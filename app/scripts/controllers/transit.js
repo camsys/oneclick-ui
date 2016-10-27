@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('applyMyRideApp')
+angular.module('oneClickApp')
   .controller('TransitController', ['$scope','$routeParams', '$location', 'flash', 'planService', '$http','ipCookie', '$attrs',
     function ($scope, $routeParams, $location, flash, planService, $http, ipCookie, $attrs) {
 

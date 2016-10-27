@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('applyMyRideApp')
+angular.module('oneClickApp')
   .controller('LoginController', ['$scope', '$location', 'flash', 'planService', '$http', 'ipCookie', '$window', 'localStorageService',
     function ($scope, $location, flash, planService, $http, ipCookie, $window, localStorageService) {
       //skip initializing this controller if we're not on the page

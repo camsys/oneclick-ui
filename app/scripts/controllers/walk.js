@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('applyMyRideApp')
+angular.module('oneClickApp')
   .controller('WalkController', ['$scope','$routeParams', '$location', 'flash', 'planService', '$http',
     function ($scope, $routeParams, $location, flash, planService, $http) {
 

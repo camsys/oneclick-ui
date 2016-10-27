@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('applyMyRideApp')
+angular.module('oneClickApp')
     .service('util', function() {
 
 		this.isMobile = function(){

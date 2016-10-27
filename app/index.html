@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>FindMyRidePA</title>
+    <title>1 Click</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
 
@@ -11,6 +11,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -24,7 +25,7 @@
       //initialize APIHOST by depending on environment
       var APIHOST = (function( docHost )
       {
-        var env = docHost.match(/^findmyridepa2-(.+)\.camsys-apps\.com$/);
+        var env = docHost.match(/^1click-(.+)\.camsys-apps\.com$/);
         var apiHosts = {
           'demo': 'oneclick-pa-demo.camsys-apps.com',
           'dev': 'oneclick-pa-dev.camsys-apps.com',
@@ -38,15 +39,16 @@
       }( document.location.hostname ));
     </script>
   </head>
-  <body ng-app="applyMyRideApp" ng-controller="NavbarController">
+  <body ng-app="oneClickApp" ng-controller="NavbarController">
     <div style="position:absolute; bottom:1px;" ng-hide="true == debugoff">v2.0.2-s.10-rc.4</div>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-show="showNavbar()" class="navbar navbar-default navbar-static-top" style="box-shadow: 0px 2px 8px rgba(0,0,0,0.4); margin-bottom: 1em;">
+    <div ng-show="showNavbar()" class="navbar navbar-static-top">
      <div class="container-fluid">
         <nav class="navbar navbar-static-top" role="navigation">
+        
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -56,11 +58,17 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="#/">
-                <img ng-src="images/FMR.png"/>
+                <img ng-src="images/brand.png"/>
               </a>
             </div>
+            
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <a class="navbar-icon" ng-click="changeLanguage()" style="cursor: pointer; margin-top: .5em;" href="">
+                    English
+                  </a>
+                </li>
                 <li ng-show="email">
                   <a class="navbar-icon" href="#/plan/my_rides?navbar=true" style="margin-top: .5em;">
                     My Rides <div class="badge alert-success">{{rideCount}}</div>
@@ -73,39 +81,36 @@
                 </li>
                 <li ng-show="email">
                   <a class="navbar-icon" ng-click="logout()" href="" style="margin-top: .5em;">
-                    Sign out
+                    Logout
                   </a>
                 </li>
                 <li ng-show="!email">
                   <a class="navbar-icon" href="#/login" style="margin-top: .5em;">
-                    Sign in
-                  </a>
-                </li>
-                <li>
-                  <a class="navbar-icon" ng-click="reset()" style="cursor: pointer; margin-top: .5em;" href="">
-                    New trip
+                    Login
                   </a>
                 </li>
                 <li>
                   <a class="navbar-icon" href="#/about" style="margin-top: .5em;">
-                    About
+                    Sign Up
                   </a>
                 </li>
               </ul>
             </div>
+          </div>
+          
         </nav>
       </div>
     </div>
 
     <!-- Add your site or application content here -->
-    <div class="container-fluid">
+    <div class="container-fluid fill-minus-navbar">
         <div class="alert alert-success alert-dismissible" role="alert" ng-show="flash.getMessage()" ng-cloak>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             {{ flash.getMessage() }}
         </div>
 
-      <div style="position: relative;">
-        <div ng-view="" class="at-view-fade-in at-view-fade-out"></div>
+      <div style="position: relative; height:100%;">
+        <div ng-view="" class="at-view-fade-in at-view-fade-out" style="height:100%;"></div>
       </div>
     </div>
 
@@ -164,6 +169,7 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/bootbox/bootbox.js"></script>
     <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
+    <script src="bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -182,6 +188,7 @@
         <script src="scripts/controllers/profile.js"></script>
         <script src="scripts/directives/clearinput.js"></script>
         <script src="scripts/directives/birthdaypicker.js"></script>
+        <script src="scripts/directives/autocomplete.js"></script>
         <script src="scripts/services/filters.js"></script>
         <script src="scripts/services/plan.js"></script>
         <script src="scripts/services/util.js"></script>

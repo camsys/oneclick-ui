@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc overview
- * @name applyMyRideApp
+ * @name oneClickApp
  * @description
- * # applyMyRideApp
+ * # oneClickApp
  *
  * Main module of the application.
  */
-angular.module('applyMyRideApp', [
+angular.module('oneClickApp', [
     'ngAnimate',
     'ngAria',
     'ipCookie',
@@ -26,10 +26,11 @@ angular.module('applyMyRideApp', [
     'LocalStorageModule',
     'ng.deviceDetector',
     'ngBootbox',
+    'ui.bootstrap.datetimepicker',
   ]).config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/login.html',
+        templateUrl: 'views/main.html',
         controller: 'MainController'
       })
       .when('/loginError', {

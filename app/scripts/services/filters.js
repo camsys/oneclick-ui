@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('applyMyRideApp')
+angular.module('oneClickApp')
 .filter('free', function() {
   return function(input) {
     return input == '$0.00' ? "Free" : input;

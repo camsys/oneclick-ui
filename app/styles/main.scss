@@ -1,0 +1,106 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+
+// KIOSK COLORS
+$white: #fff;
+$black: #000;
+$gray1: #f2f2f2;
+$gray2: #e6e6e6;
+$gray3: #d1cfcd;
+$gray4: #a49f9b;
+$gray5: #7d7874;
+$gray6: #45413d;
+$red: #f34c51;
+$blue: #00b8d0;
+$green: #03763a;
+$yellow: #fdd73e;
+
+$kioskfonts: "Avenir Next", "Helvetica Neue", Helvetica, sans-serif;
+
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+* {
+  font-family: 'Avenir Next', Helvetica, sans-serif;
+}
+
+/*
+  Allow angular.js to be loaded in body, hiding cloaked elements until
+  templates compile.  The !important is important given that there may be
+  other selectors that are more specific or come later and might alter display.
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+.navbar-brand {
+  height: 50px;
+  margin: 0;
+  padding: 3px 0 0 3px;
+  line-height: 50px;
+  img {
+    // height: 47px;
+    display: inline-block;
+    height: 37px;
+    vertical-align: middle;
+  }
+}
+
+.navbar {
+  i {
+    font-size: 3em;
+    color: $green;
+  }
+  .navbar-icon {
+    padding-bottom: 0;
+    padding-top: 5px;
+  }
+}
+
+.debug {
+  visibility: hidden;
+}
+html{
+  height:100%
+}
+body{
+  background-image: url('/images/Splash-Default-Boston.jpeg');
+  background-size: cover;
+  height:100%;
+}
+
+.fill-minus-navbar{
+  height: calc(100% - 160px);
+}
+.landing-plan{
+  height:100%;
+  display:flex;
+  justify-content:center;
+}
+.landing-plan-centered{
+  width:100%;
+  align-self:center;
+}
+.landing-plan-content{
+  background-color: rgba(255, 255, 255, .7);
+  border-radius: 10px;
+  padding:10px 20px 40px 30px;
+}
+
+
+
+
+
+
+
+
+
+
+

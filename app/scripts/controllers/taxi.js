@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('applyMyRideApp')
+angular.module('oneClickApp')
   .controller('TaxiController', ['$scope','$routeParams', '$location', 'flash', 'planService', 'ipCookie', 'usSpinnerService', '$http',
     function ($scope, $routeParams, $location, flash, planService, ipCookie, usSpinnerService, $http) {
 

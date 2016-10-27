@@ -1,10 +1,12 @@
 'use strict';
 
-var app = angular.module('applyMyRideApp');
+var app = angular.module('oneClickApp');
 
-angular.module('applyMyRideApp')
+console.log('navbar  1 ');
+angular.module('oneClickApp')
   .controller('NavbarController', ['$scope', '$location', 'flash', 'planService', 'deviceDetector', 'ipCookie', '$window',
     function ($scope, $location, flash, planService, deviceDetector, ipCookie, $window) {
+console.log('navbar  2 ');
 
       var input = document.createElement('input');
       input.setAttribute('type','date');
@@ -64,7 +66,7 @@ angular.module('applyMyRideApp')
 
     }]);
 
-angular.module('applyMyRideApp').factory('flash', function($rootScope) {
+angular.module('oneClickApp').factory('flash', function($rootScope) {
   var currentMessage = '';
 
   $rootScope.$on('$routeChangeSuccess', function() {

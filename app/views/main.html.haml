@@ -1,0 +1,64 @@
+.landing-plan{'ng-controller'=>'PlanController'}
+  .landing-plan-centered
+    .row
+      .col-md-8.col-md-offset-2.landing-plan-content
+        .text-center
+          %h1 Find Your Ride
+        .row
+          .col-md-3
+            .row
+              %autocomplete{ placeholder: 'Origin',
+                  class: 'autocompleteWrapper',
+                  id:'fromInputDiv',
+                  tabindex: 'null',
+                  'inputclass' => 'form-control',
+                  'disable-filter' => 'true',
+                  'data' => 'locations',
+                  'on-type'=> 'getLocations',
+                  'on-select' => 'selectFrom',
+                  'autocomplete-required' => 'null',
+                  'inputid' => 'fromInput',
+                  ng: {model: 'from', 'attr-mobile' => '{{mobile}}'} }
+          .col-md-3
+            .row
+              %autocomplete{ placeholder: 'Destination',
+                  class: 'autocompleteWrapper',
+                  id:'toInputDiv',
+                  tabindex: 'null',
+                  'inputclass' => 'form-control',
+                  'disable-filter' => 'true',
+                  'data' => 'locations',
+                  'on-type'=> 'getLocations',
+                  'on-select' => 'selectTo',
+                  'autocomplete-required' => 'null',
+                  'inputid' => 'toInput',
+                  ng: {model: 'to', 'attr-mobile' => '{{mobile}}'}}
+          .col-md-2
+            .row
+              %label.hide{:for => "ride-when"} Leave or Arrive?
+              %select#ride-when.select.form-control{style: "width: 100%", ng: {model: 'fromTimeType'} }
+                %option{:selected => "selected", :value => "depart"} Leave At
+                %option{:value => "arrive"} Arrive By
+          .col-md-4
+            .row
+              %button.pull-right.btn.btn-primary{type:'button', ng:{click:'planFromLanding()'}} Go
+              %datetimepicker{'hour-step'=>'hourStep',
+                  'minute-step'=>'minuteStep',
+                  'ng-model'=>'rideTime',
+                  'show-meridian'=>'true',
+                  'date-format'=>'MMM dd, yyyy',
+                  'date-options'=>'dateOptions',
+                  'date-disabled'=>'disabled(date, mode)',
+                  'datepicker-append-to-body'=>'false',
+                  'readonly-date'=>'false',
+                  'disabled-date'=>'false',
+                  'hidden-time'=>'false',
+                  'hidden-date'=>'false',
+                  'name'=>'datetimepicker',
+                  'show-spinners'=>'false',
+                  'readonly-time'=>'false',
+                  'date-opened'=>'dateOpened',
+                  'show-button-bar'=>'false'}
+        .row
+          %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions', ng: {show: 'showMap'}}
+

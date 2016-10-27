@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('applyMyRideApp');
+var app = angular.module('oneClickApp');
 
 app.controller('PlanController', ['$scope', '$http','$routeParams', '$location', 'planService', 'util', 'flash', 'usSpinnerService', '$q', 'LocationSearch', 'localStorageService', 'ipCookie', '$timeout', '$window', '$filter',
 
@@ -17,6 +17,28 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     }
   }
 
+  $scope.planFromLanding = function(){
+    _bookTrip();
+  }
+
+  $scope.rideTime = new Date();
+  $scope.$watch('rideTime', function(n){
+    //only show next if we have a valid moment object
+    $scope.showNext = false;
+    if( !n || !n instanceof Date ){ return;}
+    $scope.showNext = true;
+    //save the date/time to planService
+    planService.fromDate = n;
+    planService.fromTime = n;
+    planService.fromTimeType = 'depart';
+    planService.returnTimeType =  'depart';
+    planService.asap = false;
+    planService.fromTimeType = 'arrive';
+    _setupHowLongOptions();
+    $scope.showNext = $scope.whenShowNext();
+
+  });
+  $scope.fromTimeType = planService.fromTimeType || 'depart';
   eightAm.setSeconds(0);
   eightAm.setMinutes(0);
   eightAm.setHours(8);

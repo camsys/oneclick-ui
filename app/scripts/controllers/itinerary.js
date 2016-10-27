@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('applyMyRideApp')
+angular.module('oneClickApp')
   .controller('ItineraryController', ['$scope','$routeParams', '$location', 'flash', 'planService', '$http','ipCookie',
     function ($scope, $routeParams, $location, flash, planService, $http, ipCookie) {
       $scope.showDiv = {};

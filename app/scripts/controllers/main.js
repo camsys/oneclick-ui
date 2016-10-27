@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('applyMyRideApp')
-	.controller('MainController', ['$scope',
-		function($scope) {
-      $scope.foo = {}; // just to quiet jshint
-		}
-	]);
-	
+angular.module('oneClickApp')
+  .controller('MainController', ['$scope',
+    function($scope) {
+      $scope.foo = false;
+    }
+  ]
+);

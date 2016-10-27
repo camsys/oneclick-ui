@@ -2,10 +2,12 @@
 
 var app = angular.module('autocomplete', []);
 
+console.log('autocompletee ');
 app.directive('autocomplete', function() {
   var index = -1;
   var wasTyped = false;
 
+console.log('autocompletee 1');
   return {
     restrict: 'E',
     scope: {
@@ -21,6 +23,7 @@ app.directive('autocomplete', function() {
     controller: ['$scope', function($scope){
       // the index of the suggestions that's currently selected
       $scope.selectedIndex = -1;
+      console.log('autocompletee 2');
 
       $scope.initLock = true;
 
@@ -130,11 +133,8 @@ app.directive('autocomplete', function() {
       };
 
       for (var a in attrs) {
-        attr = a.replace('attr', '').toLowerCase();
-        // add attribute overriding defaults
-        // and preventing duplication
-        if (a.indexOf('attr') === 0) {
-          scope.attrs[attr] = attrs[a];
+        if(scope.attrs[a] !== undefined ) {
+          scope.attrs[a] = attrs[a];
         }
       }
 

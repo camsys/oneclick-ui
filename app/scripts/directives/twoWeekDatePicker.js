@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('applyMyRideApp');
+var app = angular.module('oneClickApp');
 
 app.directive('twoWeekDatePicker', function() {
     var weekdayCount;

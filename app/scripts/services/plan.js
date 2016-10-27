@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('applyMyRideApp')
+angular.module('oneClickApp')
     .service('planService', ['$rootScope', '$filter', function($rootScope, $filter) {
 
       this.reset = function(){
@@ -792,7 +792,7 @@ angular.module('applyMyRideApp')
   ]
 );
 
-angular.module('applyMyRideApp')
+angular.module('oneClickApp')
   .service('LocationSearch', function($http, $q, localStorageService, $filter){
     var countryFilter = $filter('noCountry');
     var urlPrefix = '//' + APIHOST + '/';
