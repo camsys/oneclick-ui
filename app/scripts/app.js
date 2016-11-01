@@ -27,10 +27,21 @@ angular.module('oneClickApp', [
     'ng.deviceDetector',
     'ngBootbox',
     'ui.bootstrap.datetimepicker',
-  ]).config(function ($routeProvider) {
+    'pascalprecht.translate',
+  ]).config(function ($routeProvider, $translateProvider) {
+    
+    // Configure the translation service
+    $translateProvider.useSanitizeValueStrategy('escape');
+    $translateProvider.useUrlLoader('http://oneclick-pa-dev.camsys-apps.com/api/v1/translations/all');
+    $translateProvider.preferredLanguage('en');
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
+        controller: 'MainController'
+      })
+      .when('/rides', {
+        templateUrl: 'views/rides.html',
         controller: 'MainController'
       })
       .when('/loginError', {
@@ -127,7 +138,7 @@ angular.module('oneClickApp', [
         $(".navbar-collapse").collapse('hide');
       }
     });
-
+    
     $window.$rootScope = $rootScope;
     var exceptions = ["/plan/my_rides", "/about", "/about/sharedride", "/about/projecthistory"];
     $rootScope.$on('$routeChangeStart', function (event) {

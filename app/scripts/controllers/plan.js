@@ -16,12 +16,66 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       $scope.showMap = false;
     }
   }
-
-  $scope.planFromLanding = function(){
-    _bookTrip();
+  function debugHelper(){
+    setTimeout(function(){
+      var exit = false;
+      var count = 0, 
+      plan = function(){
+        if(!planService.from || !planService.to){
+          count ++;
+          if(count < 15){
+            setTimeout(plan, 1000);
+          }
+        }else{
+          $scope.planFromLanding();
+        }
+      }
+      if(exit || $location.path() != '/'){return;}
+      $scope.from = '1550 11th Ave, York, PA';
+      mapOnBlur($scope.from, 'from');
+      setTimeout(function(){
+        $scope.to = '1920 Trolley Rd, York, PA'
+        mapOnBlur($scope.to, 'to');
+        plan();
+      },1000);
+    }, 1000);
   }
+  //FIXME remove debug code before production
+  !APIHOST.match(/local$/) || debugHelper();
+  $scope.refreshResults = ($location.path() !== '/');
 
-  $scope.rideTime = new Date();
+  $scope.planFromResults = function(){
+    _planTrip( $scope.$parent.loadItineraries );
+  }
+  $scope.planFromLanding = function(){
+    _planTrip();
+  }
+  var _planTrip = function(callback){
+    if(!planService.from || !planService.to){return;}
+    $window.visited=true;
+    _bookTrip(function(result){
+      var i;
+      for(i=0; i<result.itineraries.length; i+=1){
+        result.itineraries[i].origin = planService.getAddressDescriptionFromLocation(result.itineraries[i].start_location);
+        result.itineraries[i].destination = planService.getAddressDescriptionFromLocation(result.itineraries[i].end_location);
+        if(result.itineraries[i].returned_mode_code == "mode_paratransit"){
+          planService.paratransitResult = result.itineraries[i];
+        }else{
+          planService.transitResult.push(result.itineraries[i]);
+        }
+      }
+      planService.searchResults = result;
+      $location.path("/rides").replace();
+      if(callback){ callback(); }
+    });
+  }
+  $scope.itineraries = planService.transitResult || [];
+
+  if(planService.fromDate && planService.fromDate instanceof Date){
+    $scope.rideTime = planService.fromDate;
+  }else{
+    $scope.rideTime = new Date();
+  }
   $scope.$watch('rideTime', function(n){
     //only show next if we have a valid moment object
     $scope.showNext = false;
@@ -554,14 +608,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     });
   }
 
-  function _bookTrip(){
+  function _bookTrip( success ){
     planService.prepareConfirmationPage($scope);
     planService.transitResult = [];
     planService.paratransitResult = null;
     usSpinnerService.spin('spinner-1');
     var promise = planService.postItineraryRequest($http);
-    promise.
-      success(function(result) {
+    success = success || function(result) {
         var i;
         for(i=0; i<result.itineraries.length; i+=1){
           result.itineraries[i].origin = planService.getAddressDescriptionFromLocation(result.itineraries[i].start_location);
@@ -574,7 +627,9 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
         }
         planService.searchResults = result;
         $location.path("/plan/confirm");
-      }).
+      }
+    promise.
+      success(success).
       error(function(result) {
         bootbox.alert("An error occured on the server, please retry your search or try again later.");
         usSpinnerService.stop('spinner-1');
@@ -699,6 +754,8 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       ignoreBlur = false;
       return;
     }else if(!place){
+      lastMappedPlaces[toFrom] = place;
+      return;
       place = $scope[toFrom + 'Default'];
       defaulted = true;
     }else{
@@ -1037,6 +1094,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
               if(updateInput){
                 $("#whereToInput").val(place);
               }
+            }
+            //refresh results 
+            if($scope.refreshResults == true){
+              $scope.planFromResults();
             }
           }, 1);
         }else{

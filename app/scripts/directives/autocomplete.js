@@ -2,12 +2,10 @@
 
 var app = angular.module('autocomplete', []);
 
-console.log('autocompletee ');
 app.directive('autocomplete', function() {
   var index = -1;
   var wasTyped = false;
 
-console.log('autocompletee 1');
   return {
     restrict: 'E',
     scope: {
@@ -18,12 +16,12 @@ console.log('autocompletee 1');
       onBlur: '=onBlur',
       onFocus: '=onFocus',
       autocompleteRequired: '=',
+      placeholder: '=',
       disableFilter: '=disableFilter'
     },
     controller: ['$scope', function($scope){
       // the index of the suggestions that's currently selected
       $scope.selectedIndex = -1;
-      console.log('autocompletee 2');
 
       $scope.initLock = true;
 
@@ -125,7 +123,6 @@ console.log('autocompletee 1');
 
       // Default atts
       scope.attrs = {
-        "placeholder": "start typing...",
         "class": "",
         "id": "",
         "inputclass": "",
@@ -269,7 +266,7 @@ console.log('autocompletee 1');
             click-to-focus="{{ attrs.clicktofocus }}"\
             focus-me="{{ attrs.autofocus }}"\
             ng-model="searchParam"\
-            placeholder="{{ attrs.placeholder }}"\
+            placeholder="{{ placeholder | translate }}"\
             class="clearable {{ attrs.inputclass }}"\
             id="{{ attrs.inputid }}"\
             autocomplete="off"\

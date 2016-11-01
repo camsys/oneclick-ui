@@ -1,0 +1,91 @@
+.rides{'ng-controller'=>'RidesController'}
+  .row
+    .col-lg-2.col-lg-offset-1.col-md-3{'ng-controller'=>'PlanController'}
+      .row
+        .col-xs-12
+          %autocomplete{ placeholder: '"origin_placeholder"',
+              class: 'autocompleteWrapper',
+              id:'fromInputDiv',
+              tabindex: 'null',
+              'inputclass' => 'form-control',
+              'disable-filter' => 'true',
+              'data' => 'locations',
+              'on-type'=> 'getLocations',
+              'on-focus'=> 'focusFrom',
+              'on-blur'=> 'mapFrom',
+              'on-select' => 'selectFrom',
+              'autocomplete-required' => 'true',
+              'inputid' => 'fromInput',
+              ng: {model: 'from', 'attr-mobile' => '{{mobile}}'} }
+      .row
+        .col-xs-12
+          %autocomplete{ placeholder: '"destination_placeholder"',
+              class: 'autocompleteWrapper',
+              id:'toInputDiv',
+              tabindex: 'null',
+              'inputclass' => 'form-control',
+              'disable-filter' => 'true',
+              'data' => 'locations',
+              'on-type'=> 'getLocations',
+              'on-focus'=> 'focusTo',
+              'on-blur'=> 'mapTo',
+              'on-select' => 'selectTo',
+              'autocomplete-required' => 'true',
+              'inputid' => 'toInput',
+              ng: {model: 'to', 'attr-mobile' => '{{mobile}}'}}
+      .row
+        .col-xs-12
+          %label.hide{:for => "ride-when"} Leave or Arrive?
+          %select#ride-when.select.form-control{style: "width: 100%", ng: {model: 'fromTimeType'} }
+            %option{:selected => "selected", :value => "depart"} {{"depart_at" | translate}}
+            %option{:value => "arrive"} {{"arrive_by" | translate}}
+          %datetimepicker{'hour-step'=>'hourStep',
+              'minute-step'=>'minuteStep',
+              'ng-model'=>'rideTime',
+              'show-meridian'=>'true',
+              'date-format'=>'MMM dd, yyyy',
+              'date-options'=>'dateOptions',
+              'date-disabled'=>'disabled(date, mode)',
+              'datepicker-append-to-body'=>'false',
+              'readonly-date'=>'false',
+              'disabled-date'=>'false',
+              'hidden-time'=>'false',
+              'hidden-date'=>'false',
+              'name'=>'datetimepicker',
+              'show-spinners'=>'false',
+              'readonly-time'=>'false',
+              'date-opened'=>'dateOpened',
+              'show-button-bar'=>'false'}
+      .row
+        .col-xs-12
+          {{"sort_by" | translate}}
+      .row
+        .col-xs-12
+          %h3 {{"customize_your_trip" | translate }}
+          .trip-question
+            Are you a veteran Y/N
+          .trip-question
+            Do you have a physical disability? Y/N
+          .trip-question
+            Trip Purpose [purposes]
+      .row
+        .col-xs-12
+          %h3 {{"modes" | translate }}
+          .mode-question
+            {{"mode_paratransit_name" | translate }}
+          .mode-question
+            {{"mode_transit_name" | translate }}
+          .mode-question
+            {{"mode_drive_name" | translate }}
+      .row
+        .col-xs-12
+          %button.pull-right.btn.btn-primary{type:'button', ng:{click:'planFromResults()'}} {{"ok_button" | translate}}
+      .row{style:"display:none;"}
+        %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions', ng: {show: 'showMap'}}
+
+    .col-md-8.col-xs-12.landing-plan-content
+      .text-center
+        %h1 Rides
+      .row{ng:{repeat:'itinerary in itineraries'}}
+        {{itinerary | json}}
+

@@ -2,11 +2,9 @@
 
 var app = angular.module('oneClickApp');
 
-console.log('navbar  1 ');
 angular.module('oneClickApp')
-  .controller('NavbarController', ['$scope', '$location', 'flash', 'planService', 'deviceDetector', 'ipCookie', '$window',
-    function ($scope, $location, flash, planService, deviceDetector, ipCookie, $window) {
-console.log('navbar  2 ');
+  .controller('NavbarController', ['$scope', '$location', 'flash', 'planService', 'deviceDetector', 'ipCookie', '$window', '$translate',
+    function ($scope, $location, flash, planService, deviceDetector, ipCookie, $window, $translate) {
 
       var input = document.createElement('input');
       input.setAttribute('type','date');
@@ -17,6 +15,9 @@ console.log('navbar  2 ');
       planService.html5 = $scope.html5;
       $scope.mobile = deviceDetector.isMobile();
       planService.mobile = $scope.mobile;
+      $scope.languageOptions = {en:'English', es:'Español'};
+      $scope.languageSelected = ipCookie('lang') || 'en';
+      $translate.use($scope.languageSelected);
 
       $scope.flash = flash;
 
@@ -27,6 +28,13 @@ console.log('navbar  2 ');
         planService.reset();
         $location.path("/plan/where");
       };
+      
+      $scope.changeLanguage = function(key){
+        if($scope.languageOptions[key] == undefined){ return; }
+        $translate.use(key);
+        $scope.languageSelected = key;
+        ipCookie('lang', key);
+      }
 
       $scope.showNavbar = function() {
         that.$scope.email = ipCookie('email');

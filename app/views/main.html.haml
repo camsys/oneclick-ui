@@ -1,13 +1,14 @@
+.landing-iamge
 .landing-plan{'ng-controller'=>'PlanController'}
   .landing-plan-centered
     .row
-      .col-md-8.col-md-offset-2.landing-plan-content
+      .col-md-8.col-md-offset-2.col-xs-12.landing-plan-content
         .text-center
-          %h1 Find Your Ride
+          %h1 {{"welcome_message" | translate}}
         .row
-          .col-md-3
+          .col-md-3.col-xs-12
             .row
-              %autocomplete{ placeholder: 'Origin',
+              %autocomplete{ placeholder: '"origin_placeholder"',
                   class: 'autocompleteWrapper',
                   id:'fromInputDiv',
                   tabindex: 'null',
@@ -19,9 +20,9 @@
                   'autocomplete-required' => 'null',
                   'inputid' => 'fromInput',
                   ng: {model: 'from', 'attr-mobile' => '{{mobile}}'} }
-          .col-md-3
+          .col-md-3.col-xs-12
             .row
-              %autocomplete{ placeholder: 'Destination',
+              %autocomplete{ placeholder: '"destination_placeholder"',
                   class: 'autocompleteWrapper',
                   id:'toInputDiv',
                   tabindex: 'null',
@@ -33,15 +34,15 @@
                   'autocomplete-required' => 'null',
                   'inputid' => 'toInput',
                   ng: {model: 'to', 'attr-mobile' => '{{mobile}}'}}
-          .col-md-2
+          .col-md-2.col-xs-12
             .row
               %label.hide{:for => "ride-when"} Leave or Arrive?
               %select#ride-when.select.form-control{style: "width: 100%", ng: {model: 'fromTimeType'} }
-                %option{:selected => "selected", :value => "depart"} Leave At
-                %option{:value => "arrive"} Arrive By
-          .col-md-4
+                %option{:selected => "selected", :value => "depart"} {{"depart_at" | translate}}
+                %option{:value => "arrive"} {{"arrive_by" | translate}}
+          .col-md-4.col-xs-12
             .row
-              %button.pull-right.btn.btn-primary{type:'button', ng:{click:'planFromLanding()'}} Go
+              %button.pull-right.btn.btn-primary{type:'button', ng:{click:'planFromLanding()'}} {{"ok_button" | translate}}
               %datetimepicker{'hour-step'=>'hourStep',
                   'minute-step'=>'minuteStep',
                   'ng-model'=>'rideTime',
@@ -59,6 +60,10 @@
                   'readonly-time'=>'false',
                   'date-opened'=>'dateOpened',
                   'show-button-bar'=>'false'}
-        .row
-          %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions', ng: {show: 'showMap'}}
+
+.landing-splash-middle{'ng-include'=>'"/views/landing-splash-middle.html"' }
+
+.row{'ng-include'=>'"/views/footer.html"'}
+.row{style:"display:none;"}
+  %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions', ng: {show: 'showMap'}}
 
