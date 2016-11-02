@@ -55,6 +55,7 @@
               'show-spinners'=>'false',
               'readonly-time'=>'false',
               'date-opened'=>'dateOpened',
+              'data-on-set-time'=>'onRideTimeSet()',
               'show-button-bar'=>'false'}
       .row
         .col-xs-12
@@ -77,9 +78,6 @@
             {{"mode_transit_name" | translate }}
           .mode-question
             {{"mode_drive_name" | translate }}
-      .row
-        .col-xs-12
-          %button.pull-right.btn.btn-primary{type:'button', ng:{click:'planFromResults()'}} {{"ok_button" | translate}}
       .row{style:"display:none;"}
         %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions', ng: {show: 'showMap'}}
 

@@ -1,6 +1,7 @@
 'use strict';
 
 var app = angular.module('oneClickApp');
+var debugHelper;
 
 app.controller('PlanController', ['$scope', '$http','$routeParams', '$location', 'planService', 'util', 'flash', 'usSpinnerService', '$q', 'LocationSearch', 'localStorageService', 'ipCookie', '$timeout', '$window', '$filter',
 
@@ -16,7 +17,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       $scope.showMap = false;
     }
   }
-  function debugHelper(){
+  debugHelper = function(){
     setTimeout(function(){
       var exit = false;
       var count = 0, 
@@ -41,7 +42,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     }, 1000);
   }
   //FIXME remove debug code before production
-  !APIHOST.match(/local$/) || debugHelper();
+  //!APIHOST.match(/local$/) || debugHelper();
   $scope.refreshResults = ($location.path() !== '/');
 
   $scope.planFromResults = function(){
@@ -76,8 +77,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   }else{
     $scope.rideTime = new Date();
   }
-  $scope.$watch('rideTime', function(n){
+  var run = '0';
+  $scope.$watch(function(){return !$scope.rideTime || $scope.rideTime.getTime(); }, function(n,o){
     //only show next if we have a valid moment object
+    run += '1';
     $scope.showNext = false;
     if( !n || !n instanceof Date ){ return;}
     $scope.showNext = true;
@@ -90,8 +93,16 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     planService.fromTimeType = 'arrive';
     _setupHowLongOptions();
     $scope.showNext = $scope.whenShowNext();
-
+    if($scope.refreshResults == true && n!==o){
+      console.log('ride time plann', run);
+      $scope.planFromResults();
+    }
   });
+  run += '.';
+  $scope.onRideTimeSet = function(old, ne){
+    console.log('rtblur', $scope.rideTime, old, ne);
+    //$scope.planFromResults();
+  }
   $scope.fromTimeType = planService.fromTimeType || 'depart';
   eightAm.setSeconds(0);
   eightAm.setMinutes(0);

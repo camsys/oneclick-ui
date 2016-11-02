@@ -40,7 +40,7 @@
     </script>
   </head>
   <body ng-app="oneClickApp" ng-controller="NavbarController">
-    <div style="position:absolute; bottom:1px; color:black; background-color:white;" ng-hide="true == debugoff">v2.0.2-s.10-rc.4</div>
+    <div style="position:fixed; bottom:1px; color:black; background-color:white; z-index:9999;" ng-hide="true == debugoff">v2.0.2-s.10-rc.4</div>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -49,53 +49,52 @@
      <div class="container-fluid">
         <nav class="navbar navbar-static-top" role="navigation">
         
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#/">
-                <img ng-src="images/brand.png"/>{{"site_title" | translate}}
-              </a>
-            </div>
-            
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
-                <li>
-                  <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="language_menu_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      {{languageOptions[languageSelected]}}
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="language_menu_dropdown">
-                      <li ng-click="changeLanguage('en')">English</li>
-                      <li ng-click="changeLanguage('es')">Español</li>
-                    </ul>
-                  </div>
-                </li>
-                <li ng-show="email">
-                  <a class="navbar-icon" href="#/plan/my_rides?navbar=true" style="margin-top: .5em;">
-                    My Rides <div class="badge alert-success">{{rideCount}}</div>
-                  </a>
-                </li>
-                <li ng-show="email">
-                  <a class="navbar-icon" href="#/profile" style="margin-top: .5em;">
-                    {{first_name}} {{last_name}}
-                  </a>
-                </li>
-                <li ng-show="email">
-                  <a class="navbar-icon" ng-click="logout()" href="" style="margin-top: .5em;" translate>{{"logout"}}</a>
-                </li>
-                <li ng-show="!email">
-                  <a class="navbar-icon" href="#/login" style="margin-top: .5em;" translate>{{"log_in"}}</a>
-                </li>
-                <li>
-                  <a class="navbar-icon" href="#/sign_up" style="margin-top: .5em;" translate>{{"sign_up"}}</a>
-                </li>
-              </ul>
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-xs-12">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-label="toggle navigation">
+                  <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#/">
+                  <i class="fa fa-bolt"></i>{{"site_title" | translate}}
+                </a>
+              </div>
+              
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                  <li>
+                    <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="language_menu_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{languageOptions[languageSelected]}}
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="language_menu_dropdown">
+                        <li ng-click="changeLanguage('en')">English</li>
+                        <li ng-click="changeLanguage('es')">Español</li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li ng-show="email">
+                    <a class="navbar-icon" href="#/plan/my_rides?navbar=true" style="margin-top: .5em;">
+                      My Rides <div class="badge alert-success">{{rideCount}}</div>
+                    </a>
+                  </li>
+                  <li ng-show="email">
+                    <a class="navbar-icon" href="#/profile" style="margin-top: .5em;">
+                      {{first_name}} {{last_name}}
+                    </a>
+                  </li>
+                  <li ng-show="email">
+                    <a class="navbar-icon" ng-click="logout()" href="" style="margin-top: .5em;" translate>{{"logout"}}</a>
+                  </li>
+                  <li ng-show="!email">
+                    <a class="navbar-icon" href="#/login" style="margin-top: .5em;" translate>{{"log_in"}}</a>
+                  </li>
+                  <li>
+                    <a class="navbar-icon" href="#/sign_up" style="margin-top: .5em;" translate>{{"sign_up"}}</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           
@@ -104,7 +103,7 @@
     </div>
 
     <!-- Add your site or application content here -->
-    <div class="container-fluid">
+    <div id="main-template-container" class="container-fluid">
       <div class="alert alert-success alert-dismissible" role="alert" ng-show="flash.getMessage()" ng-cloak>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         {{ flash.getMessage() }}
