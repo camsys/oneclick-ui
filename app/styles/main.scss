@@ -52,6 +52,7 @@ footer.footer{
   margin: 0;
   padding: 3px 0 0 3px;
   line-height: 50px;
+  color: black;
   img {
     // height: 47px;
     display: inline-block;
@@ -63,6 +64,9 @@ footer.footer{
 .navbar {
   height:60px;
   margin-bottom:10px;
+  a{
+    color: black;
+  }
   i {
     font-size: 3em;
   }
