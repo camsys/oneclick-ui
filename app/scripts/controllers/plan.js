@@ -77,11 +77,8 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   }else{
     $scope.rideTime = new Date();
   }
-  var run = '0';
   $scope.$watch(function(){return !$scope.rideTime || $scope.rideTime.getTime(); }, function(n,o){
     //only show next if we have a valid moment object
-    run += '1';
-    $scope.showNext = false;
     if( !n || !n instanceof Date ){ return;}
     $scope.showNext = true;
     //save the date/time to planService
@@ -91,18 +88,11 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     planService.returnTimeType =  'depart';
     planService.asap = false;
     planService.fromTimeType = 'arrive';
-    _setupHowLongOptions();
-    $scope.showNext = $scope.whenShowNext();
+    // refresh the results only if value changed
     if($scope.refreshResults == true && n!==o){
-      console.log('ride time plann', run);
       $scope.planFromResults();
     }
   });
-  run += '.';
-  $scope.onRideTimeSet = function(old, ne){
-    console.log('rtblur', $scope.rideTime, old, ne);
-    //$scope.planFromResults();
-  }
   $scope.fromTimeType = planService.fromTimeType || 'depart';
   eightAm.setSeconds(0);
   eightAm.setMinutes(0);

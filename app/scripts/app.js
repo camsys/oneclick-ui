@@ -32,7 +32,7 @@ angular.module('oneClickApp', [
     
     // Configure the translation service
     $translateProvider.useSanitizeValueStrategy('escape');
-    $translateProvider.useUrlLoader('http://oneclick-pa-dev.camsys-apps.com/api/v1/translations/all');
+    $translateProvider.useUrlLoader('//'+APIHOST+'/api/v1/translations/all');
     $translateProvider.preferredLanguage('en');
 
     $routeProvider
