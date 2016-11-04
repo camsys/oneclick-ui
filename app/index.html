@@ -63,7 +63,7 @@
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="language_menu_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-link dropdown-toggle" type="button" id="language_menu_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       {{languageOptions[languageSelected]}}
                       <span class="caret"></span>
                     </button>
@@ -85,8 +85,49 @@
                   <li ng-show="email">
                     <a class="navbar-icon" ng-click="logout()" href="" style="margin-top: .5em;" translate>{{"logout"}}</a>
                   </li>
-                  <li ng-show="!email">
-                    <a class="navbar-icon" href="#/login" style="margin-top: .5em;" translate>{{"log_in"}}</a>
+                  <li ng-show="!email" class="dropdown">
+                    <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{"log_in" | translate}}
+                      <span class="caret"></span>
+                    </button>
+                    <ul id="login-dropdown" class="dropdown-menu" ng-controller="LoginController">
+                      <li>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <form name="loginform" class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                            
+                              <div class="form-group">
+                                <label class="sr-only" for="exampleInputEmail2">Shared Ride ID</label>
+                                <input type="text" class="form-control" id="sharedRideId" placeholder="Shared Ride ID#" placeholder="00000" ng-model="sharedRideId" required>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="sr-only" for="county">Your County</label>
+                                <select id="county" class=".btn-lg" style='width: 100%' ng-model='county', ng-change='checkId()', ng-options='county for county in counties', ng-enter='next()'>
+                                  <option value='', disabled='', selected=''>Select your county</option>
+                                </select>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="sr-only" for="birthdate">Birthdate</label>
+                                <input type="date" class="form-control" id="birthdate" ng-model="dateofbirth" required>
+                              </div>
+                              
+                              <div class="form-group">
+                                <button type="button" ng-click="authenticate()" class="btn btn-primary btn-block">Sign in</button>
+                              </div>
+                              
+                              <div class="checkbox">
+                                <label>
+                                  <input type="checkbox"> keep me logged-in
+                                </label>
+                              </div>
+                              
+                            </form>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
                   </li>
                   <li>
                     <a class="navbar-icon" href="#/sign_up" style="margin-top: .5em;" translate>{{"sign_up"}}</a>

@@ -74,6 +74,13 @@ footer.footer{
     padding-bottom: 0;
     padding-top: 5px;
   }
+  .navbar-nav > li > .dropdown-menu{
+    padding: 15px;
+    box-sizing: content-box;
+  }
+}
+.btn-link{
+  color: $black;
 }
 
 .debug {

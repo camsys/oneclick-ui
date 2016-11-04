@@ -23,11 +23,13 @@ angular.module('oneClickApp')
       $scope.sharedRideId = ipCookie('sharedRideId');
       $scope.county = ipCookie('county');
       $scope.dateofbirth = sessionStorage.getItem('dateofbirth') || false;
+      /*
       $scope.dob = {month:'', day:'', year:''};
       if($scope.dateofbirth){
         var dob = moment($scope.dateofbirth);
         $scope.dob = {month:dob.month()+1, day:dob.date(), year:dob.year()};
       }
+      */
       $scope.errors = {dob:false};
 
       var authentication_token = ipCookie('authentication_token');
@@ -44,6 +46,7 @@ angular.module('oneClickApp')
       }
 
       function checkNextValid(){
+        /*
         var bd;
         try{
           bd = moment()
@@ -61,6 +64,7 @@ angular.module('oneClickApp')
         }else{
           $scope.dateofbirth = false;
         }
+        */
         $scope.disableNext = !($scope.loginform.month.$valid 
                           && $scope.loginform.day.$valid 
                           && $scope.loginform.year.$valid 
@@ -97,7 +101,7 @@ angular.module('oneClickApp')
       $scope.back = function(){
         $location.path('/');
       }
-
+/*
       $scope.$watch('dob.month', function(n){
           var monthInt = parseInt(n);
           if(monthInt > 1 && monthInt < 13){
@@ -118,9 +122,11 @@ angular.module('oneClickApp')
           checkNextValid();
           return;
       });
-
+*/
       $scope.authenticate = function(){
         planService.dateofbirth = $scope.dateofbirth;
+        planService.sharedRideId = $scope.sharedRideId;
+        planService.county = $scope.county;
         var login = {};
         login.session = {};
         login.session.ecolane_id = planService.sharedRideId.toString();
@@ -175,7 +181,7 @@ angular.module('oneClickApp')
             if(planService.to && planService.from && planService.fromDate){
                 $location.path('/plan/purpose');
             }else{
-                $location.path('/plan/where');
+                $location.path( $location.path() );
             }
           })
         });
