@@ -23,6 +23,7 @@ angular.module('oneClickApp')
       $scope.sharedRideId = ipCookie('sharedRideId');
       $scope.county = ipCookie('county');
       $scope.dateofbirth = sessionStorage.getItem('dateofbirth') || false;
+      $scope.loginError = false;
       /*
       $scope.dob = {month:'', day:'', year:''};
       if($scope.dateofbirth){
@@ -35,15 +36,6 @@ angular.module('oneClickApp')
       var authentication_token = ipCookie('authentication_token');
       var email = ipCookie('email');
       $window.visited = true;
-
-      if(authentication_token && email){
-        planService.authentication_token = authentication_token;
-        planService.email = email;
-        $location.path('/plan/where');
-      }else{
-        delete localStorage.last_origin;
-        delete localStorage.last_destination;
-      }
 
       function checkNextValid(){
         /*
@@ -129,9 +121,8 @@ angular.module('oneClickApp')
         planService.county = $scope.county;
         var login = {};
         login.session = {};
-        login.session.ecolane_id = planService.sharedRideId.toString();
-        login.session.county = planService.county;
-        login.session.dob = moment($scope.dateofbirth).format('M/D/YYYY');
+        login.session.email = $scope.emailAddress;
+        login.session.password = $scope.password;
 
         ipCookie('sharedRideId', login.session.ecolane_id, {expires: 7, expirationUnit: 'days'});
         ipCookie('county', login.session.county, {expires: 7, expirationUnit: 'days'});
@@ -139,9 +130,10 @@ angular.module('oneClickApp')
 
         var promise = $http.post('//'+APIHOST+'/api/v1/sign_in', login);
         promise.error(function(result) {
-          $location.path('/loginError');
+          $scope.loginError = true;
         });
         promise.then(function(result) {
+          $scope.loginError = false;
           planService.authentication_token = result.data.authentication_token;
           planService.email = result.data.email;
           planService.first_name = result.data.first_name;
@@ -159,8 +151,6 @@ angular.module('oneClickApp')
           }else{
             lastOrigin = result.data.last_origin || '';
           }
-          localStorage.setItem('last_destination', lastDest);
-          localStorage.setItem('last_origin', lastOrigin);
           if($scope.rememberme == true){
             ipCookie('email', planService.email, {expires: 7, expirationUnit: 'days'});
             ipCookie('authentication_token', planService.authentication_token, {expires: 7, expirationUnit: 'days'});
@@ -178,11 +168,6 @@ angular.module('oneClickApp')
           promise = planService.getProfile($http);
           promise.then(function(result) {
             planService.profile = result.data;
-            if(planService.to && planService.from && planService.fromDate){
-                $location.path('/plan/purpose');
-            }else{
-                $location.path( $location.path() );
-            }
           })
         });
       }

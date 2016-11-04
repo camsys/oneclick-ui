@@ -97,20 +97,13 @@
                             <form name="loginform" class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
                             
                               <div class="form-group">
-                                <label class="sr-only" for="exampleInputEmail2">Shared Ride ID</label>
-                                <input type="text" class="form-control" id="sharedRideId" placeholder="Shared Ride ID#" placeholder="00000" ng-model="sharedRideId" required>
+                                <label class="sr-only" for="emailaddress">Email Address</label>
+                                <input type="text" class="form-control" id="emailaddress" placeholder="Email Address" ng-model="emailAddress" required>
                               </div>
                               
                               <div class="form-group">
-                                <label class="sr-only" for="county">Your County</label>
-                                <select id="county" class=".btn-lg" style='width: 100%' ng-model='county', ng-change='checkId()', ng-options='county for county in counties', ng-enter='next()'>
-                                  <option value='', disabled='', selected=''>Select your county</option>
-                                </select>
-                              </div>
-                              
-                              <div class="form-group">
-                                <label class="sr-only" for="birthdate">Birthdate</label>
-                                <input type="date" class="form-control" id="birthdate" ng-model="dateofbirth" required>
+                                <label class="sr-only" for="password">Password</label>
+                                <input type="password" class="form-control" placeholder="Password" id="password" ng-model="password" required>
                               </div>
                               
                               <div class="form-group">
