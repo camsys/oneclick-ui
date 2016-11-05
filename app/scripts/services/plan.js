@@ -793,13 +793,25 @@ angular.module('oneClickApp')
 );
 
 angular.module('oneClickApp')
-  .service('LocationSearch', function($http, $q, localStorageService, $filter){
+  .service('LocationSearch', ['$http', '$q', 'localStorageService', '$filter', 'planService',
+  function($http, $q, localStorageService, $filter, planService){
     var countryFilter = $filter('noCountry');
     var urlPrefix = '//' + APIHOST + '/';
 
     var autocompleteService = new google.maps.places.AutocompleteService();
 
     var LocationSearch = new Object();
+    var recentRemoteSearches = {};
+    var config = planService.getHeaders();
+    $http.get(urlPrefix + '/api/v1/places/recent', config).
+    success(function(data){
+      if(data.places){
+        angular.forEach(data.places, function(place){
+          recentRemoteSearches[place.name] = place;
+        })
+      }
+    });
+
 
     LocationSearch.getLocations = function(text, config, includeRecentSearches) {
 
@@ -855,7 +867,7 @@ angular.module('oneClickApp')
     LocationSearch.getRecentSearches = function(text) {
 
       var recentSearchData = $q.defer();
-      var recentSearches = localStorageService.get('recentSearches');
+      var recentSearches = recentRemoteSearches; //localStorageService.get('recentSearches');
       if(!recentSearches){
         recentSearchData.resolve({recentsearches: [], placeIds: []});
       }else{
@@ -898,5 +910,5 @@ angular.module('oneClickApp')
     }
 
     return LocationSearch;
-  });
+  }]);
 
