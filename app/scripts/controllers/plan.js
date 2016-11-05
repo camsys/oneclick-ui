@@ -72,8 +72,8 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   }
   $scope.itineraries = planService.transitResult || [];
 
-  if(planService.fromDate && planService.fromDate instanceof Date){
-    $scope.rideTime = planService.fromDate;
+  if(planService.fromDate > 9000){
+    $scope.rideTime = new Date(planService.fromDate);
   }else{
     $scope.rideTime = new Date();
   }
