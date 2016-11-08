@@ -4,7 +4,7 @@
       .navbar-header
         %button.navbar-toggle.collapsed{type:"button", data:{toggle:"collapse", target:"#bs-example-navbar-collapse-1"}, "aria-label"=>"toggle navigation"}
           %i.fa.fa-bars
-        %a.navbar-brand{href:"#"}
+        %a.navbar-brand{href:"#/"}
           %i.fa.fa-bolt
           {{"site_title" | translate}}
       
@@ -25,7 +25,8 @@
             %a.navbar-icon{href:"#/profile", style:"margin-top: .5em;"}
               {{first_name}} {{last_name}}
           %li{"ng-show"=>"email"}
-            %a.navbar-icon{ng:{click:"logout()"}, style:"margin-top: .5em;", translate:''} {{"logout"}}
+            %a.navbar-icon{href:'#/', ng:{click:"logout()"}, style:"margin-top: .5em;", translate:''}
+              {{"logout"}}
           %li.dropdown{ng:{show:"!email"}}
             %button.btn.btn-link.dropdown-toggle{type:"button", "data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
               {{"log_in" | translate}}
