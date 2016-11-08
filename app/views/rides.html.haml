@@ -84,6 +84,5 @@
     .col-md-8.col-xs-12.landing-plan-content
       .text-center
         %h1 Rides
-      .row{ng:{repeat:'itinerary in itineraries'}}
-        {{itinerary | json}}
+      .ride_itineraries{ng:{repeat:'itinerary in itineraries', 'include'=>'"/views/rides-itinerary.html"' }}
 

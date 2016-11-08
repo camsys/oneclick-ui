@@ -70,6 +70,34 @@ angular.module('oneClickApp')
     return m.format( f );
   };
 })
+.filter('modeIcon', function(){
+  var icons = {
+    'mode_ride_hailing' : 'auto.png',
+    'mode_paratransit':'paratransit.png',
+    'mode_taxi':'taxi.png',
+    'mode_transit':'transit.png',
+    'mode_walk':'walk.png',
+    'mode_rail':'rail.png',
+    'mode_bicycle':'bicycle.png'
+  };
+  return function(mode){
+    return icons[mode] || '';
+  }
+})
+.filter('modeName', function(){
+  var modes = {
+    'mode_ride_hailing' : 'Drive',
+    'mode_paratransit':'Paratransit',
+    'mode_taxi':'Taxi',
+    'mode_transit':'Transit',
+    'mode_walk':'Walk',
+    'mode_rail':'Rail',
+    'mode_bicycle':'Bicycle'
+  };
+  return function(mode){
+    return modes[mode] || '';
+  }
+})
 .filter('encodeURI', function() {
     return window.encodeURIComponent;
 })

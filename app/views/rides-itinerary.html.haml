@@ -1,0 +1,18 @@
+.bordered{style:'border: 1px solid black;'}
+  .row
+    .col-xs-12
+      .pull-right.btn.btn-primary
+        Select
+      .icon
+        %img{ng:{src:'/images/modes/{{itinerary.returned_mode_code | modeIcon}}'}}
+        {{itinerary.returned_mode_code | modeName}}
+  .row
+    .col-xs-6
+      {{itinerary.start_time | date : 'h:mm a'}} to {{itinerary.end_time | date : 'h:mm a'}} 
+      ({{itinerary.duration | seconds}})
+    .col-xs-2
+      {{itinerary.cost | currency | free}}
+    .col-xs-4
+      .walk_time{'ng-show':'itinerary.walk_time'}
+        {{itinerary.walk_time}} Minutes Walking
+
