@@ -42,7 +42,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     }, 1000);
   }
   //FIXME remove debug code before production
-  //!APIHOST.match(/local$/) || debugHelper();
+  !APIHOST.match(/local$/) || debugHelper();
   $scope.refreshResults = ($location.path() !== '/');
 
   $scope.planFromResults = function(){
@@ -67,7 +67,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       }
       planService.searchResults = result;
       $location.path("/rides").replace();
-      if(callback){ callback(); }
+      if(callback && typeof callback === "function"){ callback(); }
     });
   }
   $scope.itineraries = planService.transitResult || [];
@@ -1139,9 +1139,8 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     $scope.stopSpin();
   }
 
-  $scope.isMobile = function(){
-    return /Mobi/.test(navigator.userAgent);
-  }
+  //copy the util.isMobile function into scope
+  $scope.isMobile = util.isMobile;
 
   $scope.startSpin = function(){
     usSpinnerService.spin('spinner-1');
@@ -1867,160 +1866,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
 
 
 
-
-
-/*
-  $scope.$watch('fromDate', function(n) {
-      var fromDateString = moment(new Date()).format('M/D/YYYY');
-      if($scope.step == 'fromDate'){
-        if (n) {
-          var now = moment().startOf('day');
-          var datediff = now.diff(n, 'days');
-          if(datediff < 1){
-            $scope.message = null;
-            $scope.fromDate = n;
-            $scope.showNext = true;
-            $scope.minReturnDate = n;
-            if(planService.returnDate){
-              planService.returnDate = n;
-              delete planService.returnTime;
-              delete planService.returnTimeType;
-            }
-          }else{
-            planService.fromDate = null;
-            $scope.showNext = false;
-            $scope.message = 'Please select a departure date no earlier than ' + fromDateString;
-          }
-        }else{
-          planService.fromDate = null;
-          $scope.showNext = false;
-          $scope.message = 'Please select a departure date no earlier than ' + fromDateString;
-        }
-      }else if($scope.step == 'rebook'){
-        if($scope.returnDate != null && planService.rebookTrip && planService.rebookTrip.itineraries.length > 1){
-          if($scope.returnDate.getTime() < $scope.fromDate.getTime()){
-            $scope.returnDate = new Date($scope.fromDate.getTime());
-          }
-        }
-      }
-    }
-  );
-*/
-  $scope.$watch('returnDate', function(n) {
-      if($scope.step == 'returnDate'){
-        if (n) {
-          var now = moment().startOf('day');
-          var datediff = now.diff(n, 'days');
-          if(datediff < 1){
-            var then = moment(planService.fromDate).startOf('day');
-            var to = moment(n).startOf('day');
-            datediff = then.diff(to, 'days');
-            if(datediff < 1){
-              $scope.returnDate = n;
-              $scope.showNext = true;
-              $scope.message = null;
-            }else{
-              planService.returnDate = null;
-              $scope.showNext = false;
-              var fromDateString = moment(planService.fromDate).format('M/D/YYYY');
-              $scope.message = 'You must return on a date no earlier than ' + fromDateString;
-            }
-          }else{
-            planService.returnDate = null;
-            $scope.showNext = false;
-            var fromDateString = moment(planService.fromDate).format('M/D/YYYY');
-            $scope.message = 'You must return on a date no earlier than ' + fromDateString;
-          }
-        }else{
-          planService.returnDate = null;
-          $scope.showNext = false;
-        }
-      }
-    }
-  );
-
-  $scope.$watch('fromTime', function(n) {
-      if($scope.step == 'fromTimeType'){
-        var fromDate = planService.fromDate;
-        var now = moment(returnDate).startOf('day'); ;
-        var dayDiff = now.diff(fromDate, 'days');
-        if(Math.abs(dayDiff) < 1){
-          var timeDiff = moment().diff(n, 'seconds');
-          if(timeDiff > 0){
-            $scope.showNext = false;
-            $scope.message = 'Please enter a departure time after the current time.'
-          }else{
-            $scope.showNext = true;
-            $scope.message = null;
-          }
-        }
-      }
-    }
-  );
-
-  $scope.$watch('returnTime', function(n) {
-      if($scope.step == 'returnTimeType'){
-        if (n) {
-
-          var fromDate = planService.fromDate;
-          var fromTime = planService.fromTime;
-          if(fromTime == null){
-            fromTime = new Date();
-          }
-          fromTime.setYear(fromDate.getFullYear());
-          fromTime.setMonth(fromDate.getMonth());
-          fromTime.setDate(fromDate.getDate());
-          var returnTime = $scope.returnTime;
-          var returnDate = planService.returnDate;
-
-          var now = moment(returnDate).startOf('day'); ;
-          var dayDiff = now.diff(fromDate, 'days');
-          if(Math.abs(dayDiff) < 1){
-            //departing and returning on the same day, is the return time after departure?
-            returnTime.setYear(returnDate.getFullYear());
-            returnTime.setMonth(returnDate.getMonth());
-            returnTime.setDate(returnDate.getDate());
-            var timeDiff = moment(returnTime).diff(fromTime, 'minutes');
-            if(timeDiff > 10){
-              $scope.showNext = true;
-              $scope.message = null;
-            } else {
-              $scope.showNext = false;
-              $scope.message = 'Please enter a return time at least 10 minutes after the departure time.'
-            }
-          }
-        }else{
-          $scope.disableNext = true;  //not a valid time
-        }
-      }
-    }
-  );
-
-
-  $scope.$watch('confirmFromLocationMap', function(n) {
-      if (n) {
-        if(planService.fromDetails && $scope.step == 'from_confirm'){
-          var result = planService.fromDetails;
-          delete result.geometry.location.lat;
-          delete result.geometry.location.lng;
-          n.setCenter(result.geometry.location);
-          if($scope.marker){
-            $scope.marker.setMap(null);
-          }
-          $scope.marker = new google.maps.Marker({
-            map: n,
-            position: result.geometry.location,
-            animation: google.maps.Animation.DROP
-          });
-
-          google.maps.event.trigger(n, 'resize');
-          n.setCenter(result.geometry.location);
-          $scope.showMap = true;
-          $scope.showConfirmLocationMap = true;
-        }
-      }
-    }
-  );
 
 
 }
