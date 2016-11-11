@@ -32,10 +32,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
         }
       }
       if(exit || $location.path() != '/'){return;}
-      $scope.from = '1550 11th Ave, York, PA';
+      $scope.from = '2000 S Queen St, York, PA';//'1550 11th Ave, York, PA';
       mapOnBlur($scope.from, 'from');
       setTimeout(function(){
-        $scope.to = '1920 Trolley Rd, York, PA'
+        $scope.to = '449 E King St, York, PA ';//'1920 Trolley Rd, York, PA'
         mapOnBlur($scope.to, 'to');
         plan();
       },1000);
@@ -71,6 +71,29 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     });
   }
   $scope.itineraries = planService.transitResult || [];
+  $scope.characteristicsQuestions = [];
+  planService.getCharacteristicsQuestions($http).then(function(data) {
+    data = data.data ||{};
+    if(data.characteristics_questions && data.characteristics_questions.length ){
+      $scope.characteristicsQuestions = data.characteristics_questions;
+    }
+  });
+  /*
+  $scope.tripPurposes = {};
+  var planServicePromise = planService.getTripPurposes($scope, $http)
+  if(planServicePromise !== false){
+    planServicePromise.then(function(data){
+      console.log('$scope.tripPurposes', data);
+      $scope.tripPurposes = data;
+      usSpinnerService.stop('spinner-1');
+    });
+  }*/
+  $scope.accommodationQuestions = [];
+  planService.getAccommodationQuestions($http).then(function(data){
+    $scope.accommodationQuestions = data.data.accommodations_questions;
+  })
+
+
 
   if(planService.fromDate > 9000){
     $scope.rideTime = new Date(planService.fromDate);

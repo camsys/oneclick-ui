@@ -168,4 +168,11 @@ html, body{
 }
 
 
-
+.ride_itineraries{
+  margin:5px 0px;
+}
+.ride_itineraries > .bordered{
+  border:1px solid gray;
+  corder-radius:3px;
+  padding:3px;
+}

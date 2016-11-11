@@ -63,12 +63,18 @@
       .row
         .col-xs-12
           %h3 {{"customize_your_trip" | translate }}
-          .trip-question
-            Are you a veteran Y/N
-          .trip-question
-            Do you have a physical disability? Y/N
-          .trip-question
-            Trip Purpose [purposes]
+          .trip-question{ng:{repeat:'question in characteristicsQuestions'}}
+            %label{style:'width:100%;'}
+              .characteristic-boolean.pull-right
+                %input{type:'checkbox', "data-toggle"=>'toggle', 'checked':'checked'}
+              {{question.text}}
+      .row
+        .col-xs-12
+          .trip-question{ng:{repeat:'question in accommodationQuestions'}}
+            %label{style:'width:100%;'}
+              .characteristic-boolean.pull-right
+                %input{type:'checkbox', "data-toggle"=>'toggle', 'checked':'checked'}
+              {{question.text}}
       .row
         .col-xs-12
           %h3 {{"modes" | translate }}
@@ -85,4 +91,14 @@
       .text-center
         %h1 Rides
       .ride_itineraries{ng:{repeat:'itinerary in itineraries', 'include'=>'"/views/rides-itinerary.html"' }}
+
+:javascript
+  $(function(){
+    setTimeout(function(){
+      $(".characteristic-boolean > input[type=checkbox][data-toggle=toggle]").bootstrapToggle({
+        on:'Yes',
+        off:'No'
+      });
+    }, 300);
+  });
 

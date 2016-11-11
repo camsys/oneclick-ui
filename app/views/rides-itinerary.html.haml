@@ -1,18 +1,21 @@
-.bordered{style:'border: 1px solid black;'}
+.bordered
   .row
     .col-xs-12
       .pull-right.btn.btn-primary
         Select
       .icon
-        %img{ng:{src:'/images/modes/{{itinerary.returned_mode_code | modeIcon}}'}}
-        {{itinerary.returned_mode_code | modeName}}
-  .row
-    .col-xs-6
-      {{itinerary.start_time | date : 'h:mm a'}} to {{itinerary.end_time | date : 'h:mm a'}} 
-      ({{itinerary.duration | seconds}})
-    .col-xs-2
-      {{itinerary.cost | currency | free}}
-    .col-xs-4
-      .walk_time{'ng-show':'itinerary.walk_time'}
-        {{itinerary.walk_time}} Minutes Walking
+        %img{style:'vertical-align:bottom;', ng:{src:'/images/modes/{{itinerary.returned_mode_code | modeIcon}}'}}
+        %h4{style:'display:inline;'}
+          {{itinerary.returned_mode_code | modeName}}
+  %div{style:'border-top:1px solid gray;'}
+    .row
+      .col-xs-6
+        %h4
+          {{itinerary.start_time | date : 'h:mm a'}} to {{itinerary.end_time | date : 'h:mm a'}} ({{itinerary.duration | seconds}})
+      .col-xs-2
+        %h4
+          {{itinerary.cost | currency | free}}
+      .col-xs-4
+        %h4{'ng-show':'itinerary.walk_time'}
+          {{itinerary.walk_time | seconds}} walking
 
