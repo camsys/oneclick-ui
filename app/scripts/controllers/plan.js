@@ -78,16 +78,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       $scope.characteristicsQuestions = data.characteristics_questions;
     }
   });
-  /*
-  $scope.tripPurposes = {};
-  var planServicePromise = planService.getTripPurposes($scope, $http)
-  if(planServicePromise !== false){
-    planServicePromise.then(function(data){
-      console.log('$scope.tripPurposes', data);
-      $scope.tripPurposes = data;
-      usSpinnerService.stop('spinner-1');
-    });
-  }*/
   $scope.accommodationQuestions = [];
   planService.getAccommodationQuestions($http).then(function(data){
     $scope.accommodationQuestions = data.data.accommodations_questions;

@@ -31,6 +31,7 @@ angular.module('oneClickApp')
         delete this.selectedUberOption;
         delete this.showBusRides;
       }
+      var planService = this;
 
       var urlPrefix = '//' + APIHOST + '/';
       this.getPrebookingQuestions = function(){
@@ -633,54 +634,7 @@ angular.module('oneClickApp')
         return description;
       }
 
-      var cachedTripPurposes;
-      this.getTripPurposes = function($scope, $http){
-        var deferred;
-        if(!this.fromDetails){
-          return false;
-        }
-        if( cachedTripPurposes ){
-          deferred = $q.defer()
-          deferred.resolve( cachedTripPurposes );
-          return deferred.promise;
-        }
-        this.fixLatLon(this.fromDetails);
-        deferred = $http.post(urlPrefix + 'api/v1/trip_purposes/list', null, this.getHeaders())
-        deferred.success(function(data) {
-          cachedTripPurposes = data;
-          console.log('data', data);
-          $scope.top_purposes = data.top_trip_purposes;
-          data.trip_purposes = data.trip_purposes || [];
-          $scope.purposes = data.trip_purposes.filter(function(el){
-            var i;
-            for(i=0; i<$scope.top_purposes.length; i+=1){
-              if(el.code && $scope.top_purposes[i].code === el.code){
-                return false;
-              }
-            }
-            return true;
-          });
-          if (data.default_trip_purpose != undefined && $scope.email == undefined){
-            $scope.default_trip_purpose = data.default_trip_purpose;
-            $scope.showNext = true;
-          }
-        });
-        deferred.error(function(data) {
-          alert(data);
-        });
-        return deferred;
-
-        deferred = $http.get('//' + APIHOST + '/api/v1/characteristics/list');
-        deferred.then(function(data) {
-          if(data.statusText === 'OK'){
-            //cache the questions for next view
-            cached_characteristics_questions = data;
-          }
-        });
-        return deferred;
-      }
-
-      this.ggetTripPurposes = function($scope, $http) {
+      this.getTripPurposes = function($scope, $http) {
         this.fixLatLon(this.fromDetails);
         return $http.post(urlPrefix + 'api/v1/trip_purposes/list', this.fromDetails, this.getHeaders()).
           success(function(data) {
@@ -723,7 +677,11 @@ angular.module('oneClickApp')
       }
 
       this.getProfile = function($http) {
-        return $http.get(urlPrefix + 'api/v1/users/profile', this.getHeaders());
+        var profilePromise = $http.get(urlPrefix + 'api/v1/users/profile', this.getHeaders());
+        profilePromise.success(function(response){
+          planService.profile = response;
+        })
+        return profilePromise;
       }
 
       this.getServiceHours = function($http){

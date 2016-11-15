@@ -3,8 +3,8 @@
 var app = angular.module('oneClickApp');
 
 angular.module('oneClickApp')
-  .controller('NavbarController', ['$scope', '$location', 'flash', 'planService', 'deviceDetector', 'ipCookie', '$window', '$translate',
-    function ($scope, $location, flash, planService, deviceDetector, ipCookie, $window, $translate) {
+  .controller('NavbarController', ['$scope', '$location', 'flash', 'planService', 'deviceDetector', 'ipCookie', '$window', '$translate', '$http',
+    function ($scope, $location, flash, planService, deviceDetector, ipCookie, $window, $translate, $http) {
 
       var input = document.createElement('input');
       input.setAttribute('type','date');
@@ -29,14 +29,26 @@ angular.module('oneClickApp')
         $location.path("/plan/where");
       };
       
-      $scope.changeLanguage = function(key){
-        if($scope.languageOptions[key] == undefined){ return; }
+      var changeLanguage = function(key){
+        if($scope.languageOptions[key] == undefined){ return false; }
         $translate.use(key);
         $scope.languageSelected = key;
         ipCookie('lang', key);
+        return true;
+      }
+      $scope.changeLanguage = function(key){
+        //if user is logged in, and changing Language was successful, save the language
+        if(true === changeLanguage(key) && planService.email ){
+          planService.getProfile($http)
+          .success(function(profile){
+            planService.profileUpdateObject = profile;
+            planService.profileUpdateObject.lang = key;
+            planService.postProfileUpdate($http); //.success(function(data){console.log('posted',data);});
+          })
+        }
       }
 
-      $scope.showNavbar = function() {
+      var initialize = function() {
         that.$scope.email = ipCookie('email');
         that.$scope.authentication_token = ipCookie('authentication_token');
         that.$scope.first_name = ipCookie('first_name');
@@ -45,6 +57,13 @@ angular.module('oneClickApp')
         if(that.$scope.email){
           planService.email = $scope.email;
           planService.authentication_token = $scope.authentication_token;
+          planService.getProfile($http).success(function(profile){
+            //console.log('response', profile);
+            $scope.username = profile.first_name +' '+ profile.last_name;
+            if(profile.lang && profile.lang != $scope.languageSelected ){
+              changeLanguage(profile.lang);
+            }
+          });
         }else{
           that.$scope.email = planService.email;
           that.$scope.authentication_token = planService.authentication_token;
@@ -58,6 +77,7 @@ angular.module('oneClickApp')
         $scope.rideCount = ipCookie('rideCount');
         return true;
       };
+      initialize();
 
       $scope.logout = function() {
         delete ipCookie.remove('email');
