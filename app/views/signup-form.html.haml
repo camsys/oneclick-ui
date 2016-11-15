@@ -1,0 +1,26 @@
+%div{"ng-controller"=>"LoginController"}
+  %form#login-nav.form{name:"signupform", role:"form", method:"post", action:"signup", "accept-charset"=>"UTF-8"}
+    .form-group
+      %label.sr-only{for:"signup-firstname"}
+        First Name
+      %input#signup-firstname.form-control{type:"text", placeholder:"First Name", "ng-model"=>"firstName", required:'', name:'firstname'}
+    .form-group
+      %label.sr-only{for:"signup-lastname"}
+        Last Name
+      %input#signup-lastname.form-control{type:"text", placeholder:"Last Name", "ng-model"=>"lastName", required:'', name:'lastname'}
+    .form-group
+      %label.sr-only{for:"signup-emailaddress"}
+        Email Address
+      %input#signup-emailaddress.form-control{type:"text", placeholder:"Email Address", "ng-model"=>"emailAddress", required:'', name:'email'}
+    .form-group
+      %label.sr-only{for:"signup-password"}
+        Password
+      %input.form-control{type:"password", placeholder:"Password", id:"signup-password", "ng-model"=>"password", required:'', name:'password'}
+    .form-group
+      %label.sr-only{for:"signup-password-confirm"}
+        Password
+      %input.form-control{type:"password", placeholder:"Confirm Password", id:"signup-password-confirm", "ng-model"=>"passwordConfirm", required:'', name:'passwordconfirm'}
+    .form-group
+      %button.btn.btn-primary.btn-block{type:"button"}
+        Sign up
+

@@ -1,0 +1,17 @@
+%div{"ng-controller"=>"LoginController"}
+  %form#login-nav.form{name:"loginform", role:"form", method:"post", action:"login", "accept-charset"=>"UTF-8"}
+    .form-group
+      %label.sr-only{for:"emailaddress"}
+        Email Address
+      %input#emailaddress.form-control{type:"text", placeholder:"Email Address", "ng-model"=>"emailAddress", required:''}
+    .form-group
+      %label.sr-only{for:"password"}
+        Password
+      %input.form-control{type:"password", placeholder:"Password", id:"password", "ng-model"=>"password", required:''}
+    .form-group
+      %button.btn.btn-primary.btn-block{type:"button", "ng-click"=>"authenticate()"}
+        Sign in
+    .checkbox
+      %label
+        %input{type:"checkbox"}
+        keep me logged-in
