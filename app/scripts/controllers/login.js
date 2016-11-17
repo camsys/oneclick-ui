@@ -165,10 +165,8 @@ angular.module('oneClickApp')
             ipCookie.remove('county');
             sessionStorage.setItem('dateofbirth', null);
           }
-          promise = planService.getProfile($http);
-          promise.then(function(result) {
-            planService.profile = result.data;
-          })
+          //re-initialize the navbar
+          $scope.$parent.initialize();
         });
       }
     }

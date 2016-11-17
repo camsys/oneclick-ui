@@ -31,7 +31,6 @@ angular.module('oneClickApp')
         delete this.selectedUberOption;
         delete this.showBusRides;
       }
-      var planService = this;
 
       var urlPrefix = '//' + APIHOST + '/';
       this.getPrebookingQuestions = function(){
@@ -672,12 +671,19 @@ angular.module('oneClickApp')
         return $http.post(urlPrefix + 'api/v1/itineraries/plan', this.itineraryRequestObject, this.getHeaders());
       }
 
-      this.postProfileUpdate = function($http) {
-        return $http.post(urlPrefix + 'api/v1/users/update', this.profileUpdateObject, this.getHeaders());
+      this.postProfileUpdate = function($http, profile) {
+        var planService = this;
+        console.log('planService.profile 1', planService.profile);
+        return $http.post(urlPrefix + 'api/v1/users/update', profile, this.getHeaders())
+          .then(function(){
+            planService.profile = profile;
+            console.log('planService.profile 2', planService.profile);
+        });
       }
 
       this.getProfile = function($http) {
         var profilePromise = $http.get(urlPrefix + 'api/v1/users/profile', this.getHeaders());
+        var planService = this;
         profilePromise.success(function(response){
           planService.profile = response;
         })
@@ -775,6 +781,11 @@ angular.module('oneClickApp')
           var returnTimeString = moment.utc(returnDate).format();
           returnTrip.trip_time = returnTimeString;
           request.itinerary_request.push(returnTrip);
+        }
+        //if the profile was updated, include it in the request
+        if( true === this.updateProfile && this.profile ){
+          request.user_profile = this.profile;
+          this.updateProfile = false;
         }
         return request;
       };

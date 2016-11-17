@@ -42,14 +42,27 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     }, 1000);
   }
   //FIXME remove debug code before production
-  !APIHOST.match(/local$/) || debugHelper();
+  //!APIHOST.match(/local$/) || debugHelper();
   $scope.refreshResults = ($location.path() !== '/');
-
+  
+  $scope.accommodations = {};
+  $scope.characteristics = {};
+  
   $scope.planFromResults = function(){
     _planTrip( $scope.$parent.loadItineraries );
   }
   $scope.planFromLanding = function(){
     _planTrip();
+  }
+  $scope.characteristicChange = function(question, value){
+    planService.profile.characteristics = $scope.characteristics;
+    planService.updateProfile = true;
+    $scope.planFromResults();
+  }
+  $scope.accommodationChange = function(question, value){
+    planService.profile.accommodations = $scope.accommodations;
+    planService.updateProfile = true;
+    $scope.planFromResults();
   }
   var _planTrip = function(callback){
     if(!planService.from || !planService.to){return;}
@@ -73,17 +86,37 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.itineraries = planService.transitResult || [];
   $scope.characteristicsQuestions = [];
   planService.getCharacteristicsQuestions($http).then(function(data) {
+    var i, 
+    getDefault = function(code){
+      //default to true if undefined
+      if( !planService.profile.characteristics || undefined === planService.profile.characteristics[code] ){return true;}
+      return planService.profile.characteristics[code];
+    };
     data = data.data ||{};
     if(data.characteristics_questions && data.characteristics_questions.length ){
+      $scope.characteristics = {};
       $scope.characteristicsQuestions = data.characteristics_questions;
+      //initialize $scope.characteristics with values (used in checkboxes)
+      for(i=0; i< $scope.characteristicsQuestions.length; i+=1){
+        $scope.characteristics[ $scope.characteristicsQuestions[i].code ] = getDefault($scope.characteristicsQuestions[i].code);
+      }
     }
   });
   $scope.accommodationQuestions = [];
   planService.getAccommodationQuestions($http).then(function(data){
+    var i, 
+    getDefault = function(code){
+      //default to true if undefined
+      if( !planService.profile.accommodations || undefined === planService.profile.accommodations[code] ){return true;}
+      return planService.profile.accommodations[code];
+    };
+    $scope.accommodations = {};
     $scope.accommodationQuestions = data.data.accommodations_questions;
+    //initialize $scope.accommodations with values (used in checkboxes)
+    for(i=0; i< $scope.accommodationQuestions.length; i+=1){
+      $scope.accommodations[ $scope.accommodationQuestions[i].code ] = getDefault($scope.accommodationQuestions[i].code);
+    }
   })
-
-
 
   if(planService.fromDate > 9000){
     $scope.rideTime = new Date(planService.fromDate);

@@ -37,18 +37,22 @@ angular.module('oneClickApp')
         return true;
       }
       $scope.changeLanguage = function(key){
-        //if user is logged in, and changing Language was successful, save the language
+        var postProfileUpdate = function(profile){
+          profile.lang = key;
+          planService.postProfileUpdate($http, profile); //.success(function(data){console.log('posted',data);});
+        }
+        //if changing Language was successful and  user is logged in, save the language
         if(true === changeLanguage(key) && planService.email ){
-          planService.getProfile($http)
-          .success(function(profile){
-            planService.profileUpdateObject = profile;
-            planService.profileUpdateObject.lang = key;
-            planService.postProfileUpdate($http); //.success(function(data){console.log('posted',data);});
-          })
+          //use the profile if we have one, or get it then use that
+          if(planService.profile){
+            postProfileUpdate( planService.profile );
+          }else{
+            planService.getProfile($http).success( postProfileUpdate );
+          }
         }
       }
 
-      var initialize = function() {
+      $scope.initialize = function() {
         that.$scope.email = ipCookie('email');
         that.$scope.authentication_token = ipCookie('authentication_token');
         that.$scope.first_name = ipCookie('first_name');
@@ -65,6 +69,7 @@ angular.module('oneClickApp')
             }
           });
         }else{
+          planService.getProfile($http);
           that.$scope.email = planService.email;
           that.$scope.authentication_token = planService.authentication_token;
           that.$scope.first_name = planService.first_name;
@@ -77,7 +82,7 @@ angular.module('oneClickApp')
         $scope.rideCount = ipCookie('rideCount');
         return true;
       };
-      initialize();
+      $scope.initialize();
 
       $scope.logout = function() {
         delete ipCookie.remove('email');

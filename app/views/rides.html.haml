@@ -66,14 +66,14 @@
           .trip-question{ng:{repeat:'question in characteristicsQuestions'}}
             %label{style:'width:100%;'}
               .characteristic-boolean.pull-right
-                %input{type:'checkbox', "data-toggle"=>'toggle', 'checked':'checked'}
+                %input{type:'checkbox', name:'{{question.code}}', ng:{model:'characteristics[question.code]', change:'characteristicChange(question.code, characteristics[question.code])'}}
               {{question.text}}
       .row
         .col-xs-12
           .trip-question{ng:{repeat:'question in accommodationQuestions'}}
             %label{style:'width:100%;'}
               .characteristic-boolean.pull-right
-                %input{type:'checkbox', "data-toggle"=>'toggle', 'checked':'checked'}
+                %input{type:'checkbox', name:'{{question.code}}', ng:{model:'accommodations[question.code]', change:'accommodationChange(question.code, accommodations[question.code])'}}
               {{question.text}}
       .row
         .col-xs-12
