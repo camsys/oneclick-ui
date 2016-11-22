@@ -673,19 +673,28 @@ angular.module('oneClickApp')
 
       this.postProfileUpdate = function($http, profile) {
         var planService = this;
-        console.log('planService.profile 1', planService.profile);
         return $http.post(urlPrefix + 'api/v1/users/update', profile, this.getHeaders())
           .then(function(){
             planService.profile = profile;
-            console.log('planService.profile 2', planService.profile);
         });
       }
 
+      var profilePromise = false;
       this.getProfile = function($http) {
-        var profilePromise = $http.get(urlPrefix + 'api/v1/users/profile', this.getHeaders());
+        //return the existing promise if there is one
+        if(profilePromise){
+          return profilePromise;
+        }
+        profilePromise = $http.get(urlPrefix + 'api/v1/users/profile', this.getHeaders());
         var planService = this;
         profilePromise.success(function(response){
           planService.profile = response;
+          planService.first_name = response.first_name;
+          planService.last_name = response.last_name;
+          //drop the profilePromise after promises have run
+          setTimeout(function(){
+            profilePromise = false;
+          }, 100);
         })
         return profilePromise;
       }
@@ -783,7 +792,7 @@ angular.module('oneClickApp')
           request.itinerary_request.push(returnTrip);
         }
         //if the profile was updated, include it in the request
-        if( true === this.updateProfile && this.profile ){
+        if( this.profile ){
           request.user_profile = this.profile;
           this.updateProfile = false;
         }

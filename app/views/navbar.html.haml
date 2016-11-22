@@ -17,16 +17,12 @@
             %ul.dropdown-menu{"aria-labelledby"=>"language_menu_dropdown"}
               %li{ng:{click:"changeLanguage('en')" }} English
               %li{ng:{click:"changeLanguage('es')" }} Español
-          %li{ng:{show:"email"}}
-            %a.navbar-icon{href:"#/plan/my_rides?navbar=true", style:"margin-top: .5em;"}
-              My Rides
-              .badge.alert-success {{rideCount}}
           %li{"ng-show"=>"username"}
-            %a.navbar-icon{href:"#/profile", style:"margin-top: .5em;"}
-              Welcome {{username}}
+            .navbar-icon
+              {{"welcome" | translate}} {{username}}
           %li{"ng-show"=>"email"}
-            %a.navbar-icon{href:'#/', ng:{click:"logout()"}, style:"margin-top: .5em;", translate:''}
-              {{"logout"}}
+            %button.btn.btn-link{"ng-click"=>"logout()"}
+              {{"logout" | translate}}
           %li.dropdown{ng:{show:"!email"}}
             %button.btn.btn-link.dropdown-toggle{type:"button", "data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
               {{"log_in" | translate}}

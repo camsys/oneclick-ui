@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('oneClickApp')
-  .controller('LoginController', ['$scope', '$location', 'flash', 'planService', '$http', 'ipCookie', '$window', 'localStorageService',
-    function ($scope, $location, flash, planService, $http, ipCookie, $window, localStorageService) {
+  .controller('LoginController', ['$scope', '$rootScope', '$location', 'flash', 'planService', '$http', 'ipCookie', '$window', 'localStorageService',
+    function ($scope, $rootScope, $location, flash, planService, $http, ipCookie, $window, localStorageService) {
       //skip initializing this controller if we're not on the page
       if( ['/','/loginError','/plan/login-guest'].indexOf( $location.path() ) == -1){ return; }
-      
+      /*
       //this should probably be in a service if there's anything more
       $http({
         method: 'GET',
@@ -16,13 +16,14 @@ angular.module('oneClickApp')
       }, function errorCallback(response) {
             console.error(response);
       });
-      $scope.location = $location.path();
+      */
+      //$scope.location = $location.path();
       $scope.rememberme = true;
-      $scope.disableNext = true;
-      $scope.counties = [];
-      $scope.sharedRideId = ipCookie('sharedRideId');
-      $scope.county = ipCookie('county');
-      $scope.dateofbirth = sessionStorage.getItem('dateofbirth') || false;
+      //$scope.disableNext = true;
+      //$scope.counties = [];
+      //$scope.sharedRideId = ipCookie('sharedRideId');
+      //$scope.county = ipCookie('county');
+      //$scope.dateofbirth = sessionStorage.getItem('dateofbirth') || false;
       $scope.loginError = false;
       /*
       $scope.dob = {month:'', day:'', year:''};
@@ -37,6 +38,7 @@ angular.module('oneClickApp')
       var email = ipCookie('email');
       $window.visited = true;
 
+/*
       function checkNextValid(){
         /*
         var bd;
@@ -56,7 +58,7 @@ angular.module('oneClickApp')
         }else{
           $scope.dateofbirth = false;
         }
-        */
+        * /
         $scope.disableNext = !($scope.loginform.month.$valid 
                           && $scope.loginform.day.$valid 
                           && $scope.loginform.year.$valid 
@@ -93,7 +95,6 @@ angular.module('oneClickApp')
       $scope.back = function(){
         $location.path('/');
       }
-/*
       $scope.$watch('dob.month', function(n){
           var monthInt = parseInt(n);
           if(monthInt > 1 && monthInt < 13){
@@ -116,17 +117,17 @@ angular.module('oneClickApp')
       });
 */
       $scope.authenticate = function(){
-        planService.dateofbirth = $scope.dateofbirth;
-        planService.sharedRideId = $scope.sharedRideId;
-        planService.county = $scope.county;
+        //planService.dateofbirth = $scope.dateofbirth;
+        //planService.sharedRideId = $scope.sharedRideId;
+        //planService.county = $scope.county;
         var login = {};
         login.session = {};
         login.session.email = $scope.emailAddress;
         login.session.password = $scope.password;
 
-        ipCookie('sharedRideId', login.session.ecolane_id, {expires: 7, expirationUnit: 'days'});
-        ipCookie('county', login.session.county, {expires: 7, expirationUnit: 'days'});
-        sessionStorage.setItem('dateofbirth', login.session.dob);
+        //ipCookie('sharedRideId', login.session.ecolane_id, {expires: 7, expirationUnit: 'days'});
+        //ipCookie('county', login.session.county, {expires: 7, expirationUnit: 'days'});
+        //sessionStorage.setItem('dateofbirth', login.session.dob);
 
         var promise = $http.post('//'+APIHOST+'/api/v1/sign_in', login);
         promise.error(function(result) {
@@ -136,6 +137,7 @@ angular.module('oneClickApp')
           $scope.loginError = false;
           planService.authentication_token = result.data.authentication_token;
           planService.email = result.data.email;
+          /*
           planService.first_name = result.data.first_name;
           planService.last_name = result.data.last_name;
           planService.getPastRides($http, $scope, ipCookie);
@@ -151,22 +153,22 @@ angular.module('oneClickApp')
           }else{
             lastOrigin = result.data.last_origin || '';
           }
+          */
           if($scope.rememberme == true){
             ipCookie('email', planService.email, {expires: 7, expirationUnit: 'days'});
             ipCookie('authentication_token', planService.authentication_token, {expires: 7, expirationUnit: 'days'});
-            ipCookie('first_name', planService.first_name, {expires: 7, expirationUnit: 'days'});
-            ipCookie('last_name', planService.last_name, {expires: 7, expirationUnit: 'days'});
+            //ipCookie('first_name', planService.first_name, {expires: 7, expirationUnit: 'days'});
+            //ipCookie('last_name', planService.last_name, {expires: 7, expirationUnit: 'days'});
           }else{
             ipCookie.remove('email');
             ipCookie.remove('authentication_token');
-            ipCookie.remove('first_name');
-            ipCookie.remove('last_name');
-            ipCookie.remove('sharedRideId');
-            ipCookie.remove('county');
-            sessionStorage.setItem('dateofbirth', null);
+            //ipCookie.remove('first_name');
+            //ipCookie.remove('last_name');
+            //ipCookie.remove('sharedRideId');
+            //ipCookie.remove('county');
+            //sessionStorage.setItem('dateofbirth', null);
           }
-          //re-initialize the navbar
-          $scope.$parent.initialize();
+          $rootScope.$broadcast('LoginController:login', result.data);
         });
       }
     }

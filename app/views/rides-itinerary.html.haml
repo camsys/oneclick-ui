@@ -16,7 +16,7 @@
         %h4
           {{itinerary.cost | currency | free}}
       .col-xs-4
-        %h4{'ng-show':'itinerary.walk_time'}
+        %h4
           {{itinerary.walk_time | seconds}} walking
   %div{style:'border-top:1px solid gray;', ng: {show: 'itinerary.showMoreDetails' } }
     .row

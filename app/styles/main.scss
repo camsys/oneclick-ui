@@ -176,3 +176,12 @@ html, body{
   corder-radius:3px;
   padding:3px;
 }
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color:unset;
+}
+
+.trip-question label:hover{
+  cursor:pointer;
+}
+

@@ -9,6 +9,7 @@ angular.module('oneClickApp')
 })
 .filter('minutes', function() {
   return function(m) {
+    m = m || 0;
     if(m <= 60){
       return '' + m + ' minutes';
     }else{
@@ -22,6 +23,7 @@ angular.module('oneClickApp')
 })
 .filter('seconds', function() {
   return function(s) {
+    s = s || 0;
     var m = Math.ceil( s/60 );
     if(m <= 60){
       return '' + m + ' min';

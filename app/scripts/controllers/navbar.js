@@ -28,7 +28,10 @@ angular.module('oneClickApp')
         planService.reset();
         $location.path("/plan/where");
       };
-      
+      $scope.$on('LoginController:login', function(event, data){
+        console.log('Navbar: event, data', event, data);
+        initialize();
+      })
       var changeLanguage = function(key){
         if($scope.languageOptions[key] == undefined){ return false; }
         $translate.use(key);
@@ -52,24 +55,27 @@ angular.module('oneClickApp')
         }
       }
 
-      $scope.initialize = function() {
+      var initialize = function() {
         that.$scope.email = ipCookie('email');
         that.$scope.authentication_token = ipCookie('authentication_token');
         that.$scope.first_name = ipCookie('first_name');
         that.$scope.last_name = ipCookie('last_name');
-        that.$scope.sharedRideId = ipCookie('sharedRideId');
+        //that.$scope.sharedRideId = ipCookie('sharedRideId');
         if(that.$scope.email){
           planService.email = $scope.email;
           planService.authentication_token = $scope.authentication_token;
           planService.getProfile($http).success(function(profile){
             //console.log('response', profile);
             $scope.username = profile.first_name +' '+ profile.last_name;
+            that.$scope.first_name = profile.first_name;
+            that.$scope.last_name = profile.last_name;
             if(profile.lang && profile.lang != $scope.languageSelected ){
               changeLanguage(profile.lang);
             }
           });
         }else{
           planService.getProfile($http);
+          /*
           that.$scope.email = planService.email;
           that.$scope.authentication_token = planService.authentication_token;
           that.$scope.first_name = planService.first_name;
@@ -78,11 +84,12 @@ angular.module('oneClickApp')
           that.$scope.sharedRideId = planService.sharedRideId;
           that.$scope.walkingDistance = planService.walkingDistance;
           that.$scope.walkingSpeed = planService.walkingSpeed;
+          */
         }
-        $scope.rideCount = ipCookie('rideCount');
-        return true;
+        //$scope.rideCount = ipCookie('rideCount');
+        //return true;
       };
-      $scope.initialize();
+      initialize();
 
       $scope.logout = function() {
         delete ipCookie.remove('email');
