@@ -19,6 +19,5 @@
         %h4
           {{itinerary.walk_time | seconds}} walking
   %div{style:'border-top:1px solid gray;', ng: {show: 'itinerary.showMoreDetails' } }
-    .row
-      .col-xs-12{ng:{include:'itineraryTemplate( itinerary.returned_mode_code )'}}
+    .row{ng:{include:'itineraryTemplate( itinerary.returned_mode_code )'}}
 

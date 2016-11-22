@@ -44,10 +44,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   //FIXME remove debug code before production
   //!APIHOST.match(/local$/) || debugHelper();
   $scope.refreshResults = ($location.path() !== '/');
-  $scope.$on('LoginController:login', function(event, data){
-    if(planService)
-    console.log('Plan Controller event, data', event, data);
-  })
   
   $scope.accommodations = {};
   $scope.characteristics = {};
@@ -88,12 +84,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     });
   }
   $scope.itineraries = planService.transitResult || [];
-  $scope.characteristicsQuestions = [];
+  //helper for setQuestionsDefaults
   var _getKeyQuestionDefault = function(key, code){
     //default to true if undefined
     if( !planService.profile[key] || undefined === planService.profile[key][code] ){return true;}
     return planService.profile[key][code];
   }
+  //generator function which sets defaults for accommodations/characteristics which are identical, except for the key name
   var setQuestionsDefaults = function(key){
     return function(data) {
       var i;
@@ -108,35 +105,14 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       }
     }
   };
+  $scope.characteristicsQuestions = [];
+  $scope.accommodationsQuestions = [];
   //make sure we have the profile before setting question defaults
   planService.getProfile($http).success(function(){
     planService.getCharacteristicsQuestions($http).then( setQuestionsDefaults('characteristics') );
     planService.getAccommodationQuestions($http).then( setQuestionsDefaults('accommodations') );
   });
-  /*
-  planService.getCharacteristicsQuestions($http).then(function(data) {
-    var i;
-    data = data.data ||{};
-    if(data.characteristics_questions && data.characteristics_questions.length ){
-      $scope.characteristics = {};
-      $scope.characteristicsQuestions = data.characteristics_questions;
-      //initialize $scope.characteristics with values (used in checkboxes)
-      for(i=0; i< $scope.characteristicsQuestions.length; i+=1){
-        $scope.characteristics[ $scope.characteristicsQuestions[i].code ] = _getKeyQuestionDefault('characteristics', $scope.characteristicsQuestions[i].code);
-      }
-    }
-  });
-  $scope.accommodationsQuestions = [];
-  planService.getAccommodationQuestions($http).then(function(data){
-    var i;
-    $scope.accommodations = {};
-    $scope.accommodationsQuestions = data.data.accommodations_questions;
-    //initialize $scope.accommodations with values (used in checkboxes)
-    for(i=0; i< $scope.accommodationsQuestions.length; i+=1){
-      $scope.accommodations[ $scope.accommodationsQuestions[i].code ] = _getKeyQuestionDefault('accommodations', $scope.accommodationsQuestions[i].code);
-    }
-  })
-  */
+
 
   if(planService.fromDate > 9000){
     $scope.rideTime = new Date(planService.fromDate);
