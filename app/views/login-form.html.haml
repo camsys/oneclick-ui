@@ -11,6 +11,8 @@
     .form-group
       %button.btn.btn-primary.btn-block{type:"button", "ng-click"=>"authenticate()"}
         Sign in
+    .alert-danger{ng:{show:'true === loginError'}}
+      Your login was not recognized. Please try again.
     .checkbox
       %label
         %input{type:"checkbox"}
