@@ -1,22 +1,22 @@
-.col-xs-12
+.col-md-10.col-md-offset-1
   .row
     .col-xs-12
       .row
-        .col-md-8.col-md-offset-2.col-xs-12
+        .col-xs-12
           %h1
             %strong
               {{itinerary.service_name}}
     .col-xs-12
       .row
-        .col-md-8.col-md-offset-2.col-xs-12
+        .col-xs-12
           Uber is a ride sharing service. Drivers are people from the community who use their own cars to provide rides to others.
-        .col-md-8.col-md-offset-2.col-xs-12
+        .col-xs-12
           To request an Uber ride, you'll need to download the App.
       .row
-        .col-md-8.col-md-offset-2.col-xs-12
+        .col-xs-12
           %hr
       .row
-        .col-md-8.col-md-offset-2.col-xs-12
+        .col-xs-12
           %h3.text-muted{style:'display:inline-block'}
             Estimated fare is:
           %h3.text-center{style:'display:inline-block'}
@@ -24,16 +24,16 @@
             %span{'ng-show'=>'itinerary.returnItinerary'}
               (Each Way)
       .row{style:'padding:20px 0px;'}
-        .col-md-8.col-md-offset-2.col-xs-12.text-center
+        .col-xs-6.col-xs-offset-3.text-center
           %a.btn.btn-primary.btn-block{ng: {href: "https://m.uber.com/ul?&client_id=Qu7RDPXW65A6G-JqqIgnbsfYglolUTIm&action=setPickup&pickup[latitude]={{itinerary.start_location.geometry.location.lat}}&pickup[longitude]={{itinerary.start_location.geometry.location.lng}}&pickup[formatted_address]={{itinerary.start_location.formatted_address | encodeURI}}&dropoff[latitude]={{itinerary.end_location.geometry.location.lat}}&dropoff[longitude]={{itinerary.end_location.geometry.location.lng}}&dropoff[formatted_address]={{itinerary.end_location.formatted_address | encodeURI}}&product_id={{itinerary.product_id}}"}}
             Open Uber App
       .row{style: 'margin-top: 20px', ng: {hide: "savedItineraryView"}}
         %div{style: 'margin-top: 1em', ng: {show: 'showEmail'}}
           .row
-            .col-xs-12.col-sm-8.col-sm-offset-2.text-left
+            .col-xs-12.text-left
               Email your ride details to a friend (or yourself).
           .row
-            .col-xs-12.col-sm-8.col-sm-offset-2.text-left.text-muted
+            .col-xs-12.text-left.text-muted
               Use a comma to separate multiple addresses
           .row
             .col-xs-8.col-sm-6.col-sm-offset-2{'style' => 'line-height: 2em; padding-right: 0px;'}
@@ -44,17 +44,17 @@
                   %span
                     Send
           .row{ng: {show: 'invalidEmail == true'}}
-            .col-xs-12.col-sm-8.col-sm-offset-2.text-left{style: 'color: red'}
+            .col-xs-12.text-left{style: 'color: red'}
               Please enter only valid email addresses
 
         .btn-spacing
-          .col-md-8.col-md-offset-2.col-xs-12
+          .col-xs-12
             %a.btn.btn-primary.btn-block{href: "", ng: {click: 'toggleEmail($event);', show: 'uberSaved && !uberCancelled'}}
               Email this ride        
-          .col-md-8.col-md-offset-2.col-xs-12{ng: {show: 'loggedIn' } }  
+          .col-xs-12{ng: {show: 'loggedIn' } }  
             %a.btn.btn-primary.btn-block{href: "", style:'background-color:red;', ng: {click: "cancelThisUberTrip()", show: "uberSaved"}}
               Cancel this ride
-          .col-md-8.col-md-offset-2.col-xs-12.unstuck-foot
+          .col-xs-12.unstuck-foot
             .pull-right
               %a.btn.btn-primary{href: "", ng: {click: "saveUberTrip()", hide: "!loggedIn || uberSaved"}}
                 Save this Uber ride

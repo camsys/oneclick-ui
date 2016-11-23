@@ -26,16 +26,28 @@ angular.module('oneClickApp')
     s = s || 0;
     var m = Math.ceil( s/60 );
     if(m <= 60){
-      return '' + m + ' min';
+      return '' + m + ' Minutes';
     }else{
       return '' 
-        + (Math.floor( m/60 )) + ' hr, '
-        + (m % 60) + ' min';
+        + (Math.floor( m/60 )) + ' Hour, '
+        + (m % 60) + ' Minutes';
     }
     if(!m || !m._isAMomentObject){ return ''; }
     return m.format('YY-MM-DD');
   };
-}).filter('momentYMD', function() {
+}).filter('distance', [function(){
+  //return human readable distance when provided feet
+  return function(meters){
+    var feet = meters * 3.28084;
+    if(feet < (5280 / 4)) {
+      return Math.round(feet) + ' feet';
+    }else{
+      //round to tenth of a mile
+      //5280 ft per mile
+      return '' + Math.round( (feet/5280) * 100 )/ 100 + ' miles';
+    }
+  };
+}]).filter('momentYMD', function() {
   return function(m) {
     if(!m || !m._isAMomentObject){ return ''; }
     return m.format('YY-MM-DD');
@@ -80,7 +92,12 @@ angular.module('oneClickApp')
     'mode_transit':'transit.png',
     'mode_walk':'walk.png',
     'mode_rail':'rail.png',
-    'mode_bicycle':'bicycle.png'
+    'mode_bicycle':'bicycle.png',
+    'WALK':'walk.png',
+    'BUS':'transit.png',
+    'TRAM':'streetcar.png',
+    'BICYCLE':'bicycle.png',
+    'CAR':'auto.png'
   };
   return function(mode){
     return icons[mode] || '';

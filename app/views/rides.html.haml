@@ -75,7 +75,7 @@
               .characteristic-boolean.pull-right
                 %input{type:'checkbox', name:'{{question.code}}', ng:{model:'accommodations[question.code]', change:'accommodationChange(question.code, accommodations[question.code])'}}
               {{question.text}}
-      .row
+      .row{style:"display:none;"}
         .col-xs-12
           %h3 {{"modes" | translate }}
           .mode-question
@@ -87,18 +87,6 @@
       .row{style:"display:none;"}
         %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions', ng: {show: 'showMap'}}
 
-    .col-md-8.col-xs-12.landing-plan-content
-      .text-center
-        %h1 Rides
+    .col-md-8.col-xs-12
       .ride_itineraries{ng:{repeat:'itinerary in itineraries', 'include'=>'"/views/rides-itinerary.html"' }}
-
-:javascript
-  $(function(){
-    setTimeout(function(){
-      $(".characteristic-boolean > input[type=checkbox][data-toggle=toggle]").bootstrapToggle({
-        on:'Yes',
-        off:'No'
-      });
-    }, 300);
-  });
 

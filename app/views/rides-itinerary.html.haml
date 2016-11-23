@@ -1,5 +1,5 @@
 .bordered
-  .row{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
+  .row.no-outline{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
     .col-xs-12
       .pull-right.btn.btn-primary
         Select
@@ -7,7 +7,7 @@
         %img{style:'vertical-align:bottom;', ng:{src:'/images/modes/{{itinerary.returned_mode_code | modeIcon}}'}}
         %h4{style:'display:inline;'}
           {{itinerary.returned_mode_code | modeName}}
-  %div{style:'border-top:1px solid gray;', ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
+  .no-outline{style:'border-top:1px solid gray;', ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
     .row
       .col-xs-6
         %h4

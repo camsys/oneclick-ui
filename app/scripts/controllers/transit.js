@@ -92,7 +92,7 @@ angular.module('oneClickApp')
         });
         $scope.roundtrip = planService.fare_info.roundtrip;
       }
-
+/*
       if($location.$$path.indexOf('/transitoptions') > -1) {
         $scope.transitInfos = planService.transitInfos[$scope.segmentid];
         if(planService.fare_info.roundtrip == true){
@@ -122,7 +122,7 @@ angular.module('oneClickApp')
       }else{
         $scope.prepareTrip();
       }
-
+*/
 
       $scope.selectTransitTrip = function(tripid, segmentid){
         planService.selectedTripId = tripid;
