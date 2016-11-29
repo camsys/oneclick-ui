@@ -31,4 +31,5 @@ Deploy
 
 + build the application with the command: `grunt --force`
 
-+ execute one of the environment specific deployment scripts (eg. `./deploy.dev.sh`)
++ execute one of the environment specific deployment scripts (eg. `./deploy.dev.sh` OR `./deploy.dev.sh invalidate` to force cloudfront refresh)
+
