@@ -23,7 +23,7 @@
       .col-md-12{ng:{controller:"TransitController"}}
         .row
           .col-xs-6
-            %h1 Directions
+            %h1 {{'directions' | translate}}
             .transit-details{ng: {repeat: 'leg in itinerary.json_legs track by $index', 
                   class: '{"mode_car": leg.mode == "CAR", "mode_bicycle": leg.mode == "BICYCLE","mode_bus": leg.mode == "BUS", "mode_walk": leg.mode == "WALK", "mode_tram": leg.mode == "TRAM" || leg.mode == "RAIL"}'}}
               .row.even-height-row
@@ -48,11 +48,12 @@
                       Show steps
                     .hide-steps-click{ng:{show:'showSteps[$index]', click:'showSteps[$index] = !showSteps[$index]'}}
                       Hide steps
-                    .show-steps{ng:{show:'showSteps[$index] === true', repeat:'step in leg.steps track by $index'}}
-                      .first-step{ng:{show:'$first'}}
-                        Depart {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
-                      .step{ng:{hide:'$first'}}
-                        Turn {{step.relativeDirection}} ({{step.absoluteDirection}}) on {{step.streetName}}, go {{step.distance | distance}}
+                    .show-steps{ng:{show:'showSteps[$index] === true'}}
+                      .steps{ng:{repeat:'step in leg.steps track by step.lon'}}
+                        .first-step{ng:{show:'$first'}}
+                          Depart {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
+                        .step{ng:{hide:'$first'}}
+                          Turn {{step.relativeDirection}} ({{step.absoluteDirection}}) on {{step.streetName}}, go {{step.distance | distance}}
                   .bus-info{ng: {show: 'leg.mode == "BUS"'}}
                     %h5.text-muted{ng: {show: 'leg.warning'}}  {{leg.warning}}
                     %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  Wait for {{leg.transferTimeInMins}} minutes
