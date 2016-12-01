@@ -56,7 +56,7 @@
                     'date-opened'=>'dateOpened',
                     'show-button-bar'=>'false'}
                 %button.btn.btn-primary{type:'button', ng:{class:'{disabled:!ride_search_form.$valid}', click:'ride_search_form.$valid && planFromLanding()'}} {{"ok_button" | translate}}
-  #map{style:"width:500px; height:500px;"}
+  #map{style:"width:500px; height:500px;display:none;"}
     .map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 .landing-splash-middle{'ng-include'=>'"/views/landing-splash-middle.html"' }
 
