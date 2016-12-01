@@ -4,7 +4,7 @@
       .pull-right.btn.btn-primary
         Select
       .icon
-        %img{style:'vertical-align:bottom;', ng:{src:'/images/modes/{{itinerary.returned_mode_code | modeIcon}}'}}
+        %img{style:'vertical-align:bottom;', ng:{src:'{{itinerary.returned_mode_code | modeIcon: itinerary.logo_url}}'}}
         %h4{style:'display:inline;'}
           {{itinerary.service_name}}
   .no-outline{style:'border-top:1px solid gray;', ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
@@ -23,12 +23,10 @@
       .col-md-10.col-md-offset-1
         .row
           .col-xs-12
-            .row
+            .row{style: 'margin-top:20px;'}
               .col-xs-12
-                {{itinerary.comment}}
-            .row
-              .col-xs-12
-                %hr
+                %h4
+                  {{itinerary.comment}}
             .row
               .col-xs-12
                 %h3.text-muted{style:'display:inline-block'}

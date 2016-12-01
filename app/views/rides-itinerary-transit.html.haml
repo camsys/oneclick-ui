@@ -4,7 +4,7 @@
       .pull-right.btn.btn-primary
         Select
       .icon
-        %img{style:'vertical-align:bottom;', ng:{src:'/images/modes/{{itinerary.returned_mode_code | modeIcon}}'}}
+        %img{style:'vertical-align:bottom;', ng:{src:'{{itinerary.returned_mode_code | modeIcon: itinerary.logo_url}}'}}
         %h4{style:'display:inline;'}
           {{itinerary.returned_mode_code | modeName}}
   .no-outline{style:'border-top:1px solid gray;', ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
@@ -28,7 +28,7 @@
                   class: '{"mode_car": leg.mode == "CAR", "mode_bicycle": leg.mode == "BICYCLE","mode_bus": leg.mode == "BUS", "mode_walk": leg.mode == "WALK", "mode_tram": leg.mode == "TRAM" || leg.mode == "RAIL"}'}}
               .row.even-height-row
                 .col-xs-1
-                  %img{"ng-src"=>"images/modes/{{leg.mode | modeIcon}}"}
+                  %img{"ng-src"=>"{{leg.mode | modeIcon}}"}
                 .col-xs-3.text-center
                   .walk-info{ng: {show: 'leg.mode == "WALK"'}}
                     {{leg.duration | seconds}}

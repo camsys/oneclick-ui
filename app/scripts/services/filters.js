@@ -100,8 +100,13 @@ angular.module('oneClickApp')
     'BICYCLE':'bicycle.png',
     'CAR':'auto.png'
   };
-  return function(mode){
-    return icons[mode] || '';
+  return function(mode, iconURL){
+    if(iconURL){
+      return iconURL;
+    }
+    iconURL = '/images/modes/';
+    iconURL += icons[mode] || '';
+    return iconURL;
   }
 })
 .filter('modeName', function(){
