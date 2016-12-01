@@ -4,6 +4,7 @@
 angular.module('oneClickApp')
 .filter('free', function() {
   return function(input) {
+    input = input || '$0.00';
     return input == '$0.00' ? "Free" : input;
   };
 })
