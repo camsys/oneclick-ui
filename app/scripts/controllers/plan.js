@@ -148,6 +148,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.locations = [];
   $scope.placeIds = [];
   $scope.showConfirmLocationMap = false;
+  $scope.whereToMap = null;
   $scope.mapOptions = {
     zoom: 11,
     mapTypeId: google.maps.MapTypeId.ROADMAP

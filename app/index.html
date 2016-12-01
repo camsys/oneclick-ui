@@ -121,6 +121,26 @@
     <script src="bower_components/autofill-event/src/autofill-event.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+<script type="text/javascript">
+var onGoogleReady = (function(){
+    var onReady, callbacks = [];
+    onReady = function(){
+        //call each callback
+        for( var i=0; i < callbacks.length; i+=1){
+            callbacks[i].call();
+        }
+        //reset callbacks
+        callbacks = [];
+    }
+    onReady.callback = function( fn ){
+        // add the function to the callback stack
+        if("function" !== typeof fn){ return; }
+        callbacks.push(fn);
+    }
+    return onReady;
+}());
+
+</script>
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
@@ -149,9 +169,10 @@
         <script src="scripts/directives/autocomplete.js"></script>
         <script src="scripts/directives/enter.js"></script>
         <script src="scripts/directives/autofocus.js"></script>
+        <script src="scripts/lib/infobox.js"></script>
         <!-- endbuild -->
 
-        <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDdpyfym0ylu7GMq6_dTWpEA2u8lmuvnfY&libraries=places"></script>
+        <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDdpyfym0ylu7GMq6_dTWpEA2u8lmuvnfY&libraries=places,geometry&callback=onGoogleReady"></script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

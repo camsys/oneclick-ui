@@ -85,7 +85,7 @@
           .mode-question
             {{"mode_drive_name" | translate }}
       .row{style:"display:none;"}
-        %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions', ng: {show: 'showMap'}}
+        %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 
     .col-md-8.col-xs-12
       .ride_itineraries{ng:{repeat:'itinerary in itineraries', 'include'=>'"/views/rides-itinerary.html"' }}
