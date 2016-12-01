@@ -1,58 +1,80 @@
-.col-md-12{ng:{controller:"TransitController"}}
-  .row
-    .col-xs-6
-      %h1 Directions
-      .transit-details{ng: {repeat: 'leg in itinerary.json_legs track by $index', 
-            class: '{"mode_car": leg.mode == "CAR", "mode_bicycle": leg.mode == "BICYCLE","mode_bus": leg.mode == "BUS", "mode_walk": leg.mode == "WALK", "mode_tram": leg.mode == "TRAM" || leg.mode == "RAIL"}'}}
-        .row.even-height-row
-          .col-xs-1
-            %img{"ng-src"=>"images/modes/{{leg.mode | modeIcon}}"}
-          .col-xs-3.text-center
-            .walk-info{ng: {show: 'leg.mode == "WALK"'}}
-              {{leg.duration | seconds}}
-            .bus-info{ng: {show: 'leg.mode == "BUS"'}}
-              %span{ng: {attr: {style:'background-color:#{{leg.routeColor}}; color: #{{leg.routeTextColor}}'}}}
-                {{leg.route}}
-            .tram-info{ng: {show: 'leg.mode == "TRAM" || leg.mode == "RAIL"'}}
-              
-          .col-xs-8
+.bordered
+  .row.no-outline{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
+    .col-xs-12
+      .pull-right.btn.btn-primary
+        Select
+      .icon
+        %img{style:'vertical-align:bottom;', ng:{src:'/images/modes/{{itinerary.returned_mode_code | modeIcon}}'}}
+        %h4{style:'display:inline;'}
+          {{itinerary.returned_mode_code | modeName}}
+  .no-outline{style:'border-top:1px solid gray;', ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
+    .row
+      .col-xs-6
+        %h4
+          {{itinerary.start_time | date : 'h:mm a'}} to {{itinerary.end_time | date : 'h:mm a'}} ({{itinerary.duration | seconds}})
+      .col-xs-2
+        %h4
+          {{itinerary.cost | currency | free}}
+      .col-xs-4
+        %h4
+          {{itinerary.walk_time | seconds}} walking
+  %div{style:'border-top:1px solid gray;', ng: {show: 'itinerary.showMoreDetails' } }
+    .row
+      .col-md-12{ng:{controller:"TransitController"}}
+        .row
+          .col-xs-6
+            %h1 Directions
+            .transit-details{ng: {repeat: 'leg in itinerary.json_legs track by $index', 
+                  class: '{"mode_car": leg.mode == "CAR", "mode_bicycle": leg.mode == "BICYCLE","mode_bus": leg.mode == "BUS", "mode_walk": leg.mode == "WALK", "mode_tram": leg.mode == "TRAM" || leg.mode == "RAIL"}'}}
+              .row.even-height-row
+                .col-xs-1
+                  %img{"ng-src"=>"images/modes/{{leg.mode | modeIcon}}"}
+                .col-xs-3.text-center
+                  .walk-info{ng: {show: 'leg.mode == "WALK"'}}
+                    {{leg.duration | seconds}}
+                  .bus-info{ng: {show: 'leg.mode == "BUS"'}}
+                    %span{ng: {attr: {style:'background-color:#{{leg.routeColor}}; color: #{{leg.routeTextColor}}'}}}
+                      {{leg.route}}
+                  .tram-info{ng: {show: 'leg.mode == "TRAM" || leg.mode == "RAIL"'}}
+                    
+                .col-xs-8
 
-            .walk-info{ng: {show: 'leg.mode == "WALK"'}}
-              .first{ng: {show: '$first'}}
-                Start {{itinerary.start_location.formatted_address | noCountry}}
-              .not-first{ng: {show: '!$first'}}
-                Start walking {{leg.from.name}}
-              .show-steps-click{ng:{hide:'showSteps[$index]', click:'showSteps[$index] = !showSteps[$index]'}}
-                Show steps
-              .hide-steps-click{ng:{show:'showSteps[$index]', click:'showSteps[$index] = !showSteps[$index]'}}
-                Hide steps
-              .show-steps{ng:{show:'showSteps[$index] === true', repeat:'step in leg.steps track by $index'}}
-                .first-step{ng:{show:'$first'}}
-                  Depart {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
-                .step{ng:{hide:'$first'}}
-                  Turn {{step.relativeDirection}} ({{step.absoluteDirection}}) on {{step.streetName}}, go {{step.distance | distance}}
-            .bus-info{ng: {show: 'leg.mode == "BUS"'}}
-              %h5.text-muted{ng: {show: 'leg.warning'}}  {{leg.warning}}
-              %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  Wait for {{leg.transferTimeInMins}} minutes
-              .get-on
-                Get on {{leg.serviceName}} 
-              %span{ng: {show: '!$first'}}
-                {{leg.from.name}}
-              %span{ng: {show: '$first'}}
-                {{itinerary.start_location.formatted_address | noCountry}}
-              %h5.text-muted {{leg.distance | distance}} ({{leg.duration | seconds}})
+                  .walk-info{ng: {show: 'leg.mode == "WALK"'}}
+                    .first{ng: {show: '$first'}}
+                      Start {{itinerary.start_location.formatted_address | noCountry}}
+                    .not-first{ng: {show: '!$first'}}
+                      Start walking {{leg.from.name}}
+                    .show-steps-click{ng:{hide:'showSteps[$index]', click:'showSteps[$index] = !showSteps[$index]'}}
+                      Show steps
+                    .hide-steps-click{ng:{show:'showSteps[$index]', click:'showSteps[$index] = !showSteps[$index]'}}
+                      Hide steps
+                    .show-steps{ng:{show:'showSteps[$index] === true', repeat:'step in leg.steps track by $index'}}
+                      .first-step{ng:{show:'$first'}}
+                        Depart {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
+                      .step{ng:{hide:'$first'}}
+                        Turn {{step.relativeDirection}} ({{step.absoluteDirection}}) on {{step.streetName}}, go {{step.distance | distance}}
+                  .bus-info{ng: {show: 'leg.mode == "BUS"'}}
+                    %h5.text-muted{ng: {show: 'leg.warning'}}  {{leg.warning}}
+                    %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  Wait for {{leg.transferTimeInMins}} minutes
+                    .get-on
+                      Get on {{leg.serviceName}} 
+                    %span{ng: {show: '!$first'}}
+                      {{leg.from.name}}
+                    %span{ng: {show: '$first'}}
+                      {{itinerary.start_location.formatted_address | noCountry}}
+                    %h5.text-muted {{leg.distance | distance}} ({{leg.duration | seconds}})
 
-            .tram-info{ng: {show: 'leg.mode == "TRAM" || leg.mode == "RAIL"'}}
-              %h5.text-muted{ng: {show: 'leg.warning'}}  {{leg.warning}}
-              %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  Wait for {{leg.transferTimeInMins}} minutes
-              %h5.text-muted Get on {{leg.serviceName}}
-              %h4{ng: {show: '!$first'}}
-                Train @ {{leg.from.name}}
-              %h4{ng: {show: '$first'}}
-                Train @ {{itinerary.start_location.formatted_address | noCountry}}
-              %h4{ng: {show: 'leg.specialService'}}  This is a special service train.
-              %h5.text-muted {{leg.distance | distance}} ({{leg.duration | seconds}})
+                  .tram-info{ng: {show: 'leg.mode == "TRAM" || leg.mode == "RAIL"'}}
+                    %h5.text-muted{ng: {show: 'leg.warning'}}  {{leg.warning}}
+                    %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  Wait for {{leg.transferTimeInMins}} minutes
+                    %h5.text-muted Get on {{leg.serviceName}}
+                    %h4{ng: {show: '!$first'}}
+                      Train @ {{leg.from.name}}
+                    %h4{ng: {show: '$first'}}
+                      Train @ {{itinerary.start_location.formatted_address | noCountry}}
+                    %h4{ng: {show: 'leg.specialService'}}  This is a special service train.
+                    %h5.text-muted {{leg.distance | distance}} ({{leg.duration | seconds}})
 
-    .col-xs-6
-      .map-canvas{:style => "height: 40em", "ui-map" => "routeMap", "ui-options" => "mapOptions"}
+          .col-xs-6
+            .map-canvas{:style => "height: 40em", "ui-map" => "routeMap", "ui-options" => "mapOptions"}
 
