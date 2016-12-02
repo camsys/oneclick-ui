@@ -1,2 +1,47 @@
-%h1
-  More Info for walk
+.bordered
+  .row.no-outline{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
+    .col-xs-12
+      .pull-right.btn.btn-primary
+        Select
+      .icon
+        %img{style:'vertical-align:bottom;', ng:{src:'{{itinerary.returned_mode_code | modeIcon: itinerary.logo_url}}'}}
+        %h4{style:'display:inline;'}
+          {{itinerary.returned_mode_code | modeName}}
+  .no-outline{style:'border-top:1px solid gray;', ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
+    .row
+      .col-xs-6
+        %h4
+          {{itinerary.start_time | date : 'h:mm a'}} to {{itinerary.end_time | date : 'h:mm a'}} ({{itinerary.duration | seconds}})
+      .col-xs-2
+        %h4
+          {{itinerary.cost | currency | free}}
+      .col-xs-4
+        %h4
+          {{itinerary.walk_time | seconds}} walking
+  %div{style:'border-top:1px solid gray;', ng: {show: 'itinerary.showMoreDetails' } }
+    .row
+      .col-md-12{ng:{controller:"TransitController"}}
+        .row
+          .col-xs-6
+            %h1 {{'directions' | translate}}
+            .transit-details{ng: {repeat: 'leg in itinerary.json_legs track by $index', 
+                  class: '{"mode_car": leg.mode == "CAR", "mode_bicycle": leg.mode == "BICYCLE","mode_bus": leg.mode == "BUS", "mode_walk": leg.mode == "WALK", "mode_tram": leg.mode == "TRAM" || leg.mode == "RAIL"}'}}
+              .row.even-height-row
+                .col-xs-1
+                  %img{"ng-src"=>"{{leg.mode | modeIcon}}"}
+                .col-xs-3.text-center
+                  .walk-info
+                    {{leg.duration | seconds}}
+                .col-xs-8
+                  .walk-info{ng: {show: 'leg.mode == "WALK"'}}
+                    .first
+                      Start {{itinerary.start_location.formatted_address | noCountry}}
+                    .steps{ng:{repeat:'step in leg.steps track by step.lon'}}
+                      .first-step{ng:{show:'$first'}}
+                        Depart {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
+                      .step{ng:{hide:'$first'}}
+                        Turn {{step.relativeDirection}} ({{step.absoluteDirection}}) on {{step.streetName}}, go {{step.distance | distance}}
+
+          .col-xs-6
+            .map-canvas{:style => "height: 40em", "ui-map" => "routeMap", "ui-options" => "mapOptions"}
+

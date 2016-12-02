@@ -792,9 +792,9 @@ angular.module('oneClickApp')
           request.itinerary_request.push(returnTrip);
         }
         //if the profile was updated, include it in the request
-        if( this.profile ){
-          request.user_profile = this.profile;
-          this.updateProfile = false;
+        if( this.user_profile ){
+          request.user_profile = this.user_profile;
+          delete this.user_profile;
         }
         return request;
       };

@@ -33,9 +33,11 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       }
       if(exit || $location.path() != '/'){return;}
       $scope.from = '2000 S Queen St, York, PA';//'1550 11th Ave, York, PA';
+      $scope.from = '401 S Queen St, York, PA';
       mapOnBlur($scope.from, 'from');
       setTimeout(function(){
         $scope.to = '449 E King St, York, PA ';//'1920 Trolley Rd, York, PA'
+        $scope.to = '960 S George St, York, PA';
         mapOnBlur($scope.to, 'to');
         plan();
       },1000);
@@ -55,13 +57,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     _planTrip();
   }
   $scope.characteristicChange = function(question, value){
-    planService.profile.characteristics = $scope.characteristics;
-    planService.updateProfile = true;
+    planService.user_profile = planService.user_profile || {};
+    planService.user_profile.characteristics = $scope.characteristics;
     $scope.planFromResults();
   }
   $scope.accommodationChange = function(question, value){
+    planService.user_profile = planService.user_profile || {};
     planService.profile.accommodations = $scope.accommodations;
-    planService.updateProfile = true;
     $scope.planFromResults();
   }
   var _planTrip = function(callback){

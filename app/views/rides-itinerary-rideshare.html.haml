@@ -14,7 +14,7 @@
           {{itinerary.start_time | date : 'h:mm a'}} to {{itinerary.end_time | date : 'h:mm a'}} ({{itinerary.duration | seconds}})
       .col-xs-2
         %h4
-          {{itinerary.cost | currency | free}}
+          {{itinerary.cost | roundUp | currency | free}}
       .col-xs-4
         %h4
           {{itinerary.walk_time | seconds}} walking
