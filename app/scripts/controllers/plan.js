@@ -677,6 +677,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     promise.
       success(success).
       error(function(result) {
+        if(!result){
+          //null result means xhr aborted
+          return;
+        }
         bootbox.alert("An error occured on the server, please retry your search or try again later.");
         usSpinnerService.stop('spinner-1');
       });

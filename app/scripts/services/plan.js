@@ -667,8 +667,17 @@ angular.module('oneClickApp')
         return $http.post(urlPrefix + 'api/v1/places/within_area', place, this.getHeaders());
       }
 
+      var itineraryRequestPromise;
       this.postItineraryRequest = function($http) {
-        return $http.post(urlPrefix + 'api/v1/itineraries/plan', this.itineraryRequestObject, this.getHeaders());
+        ( !itineraryRequestPromise || itineraryRequestPromise.abort() );
+        var deferredAbort = $q.defer();
+        var config = this.getHeaders();
+        config.timeout = deferredAbort.promise;
+        itineraryRequestPromise = $http.post(urlPrefix + 'api/v1/itineraries/plan', this.itineraryRequestObject, config);
+        itineraryRequestPromise.abort = function(){
+          deferredAbort.resolve();
+        }
+        return itineraryRequestPromise;
       }
 
       this.postProfileUpdate = function($http, profile) {
