@@ -63,18 +63,18 @@
       .row
         .col-xs-12
           %h3 {{"customize_your_trip" | translate }}
-          .trip-question{ng:{repeat:'question in characteristicsQuestions'}}
+          .trip-question{ng:{repeat:'question in characteristicsQuestions track by question.code'}}
             %label{style:'width:100%;'}
               .characteristic-boolean.pull-right
                 %input{type:'checkbox', name:'{{question.code}}', ng:{model:'characteristics[question.code]', change:'characteristicChange(question.code, characteristics[question.code])'}}
-              {{question.text}}
+              {{question.note}}
       .row
         .col-xs-12
-          .trip-question{ng:{repeat:'question in accommodationQuestions'}}
+          .trip-question{ng:{repeat:'question in accommodationsQuestions track by question.code'}}
             %label{style:'width:100%;'}
               .characteristic-boolean.pull-right
                 %input{type:'checkbox', name:'{{question.code}}', ng:{model:'accommodations[question.code]', change:'accommodationChange(question.code, accommodations[question.code])'}}
-              {{question.text}}
+              {{question.note}}
       .row{style:"display:none;"}
         .col-xs-12
           %h3 {{"modes" | translate }}

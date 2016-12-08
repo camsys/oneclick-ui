@@ -56,16 +56,15 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.planFromLanding = function(){
     _planTrip();
   }
-  $scope.characteristicChange = function(question, value){
+  var _updatePlanWithQuestionResponses = function(question, value){
     planService.user_profile = planService.user_profile || {};
     planService.user_profile.characteristics = $scope.characteristics;
+    planService.user_profile.accommodations = $scope.accommodations;
     $scope.planFromResults();
   }
-  $scope.accommodationChange = function(question, value){
-    planService.user_profile = planService.user_profile || {};
-    planService.profile.accommodations = $scope.accommodations;
-    $scope.planFromResults();
-  }
+  $scope.characteristicChange = _updatePlanWithQuestionResponses;
+  $scope.accommodationChange = _updatePlanWithQuestionResponses;
+  
   var _planTrip = function(callback){
     if(!planService.from || !planService.to){return;}
     $window.visited=true;
@@ -95,24 +94,29 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   //generator function which sets defaults for accommodations/characteristics which are identical, except for the key name
   var setQuestionsDefaults = function(key){
     return function(data) {
-      var i;
-      data = data.data ||{};
-      if(data[key + '_questions'] && data[key + '_questions'].length ){
-        $scope[key] = {};
-        $scope[key+'Questions'] = data[key+'_questions'];
-        //initialize $scope.characteristics with values (used in checkboxes)
-        for(i=0; i< $scope[key+'Questions'].length; i+=1){
-          $scope[key][ $scope[key+'Questions'][i].code ] = _getKeyQuestionDefault(key, $scope[key+'Questions'][i].code);
+      var i, code, value;
+      for(i=0; i<data.length; i+=1){
+        if('boolean' === typeof data[i].value){
+          value = data[i].value;
+        }else{
+          value = (data[i].value == 't');
         }
+        $scope[key][ data[i].code ] = value;
       }
     }
   };
-  $scope.characteristicsQuestions = [];
-  $scope.accommodationsQuestions = [];
+  $scope.characteristicsQuestions = planService.characteristicsQuestions || [];
+  $scope.accommodationsQuestions = planService.accommodationsQuestions || [];
   //make sure we have the profile before setting question defaults
   planService.getProfile($http).success(function(){
-    planService.getCharacteristicsQuestions($http).then( setQuestionsDefaults('characteristics') );
-    planService.getAccommodationQuestions($http).then( setQuestionsDefaults('accommodations') );
+    if($scope.characteristicsQuestions.length > 0){
+      setQuestionsDefaults('characteristics')( planService.profile.characteristics );
+    }
+    if($scope.accommodationsQuestions.length > 0){
+      setQuestionsDefaults('accommodations')( planService.profile.accommodations );
+    }
+    //planService.getCharacteristicsQuestions($http).then( setQuestionsDefaults('characteristics') );
+    //planService.getAccommodationQuestions($http).then( setQuestionsDefaults('accommodations') );
   });
 
 
@@ -507,112 +511,14 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     return fromDateString;
   }
 
-  $scope.next = function() {
-    if($scope.disableNext){ return; }
-    $scope.showNext = false;
-
-    //rebook the trip if backToConfirm
-    if(planService.backToConfirm){
-      $scope.specifyTripPurpose( planService.purpose );
-      planService.backToConfirm = false;
-      return;
-    }
-
-    switch($scope.step) {
-      case 'when':
-        if(!planService.email){
-          _bookTrip();
-        }else{
-          $location.path('/plan/purpose');
-        }
-        break;
-      case 'where':
-        $location.path('/plan/when');
-        break;
-      case 'confirm':
-        $location.path('/plan/companions');
-        break;
-        usSpinnerService.spin('spinner-1');
-        var promise = planService.postItineraryRequest($http);
-        promise.
-          success(function(result) {
-            planService.searchResults = result;
-            $location.path('/plan/list_itineraries');
-          }).
-          error(function(result) {
-            bootbox.alert("An error occured on the server, please retry your search or try again later.");
-            usSpinnerService.stop('spinner-1');
-          });
-        break;
-      case 'assistant':
-        planService.hasEscort = $scope.hasEscort;
-        if($scope.hasCompanions){
-          planService.numberOfCompanions = $scope.numberOfCompanions || 0;
-        }else{
-          planService.numberOfCompanions = 0;
-        }
-        
-        $location.path('/plan/instructions_for_driver');
-        break;
-      case 'instructions_for_driver':
-        planService.driverInstructions = $scope.driverInstructions;
-        usSpinnerService.spin('spinner-1');
-        var promise = planService.bookSharedRide($http);
-        promise.then(function(result) {
-          planService.booking_results = result.data.booking_results;
-          $location.path('/paratransit/confirm_shared_ride');
-        });
-        break;
-    }
-    return;
-    /*
-      case 'fromDate':
-        planService.fromDate = $scope.fromDate;
-        $location.path('/plan/fromTimeType');
-        break;
-      case 'fromTimeType':
-        planService.fromTime = $scope.fromTime;
-        planService.fromTimeType = $scope.fromTimeType;
-        if($scope.fromTimeType == 'asap'){
-          planService.fromTime = new Date();
-          planService.fromTimeType = 'depart';
-          planService.asap = true;
-        }
-        if(planService.mobile == true){
-          $location.path('/plan/start_current');
-        }else{
-          $location.path('/plan/from');
-        }
-
-        break;
-      case 'from':
-        $location.path('/plan/to');
-        break;
-      case 'from_confirm':
-        $location.path('/plan/to');
-        break;
-      case 'to':
-        $location.path('/plan/purpose');
-        break;
-      case 'purpose':
-        planService.purpose = $scope.default_trip_purpose;
-        $location.path('/plan/needReturnTrip');
-        break;
-      case 'needReturnTrip':
-        $location.path('/plan/returnDate');
-        break;
-      case 'returnDate':
-        planService.returnDate = $scope.returnDate;
-        $location.path('/plan/returnTimeType');
-        break;
-      case 'returnTimeType':
-        planService.returnTime = $scope.returnTime;
-        planService.returnTimeType = $scope.returnTimeType;
-        $location.path('/plan/confirm');
-        break;
-    }
-    */
-  };
+  $scope.saveTrip = function(tripId){
+    selectedItineraries = { select_itineraries: [] };
+    var promise = planService.selectItineraries($http, selectedItineraries);
+    promise.success(function(response){
+      console.log('saved trip response', response);
+    });
+    return false;
+  }
 
   $scope.saveBusTrip = function(){
     var tripId = planService.tripId;
@@ -674,6 +580,11 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
         planService.searchResults = result;
         $location.path("/plan/confirm");
       }
+    promise.success(function(result){
+      $scope.accommodationsQuestions = planService.accommodationsQuestions;
+      $scope.characteristicsQuestions = planService.characteristicsQuestions;
+      $scope.purposes = planService.purposes;
+    })
     promise.
       success(success).
       error(function(result) {

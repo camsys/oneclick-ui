@@ -669,6 +669,7 @@ angular.module('oneClickApp')
 
       var itineraryRequestPromise;
       this.postItineraryRequest = function($http) {
+        var planService = this;
         ( !itineraryRequestPromise || itineraryRequestPromise.abort() );
         var deferredAbort = $q.defer();
         var config = this.getHeaders();
@@ -677,6 +678,13 @@ angular.module('oneClickApp')
         itineraryRequestPromise.abort = function(){
           deferredAbort.resolve();
         }
+        itineraryRequestPromise.success(function(response){
+          //set self properties first
+          planService.accommodationsQuestions = response.accommodations;
+          planService.characteristicsQuestions = response.characteristics;
+          planService.itineraries = response.itineraries;
+          planService.purposes = response.purposes;
+        });
         return itineraryRequestPromise;
       }
 

@@ -6,11 +6,11 @@ app.controller('RidesController', ['$scope', '$http','$routeParams', '$location'
 
 function($scope, $http, $routeParams, $location, planService, util, flash, usSpinnerService, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter) {
 
-  $scope.itineraries =[];
+  $scope.itineraries = [];
   $scope.loadItineraries = function(){
     //this method is used in PlanController, as a callback for when the plan/itinerary is updated
     if(planService.searchResults){
-      $scope.itineraries = planService.searchResults.itineraries;
+      $scope.itineraries = planService.itineraries;
     }else{
       $scope.itineraries =[];
     }
