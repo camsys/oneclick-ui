@@ -50,8 +50,18 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.accommodations = {};
   $scope.characteristics = {};
   
+  var planTimeoutId = null;
   $scope.planFromResults = function(){
-    _planTrip( $scope.$parent.loadItineraries );
+    //only run after a timeout, and cancel the previous if called again within the timeout
+    var timeout = 700;
+    if(planTimeoutId){
+      clearTimeout(planTimeoutId);
+    }
+    planTimeoutId = setTimeout(function(){
+      _planTrip( $scope.$parent.loadItineraries );
+      planTimeoutId = null;
+    }, timeout);
+    
   }
   $scope.planFromLanding = function(){
     _planTrip();
