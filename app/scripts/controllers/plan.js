@@ -120,10 +120,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   //make sure we have the profile before setting question defaults
   planService.getProfile($http).success(function(){
     if($scope.characteristicsQuestions.length > 0){
-      setQuestionsDefaults('characteristics')( planService.profile.characteristics );
+      setQuestionsDefaults('characteristics')( planService.profile.characteristics || [] );
     }
     if($scope.accommodationsQuestions.length > 0){
-      setQuestionsDefaults('accommodations')( planService.profile.accommodations );
+      setQuestionsDefaults('accommodations')( planService.profile.accommodations || [] );
     }
     //planService.getCharacteristicsQuestions($http).then( setQuestionsDefaults('characteristics') );
     //planService.getAccommodationQuestions($http).then( setQuestionsDefaults('accommodations') );
