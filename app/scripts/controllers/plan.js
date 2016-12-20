@@ -521,15 +521,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     return fromDateString;
   }
 
-  $scope.saveTrip = function(tripId){
-    selectedItineraries = { select_itineraries: [] };
-    var promise = planService.selectItineraries($http, selectedItineraries);
-    promise.success(function(response){
-      console.log('saved trip response', response);
-    });
-    return false;
-  }
-
   $scope.saveBusTrip = function(){
     var tripId = planService.tripId;
     var selectedItineraries = [{"trip_id":tripId, "itinerary_id":planService.transitInfos[0][ $scope.selectedBusOption[0] ].id}];

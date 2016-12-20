@@ -1,40 +1,46 @@
 %nav.navbar.navbar-static-top{role: "navigation"}
   .row
-    .col-md-10.col-md-offset-1.col-xs-12
+    .col-lg-10.col-lg-offset-1.col-xs-12
       .navbar-header
         %button.navbar-toggle.collapsed{type:"button", data:{toggle:"collapse", target:"#bs-example-navbar-collapse-1"}, "aria-label"=>"toggle navigation"}
           %i.fa.fa-bars
-        %a.navbar-brand{href:"#/"}
-          %i.fa.fa-bolt
-          {{"site_title" | translate}}
+        %a.navbar-brand{href:'#/', style:'margin-left:0px;'}
+          %h1{style:'margin:0px;'}
+            %i.fa.fa-bolt{style:'vertical-align:sub;font-size:1.6em;'}
+            {{"site_title" | translate}}
       
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav.navbar-right
           %li.dropdown
             %button#language_menu_dropdown.btn.btn-link.dropdown-toggle{type:"button", "data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
-              {{languageOptions[languageSelected]}}
-              %span.caret
+              %h4.display-inline
+                {{languageOptions[languageSelected]}}
+                %span.caret
             %ul.dropdown-menu{"aria-labelledby"=>"language_menu_dropdown"}
               %li{ng:{click:"changeLanguage('en')" }} English
               %li{ng:{click:"changeLanguage('es')" }} Español
           %li{"ng-show"=>"username"}
             .navbar-icon
-              {{"welcome" | translate}} {{username}}
+              %h4.display-inline
+                {{"welcome" | translate}} {{username}}
           %li{"ng-show"=>"email"}
             %button.btn.btn-link{"ng-click"=>"logout()"}
-              {{"logout" | translate}}
+              %h4.display-inline
+                {{"logout" | translate}}
           %li.dropdown{ng:{show:"!email"}}
             %button.btn.btn-link.dropdown-toggle{type:"button", "data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
-              {{"log_in" | translate}}
-              %span.caret
+              %h4.display-inline
+                {{"log_in" | translate}}
+                %span.caret
             %ul#login-dropdown.dropdown-menu
               %li
                 .row
                   .col-md-12{"ng-include":"'/views/login-form.html'"}
           %li.dropdown{"ng-show"=>"!email"}
             %button.btn.btn-link.dropdown-toggle{type:"button", "data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
-              {{"sign_up" | translate}}
-              %span.caret
+              %h4.display-inline
+                {{"sign_up" | translate}}
+                %span.caret
             %ul#login-dropdown.dropdown-menu
               %li
                 .row

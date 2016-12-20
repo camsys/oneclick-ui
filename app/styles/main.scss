@@ -132,6 +132,12 @@ html, body{
 #splash-search-form select {
   width: initial;
 }
+.flex-container{
+  display: flex;
+}
+.flex-item{
+  flex-grow: 0;
+}
 #splash-search-form{
   display: flex;
   flex-wrap: wrap;
@@ -171,10 +177,15 @@ html, body{
 .ride_itineraries{
   margin:5px 0px;
 }
-.ride_itineraries > .bordered{
-  border:1px solid gray;
-  corder-radius:3px;
-  padding:3px;
+.bordered{
+  border:1px solid #ddd;
+  border-radius:8px;
+  padding: 7px 9px;
+  margin: 11px 0px;
+  background-color: #fff;
+}
+.top-border-hr{
+  border-top:1px solid #ddd;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -190,4 +201,47 @@ html, body{
 .map-canvas{
   height:100%;
   width:100%;
+}
+.row-eq-height{
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-ms-flexbox;
+  display:flex;
+}
+.schedule-row{
+  padding:3px;
+  justify-content:center;
+}
+.schedule-row:nth-child(even){
+  background-color:#eee;
+}
+body{
+  background-color: #F0F0FF;
+}
+
+@media (min-width: 1200px) {
+  .col-lg-offset-small{
+    margin-left:3%;
+  }
+  .bordered{
+    padding: 13px 17px;
+  }
+}
+.ride-planner-menu{
+  background-color:#fff;
+  padding:5px 0px;
+  .row{
+    margin:3px 0px;
+  }
+}
+.ride-mode-service-name{
+  display:inline-block;
+  white-space:nowrap;
+  margin:0px 0px 0px 3%;
+}
+.ride-mode-service-icon{
+
+}
+.display-inline{
+  display:inline;
 }

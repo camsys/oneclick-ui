@@ -74,9 +74,14 @@ angular.module('oneClickApp')
   }
 })
 .filter('roundUp', function() {
-  return function(up){
-    //parse as float then round up
-    return ''+ Math.ceil( parseFloat( up || 1) )
+  var roundUpModes = ['mode_ride_hailing', 'mode_taxi'];
+  return function(up, mode){
+    //parse as float then round up, only if mode in roundUpModes
+    if(roundUpModes.indexOf(mode) > -1){
+      return ''+ Math.ceil( parseFloat( up || 1) )
+    }
+    return up;
+    
   }
 })
 .filter('momentFormat', function() {
@@ -119,8 +124,8 @@ angular.module('oneClickApp')
     'mode_rail':'Rail',
     'mode_bicycle':'Bicycle'
   };
-  return function(mode){
-    return modes[mode] || '';
+  return function(mode, service_name){
+    return (service_name || modes[mode]) || '';
   }
 })
 .filter('encodeURI', function() {

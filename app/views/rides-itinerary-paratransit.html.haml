@@ -1,77 +1,39 @@
-.bordered
-  .row.no-outline{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
-    .col-xs-12
-      .pull-right.btn.btn-primary
-        Select
-      .icon
-        %img{style:'vertical-align:bottom;', ng:{src:'{{itinerary.returned_mode_code | modeIcon: itinerary.logo_url}}'}}
-        %h4{style:'display:inline;'}
-          {{itinerary.service_name}}
-  .no-outline{style:'border-top:1px solid gray;', ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
-    .row
-      .col-xs-6
+.row{'ng-show'=>'!itinerary.comment && !itinerary.phone && !itinerary.url && !itinerary.schedule.length'}
+  .col-xs-12.text-center
+    %h3 No more details available.
+.row{style:'display:flex; flex-wrap:wrap;'}
+  .col-sm-7.col-xs-12
+    .row{'ng-show'=>'itinerary.comment'}
+      .col-xs-12
+        %h3 About
+        %h4 {{itinerary.comment}}
+    .row{'ng-show'=>'itinerary.phone'}
+      .col-xs-12
+        %h3 Next Steps
         %h4
-          {{itinerary.start_time | date : 'h:mm a'}} to {{itinerary.end_time | date : 'h:mm a'}} ({{itinerary.duration | seconds}})
-      .col-xs-2
-        %h4
-          {{itinerary.cost | currency | free}}
-      .col-xs-4
-        %h4
-          {{itinerary.walk_time | seconds}} walking
-  %div{style:'border-top:1px solid gray;', ng: {show: 'itinerary.showMoreDetails' } }
-    .row
-      .col-md-10.col-md-offset-1
-        .row
-          .col-xs-12
-            .row{style: 'margin-top:20px;'}
-              .col-xs-12
-                %h4
-                  {{itinerary.comment}}
-            .row
-              .col-xs-12
-                %h3.text-muted{style:'display:inline-block'}
-                  Estimated fare is:
-                %h3.text-center{style:'display:inline-block'}
-                  {{itinerary.cost | roundUp | currency}} 
-                  %span{'ng-show'=>'itinerary.returnItinerary'}
-                    (Each Way)
-            .row{style:'padding:20px 0px;'}
-              .col-xs-6.col-xs-offset-3.text-center
-                %a.btn.btn-primary.btn-block{ng: {href: "{{itinerary.phone | telephoneLink }}", click: 'callService(itinerary.phone);'}}
-                  Call {{itinerary.service_name}}
-            .row{style:'padding:20px 0px;'}
-              .col-xs-12.text-center
-                Their phone number is {{itinerary.phone}}
-            .row{style: 'margin-top: 20px', ng: {hide: "savedItineraryView"}}
-              %div{style: 'margin-top: 1em', ng: {show: 'showEmail'}}
-                .row
-                  .col-xs-12.col-sm-8.col-sm-offset-2.text-left
-                    Email your ride details to a friend (or yourself).
-                .row
-                  .col-xs-12.col-sm-8.col-sm-offset-2.text-left.text-muted
-                    Use a comma to separate multiple addresses
-                .row
-                  .col-xs-8.col-sm-6.col-sm-offset-2{'style' => 'line-height: 2em; padding-right: 0px;'}
-                    %input.form-control{style: 'font-size: .9em; border-top-right-radius:0px; border-bottom-right-radius:0px;', ng: {model: 'emailString'}}
-                  .col-xs-4.col-sm-2{'style' => 'line-height: 2em; padding-left: 0px;'}
-                    %a.btn.btn-success.btn-block{style: 'padding-left: 0px; padding-right: 0px;min-width: 20px; border-top-left-radius:0px; border-bottom-left-radius:0px;', ng: {click: 'sendEmail($event)'}}
-                      %i.fa.fa-envelope-o{style:'color: white;'}
-                        %span
-                          Send
-                .row{ng: {show: 'invalidEmail == true'}}
-                  .col-xs-12.col-sm-8.col-sm-offset-2.text-left{style: 'color: red'}
-                    Please enter only valid email addresses
+          Call 
+          %a{'ng-href'=>'itinerary.phone | telephoneLink'}
+            {{itinerary.phone}}
+          to register to use this service
+    .row{'ng-show'=>'itinerary.url'}
+      .col-xs-12
+        %h3 More Information
+        %h4 
+          Visit 
+          %a{ng:{href:'itinerary.url'}} {{itinerary.url}}
+          for more information
+  .col-sm-5.col-xs-12{style:'display:flex; align-items:center;'}
+    .row{'ng-show'=>'itinerary.schedule.length > 0', style:'padding-bottom:20px;'}
+      .col-xs-12
+        %h3 Schedule
+      .col-xs-12
+        .flex-container.schedule-row{ng:{repeat:'day in itinerary.schedule track by day.day'}}
+          .flex-item{style:'width:90px;'}
+            {{day.day}}
+          .flex-item
+            .startTime{style:'width:70px; ', 'ng-repeat'=>'startTime in day.start'}
+              {{startTime}}
+          .flex-item
+            .endTime{style:'width:70px; ', 'ng-repeat'=>'endTime in day.end'}
+              {{endTime}}
 
-              .btn-spacing
-                .col-xs-12
-                  %a.btn.btn-primary.btn-block{href: "", ng: {click: 'toggleEmail($event);', show: 'paratransitSaved && !paratransitCancelled'}}
-                    Email this ride        
-                .col-xs-12{ng: {show: 'loggedIn' } }  
-                  %a.btn.btn-primary.btn-block{href: "", style:'background-color:red;', ng: {click: "cancelThisParatransitTrip()", show: "paratransitSaved"}}
-                    Cancel this ride
-                .col-xs-12.unstuck-foot
-                  .pull-right
-                    %a.btn.btn-primary{href: "", ng: {click: "saveParatransitTrip()", hide: "!loggedIn || paratransitSaved"}}
-                      Save this paratransit ride
-                    %a.btn.btn-link{ng: {show:"loggedIn && paratransitSaved", click: "reset()"}}
-                      Book another ride

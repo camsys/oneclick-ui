@@ -33,5 +33,17 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     var templatePath = '/views/' + (templates[ mode ] || 'rides-itinerary-templatemissing.html');
     return templatePath;
   }
+  $scope.saveTrip = function(tripId){
+    var selectedItineraries = { select_itineraries: [ { itinerary_id: tripId } ] };
+    var promise = planService.selectItineraries($http, selectedItineraries);
+    promise.success(function(response){
+      console.log('saved trip response', response);
+    });
+    promise.error(function(error){
+      console.log(error);
+    })
+    console.log('saving...');
+  }
+
 
 }]);
