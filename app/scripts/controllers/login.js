@@ -37,6 +37,11 @@ angular.module('oneClickApp')
       var authentication_token = ipCookie('authentication_token');
       var email = ipCookie('email');
       $window.visited = true;
+      $scope.firstName = {};
+      $scope.lastName = {};
+      $scope.email = {};
+      $scope.password = {};
+      $scope.passwordConfirm = {};
 
 /*
       function checkNextValid(){
@@ -116,60 +121,51 @@ angular.module('oneClickApp')
           return;
       });
 */
+      var processUserLogin = function(result) {
+        $scope.loginError = false;
+        planService.authentication_token = result.authentication_token;
+        planService.email = result.email;
+        if($scope.rememberme == true){
+          ipCookie('email', planService.email, {expires: 7, expirationUnit: 'days'});
+          ipCookie('authentication_token', planService.authentication_token, {expires: 7, expirationUnit: 'days'});
+        }else{
+          ipCookie.remove('email');
+          ipCookie.remove('authentication_token');
+        }
+        $rootScope.$broadcast('LoginController:login', result.data);
+      }
+      $scope.signUp = function(){
+        var newUser = {};
+        if(true !== $scope.signupform.$valid){
+          $scope.showErrors = true;
+          return;
+        }
+        newUser.first_name = $scope.firstName.text;
+        newUser.last_name = $scope.lastName.text;
+        newUser.email = $scope.email.text;
+        newUser.password = $scope.password.text;
+        newUser.password_confirmation = $scope.passwordConfirm.text;
+
+        var promise = $http.post('//'+APIHOST+'/api/v1/sign_up', newUser);
+        promise.error(function(result){
+          $scope.newUserError = true;
+          console.error(result);
+        });
+        promise.success(processUserLogin);
+      }
+
       $scope.authenticate = function(){
-        //planService.dateofbirth = $scope.dateofbirth;
-        //planService.sharedRideId = $scope.sharedRideId;
-        //planService.county = $scope.county;
         var login = {};
         login.session = {};
         login.session.email = $scope.emailAddress;
         login.session.password = $scope.password;
 
-        //ipCookie('sharedRideId', login.session.ecolane_id, {expires: 7, expirationUnit: 'days'});
-        //ipCookie('county', login.session.county, {expires: 7, expirationUnit: 'days'});
-        //sessionStorage.setItem('dateofbirth', login.session.dob);
-
         var promise = $http.post('//'+APIHOST+'/api/v1/sign_in', login);
         promise.error(function(result) {
           $scope.loginError = true;
         });
-        promise.then(function(result) {
-          $scope.loginError = false;
-          planService.authentication_token = result.data.authentication_token;
-          planService.email = result.data.email;
-          /*
-          planService.first_name = result.data.first_name;
-          planService.last_name = result.data.last_name;
-          planService.getPastRides($http, $scope, ipCookie);
-          planService.getFutureRides($http, $scope, ipCookie);
-          var lastDest, lastOrigin;
-          if(result.data.last_destination && typeof '' !== typeof result.data.last_destination && result.data.last_destination.formatted_address){
-            lastDest = result.data.last_destination.formatted_address;
-          }else{
-            lastDest = result.data.last_destination || '';
-          }
-          if(result.data.last_origin && typeof '' !== typeof result.data.last_origin && result.data.last_origin.formatted_address){
-            lastOrigin = result.data.last_origin.formatted_address;
-          }else{
-            lastOrigin = result.data.last_origin || '';
-          }
-          */
-          if($scope.rememberme == true){
-            ipCookie('email', planService.email, {expires: 7, expirationUnit: 'days'});
-            ipCookie('authentication_token', planService.authentication_token, {expires: 7, expirationUnit: 'days'});
-            //ipCookie('first_name', planService.first_name, {expires: 7, expirationUnit: 'days'});
-            //ipCookie('last_name', planService.last_name, {expires: 7, expirationUnit: 'days'});
-          }else{
-            ipCookie.remove('email');
-            ipCookie.remove('authentication_token');
-            //ipCookie.remove('first_name');
-            //ipCookie.remove('last_name');
-            //ipCookie.remove('sharedRideId');
-            //ipCookie.remove('county');
-            //sessionStorage.setItem('dateofbirth', null);
-          }
-          $rootScope.$broadcast('LoginController:login', result.data);
-        });
+        promise.success(processUserLogin);
       }
+      
     }
   ]);

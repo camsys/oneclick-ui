@@ -94,32 +94,33 @@
           .no-outline
             .row
               .col-sm-8.col-xs-9
-                .no-outline.icon{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
+                .no-outline.icon
                   %img.ride-mode-service-icon{style:'vertical-align:bottom;', ng:{src:'{{itinerary.returned_mode_code | modeIcon: itinerary.logo_url}}'}}
                   %h2.ride-mode-service-name
                     {{itinerary.returned_mode_code | modeName: itinerary.service_name}}
               .col-sm-4.col-xs-12{style:'position:relative;'}
                 .btn.btn-primary{style:'width:100%;', ng:{click:'saveTrip(itinerary.id)'}}
                   Select
-          .no-outline.top-border-hr{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
+          .no-outline.top-border-hr
             .row
-              .col-sm-2.col-xs-6.text-center
+              .col-sm-3.col-xs-6.text-center
                 %h3
                   {{itinerary.cost | roundUp: itinerary.returned_mode_code | currency | free}}
-              .col-sm-9.col-sm-offset-1.col-xs-12
-                %h3
+              .col-sm-8.col-sm-offset-1.col-xs-12
+                %h3{style:'font-weight:normal'}
                   %span.start-end-time.text-nowrap {{itinerary.start_time | date : 'h:mm a'}} to
                   %span.start-end-time.text-nowrap {{itinerary.end_time | date : 'h:mm a'}}
-              .col-sm-6.col-xs-12
+              .col-md-6.col-sm-8.col-xs-12
                 %h3
                   %span.small.text-nowrap {{itinerary.duration | seconds}} travel time,
                   %span.small.text-nowrap {{itinerary.walk_time | seconds}} walking
-              .col-sm-4.col-sm-offset-2.col-xs-12.text-center
-                %h4
-                  %span{ng:{hide:'itinerary.showMoreDetails'}}
-                    More trip details
-                  %span{ng:{show:'itinerary.showMoreDetails'}}
-                    Close trip details
+              .col-md-4.col-md-offset-2.col-sm-4.col-xs-12.text-center
+                .btn.btn-secondary{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails' } }
+                  %h4
+                    %span{ng:{hide:'itinerary.showMoreDetails'}}
+                      More trip details
+                    %span{ng:{show:'itinerary.showMoreDetails'}}
+                      Close trip details
           .top-border-hr{ng: {show: 'itinerary.showMoreDetails', 'include'=>'itineraryTemplate( itinerary.returned_mode_code )' } }
 
 

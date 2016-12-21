@@ -3,24 +3,43 @@
     .form-group
       %label.sr-only{for:"signup-firstname"}
         First Name
-      %input#signup-firstname.form-control{type:"text", placeholder:"First Name", "ng-model"=>"firstName", required:'', name:'firstname'}
+      %input#signup-firstname.form-control{type:"text", placeholder:"First Name", "ng-model"=>"firstName.text", required:'', name:'firstname'}
+      .alert{role:'alert'}
+        .error{"ng-show"=>"signupform.firstname.$error.required"}
+          Required
     .form-group
       %label.sr-only{for:"signup-lastname"}
         Last Name
-      %input#signup-lastname.form-control{type:"text", placeholder:"Last Name", "ng-model"=>"lastName", required:'', name:'lastname'}
+      %input#signup-lastname.form-control{type:"text", placeholder:"Last Name", "ng-model"=>"lastName.text", required:'', name:'lastname'}
+      .alert{role:'alert'}
+        .error{"ng-show"=>"signupform.lastname.$error.required"}
+          Required
     .form-group
       %label.sr-only{for:"signup-emailaddress"}
         Email Address
-      %input#signup-emailaddress.form-control{type:"text", placeholder:"Email Address", "ng-model"=>"emailAddress", required:'', name:'email'}
+      %input#signup-emailaddress.form-control{type:"email", placeholder:"Email Address", "ng-model"=>"email.text", required:'', name:'email'}
+      .alert{role:'alert'}
+        .error{"ng-show"=>"signupform.email.$error.required"}
+          Required
+        .error{"ng-show"=>"signupform.email.$error.email"}
+          Not valid email
     .form-group
       %label.sr-only{for:"signup-password"}
         Password
-      %input.form-control{type:"password", placeholder:"Password", id:"signup-password", "ng-model"=>"password", required:'', name:'password'}
+      %input.form-control{type:"password", placeholder:"Password", id:"signup-password", ng:{model:'password.text', equals:'{{passwordConfirm.text}}'}, required:'', name:'password'}
+      .alert{role:'alert'}
+        .error{"ng-show"=>"signupform.password.$valid.required"}
+          Required
     .form-group
       %label.sr-only{for:"signup-password-confirm"}
         Password
-      %input.form-control{type:"password", placeholder:"Confirm Password", id:"signup-password-confirm", "ng-model"=>"passwordConfirm", required:'', name:'passwordconfirm'}
+      %input.form-control{type:"password", placeholder:"Confirm Password", id:"signup-password-confirm", ng:{model:'passwordConfirm.text', equals:'{{password.text}}'}, required:'', name:'passwordconfirm'}
+      .alert{role:'alert'}
+        .error{"ng-show"=>"signupform.passwordconfirm.$error.required"}
+          Required
+        .error{"ng-show"=>"signupform.passwordconfirm.$invalid"}
+          Passwords must match
     .form-group
-      %button.btn.btn-primary.btn-block{type:"button"}
+      %button.btn.btn-primary.btn-block{type:"button", "ng-click"=>"signUp()"}
         Sign up
 

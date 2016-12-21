@@ -78,6 +78,9 @@ footer.footer{
     padding: 15px;
     box-sizing: content-box;
   }
+  .navbar-right{
+    margin-top:13px;
+  }
 }
 .btn-link{
   color: $black;
@@ -244,4 +247,19 @@ body{
 }
 .display-inline{
   display:inline;
+}
+#login-nav{
+  .alert{
+    padding:0px;
+    margin-bottom:0px;
+  }
+}
+.ng-untouched + .alert{
+  display:none;
+}
+.ng-untouched + .alert .error{
+  display:inline-block;
+}
+.ng-untouched + .alert .error.ng-hide{
+  display:none;
 }

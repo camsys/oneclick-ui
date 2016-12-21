@@ -44,7 +44,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     }, 1000);
   }
   //FIXME remove debug code before production
-  //!APIHOST.match(/local$/) || debugHelper();
+  !APIHOST.match(/local$/) || debugHelper();
   $scope.refreshResults = ($location.path() !== '/');
   
   $scope.accommodations = {};
@@ -66,6 +66,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.planFromLanding = function(){
     _planTrip();
   }
+  //handle login -- update results
+  $scope.$on('LoginController:login', function(event, data){
+    if($scope.itineraries.length){
+      //reload itineraries
+      $scope.planFromResults();
+    }
+  })
   var _updatePlanWithQuestionResponses = function(question, value){
     planService.user_profile = planService.user_profile || {};
     planService.user_profile.characteristics = $scope.characteristics;

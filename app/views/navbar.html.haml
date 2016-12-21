@@ -20,7 +20,7 @@
               %li{ng:{click:"changeLanguage('en')" }} English
               %li{ng:{click:"changeLanguage('es')" }} Español
           %li{"ng-show"=>"username"}
-            .navbar-icon
+            .navbar-icon{style:"padding: 6px 12px; border: 1px solid transparent;"}
               %h4.display-inline
                 {{"welcome" | translate}} {{username}}
           %li{"ng-show"=>"email"}
