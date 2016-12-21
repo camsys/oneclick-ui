@@ -263,3 +263,10 @@ body{
 .ng-untouched + .alert .error.ng-hide{
   display:none;
 }
+.walk-info > .steps{
+  margin:3px 0px;
+  padding:2px;
+}
+.walk-info > .steps:nth-child(even){
+  background-color:#eee;
+}
