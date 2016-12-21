@@ -75,8 +75,10 @@ footer.footer{
     padding-top: 5px;
   }
   .navbar-nav > li > .dropdown-menu{
-    padding: 15px;
     box-sizing: content-box;
+    li{
+      padding:3px;
+    }
   }
   .navbar-right{
     margin-top:13px;
@@ -181,22 +183,30 @@ html, body{
   margin:5px 0px;
 }
 .bordered{
-  border:1px solid #ddd;
+  border:1px solid #DDD;
   border-radius:8px;
   padding: 7px 9px;
   margin: 11px 0px;
-  background-color: #fff;
+  background-color: #FFF;
 }
 .top-border-hr{
-  border-top:1px solid #ddd;
+  border-top:1px solid #DDD;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
   background-color:unset;
 }
 
-.trip-question label:hover{
-  cursor:pointer;
+.trip-question{
+  background-color:#EEE;
+  margin:7px 3px;
+  border-radius:5px;
+  label{
+    padding:3px 7px;
+  }
+  label:hover{
+    cursor:pointer;
+  }
 }
 .ride_itineraries .bordered .no-outline{
   outline:none;
@@ -216,7 +226,7 @@ html, body{
   justify-content:center;
 }
 .schedule-row:nth-child(even){
-  background-color:#eee;
+  background-color:#EEE;
 }
 body{
   background-color: #F0F0FF;
@@ -231,7 +241,7 @@ body{
   }
 }
 .ride-planner-menu{
-  background-color:#fff;
+  background-color:#FFF;
   padding:5px 0px;
   .row{
     margin:3px 0px;
@@ -269,4 +279,14 @@ body{
 }
 .walk-info > .steps:nth-child(even){
   background-color:#eee;
+}
+ul.language-menu-dropdown{
+  width: 100px;
+  li:hover{
+    background-color:#EEE;
+  }
+}
+#signup-dropdown, 
+#login-dropdown{
+  padding:7px;
 }

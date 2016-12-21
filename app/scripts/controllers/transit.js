@@ -251,13 +251,11 @@ angular.module('oneClickApp')
           start_location = new google.maps.Marker({
             map: $scope.routeMap,
             position: $scope.itinerary.start_location.geometry.location,
-            animation: google.maps.Animation.DROP,
             icon: $scope.toFromIcons.from
           });
           end_location = new google.maps.Marker({
             map: $scope.routeMap,
             position: $scope.itinerary.end_location.geometry.location,
-            animation: google.maps.Animation.DROP,
             icon: $scope.toFromIcons.to
           });
           bounds.extend(start_location.position);
