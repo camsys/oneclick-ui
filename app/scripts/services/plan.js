@@ -813,6 +813,7 @@ angular.module('oneClickApp')
           request.user_profile = this.user_profile;
           delete this.user_profile;
         }
+        request.modes = ['mode_car', 'mode_transit', 'mode_taxi', 'mode_paratransit', 'mode_bicycle', 'mode_walk'];
         return request;
       };
 
