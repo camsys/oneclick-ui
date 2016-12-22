@@ -89,7 +89,7 @@
           %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 
     .col-lg-7.col-sm-9.col-xs-12
-      .ride_itineraries{ng:{repeat:'itinerary in itineraries' }}
+      .ride_itineraries{ng:{repeat:'itinerary in itineraries', hide:'itinerary.hidden' }}
         .bordered
           .no-outline
             .row
