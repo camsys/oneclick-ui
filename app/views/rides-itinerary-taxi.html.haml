@@ -11,7 +11,7 @@
             %h3.text-muted{style:'display:inline-block'}
               Estimated fare is:
             %h3.text-center{style:'display:inline-block'}
-              {{itinerary.cost | roundUp | currency}} 
+              {{itinerary.cost | roundUp: itinerary.returned_mode_code | currency}} 
               %span{'ng-show'=>'itinerary.returnItinerary'}
                 (Each Way)
         .row{style:'padding:20px 0px;'}
