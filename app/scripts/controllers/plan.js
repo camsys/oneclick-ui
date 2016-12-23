@@ -241,7 +241,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
 
   $scope.reset = function() {
     planService.reset();
-    $location.path("/plan/where");
+    $location.path("/");
   };
 
   $scope.goPlanWhere = function(){
