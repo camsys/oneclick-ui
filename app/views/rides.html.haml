@@ -60,7 +60,9 @@
                 'show-button-bar'=>'false'}
         .row
           .col-xs-12
-            {{"sort_by" | translate}}
+            %h3 Trip Purpose?
+            %select#trip-purpose.select.form-control{style: 'width:100%', ng:{model:'tripPurpose', options:'purpose.name for purpose in purposesQuestions track by purpose.code', change:'purposeChange(purpose, $i)'}}
+              %option{value:''} All
         .row
           .col-xs-12
             %h3 {{"customize_your_trip" | translate }}
@@ -122,5 +124,4 @@
                     %span{ng:{show:'itinerary.showMoreDetails'}}
                       Close trip details
           .top-border-hr{ng: {show: 'itinerary.showMoreDetails', 'include'=>'itineraryTemplate( itinerary.returned_mode_code )' } }
-
 

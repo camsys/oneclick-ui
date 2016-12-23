@@ -49,6 +49,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   
   $scope.accommodations = {};
   $scope.characteristics = {};
+  $scope.tripPurpose = null;
   
   var planTimeoutId = null;
   $scope.planFromResults = function(){
@@ -81,6 +82,15 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   }
   $scope.characteristicChange = _updatePlanWithQuestionResponses;
   $scope.accommodationChange = _updatePlanWithQuestionResponses;
+  $scope.purposeChange = function(code){
+    console.log(code, $scope);
+    code = null;
+    if($scope.tripPurpose){
+      code = $scope.tripPurpose.code;
+    }
+    planService.setTripPurpose( code );
+    $scope.planFromResults();
+  }
   
   var _planTrip = function(callback){
     if(!planService.from || !planService.to){return;}
@@ -124,6 +134,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   };
   $scope.characteristicsQuestions = planService.characteristicsQuestions || [];
   $scope.accommodationsQuestions = planService.accommodationsQuestions || [];
+  $scope.purposes = {};
+  $scope.purposesQuestions = planService.purposes || [];
+  //FIXME purposes does not have defaults.
+  
   //make sure we have the profile before setting question defaults
   planService.getProfile($http).success(function(){
     if($scope.characteristicsQuestions.length > 0){
@@ -591,7 +605,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     promise.success(function(result){
       $scope.accommodationsQuestions = planService.accommodationsQuestions;
       $scope.characteristicsQuestions = planService.characteristicsQuestions;
-      $scope.purposes = planService.purposes;
+      $scope.purposesQuestions = planService.purposes;
     })
     promise.
       success(success).
