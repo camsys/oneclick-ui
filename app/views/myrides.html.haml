@@ -6,8 +6,13 @@
           My Rides
   .row
     .col-md-8.col-md-offset-2.col-xs-12
+      .btn.btn-link{ng:{click:'showTab="future"'}}
+        Upcoming ({{trips.future.length}})
+      .btn.btn-link{ng:{click:'showTab="past"'}}
+        History ({{trips.past.length}})
       %tabset 
-        %tab{'heading' => 'Upcoming ({{trips.future.length}})', 'active' => 'tabFuture'}
+        %tab{'heading' => 'Upcoming ({{trips.future.length}})', 'active' => 'tabFuture', "ng-show":'showTab!=="past"'}
+          %h3 Upcoming rides
           .myride{'index' => '{{$index}}', ng: {init: 'tab = "future"', click: 'selectTrip($event, tab, $index)', repeat: 'trip in trips.future'}}
             .row
               .col-xs-2.col-height-slave
@@ -29,7 +34,8 @@
             .animate-show.myride-buttons{ng: {show: 'tripDivs.future[$index]'}}   
               .row.even-height-row    
                 %span{ng: {include: "'views/emailOrCancel.html'"}}      
-        %tab{'heading' => 'History ({{trips.past.length}})', 'active' => 'tabPast'}
+        %tab{'heading' => 'History ({{trips.past.length}})', 'active' => 'tabPast', "ng-show":'showTab==="past"'}
+          %h3 Past rides
           .myride{'index' => '{{$index}}', ng: {init: 'tab = "past"', click: 'selectTrip($event, tab, $index);', repeat: 'trip in trips.past'}}       
             .row
               .col-xs-2.col-height-slave
