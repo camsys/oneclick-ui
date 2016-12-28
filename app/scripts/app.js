@@ -44,6 +44,10 @@ angular.module('oneClickApp', [
         templateUrl: 'views/rides.html',
         controller: 'MainController'
       })
+      .when('/my_rides', {
+        templateUrl: 'views/myrides.html',
+        controller: 'MyridesController'
+      })
       .when('/loginError', {
         templateUrl: 'views/login.html',
         controller: 'MainController'

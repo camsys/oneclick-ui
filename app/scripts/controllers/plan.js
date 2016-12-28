@@ -83,7 +83,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.characteristicChange = _updatePlanWithQuestionResponses;
   $scope.accommodationChange = _updatePlanWithQuestionResponses;
   $scope.purposeChange = function(code){
-    console.log(code, $scope);
     code = null;
     if($scope.tripPurpose){
       code = $scope.tripPurpose.code;
