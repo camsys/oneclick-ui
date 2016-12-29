@@ -244,9 +244,6 @@ body{
 .ride-planner-menu{
   background-color:#FFF;
   padding:5px 0px;
-  .row{
-    margin:3px 0px;
-  }
 }
 .ride-mode-service-name{
   display:inline-block;
@@ -290,4 +287,16 @@ ul.language-menu-dropdown{
 #signup-dropdown, 
 #login-dropdown{
   padding:7px;
+}
+
+
+@media (min-width: 0) and (max-width: $screen-sm-min){
+  .ride_itineraries .map-canvas{
+    height:20em !important;
+  }
+}
+@media (min-width: $screen-sm-min) {
+  .ride_itineraries .map-canvas{
+    height:40em !important;
+  }
 }

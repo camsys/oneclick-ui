@@ -1,98 +1,123 @@
 .rides{'ng-controller'=>'RidesController'}
   .row
     .col-lg-3.col-lg-offset-1.col-sm-3.col-xs-12{'ng-controller'=>'PlanController'}
-      .ride-planner-menu.bordered
-        .row
-          .col-xs-12
-            %autocomplete{ placeholder: '"origin_placeholder"',
-                class: 'autocompleteWrapper',
-                id:'fromInputDiv',
-                tabindex: 'null',
-                'inputclass' => 'form-control',
-                'disable-filter' => 'true',
-                'data' => 'locations',
-                'on-type'=> 'getLocations',
-                'on-focus'=> 'focusFrom',
-                'on-blur'=> 'mapFrom',
-                'on-select' => 'selectFrom',
-                'autocomplete-required' => 'true',
-                'inputid' => 'fromInput',
-                ng: {model: 'from', 'attr-mobile' => '{{mobile}}'} }
-        .row
-          .col-xs-12
-            %autocomplete{ placeholder: '"destination_placeholder"',
-                class: 'autocompleteWrapper',
-                id:'toInputDiv',
-                tabindex: 'null',
-                'inputclass' => 'form-control',
-                'disable-filter' => 'true',
-                'data' => 'locations',
-                'on-type'=> 'getLocations',
-                'on-focus'=> 'focusTo',
-                'on-blur'=> 'mapTo',
-                'on-select' => 'selectTo',
-                'autocomplete-required' => 'true',
-                'inputid' => 'toInput',
-                ng: {model: 'to', 'attr-mobile' => '{{mobile}}'}}
-        .row
-          .col-xs-12
-            %label.hide{:for => "ride-when"} Leave or Arrive?
-            %select#ride-when.select.form-control{style: "width: 100%", ng: {model: 'fromTimeType'} }
-              %option{:selected => "selected", :value => "depart"} {{"depart_at" | translate}}
-              %option{:value => "arrive"} {{"arrive_by" | translate}}
-            %datetimepicker{'hour-step'=>'hourStep',
-                'minute-step'=>'minuteStep',
-                'ng-model'=>'rideTime',
-                'show-meridian'=>'true',
-                'date-format'=>'MMM dd, yyyy',
-                'date-options'=>'dateOptions',
-                'date-disabled'=>'disabled(date, mode)',
-                'datepicker-append-to-body'=>'false',
-                'readonly-date'=>'false',
-                'disabled-date'=>'false',
-                'hidden-time'=>'false',
-                'hidden-date'=>'false',
-                'name'=>'datetimepicker',
-                'show-spinners'=>'false',
-                'readonly-time'=>'false',
-                'date-opened'=>'dateOpened',
-                'data-on-set-time'=>'onRideTimeSet()',
-                'show-button-bar'=>'false'}
-        .row
-          .col-xs-12
-            %button.btn.btn-link{type:"button", data:{toggle:"collapse", target:"#sidebar-collapse-1"}, "aria-label"=>"toggle trip options"}
-              %h3 {{"customize_your_trip" | translate }}
-        #sidebar-collapse-1.collapse{"ng-class"=>"{ in: !isMobile() }"}
+      .bordered
+        .ride-planner-view.text-center{'ng-show'=>'tripSelected'}
           .row
             .col-xs-12
-              .trip-question{ng:{repeat:'question in characteristicsQuestions track by question.code'}}
-                %label{style:'width:100%;'}
-                  .characteristic-boolean.pull-right
-                    %input{type:'checkbox', name:'{{question.code}}', ng:{model:'characteristics[question.code]', change:'characteristicChange(question.code, characteristics[question.code])'}}
-                  {{question.note}}
+              %h4
+                %span.small{style:'display: inline-block; width: 35px;text-align: right;'}
+                  From
+                {{from}}
           .row
             .col-xs-12
-              .trip-question{ng:{repeat:'question in accommodationsQuestions track by question.code'}}
-                %label{style:'width:100%;'}
-                  .characteristic-boolean.pull-right
-                    %input{type:'checkbox', name:'{{question.code}}', ng:{model:'accommodations[question.code]', change:'accommodationChange(question.code, accommodations[question.code])'}}
-                  {{question.note}}
+              %h4
+                %span.small{style:'display: inline-block; width: 35px;text-align: right;'}
+                  To
+                {{to}}
+          .row
+            .col-xs-6.text-right
+              %h4{'ng-show'=>'fromTimeType === "arrive"'}
+                {{"arrive_by" | translate}}
+              %h4{'ng-show'=>'fromTimeType === "depart"'}
+                {{"depart_at" | translate}}
+            .col-xs-6
+              %h4
+                {{rideTime | date: 'MMM d, yyyy'}}
+        .ride-planner-menu{'ng-hide'=>'tripSelected'}
+          .row
+            .col-xs-12
+              %autocomplete{ placeholder: '"origin_placeholder"',
+                  class: 'autocompleteWrapper',
+                  id:'fromInputDiv',
+                  tabindex: 'null',
+                  'inputclass' => 'form-control',
+                  'disable-filter' => 'true',
+                  'data' => 'locations',
+                  'on-type'=> 'getLocations',
+                  'on-focus'=> 'focusFrom',
+                  'on-blur'=> 'mapFrom',
+                  'on-select' => 'selectFrom',
+                  'autocomplete-required' => 'true',
+                  'inputid' => 'fromInput',
+                  ng: {model: 'from', 'attr-mobile' => '{{mobile}}'} }
+          .row
+            .col-xs-12
+              %autocomplete{ placeholder: '"destination_placeholder"',
+                  class: 'autocompleteWrapper',
+                  id:'toInputDiv',
+                  tabindex: 'null',
+                  'inputclass' => 'form-control',
+                  'disable-filter' => 'true',
+                  'data' => 'locations',
+                  'on-type'=> 'getLocations',
+                  'on-focus'=> 'focusTo',
+                  'on-blur'=> 'mapTo',
+                  'on-select' => 'selectTo',
+                  'autocomplete-required' => 'true',
+                  'inputid' => 'toInput',
+                  ng: {model: 'to', 'attr-mobile' => '{{mobile}}'}}
+          .row
+            .col-xs-12
+              %label.hide{:for => "ride-when"} Leave or Arrive?
+              %select#ride-when.select.form-control{style: "width: 100%", ng: {model: 'fromTimeType'} }
+                %option{:selected => "selected", :value => "depart"} {{"depart_at" | translate}}
+                %option{:value => "arrive"} {{"arrive_by" | translate}}
+          .row
+            .col-xs-12
+              %datetimepicker{'hour-step'=>'hourStep',
+                  'minute-step'=>'minuteStep',
+                  'ng-model'=>'rideTime',
+                  'show-meridian'=>'true',
+                  'date-format'=>'MMM dd, yyyy',
+                  'date-options'=>'dateOptions',
+                  'date-disabled'=>'disabled(date, mode)',
+                  'datepicker-append-to-body'=>'false',
+                  'readonly-date'=>'false',
+                  'disabled-date'=>'false',
+                  'hidden-time'=>'false',
+                  'hidden-date'=>'false',
+                  'name'=>'datetimepicker',
+                  'show-spinners'=>'false',
+                  'readonly-time'=>'false',
+                  'date-opened'=>'dateOpened',
+                  'data-on-set-time'=>'onRideTimeSet()',
+                  'show-button-bar'=>'false'}
+          .row
+            .col-xs-12
+              %button.btn.btn-link{type:"button", data:{toggle:"collapse", target:"#sidebar-collapse-1"}, "aria-label"=>"toggle trip options"}
+                %h3 {{"customize_your_trip" | translate }}
+          #sidebar-collapse-1.collapse{"ng-class"=>"{ in: !isMobile() }"}
+            .row
+              .col-xs-12
+                .trip-question{ng:{repeat:'question in characteristicsQuestions track by question.code'}}
+                  %label{style:'width:100%;'}
+                    .characteristic-boolean.pull-right
+                      %input{type:'checkbox', name:'{{question.code}}', ng:{model:'characteristics[question.code]', change:'characteristicChange(question.code, characteristics[question.code])'}}
+                    {{question.note}}
+            .row
+              .col-xs-12
+                .trip-question{ng:{repeat:'question in accommodationsQuestions track by question.code'}}
+                  %label{style:'width:100%;'}
+                    .characteristic-boolean.pull-right
+                      %input{type:'checkbox', name:'{{question.code}}', ng:{model:'accommodations[question.code]', change:'accommodationChange(question.code, accommodations[question.code])'}}
+                    {{question.note}}
+            .row{style:"display:none;"}
+              .col-xs-12
+                %h3 {{"modes" | translate }}
+                .mode-question
+                  {{"mode_paratransit_name" | translate }}
+                .mode-question
+                  {{"mode_transit_name" | translate }}
+                .mode-question
+                  {{"mode_drive_name" | translate }}
+            .row
+              .col-xs-12
+                %h3 Trip Purpose?
+                %select#trip-purpose.select.form-control{style: 'width:100%', ng:{model:'tripPurpose', options:'purpose.name for purpose in purposesQuestions track by purpose.code', change:'purposeChange(purpose, $i)'}}
+                  %option{value:''} All
           .row{style:"display:none;"}
-            .col-xs-12
-              %h3 {{"modes" | translate }}
-              .mode-question
-                {{"mode_paratransit_name" | translate }}
-              .mode-question
-                {{"mode_transit_name" | translate }}
-              .mode-question
-                {{"mode_drive_name" | translate }}
-          .row
-            .col-xs-12
-              %h3 Trip Purpose?
-              %select#trip-purpose.select.form-control{style: 'width:100%', ng:{model:'tripPurpose', options:'purpose.name for purpose in purposesQuestions track by purpose.code', change:'purposeChange(purpose, $i)'}}
-                %option{value:''} All
-        .row{style:"display:none;"}
-          %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
+            %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 
     .col-lg-7.col-sm-9.col-xs-12
       .ride_itineraries{ng:{repeat:'itinerary in itineraries', hide:'tripSelected && tripSelected != itinerary.id' }}
@@ -150,10 +175,7 @@
                 .col-xs-12.col-sm-8.col-sm-offset-2.text-left{style: 'color: red'}
                   Please enter only valid email addresses
             .row.action-buttons
-              .col-md-4.col-md-offset-2.col-sm-6
-                .btn.btn-primary.btn-block{ng:{click:'a=1'}}
-                  {{'go_back_button' | translate}}
-              .col-md-4.col-sm-6
+              .col-md-4.col-md-offset-4.col-xs-10.col-xs-offset-1
                 .btn.btn-primary.btn-block{ng:{click:'showEmail || toggleEmail()', show: 'tripSelected == itinerary.id', class:'{disabled:showEmail}'}}
                   {{'email_button' | translate}}
 
