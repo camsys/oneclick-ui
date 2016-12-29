@@ -1,7 +1,7 @@
 .row
   .col-md-12{ng:{controller:"TransitController"}}
     .row
-      .col-xs-6
+      .col-md-6.col-xs-12
         %h1 {{'directions' | translate}}
         .transit-details{ng: {repeat: 'leg in itinerary.json_legs track by $index', 
               class: '{"mode_car": leg.mode == "CAR", "mode_bicycle": leg.mode == "BICYCLE","mode_bus": leg.mode == "BUS", "mode_walk": leg.mode == "WALK", "mode_tram": leg.mode == "TRAM" || leg.mode == "RAIL"}'}}
@@ -55,6 +55,6 @@
                 %h4{ng: {show: 'leg.specialService'}}  This is a special service train.
                 %h5.text-muted {{leg.distance | distance}} ({{leg.duration | seconds}})
 
-      .col-xs-6
+      .col-md-6.col-xs-12
         .map-canvas{:style => "height: 40em", "ui-map" => "routeMap", "ui-options" => "mapOptions"}
 

@@ -13,15 +13,11 @@
       %tabset 
         %tab{'heading' => 'Upcoming ({{trips.future.length}})', 'active' => 'tabFuture', "ng-show":'showTab!=="past"'}
           %h3 Upcoming rides
-          .myride{'index' => '{{$index}}', ng: {init: 'tab = "future"', click: 'selectTrip($event, tab, $index)', repeat: 'trip in trips.future'}}
+          .bordered.myride{'index' => '{{$index}}', ng: {init: 'tab = "future"', click: 'selectTrip($event, tab, $index)', repeat: 'trip in trips.future'}}
             .row
               .col-xs-2.col-height-slave
-                %img.img-responsive{ng: {src: 'images/modes/paratransit.png', show: 'trip.mode == "mode_paratransit"'}}
-                %img.img-responsive{ng: {src: 'images/modes/transit.png', show: 'trip.mode == "mode_transit"'}}
-                %img.img-responsive{ng: {src: 'images/modes/walk.png', show: 'trip.mode == "mode_walk"'}}
-                %img.img-responsive{ng: {src: 'images/modes/taxi.png', show: 'trip.mode == "mode_taxi"'}}
-                %img.img-responsive{ng: {src: 'images/modes/auto.png', show: 'trip.mode == "mode_ride_hailing"'}}
-              .col-xs-10.col-height-master{style: 'width: 60em !important;'}
+                %img.ride-mode-service-icon{style:'vertical-align:bottom;', ng:{src:'{{trip.mode | modeIcon: trip.logo_url}}'}}
+              .col-xs-10.col-height-master
                 .row
                   .col-xs-12
                     %h4 {{trip.from_place}} to {{trip.to_place}}
@@ -36,15 +32,11 @@
                 %span{ng: {include: "'views/emailOrCancel.html'"}}      
         %tab{'heading' => 'History ({{trips.past.length}})', 'active' => 'tabPast', "ng-show":'showTab==="past"'}
           %h3 Past rides
-          .myride{'index' => '{{$index}}', ng: {init: 'tab = "past"', click: 'selectTrip($event, tab, $index);', repeat: 'trip in trips.past'}}       
+          .bordered.myride{'index' => '{{$index}}', ng: {init: 'tab = "past"', click: 'selectTrip($event, tab, $index);', repeat: 'trip in trips.past'}}       
             .row
               .col-xs-2.col-height-slave
-                %img.img-responsive{ng: {src: 'images/modes/paratransit.png', show: 'trip.mode == "mode_paratransit"'}}
-                %img.img-responsive{ng: {src: 'images/modes/transit.png', show: 'trip.mode == "mode_transit"'}}
-                %img.img-responsive{ng: {src: 'images/modes/walk.png', show: 'trip.mode == "mode_walk"'}}
-                %img.img-responsive{ng: {src: 'images/modes/taxi.png', show: 'trip.mode == "mode_taxi"'}}
-                %img.img-responsive{ng: {src: 'images/modes/auto.png', show: 'trip.mode == "mode_ride_hailing"'}}
-              .col-xs-10.col-height-master{style: 'width: 60em !important;'}
+                %img.ride-mode-service-icon{style:'vertical-align:bottom;', ng:{src:'{{trip.mode | modeIcon: trip.logo_url}}'}}
+              .col-xs-10.col-height-master
                 .row
                   .col-xs-12
                     %h4 {{trip.from_place}} to {{trip.to_place}}
