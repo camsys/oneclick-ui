@@ -6,7 +6,11 @@ app.controller('RidesController', ['$scope', '$http','$routeParams', '$location'
 
 function($scope, $http, $routeParams, $location, planService, util, flash, usSpinnerService, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter) {
 
+  $scope.tripSelected =  false;
+  $scope.invalidEmail = false;
   $scope.itineraries = [];
+  $scope.emailAddresses = {};
+  
   $scope.loadItineraries = function(){
     //this method is used in PlanController, as a callback for when the plan/itinerary is updated
     if(planService.searchResults){
@@ -33,11 +37,14 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     var templatePath = '/views/' + (templates[ mode ] || 'rides-itinerary-templatemissing.html');
     return templatePath;
   }
-  $scope.saveTrip = function(tripId){
+  $scope.saveTrip = function(itinerary){
+    var tripId = itinerary.id;
     var selectedItineraries = { select_itineraries: [ { itinerary_id: tripId } ] };
     var promise = planService.selectItineraries($http, selectedItineraries);
     promise.success(function(response){
-      console.log('saved trip response', response);
+      $scope.tripSelected = tripId;
+      itinerary.showMoreDetails=true;
+      ipCookie('rideCount', ipCookie('rideCount') - 1);
     });
     promise.error(function(error){
       console.log(error);
@@ -45,5 +52,68 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     console.log('saving...');
   }
 
+  $scope.cancelTrip = function(itinerary) {
+    var tripId = itinerary.id;
+    var message = "Are you sure you want to drop this ride?";
+    var successMessage = 'Your trip has been dropped.'
+
+    bootbox.confirm({
+      message: message,
+      buttons: {
+        'cancel': {
+          label: 'Keep Ride'
+        },
+        'confirm': {
+          label: 'Cancel Ride'
+        }
+      },
+      callback: function(result) {
+        if(result == true){
+          //cancel one itinerary
+          var cancel = {bookingcancellation_request:[{itinerary_id: tripId}]};
+          var cancelPromise = planService.cancelTrip($http, cancel)
+          cancelPromise.error(function(data) {
+            bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
+          });
+          cancelPromise.success(function(data) {
+            bootbox.alert(successMessage);
+            $scope.tripSelected = false;
+            ipCookie('rideCount', ipCookie('rideCount') - 1);
+          })
+        }
+      }
+    });
+  };
+
+  $scope.toggleEmail = function(){
+    $scope.invalidEmail = false;
+    $scope.showEmail = !$scope.showEmail;
+  };
+
+  $scope.sendEmail = function(itinerary){
+    var tripId = itinerary.id;
+    var emailString = $scope.emailAddresses.text;
+    var emailRequest, emailPromise;
+    
+    if(emailString && tripId){
+      if( planService.validateEmail(emailString) ){
+        $scope.showEmail = false;
+        emailRequest = {
+          email_address: emailString,
+          trip_id: tripId
+        };
+        planService
+          .emailItineraries($http, emailRequest)
+          .error(function(data) {
+            bootbox.alert("An error occurred on the server, your email was not sent.");
+          })
+          .success(function(data){
+            bootbox.alert('Your email was sent');
+          });
+      }else{
+        $scope.invalidEmail = true;
+      } 
+    }
+  }
 
 }]);
