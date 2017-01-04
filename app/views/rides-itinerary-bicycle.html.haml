@@ -1,2 +1,26 @@
-%h1
-  More Info for bicycle
+.row
+  .col-md-12{ng:{controller:"TransitController"}}
+    .row
+      .col-md-6.col-xs-12
+        %h1 {{'directions' | translate}}
+        .mode_bicycle.transit-details{ng: {repeat: 'leg in itinerary.json_legs track by $index'}}
+          .row.even-height-row
+            .col-md-1.col-xs-3
+              %img{"ng-src"=>"{{leg.mode | modeIcon}}"}
+            .col-md-3.col-xs-9.text-center
+              .bicycle-info
+                {{leg.duration | seconds}}
+            .col-md-8.col-xs-12
+              .bicycle-info
+                .first
+                  Start {{itinerary.start_location.formatted_address | noCountry}}
+                .steps{ng:{repeat:'step in leg.steps track by step.lon'}}
+                  .first-step{ng:{show:'$first'}}
+                    Depart {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
+                  .step{ng:{hide:'$first'}}
+                    %span{style:'text-transform: capitalize;'} {{step.relativeDirection }}
+                    on {{step.streetName}} ({{step.absoluteDirection}}), go {{step.distance | distance}}
+
+      .col-md-6.col-xs-12
+        .map-canvas{:style => "height: 40em", "ui-map" => "routeMap", "ui-options" => "mapOptions"}
+
