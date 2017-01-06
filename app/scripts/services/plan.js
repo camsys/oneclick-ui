@@ -682,7 +682,12 @@ angular.module('oneClickApp')
           //set self properties first
           planService.accommodationsQuestions = response.accommodations;
           planService.characteristicsQuestions = response.characteristics;
-          planService.itineraries = response.itineraries;
+          planService.itineraries = response.itineraries.map(function(itinerary){
+            itinerary.cost = parseFloat( itinerary.cost ) || 0;
+            itinerary.walk_distance = parseFloat( itinerary.walk_distance ) || 0;
+            itinerary.duration = parseInt( itinerary.duration ) || 0;
+            return itinerary;
+          });
           planService.purposes = response.purposes;
           planService.tripId = response.trip_id;
           $rootScope.$broadcast('PlanService:updateItineraryResults', response);

@@ -116,12 +116,20 @@
                 %h3 Trip Purpose?
                 %select#trip-purpose.select.form-control{style: 'width:100%', ng:{model:'tripPurpose', options:'purpose.name for purpose in purposesQuestions track by purpose.code', change:'purposeChange(purpose, $i)'}}
                   %option{value:''} All
+            .row
+              .col-xs-12
+                %h3
+                  Order By
+                %select#order-by.select.form-control{style: 'width:100%', ng:{model:'$parent.orderItinerariesBy'}}
+                  %option{value:'cost'} Price
+                  %option{value:'duration'} Travel Time
+                  %option{value:'walk_distance'} Walking Distance
           .row{style:"display:none;"}
             %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 
     .col-lg-7.col-sm-9.col-xs-12
       #rides-itineraries-list
-        .ride_itineraries{ng:{repeat:'itinerary in itineraries', hide:'tripSelected && tripSelected != itinerary.id' }}
+        .ride_itineraries{ng:{repeat:"itinerary in itineraries | orderBy:orderItinerariesBy:false", hide:'tripSelected && tripSelected != itinerary.id' }}
           .bordered
             .no-outline
               .row
@@ -181,7 +189,7 @@
                     {{'email_button' | translate}}
       #rides-itineraries-loading.fade.in{'ng-show'=>'updatingResults', style:'position:absolute; top:0px;'}
         %h3{style:'margin-top:30px;'}
-          Updating Rides...
+          Finding Rides...
         .sk-circle
           .sk-circle1.sk-child
           .sk-circle2.sk-child

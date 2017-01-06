@@ -44,7 +44,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     }, 1000);
   }
   //FIXME remove debug code before production
-  //!APIHOST.match(/local$/) || debugHelper();
+  !APIHOST.match(/local$/) || debugHelper();
   $scope.refreshResults = ($location.path() !== '/');
   
   $scope.accommodations = {};
@@ -108,7 +108,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
         }
       }
       planService.searchResults = result;
-    //  $location.path("/rides").replace();
       if(callback && typeof callback === "function"){ callback(); }
     });
   }
@@ -154,7 +153,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     });
   }
   $scope.$on('PlanService:updateItineraryResults', function(event, data){
-    console.log('plan service event in plan (controller)', event, data);
     initializeScopeVarsFromPlanServiceResults();
   });
 

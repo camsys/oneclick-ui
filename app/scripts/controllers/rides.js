@@ -11,6 +11,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.itineraries = [];
   $scope.emailAddresses = {};
   
+  $scope.orderItinerariesBy = 'cost';
   $scope.loadItineraries = function(){
     //this method is used in PlanController, as a callback for when the plan/itinerary is updated
     if(planService.itineraries){
@@ -24,7 +25,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   //initialize automatically the first time
   $scope.loadItineraries();
   $scope.$on('PlanService:updateItineraryResults', function(event, data){
-    console.log('plan service event in rides', event, data);
     $scope.loadItineraries();
   });
 
