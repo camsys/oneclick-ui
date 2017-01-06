@@ -76,6 +76,15 @@ angular.module('oneClickApp')
         }else{
           planService.getProfile($http);
           /*
+          //get the dummy token, then get profile
+          planService.getGuestToken($http)
+          .success(function(result){
+            //now get the proifile with the guest token
+            console.log('guestTokenResult', result);
+            planService.getProfile($http);
+          });
+          */
+          /*
           that.$scope.email = planService.email;
           that.$scope.authentication_token = planService.authentication_token;
           that.$scope.first_name = planService.first_name;

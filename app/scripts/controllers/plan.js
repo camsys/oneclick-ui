@@ -44,7 +44,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     }, 1000);
   }
   //FIXME remove debug code before production
-  !APIHOST.match(/local$/) || debugHelper();
+  //!APIHOST.match(/local$/) || debugHelper();
   $scope.refreshResults = ($location.path() !== '/');
   
   $scope.accommodations = {};
@@ -59,6 +59,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       clearTimeout(planTimeoutId);
     }
     planTimeoutId = setTimeout(function(){
+      $scope.$parent.updatingResults = true;
       _planTrip( $scope.$parent.loadItineraries );
       planTimeoutId = null;
     }, timeout);
@@ -94,6 +95,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   var _planTrip = function(callback){
     if(!planService.from || !planService.to){return;}
     $window.visited=true;
+    $location.path("/rides").replace();
     _bookTrip(function(result){
       var i;
       for(i=0; i<result.itineraries.length; i+=1){
@@ -106,7 +108,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
         }
       }
       planService.searchResults = result;
-      $location.path("/rides").replace();
+    //  $location.path("/rides").replace();
       if(callback && typeof callback === "function"){ callback(); }
     });
   }
@@ -131,23 +133,32 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       }
     }
   };
-  $scope.characteristicsQuestions = planService.characteristicsQuestions || [];
-  $scope.accommodationsQuestions = planService.accommodationsQuestions || [];
-  $scope.purposes = {};
-  $scope.purposesQuestions = planService.purposes || [];
-  //FIXME purposes does not have defaults.
-  
-  //make sure we have the profile before setting question defaults
-  planService.getProfile($http).success(function(){
-    if($scope.characteristicsQuestions.length > 0){
-      setQuestionsDefaults('characteristics')( planService.profile.characteristics || [] );
-    }
-    if($scope.accommodationsQuestions.length > 0){
-      setQuestionsDefaults('accommodations')( planService.profile.accommodations || [] );
-    }
-    //planService.getCharacteristicsQuestions($http).then( setQuestionsDefaults('characteristics') );
-    //planService.getAccommodationQuestions($http).then( setQuestionsDefaults('accommodations') );
+
+  var initializeScopeVarsFromPlanServiceResults = function(){
+    $scope.characteristicsQuestions = planService.characteristicsQuestions || [];
+    $scope.accommodationsQuestions = planService.accommodationsQuestions || [];
+    $scope.purposes = {};
+    $scope.purposesQuestions = planService.purposes || [];
+    //FIXME purposes does not have defaults.
+
+    //make sure we have the profile before setting question defaults
+    planService.getProfile($http).success(function(){
+      if($scope.characteristicsQuestions.length > 0){
+        setQuestionsDefaults('characteristics')( planService.profile.characteristics || [] );
+      }
+      if($scope.accommodationsQuestions.length > 0){
+        setQuestionsDefaults('accommodations')( planService.profile.accommodations || [] );
+      }
+      //planService.getCharacteristicsQuestions($http).then( setQuestionsDefaults('characteristics') );
+      //planService.getAccommodationQuestions($http).then( setQuestionsDefaults('accommodations') );
+    });
+  }
+  $scope.$on('PlanService:updateItineraryResults', function(event, data){
+    console.log('plan service event in plan (controller)', event, data);
+    initializeScopeVarsFromPlanServiceResults();
   });
+
+
 
 
   if(planService.fromDate > 9000){
@@ -433,17 +444,9 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     $event.stopPropagation();
     var trip = $scope.trips[tab][index];
     planService.selectedTrip = trip;
-    switch(trip.mode) {
-      case 'mode_paratransit':
-        break;
-      case 'mode_transit':
-        break;
-      case 'mode_walk':
-        break;
-    }
+    planService.myRidesShowTab = tab;
     $location.path('/itinerary');
   };
-
   $scope.toggleEmail = function($event) {
     $scope.invalidEmail = false;
     $scope.showEmail = !$scope.showEmail;

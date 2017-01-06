@@ -144,7 +144,7 @@ angular.module('oneClickApp', [
     });
     
     $window.$rootScope = $rootScope;
-    var exceptions = ["/plan/my_rides", "/about", "/about/sharedride", "/about/projecthistory"];
+    var exceptions = ["/my_rides", "/about", "/about/sharedride", "/about/projecthistory"];
     $rootScope.$on('$routeChangeStart', function (event) {
       if(!$window.visited){
         if(exceptions.indexOf($location.$$path) < 0){

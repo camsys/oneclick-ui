@@ -23,6 +23,9 @@
                     %h4 {{trip.from_place}} to {{trip.to_place}}
                 .row
                   .col-xs-8
+                    %h5.blue-text{"ng-show"=>"trip.service_name"} {{trip.service_name}}
+                .row
+                  .col-xs-8
                     %h5.blue-text {{trip.startDesc}}
                   .col-xs-4
                     %h5.text-muted.text-right{ng: {show: 'trip.itineraries.length > 1'}} (round trip)
@@ -40,6 +43,9 @@
                 .row
                   .col-xs-12
                     %h4 {{trip.from_place}} to {{trip.to_place}}
+                .row
+                  .col-xs-8
+                    %h5.blue-text{"ng-show"=>"trip.service_name"} {{trip.service_name}}
                 .row
                   .col-xs-8
                     %h5.blue-text {{trip.startDesc}}

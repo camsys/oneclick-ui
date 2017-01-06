@@ -684,10 +684,16 @@ angular.module('oneClickApp')
           planService.characteristicsQuestions = response.characteristics;
           planService.itineraries = response.itineraries;
           planService.purposes = response.purposes;
+          planService.tripId = response.trip_id;
+          $rootScope.$broadcast('PlanService:updateItineraryResults', response);
         });
         return itineraryRequestPromise;
       }
 
+      this.getGuestToken = function($http){
+        var planService = this;
+        return $http.get(urlPrefix + 'api/v1/users/get_guest_token');
+      }
       this.postProfileUpdate = function($http, profile) {
         var planService = this;
         return $http.post(urlPrefix + 'api/v1/users/update', profile, this.getHeaders())

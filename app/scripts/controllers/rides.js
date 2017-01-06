@@ -13,14 +13,20 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   
   $scope.loadItineraries = function(){
     //this method is used in PlanController, as a callback for when the plan/itinerary is updated
-    if(planService.searchResults){
+    if(planService.itineraries){
+      $scope.updatingResults = false;
       $scope.itineraries = planService.itineraries;
     }else{
       $scope.itineraries =[];
+      $scope.updatingResults = true;
     }
   }
   //initialize automatically the first time
   $scope.loadItineraries();
+  $scope.$on('PlanService:updateItineraryResults', function(event, data){
+    console.log('plan service event in rides', event, data);
+    $scope.loadItineraries();
+  });
 
   $scope.itineraryTemplate = function( mode ){
     //return a different template depending on mode 
@@ -90,8 +96,8 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     $scope.showEmail = !$scope.showEmail;
   };
 
-  $scope.sendEmail = function(itinerary){
-    var tripId = itinerary.id;
+  $scope.sendEmail = function(){
+    var tripId = planService.tripId;
     var emailString = $scope.emailAddresses.text;
     var emailRequest, emailPromise;
     

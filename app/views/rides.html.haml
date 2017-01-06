@@ -120,62 +120,79 @@
             %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 
     .col-lg-7.col-sm-9.col-xs-12
-      .ride_itineraries{ng:{repeat:'itinerary in itineraries', hide:'tripSelected && tripSelected != itinerary.id' }}
-        .bordered
-          .no-outline
-            .row
-              .col-sm-8.col-xs-9
-                .no-outline.icon
-                  %img.ride-mode-service-icon{style:'vertical-align:bottom;', ng:{src:'{{itinerary.returned_mode_code | modeIcon: itinerary.logo_url}}'}}
-                  %h2.ride-mode-service-name
-                    {{itinerary.returned_mode_code | modeName: itinerary.service_name}}
-              .col-sm-4.col-xs-12{style:'position:relative;'}
-                .btn.btn-primary.btn-block{ng:{click:'saveTrip(itinerary)', hide:'tripSelected'}}
-                  Select
-                .btn.btn-primary.btn-block{ng:{click:'cancelTrip(itinerary)', show:'tripSelected'}}
-                  Cancel
-          .no-outline.top-border-hr
-            .row
-              .col-sm-3.col-xs-6.text-center
-                %h3
-                  {{itinerary.cost | roundUp: itinerary.returned_mode_code | currency | free}}
-              .col-sm-8.col-sm-offset-1.col-xs-12
-                %h3{style:'font-weight:normal'}
-                  %span.start-end-time.text-nowrap {{itinerary.start_time | date : 'h:mm a'}} to
-                  %span.start-end-time.text-nowrap {{itinerary.end_time | date : 'h:mm a'}}
-            .row{style:'margin-bottom: 1em;'}
-              .col-md-6.col-sm-8.col-xs-12
-                %h3{style:'margin: 0px;'}
-                  %span.small.text-nowrap {{itinerary.duration | seconds}} travel time,
-                  %span.small.text-nowrap {{itinerary.walk_time | seconds}} walking
-              .col-md-4.col-md-offset-2.col-sm-4.col-xs-12.text-center
-                .btn.btn-link{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails', hide:'tripSelected' } }
-                  %span{ng:{hide:'itinerary.showMoreDetails'}}
-                    More trip details
-                  %span{ng:{show:'itinerary.showMoreDetails'}}
-                    Close trip details
-          .top-border-hr{ng: {show: 'itinerary.showMoreDetails'}}
-            .included-template{ng:{ 'include'=>'itineraryTemplate( itinerary.returned_mode_code )' } }
-            .email-itinerary-form{style:'margin:1em 0px;', ng: {show: 'showEmail'}}
+      #rides-itineraries-list
+        .ride_itineraries{ng:{repeat:'itinerary in itineraries', hide:'tripSelected && tripSelected != itinerary.id' }}
+          .bordered
+            .no-outline
               .row
-                .col-xs-12.col-sm-8.col-sm-offset-2.text-left
-                  Email your ride details to a friend (or yourself).
+                .col-sm-8.col-xs-9
+                  .no-outline.icon
+                    %img.ride-mode-service-icon{style:'vertical-align:bottom;', ng:{src:'{{itinerary.returned_mode_code | modeIcon: itinerary.logo_url}}'}}
+                    %h2.ride-mode-service-name
+                      {{itinerary.returned_mode_code | modeName: itinerary.service_name}}
+                .col-sm-4.col-xs-12{style:'position:relative;'}
+                  .btn.btn-primary.btn-block{ng:{click:'saveTrip(itinerary)', hide:'tripSelected'}}
+                    Select
+                  .btn.btn-primary.btn-block{ng:{click:'cancelTrip(itinerary)', show:'tripSelected'}}
+                    Cancel
+            .no-outline.top-border-hr
               .row
-                .col-xs-12.col-sm-8.col-sm-offset-2.text-left.text-muted
-                  Use a comma to separate multiple addresses
-              .row
-                .col-sm-6.col-sm-offset-2.col-xs-8{'style' => 'line-height: 2em; padding-right: 0px;'}
-                  %input.form-control{type:'text', style: 'font-size: .9em; border-top-right-radius:0px; border-bottom-right-radius:0px;', ng: {model: 'emailAddresses.text'}}
-                .col-sm-2.col-xs-10{'style' => 'line-height: 2em; padding-left: 0px;'}
-                  .btn.btn-success.btn-block{style: 'padding-left: 0px; padding-right: 0px;min-width: 20px; border-top-left-radius:0px; border-bottom-left-radius:0px;', ng: {click: 'sendEmail(itinerary)'}}
-                    %i.fa.fa-envelope-o.fa-lg{style:'color: white;'}
-                      %span
-                        Send
-              .row{ng: {show: 'invalidEmail == true'}}
-                .col-xs-12.col-sm-8.col-sm-offset-2.text-left{style: 'color: red'}
-                  Please enter only valid email addresses
-            .row.action-buttons
-              .col-md-4.col-md-offset-4.col-xs-10.col-xs-offset-1
-                .btn.btn-primary.btn-block{ng:{click:'showEmail || toggleEmail()', show: 'tripSelected == itinerary.id', class:'{disabled:showEmail}'}}
-                  {{'email_button' | translate}}
+                .col-sm-3.col-xs-6.text-center
+                  %h3
+                    {{itinerary.cost | roundUp: itinerary.returned_mode_code | currency | free}}
+                .col-sm-8.col-sm-offset-1.col-xs-12
+                  %h3{style:'font-weight:normal'}
+                    %span.start-end-time.text-nowrap {{itinerary.start_time | date : 'h:mm a'}} to
+                    %span.start-end-time.text-nowrap {{itinerary.end_time | date : 'h:mm a'}}
+              .row{style:'margin-bottom: 1em;'}
+                .col-md-6.col-sm-8.col-xs-12
+                  %h3{style:'margin: 0px;'}
+                    %span.small.text-nowrap {{itinerary.duration | seconds}} travel time,
+                    %span.small.text-nowrap {{itinerary.walk_time | seconds}} walking
+                .col-md-4.col-md-offset-2.col-sm-4.col-xs-12.text-center
+                  .btn.btn-link{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails', hide:'tripSelected' } }
+                    %span{ng:{hide:'itinerary.showMoreDetails'}}
+                      More trip details
+                    %span{ng:{show:'itinerary.showMoreDetails'}}
+                      Close trip details
+            .top-border-hr{ng: {show: 'itinerary.showMoreDetails'}}
+              .included-template{ng:{ 'include'=>'itineraryTemplate( itinerary.returned_mode_code )' } }
+              .email-itinerary-form{style:'margin:1em 0px;', ng: {show: 'showEmail'}}
+                .row
+                  .col-xs-12.col-sm-8.col-sm-offset-2.text-left
+                    Email your ride details to a friend (or yourself).
+                .row
+                  .col-xs-12.col-sm-8.col-sm-offset-2.text-left.text-muted
+                    Use a comma to separate multiple addresses
+                .row
+                  .col-sm-6.col-sm-offset-2.col-xs-8{'style' => 'line-height: 2em; padding-right: 0px;'}
+                    %input.form-control{type:'text', style: 'font-size: .9em; border-top-right-radius:0px; border-bottom-right-radius:0px;', ng: {model: 'emailAddresses.text'}}
+                  .col-sm-2.col-xs-10{'style' => 'line-height: 2em; padding-left: 0px;'}
+                    .btn.btn-success.btn-block{style: 'padding-left: 0px; padding-right: 0px;min-width: 20px; border-top-left-radius:0px; border-bottom-left-radius:0px;', ng: {click: 'sendEmail(itinerary)'}}
+                      %i.fa.fa-envelope-o.fa-lg{style:'color: white;'}
+                        %span
+                          Send
+                .row{ng: {show: 'invalidEmail == true'}}
+                  .col-xs-12.col-sm-8.col-sm-offset-2.text-left{style: 'color: red'}
+                    Please enter only valid email addresses
+              .row.action-buttons
+                .col-md-4.col-md-offset-4.col-xs-10.col-xs-offset-1
+                  .btn.btn-primary.btn-block{ng:{click:'showEmail || toggleEmail()', show: 'tripSelected == itinerary.id', class:'{disabled:showEmail}'}}
+                    {{'email_button' | translate}}
+      #rides-itineraries-loading.fade.in{'ng-show'=>'updatingResults', style:'position:absolute; top:0px;'}
+        %h3{style:'margin-top:30px;'}
+          Updating Rides...
+        .sk-circle
+          .sk-circle1.sk-child
+          .sk-circle2.sk-child
+          .sk-circle3.sk-child
+          .sk-circle4.sk-child
+          .sk-circle5.sk-child
+          .sk-circle6.sk-child
+          .sk-circle7.sk-child
+          .sk-circle8.sk-child
+          .sk-circle9.sk-child
+          .sk-circle10.sk-child
+          .sk-circle11.sk-child
+          .sk-circle12.sk-child
 
