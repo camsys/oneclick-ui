@@ -44,7 +44,7 @@ angular.module('oneClickApp', [
         templateUrl: 'views/rides.html',
         controller: 'MainController'
       })
-      .when('/my_rides', {
+      .when('/my_trips', {
         templateUrl: 'views/myrides.html',
         controller: 'MyridesController'
       })
@@ -144,7 +144,7 @@ angular.module('oneClickApp', [
     });
     
     $window.$rootScope = $rootScope;
-    var exceptions = ["/my_rides", "/about", "/about/sharedride", "/about/projecthistory"];
+    var exceptions = ["/my_trips", "/about", "/about/sharedride", "/about/projecthistory"];
     $rootScope.$on('$routeChangeStart', function (event) {
       if(!$window.visited){
         if(exceptions.indexOf($location.$$path) < 0){
