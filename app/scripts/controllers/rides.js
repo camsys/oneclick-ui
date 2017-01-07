@@ -46,9 +46,11 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   }
   var _okModes = [];
   $scope.itineraryFilter = function(itinerary, index, arr){
+    //returns true if there are no modes selected OR the itinerary's mode is in the array
     return (_okModes.length === 0) || (_okModes.indexOf(itinerary.returned_mode_code) > -1);
   };
   $scope.itineraryFilterChange = function() {
+    //make an array of OK mode codes
     var mode;
     _okModes = [];
     for (mode in $scope.selectedItineraryModes) {
