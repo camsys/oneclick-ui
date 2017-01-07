@@ -132,14 +132,14 @@
                   .mode{ng:{repeat:'mode in itineraryModes'}}
                     %label{style:'width:100%;'}
                       .mode-boolean.pull-right
-                        %input{type:'checkbox', name:'{{mode}}', ng:{model:'selectedItineraryModes[mode]'}}
+                        %input{type:'checkbox', name:'{{mode}}', ng:{model:'$parent.selectedItineraryModes[mode]', change:'$parent.itineraryFilterChange()'}}
                       {{mode | modeName}}
           .row{style:"display:none;"}
             %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 
     .col-lg-7.col-sm-9.col-xs-12
       #rides-itineraries-list
-        .ride_itineraries{ng:{repeat:"itinerary in itineraries | orderBy:orderItinerariesBy:false", hide:'tripSelected && tripSelected != itinerary.id' }}
+        .ride_itineraries{ng:{repeat:"itinerary in itineraries | filter:itineraryFilter | orderBy:orderItinerariesBy:false", hide:'tripSelected && tripSelected != itinerary.id' }}
           .bordered
             .no-outline
               .row

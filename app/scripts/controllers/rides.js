@@ -10,6 +10,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.invalidEmail = false;
   $scope.itineraries = [];
   $scope.emailAddresses = {};
+  $scope.selectedItineraryModes = {};
   
   $scope.orderItinerariesBy = 'cost';
   $scope.loadItineraries = function(){
@@ -42,6 +43,20 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     //return the mode's template, or a "missing template error" template 
     var templatePath = '/views/' + (templates[ mode ] || 'rides-itinerary-templatemissing.html');
     return templatePath;
+  }
+  var _okModes = [];
+  $scope.itineraryFilter = function(itinerary, index, arr){
+    return (_okModes.length === 0) || (_okModes.indexOf(itinerary.returned_mode_code) > -1);
+  };
+  $scope.itineraryFilterChange = function() {
+    var mode;
+    _okModes = [];
+    console.log('selectedItineraryModes', $scope.selectedItineraryModes);
+    for (mode in $scope.selectedItineraryModes) {
+      if ($scope.selectedItineraryModes[mode]) {
+        _okModes.push(mode);
+      }
+    }
   }
   $scope.saveTrip = function(itinerary){
     var tripId = itinerary.id;

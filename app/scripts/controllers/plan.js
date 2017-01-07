@@ -47,7 +47,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   !APIHOST.match(/local$/) || debugHelper();
   $scope.refreshResults = ($location.path() !== '/');
   
-  $scope.selectedItineraryModes = {};
   $scope.itineraryModes = [];
   $scope.accommodations = {};
   $scope.characteristics = {};
