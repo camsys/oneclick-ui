@@ -136,6 +136,11 @@ angular.module('oneClickApp')
       }
       $scope.signUp = function(){
         var newUser = {};
+        $scope.signupform.firstname.$setTouched();
+        $scope.signupform.lastname.$setTouched();
+        $scope.signupform.email.$setTouched();
+        $scope.signupform.password.$setTouched();
+        $scope.signupform.passwordconfirm.$setTouched();
         if(true !== $scope.signupform.$valid){
           $scope.showErrors = true;
           return;

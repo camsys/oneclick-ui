@@ -17,7 +17,7 @@
     .form-group
       %label.sr-only{for:"signup-emailaddress"}
         Email Address
-      %input#signup-emailaddress.form-control{type:"email", placeholder:"Email Address", "ng-model"=>"email.text", required:'', name:'email'}
+      %input#signup-emailaddress.form-control{type:"email", required:'', name:'email', placeholder:"Email Address", ng:{model:"email.text", pattern:"/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"}}
       .alert{role:'alert'}
         .error{"ng-show"=>"signupform.email.$error.required"}
           Required
@@ -28,7 +28,7 @@
         Password
       %input.form-control{type:"password", placeholder:"Password", id:"signup-password", ng:{model:'password.text', equals:'{{passwordConfirm.text}}'}, required:'', name:'password'}
       .alert{role:'alert'}
-        .error{"ng-show"=>"signupform.password.$valid.required"}
+        .error{"ng-show"=>"signupform.password.$error.required"}
           Required
     .form-group
       %label.sr-only{for:"signup-password-confirm"}
@@ -37,7 +37,7 @@
       .alert{role:'alert'}
         .error{"ng-show"=>"signupform.passwordconfirm.$error.required"}
           Required
-        .error{"ng-show"=>"signupform.passwordconfirm.$invalid"}
+        .error{"ng-show"=>"signupform.passwordconfirm.$invalid || signupform.password.$invalid"}
           Passwords must match
     .form-group
       %button.btn.btn-primary.btn-block{type:"button", "ng-click"=>"signUp()"}
