@@ -51,7 +51,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.itineraryFilterChange = function() {
     var mode;
     _okModes = [];
-    console.log('selectedItineraryModes', $scope.selectedItineraryModes);
     for (mode in $scope.selectedItineraryModes) {
       if ($scope.selectedItineraryModes[mode]) {
         _okModes.push(mode);

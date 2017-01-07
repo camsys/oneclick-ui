@@ -78,7 +78,7 @@ angular.module('oneClickApp')
   return function(up, mode){
     //parse as float then round up, only if mode in roundUpModes
     if(roundUpModes.indexOf(mode) > -1){
-      return ''+ Math.ceil( parseFloat( up || 1) )
+      return ''+ Math.ceil( parseFloat( up || 0) )
     }
     return up;
     
