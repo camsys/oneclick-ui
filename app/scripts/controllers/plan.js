@@ -96,20 +96,33 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     if(!planService.from || !planService.to){return;}
     $window.visited=true;
     $location.path("/rides").replace();
-    _bookTrip(function(result){
-      var i;
-      for(i=0; i<result.itineraries.length; i+=1){
-        result.itineraries[i].origin = planService.getAddressDescriptionFromLocation(result.itineraries[i].start_location);
-        result.itineraries[i].destination = planService.getAddressDescriptionFromLocation(result.itineraries[i].end_location);
-        if(result.itineraries[i].returned_mode_code == "mode_paratransit"){
-          planService.paratransitResult = result.itineraries[i];
-        }else{
-          planService.transitResult.push(result.itineraries[i]);
+    planService.prepareConfirmationPage($scope);
+    planService.transitResult = [];
+    planService.paratransitResult = null;
+    planService
+      .postItineraryRequest($http)
+      .success(function(result){
+        var i;
+        for(i=0; i<result.itineraries.length; i+=1){
+          result.itineraries[i].origin = planService.getAddressDescriptionFromLocation(result.itineraries[i].start_location);
+          result.itineraries[i].destination = planService.getAddressDescriptionFromLocation(result.itineraries[i].end_location);
+          if(result.itineraries[i].returned_mode_code == "mode_paratransit"){
+            planService.paratransitResult = result.itineraries[i];
+          }else{
+            planService.transitResult.push(result.itineraries[i]);
+          }
         }
-      }
-      planService.searchResults = result;
-      if(callback && typeof callback === "function"){ callback(); }
-    });
+        planService.searchResults = result;
+        if(callback && typeof callback === "function"){ callback(); }
+      })
+      .error(function(result){
+        if(!result){
+          //null result means xhr aborted
+          return;
+        }
+        bootbox.alert("An error occured on the server, please retry your search or try again later.");
+      });
+    //formerly _bookTrip();
   }
   $scope.itineraries = planService.transitResult || [];
   //helper for setQuestionsDefaults
@@ -586,36 +599,15 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     planService.prepareConfirmationPage($scope);
     planService.transitResult = [];
     planService.paratransitResult = null;
-    usSpinnerService.spin('spinner-1');
-    var promise = planService.postItineraryRequest($http);
-    success = success || function(result) {
-        var i;
-        for(i=0; i<result.itineraries.length; i+=1){
-          result.itineraries[i].origin = planService.getAddressDescriptionFromLocation(result.itineraries[i].start_location);
-          result.itineraries[i].destination = planService.getAddressDescriptionFromLocation(result.itineraries[i].end_location);
-          if(result.itineraries[i].returned_mode_code == "mode_paratransit"){
-            planService.paratransitResult = result.itineraries[i];
-          }else{
-            planService.transitResult.push(result.itineraries[i]);
-          }
-        }
-        planService.searchResults = result;
-        $location.path("/plan/confirm");
-      }
-    promise.success(function(result){
-      $scope.accommodationsQuestions = planService.accommodationsQuestions;
-      $scope.characteristicsQuestions = planService.characteristicsQuestions;
-      $scope.purposesQuestions = planService.purposes;
-    })
-    promise.
-      success(success).
-      error(function(result) {
+    planService
+      .postItineraryRequest($http)
+      .success(success)
+      .error(function(result){
         if(!result){
           //null result means xhr aborted
           return;
         }
         bootbox.alert("An error occured on the server, please retry your search or try again later.");
-        usSpinnerService.stop('spinner-1');
       });
   }
   $scope.specifyTripPurpose = function(purpose){
