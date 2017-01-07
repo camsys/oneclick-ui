@@ -124,6 +124,16 @@
                   %option{value:'cost'} Price
                   %option{value:'duration'} Travel Time
                   %option{value:'walk_distance'} Walking Distance
+            .row
+              .col-xs-12
+                %h3
+                  Transit Modes
+                .mode-options
+                  .mode{ng:{repeat:'mode in itineraryModes'}}
+                    %label{style:'width:100%;'}
+                      .mode-boolean.pull-right
+                        %input{type:'checkbox', name:'{{mode}}', ng:{model:'selectedItineraryModes[mode]'}}
+                      {{mode | modeName}}
           .row{style:"display:none;"}
             %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 

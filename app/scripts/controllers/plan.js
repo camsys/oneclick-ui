@@ -47,6 +47,8 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   !APIHOST.match(/local$/) || debugHelper();
   $scope.refreshResults = ($location.path() !== '/');
   
+  $scope.selectedItineraryModes = {};
+  $scope.itineraryModes = [];
   $scope.accommodations = {};
   $scope.characteristics = {};
   $scope.tripPurpose = null;
@@ -151,6 +153,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     $scope.accommodationsQuestions = planService.accommodationsQuestions || [];
     $scope.purposes = {};
     $scope.purposesQuestions = planService.purposes || [];
+    $scope.itineraryModes = planService.itineraryModes;
     //FIXME purposes does not have defaults.
 
     //make sure we have the profile before setting question defaults

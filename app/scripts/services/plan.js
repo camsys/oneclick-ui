@@ -679,17 +679,25 @@ angular.module('oneClickApp')
           deferredAbort.resolve();
         }
         itineraryRequestPromise.success(function(response){
+          var alphabetical = function(a,b){
+            var textA = a.toUpperCase();
+            var textB = b.toUpperCase();
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+          };
           //set self properties first
           planService.accommodationsQuestions = response.accommodations;
           planService.characteristicsQuestions = response.characteristics;
+          var modes = {};
           planService.itineraries = response.itineraries.map(function(itinerary){
             itinerary.cost = parseFloat( itinerary.cost ) || 0;
             itinerary.walk_distance = parseFloat( itinerary.walk_distance ) || 0;
             itinerary.duration = parseInt( itinerary.duration ) || 0;
+            modes[itinerary.returned_mode_code] = null;
             return itinerary;
           });
           planService.purposes = response.purposes;
           planService.tripId = response.trip_id;
+          planService.itineraryModes = Object.keys(modes).sort(alphabetical);
           $rootScope.$broadcast('PlanService:updateItineraryResults', response);
         });
         return itineraryRequestPromise;
