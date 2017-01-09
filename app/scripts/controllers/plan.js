@@ -936,7 +936,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
                 placeIdPromise.resolve();
               } 
               else{
-                $scope.stopSpin();
+                //$scope.stopSpin();
               }
 
               placeIdPromise.promise.then($scope.mapAddressByPlaceId(result.place_id, place, toFrom, true));
@@ -970,7 +970,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
           if(datatypes.indexOf('route') < 0){
             $scope.toFromMarkers[toFrom].setMap(null);
             bootbox.alert("The location you selected does not have have a street associated with it, please select another location.");
-            $scope.stopSpin();
+            //$scope.stopSpin();
             return;
           }
           else if(datatypes.indexOf('street_number') < 0){
@@ -989,7 +989,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
               $scope.toFromMarkers[toFrom].setMap(null);
               checkShowMap();
               bootbox.alert("The location you selected does not have a street number associated, please select another location.");
-              $scope.stopSpin();
+              //$scope.stopSpin();
               return;
             }
           }
@@ -998,7 +998,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       } 
       else {
         alert('Geocode was not successful for the following reason: ' + status);
-        $scope.stopSpin();
+        //$scope.stopSpin();
       }
     });
   }
@@ -1086,13 +1086,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
           checkShowMap();
           $scope.errors['rangeError'+toFrom] = true;
           bootbox.alert("The location you selected is outside the service area.");
-          $scope.stopSpin();
+          //$scope.stopSpin();
         }
-        $scope.stopSpin();
+        //$scope.stopSpin();
       }).
       error(function(serviceAreaResult) {
         bootbox.alert("An error occured on the server, please retry your search or try again later.");
-        $scope.stopSpin();
+        //$scope.stopSpin();
       });
   }
 
@@ -1112,11 +1112,12 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
         break;
     }
     $scope.$apply();
-    $scope.stopSpin();
+    //$scope.stopSpin();
   }
 
   //copy the util.isMobile function into scope
   $scope.isMobile = util.isMobile;
+/*
 
   $scope.startSpin = function(){
     usSpinnerService.spin('spinner-1');
@@ -1430,9 +1431,8 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     $scope.showBusRides =! $scope.showBusRides;
     planService.showBusRides = $scope.showBusRides;
   }
-
-
-
+*/
+/*
 //initialize this step's state
   switch($routeParams.step) {
     case undefined:
@@ -1840,7 +1840,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       break;
   }
 
-
+*/
 
 
 
