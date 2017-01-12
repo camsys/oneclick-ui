@@ -110,15 +110,18 @@ angular.module('oneClickApp')
         return re.test(email);
       }
 
+      var _tripCache = null;
       this.getPastRides = function($http, $scope, ipCookie) {
         var tripType = 'past',
             urlPath = 'api/v1/trips/past_trips';
+        if(_tripCache !== null){$scope.trips = _tripCache;}
         return this.getRidesByType($http, $scope, ipCookie, tripType, urlPath);
       }
 
       this.getFutureRides = function($http, $scope, ipCookie) {
         var tripType = 'future',
             urlPath = 'api/v1/trips/future_trips';
+        if(_tripCache !== null){$scope.trips = _tripCache;}
         return this.getRidesByType($http, $scope, ipCookie, tripType, urlPath);
       }
 
@@ -204,10 +207,12 @@ angular.module('oneClickApp')
               $scope.trips.future = trips;
               $scope.tripDivs.future = tripDivs;
               ipCookie('rideCount', trips.length);
+              _tripCache = $scope.trips;
             }
             else {
               $scope.trips.past = trips;
               $scope.tripDivs.past = tripDivs;
+              _tripCache = $scope.trips;
             }
 
           });

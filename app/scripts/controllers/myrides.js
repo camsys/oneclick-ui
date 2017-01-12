@@ -8,6 +8,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
 
   var currentLocationLabel = "Current Location";
   var urlPrefix = '//' + APIHOST + '/';
+  $scope.itineraryhideButtonBar = null;
+  $scope.showTab = null;
+  $scope.trips = null;
+  $scope.tripDivs = null;
 
   var pastRides = planService.getPastRides($http, $scope, ipCookie);
   var futureRides = planService.getFutureRides($http, $scope, ipCookie);
