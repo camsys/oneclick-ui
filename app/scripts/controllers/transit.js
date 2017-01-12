@@ -247,15 +247,17 @@ angular.module('oneClickApp')
       var rebuildMap = function()
       {
         google.maps.event.trigger($scope.routeMap, 'resize');
+        var origin = $scope.itinerary.start_location || $scope.itinerary.origin;
+        var destination = $scope.itinerary.end_location || $scope.itinerary.destination;
         if(!start_location){
           start_location = new google.maps.Marker({
             map: $scope.routeMap,
-            position: $scope.itinerary.start_location.geometry.location,
+            position: origin.geometry.location,
             icon: $scope.toFromIcons.from
           });
           end_location = new google.maps.Marker({
             map: $scope.routeMap,
-            position: $scope.itinerary.end_location.geometry.location,
+            position: destination.geometry.location,
             icon: $scope.toFromIcons.to
           });
           bounds.extend(start_location.position);
@@ -267,7 +269,10 @@ angular.module('oneClickApp')
         google.maps.event.trigger($scope.routeMap, 'resize');
       }
 
-      $scope.$watch(function(){ return $scope.itinerary.showMoreDetails; }, function(n,o){
+      var watchVar = $scope.trip || $scope.itinerary;
+      $scope.$watch(function(){
+        return watchVar.showMoreDetails;
+      }, function(n,o){
         //if new value is true rebuild the map
         if(true === n){
           setTimeout(rebuildMap);
