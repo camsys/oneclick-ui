@@ -132,10 +132,12 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
           .success(function(data){
             bootbox.alert('Your email was sent');
           });
+        return false;
       }else{
         $scope.invalidEmail = true;
-      } 
+      }
     }
+    return true;
   }
 
 }]);
