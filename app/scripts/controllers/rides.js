@@ -38,6 +38,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       'mode_transit' : 'rides-itinerary-transit.html',
       'mode_walk' : 'rides-itinerary-walk.html',
       'mode_rail' : 'rides-itinerary-rail.html',
+      'mode_car' : 'rides-itinerary-bicycle.html',
       'mode_bicycle' : 'rides-itinerary-bicycle.html'
     };
     //return the mode's template, or a "missing template error" template 

@@ -93,6 +93,7 @@ angular.module('oneClickApp')
 .filter('modeIcon', function(){
   var icons = {
     'mode_ride_hailing' : 'auto.png',
+    'mode_car' : 'auto.png',
     'mode_paratransit':'paratransit.png',
     'mode_taxi':'taxi.png',
     'mode_transit':'transit.png',
@@ -117,6 +118,7 @@ angular.module('oneClickApp')
 .filter('modeName', function(){
   var modes = {
     'mode_ride_hailing' : 'Drive',
+    'mode_car' : 'Drive',
     'mode_paratransit':'Paratransit',
     'mode_taxi':'Taxi',
     'mode_transit':'Transit',
