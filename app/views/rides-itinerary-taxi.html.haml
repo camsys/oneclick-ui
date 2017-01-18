@@ -4,8 +4,7 @@
       .col-xs-12
         .row{style: 'margin-top:20px;'}
           .col-xs-12
-            %h4
-              {{itinerary.comment}}
+            %h4{'ng-bind-html'=>'itinerary.comment'}
         .row
           .col-xs-12
             %h3.text-muted{style:'display:inline-block'}
