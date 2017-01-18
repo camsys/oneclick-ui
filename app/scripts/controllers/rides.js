@@ -46,6 +46,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   }
   var _okModes = [];
   $scope.itineraryFilter = function(itinerary, index, arr){
+    if(itinerary.hidden){ return false; }
     //returns true if there are no modes selected OR the itinerary's mode is in the array
     return (_okModes.length === 0) || (_okModes.indexOf(itinerary.returned_mode_code) > -1);
   };
