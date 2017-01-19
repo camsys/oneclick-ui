@@ -1,13 +1,11 @@
 %nav.navbar.navbar-static-top{role: "navigation"}
   .row
-    .col-lg-10.col-lg-offset-1.col-xs-12
+    .col-lg-10.col-lg-offset-1.col-xs-12.navbar-container
       .navbar-header
         %button.navbar-toggle.collapsed{type:"button", data:{toggle:"collapse", target:"#bs-example-navbar-collapse-1"}, "aria-label"=>"toggle navigation"}
           %i.fa.fa-bars
         %a.navbar-brand{href:'#/', style:'margin-left:0px;'}
-          %h1{style:'margin:0px;'}
-            %i.fa.fa-bolt{style:'vertical-align:sub;font-size:1.6em;'}
-            {{"site_title" | translate}}
+          %img{src:'/images/UtahRideLink_logo_highres.png'}
       
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav.navbar-right

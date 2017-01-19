@@ -47,19 +47,6 @@ footer.footer{
   height: 60px;
   background-color: #f5f5f5;
 }
-.navbar-brand {
-  height: 50px;
-  margin: 0;
-  padding: 3px 0 0 3px;
-  line-height: 50px;
-  color: black;
-  img {
-    // height: 47px;
-    display: inline-block;
-    height: 37px;
-    vertical-align: middle;
-  }
-}
 
 .navbar {
   height:60px;
@@ -69,6 +56,18 @@ footer.footer{
   }
   i {
     font-size: 3em;
+  }
+  .navbar-brand {
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+    line-height: 50px;
+    color: black;
+    img {
+      height: 47px;
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
   .navbar-icon {
     padding-bottom: 0;
@@ -81,7 +80,12 @@ footer.footer{
     }
   }
   .navbar-right{
-    margin-top:13px;
+    margin-top:11px;
+  }
+  .navbar-container{
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 7px;
+    margin-top:4px;
   }
 }
 .btn-link{
@@ -131,9 +135,9 @@ html, body{
     align-self:center;
   }
   .landing-plan-content{
-    background-color: rgba(255, 255, 255, .7);
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
-    padding:10px 20px 40px 30px;
+    padding:10px 20px 10px 30px;
   }
   .landing-splash-middle{
     width:100%;
@@ -161,8 +165,8 @@ html, body{
     flex-wrap: wrap;
     flex-direction:row;
   }
-  #splash-search-form .block-ok{
-    margin: 3px 0px;
+  .block-ok{
+    margin: 13px 0px;
     display:flex;
     flex: 10 1 500px;
     flex-wrap: wrap;
