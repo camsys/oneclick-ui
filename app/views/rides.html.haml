@@ -23,7 +23,7 @@
                 {{"depart_at" | translate}}
             .col-xs-6
               %h4
-                {{rideTime | date: 'MMM d, yyyy'}}
+                {{rideTime | date: 'MMM d, yyyy h:mm a'}}
         .ride-planner-menu{'ng-hide'=>'tripSelected'}
           .row
             .col-xs-12
