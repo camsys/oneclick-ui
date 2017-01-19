@@ -16,12 +16,12 @@
                   To
                 {{to}}
           .row
-            .col-xs-6.text-right
+            .col-xs-4.text-right
               %h4{'ng-show'=>'fromTimeType === "arrive"'}
                 {{"arrive_by" | translate}}
               %h4{'ng-show'=>'fromTimeType === "depart"'}
                 {{"depart_at" | translate}}
-            .col-xs-6
+            .col-xs-8
               %h4
                 {{rideTime | date: 'MMM d, yyyy h:mm a'}}
         .ride-planner-menu{'ng-hide'=>'tripSelected'}
