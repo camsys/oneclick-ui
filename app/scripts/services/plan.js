@@ -675,6 +675,7 @@ angular.module('oneClickApp')
       var itineraryRequestPromise;
       this.postItineraryRequest = function($http) {
         var planService = this;
+        planService.itineraries = null;
         ( !itineraryRequestPromise || itineraryRequestPromise.abort() );
         var deferredAbort = $q.defer();
         var config = this.getHeaders();
