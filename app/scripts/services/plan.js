@@ -698,7 +698,9 @@ angular.module('oneClickApp')
             itinerary.cost = parseFloat( itinerary.cost ) || 0;
             itinerary.walk_distance = parseFloat( itinerary.walk_distance ) || 0;
             itinerary.duration = parseInt( itinerary.duration ) || 0;
-            modes[itinerary.returned_mode_code] = null;
+            if(!itinerary.hidden){
+              modes[itinerary.returned_mode_code] = null;
+            }
             return itinerary;
           });
           planService.purposes = response.purposes;
