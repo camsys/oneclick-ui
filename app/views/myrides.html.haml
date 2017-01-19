@@ -12,7 +12,7 @@
         History ({{trips.past.length}})
       %tabset 
         %tab{'heading' => 'Upcoming ({{trips.future.length}})', 'active' => 'tabFuture', "ng-show":'showTab!=="past"'}
-          %h3 Upcoming rides
+          %h3 Upcoming trips
           .bordered.myride{'index' => '{{$index}}', ng: {init: 'tab = "future"', click: 'trip.showMoreDetails = !trip.showMoreDetails', repeat: 'trip in trips.future'}}
             .row
               .col-xs-2.col-height-slave
@@ -31,7 +31,7 @@
                     %h5.text-muted.text-right{ng: {show: 'trip.itineraries.length > 1'}} (round trip)
                     %h5.text-muted.text-right{ng: {show: 'trip.itineraries.length == 1'}} (one way)  
         %tab{'heading' => 'History ({{trips.past.length}})', 'active' => 'tabPast', "ng-show":'showTab==="past"'}
-          %h3 Past rides
+          %h3 Past trips
           .bordered.myride{'index' => '{{$index}}', ng: {init: 'tab = "past"', repeat: 'trip in trips.past'}}
             .row
               .col-xs-2.col-height-slave
