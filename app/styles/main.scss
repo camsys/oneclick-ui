@@ -96,89 +96,104 @@ footer.footer{
 html, body{
   height:100%
 }
-.landing-iamge{
-  background-image: url('/images/Splash-Default-Boston.jpeg');
-  background-size: cover;
-  background-position: center, center;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height:60%;
-  min-height: 240px;
-  z-index:-9999;
-}
 
-.landing-plan{
-  height:60%;
-  width:100%;
-  min-height:240px;
-  display:flex;
-  justify-content:center;
-}
-.landing-plan-centered{
-  width:100%;
-  align-self:center;
-}
-.landing-plan-content{
-  background-color: rgba(255, 255, 255, .7);
-  border-radius: 10px;
-  padding:10px 20px 40px 30px;
-}
-.landing-splash-middle{
-  width:100%;
-}
-.landing-splash-footer{
-  position:absolute;
-  bottom:0px;
-  left:0px;
-  width:100%;
-}
-
-#splash-search-form select {
-  width: initial;
-}
 .flex-container{
   display: flex;
 }
 .flex-item{
   flex-grow: 0;
 }
-#splash-search-form{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
+#main-page{
+  height: 100%;
+  
+  .landing-iamge{
+    background-image: url('/images/Splash-Default-UTA.jpg');
+    background-size: cover;
+    background-position: center, center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height:80%;
+    min-height: 240px;
+    z-index:-9999;
+  }
+
+  .landing-plan{
+    height:80%;
+    width:100%;
+    min-height:240px;
+    display:flex;
+    justify-content:center;
+  }
+  .landing-plan-centered{
+    width:100%;
+    align-self:center;
+  }
+  .landing-plan-content{
+    background-color: rgba(255, 255, 255, .7);
+    border-radius: 10px;
+    padding:10px 20px 40px 30px;
+  }
+  .landing-splash-middle{
+    width:100%;
+  }
+  .landing-splash-footer{
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    width:100%;
+  }
+
+  #splash-search-form select {
+    width: initial;
+  }
+  #splash-search-form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+  }
+  #splash-search-form .block-one{
+    margin: 3px 0px;
+    display:flex;
+    flex: 10 1 500px;
+    flex-wrap: wrap;
+    flex-direction:row;
+  }
+  #splash-search-form .block-ok{
+    margin: 3px 0px;
+    display:flex;
+    flex: 10 1 500px;
+    flex-wrap: wrap;
+    flex-direction:column;
+  }
+  #splash-search-form .block-two{
+    margin: 3px 0px;
+    display:flex;
+    flex: 1 1 510px;
+    flex-wrap: wrap;
+    flex-direction:row;
+    justify-content: space-between;
+  }
+  #splash-search-form .block-one > *{
+    flex: 1 1 251px;
+  }
+  #splash-search-form .block-two > select{
+    flex: 4 1 190px;
+  }
+  #splash-search-form .block-two > datetimepicker{
+    flex: 0 0 290px;
+  }
+  #splash-search-form .block-two > button{
+    flex: 0 0 auto;
+  }
 }
-#splash-search-form .block-one{
-  display:flex;
-  flex: 10 1 500px;
-  flex-wrap: wrap;
-  flex-direction:row;
-}
-#splash-search-form .block-two{
-  display:flex;
-  flex: 1 1 510px;
-  flex-wrap: wrap;
-  flex-direction:row;
-  justify-content: space-between;
-}
-#splash-search-form .block-one > *{
-  flex: 1 1 251px;
-}
-#splash-search-form .block-two > select{
-  flex: 1 1 190px;
-}
-#splash-search-form .block-two > datetimepicker{
-  flex: 1 1 290px;
-}
-#splash-search-form .block-two > button{
-  flex: 0 0 auto;
-}
+
+
 #main-template-container{
   height: calc(100% - 70px);
 }
-
 
 .ride_itineraries{
   margin:5px 0px;

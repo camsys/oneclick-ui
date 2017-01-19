@@ -163,11 +163,11 @@
                     %span.start-end-time.text-nowrap {{itinerary.start_time | date : 'h:mm a'}} to
                     %span.start-end-time.text-nowrap {{itinerary.end_time | date : 'h:mm a'}}
               .row{style:'margin-bottom: 1em;'}
-                .col-md-6.col-sm-8.col-xs-12
+                .col-sm-8.col-xs-12
                   %h3{style:'margin: 0px;'}
                     %span.small.text-nowrap {{itinerary.duration | seconds}} travel time,
                     %span.small.text-nowrap {{itinerary.walk_time | seconds}} walking
-                .col-md-4.col-md-offset-2.col-sm-4.col-xs-12.text-center
+                .col-sm-4.col-xs-12.text-center
                   .btn.btn-link{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails', hide:'tripSelected' } }
                     %span{ng:{hide:'itinerary.showMoreDetails'}}
                       More trip details

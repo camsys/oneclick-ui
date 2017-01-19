@@ -1,65 +1,70 @@
-.landing-iamge
-.landing-plan{'ng-controller'=>'PlanController'}
-  .landing-plan-centered
-    .row
-      .col-md-10.col-md-offset-1.col-xs-12.landing-plan-content
-        .text-center
-          %h1 {{"welcome_message" | translate}}
-        .row
-          .col-md-12.col-xs-12
-            %form#splash-search-form.row{name:'ride_search_form'}
-              .block-one
-                %autocomplete{ placeholder: '"origin_placeholder"',
-                    class: 'autocomplete_wrapper',
-                    id:'fromInputDiv',
-                    tabindex: 'null',
-                    'inputclass' => 'form-control',
-                    'disable-filter' => 'true',
-                    'data' => 'locations',
-                    'on-type'=> 'getLocations',
-                    'on-select' => 'selectFrom',
-                    'autocomplete-required' => 'true',
-                    'inputid' => 'fromInput',
-                    ng: {model: 'from', 'attr-mobile' => '{{mobile}}'} }
-                %autocomplete{ placeholder: '"destination_placeholder"',
-                    class: 'autocomplete_wrapper',
-                    id:'toInputDiv',
-                    tabindex: 'null',
-                    'inputclass' => 'form-control',
-                    'disable-filter' => 'true',
-                    'data' => 'locations',
-                    'on-type'=> 'getLocations',
-                    'on-select' => 'selectTo',
-                    'autocomplete-required' => 'true',
-                    'inputid' => 'toInput',
-                    ng: {class:'{error:form.input.$error.required}', model: 'to', 'attr-mobile' => '{{mobile}}'}}
-              .block-two
-                %label.hide{:for => "ride-when"} Leave or Arrive?
-                %select#ride-when.select.form-control{ng: {model: 'fromTimeType'} }
-                  %option{:selected => "selected", :value => "depart"} {{"depart_at" | translate}}
-                  %option{:value => "arrive"} {{"arrive_by" | translate}}
-                %datetimepicker{'hour-step'=>'hourStep',
-                    'minute-step'=>'minuteStep',
-                    'ng-model'=>'rideTime',
-                    'show-meridian'=>'true',
-                    'date-format'=>'MMM dd, yyyy',
-                    'date-options'=>'dateOptions',
-                    'date-disabled'=>'disabled(date, mode)',
-                    'datepicker-append-to-body'=>'false',
-                    'readonly-date'=>'false',
-                    'disabled-date'=>'false',
-                    'hidden-time'=>'false',
-                    'hidden-date'=>'false',
-                    'name'=>'datetimepicker',
-                    'show-spinners'=>'false',
-                    'readonly-time'=>'false',
-                    'date-opened'=>'dateOpened',
-                    'show-button-bar'=>'false'}
-                %button.btn.btn-primary{type:'button', ng:{class:'{disabled:!ride_search_form.$valid}', click:'ride_search_form.$valid && planFromLanding()'}} {{"ok_button" | translate}}
-  #map{style:"width:500px; height:500px;display:none;"}
-    .map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
-.landing-splash-middle{'ng-include'=>'"/views/landing-splash-middle.html"' }
+#main-page
+  .landing-iamge
+  .landing-plan{'ng-controller'=>'PlanController'}
+    .landing-plan-centered
+      .row
+        .col-md-10.col-md-offset-1.col-xs-12.landing-plan-content
+          .text-center
+            %h1 {{"welcome_message" | translate}}
+          .row
+            .col-md-12.col-xs-12
+              %form{name:'ride_search_form'}
+                #splash-search-form.row
+                  .block-one
+                    %autocomplete{ placeholder: '"origin_placeholder"',
+                        class: 'autocomplete_wrapper',
+                        id:'fromInputDiv',
+                        tabindex: 'null',
+                        'inputclass' => 'form-control',
+                        'disable-filter' => 'true',
+                        'data' => 'locations',
+                        'on-type'=> 'getLocations',
+                        'on-select' => 'selectFrom',
+                        'autocomplete-required' => 'true',
+                        'inputid' => 'fromInput',
+                        ng: {model: 'from', 'attr-mobile' => '{{mobile}}'} }
+                    %autocomplete{ placeholder: '"destination_placeholder"',
+                        class: 'autocomplete_wrapper',
+                        id:'toInputDiv',
+                        tabindex: 'null',
+                        'inputclass' => 'form-control',
+                        'disable-filter' => 'true',
+                        'data' => 'locations',
+                        'on-type'=> 'getLocations',
+                        'on-select' => 'selectTo',
+                        'autocomplete-required' => 'true',
+                        'inputid' => 'toInput',
+                        ng: {class:'{error:form.input.$error.required}', model: 'to', 'attr-mobile' => '{{mobile}}'}}
+                  .block-two
+                    %label.hide{:for => "ride-when"} Leave or Arrive?
+                    %select#ride-when.select.form-control{ng: {model: 'fromTimeType'} }
+                      %option{:selected => "selected", :value => "depart"} {{"depart_at" | translate}}
+                      %option{:value => "arrive"} {{"arrive_by" | translate}}
+                    %datetimepicker{'hour-step'=>'hourStep',
+                        'minute-step'=>'minuteStep',
+                        'ng-model'=>'rideTime',
+                        'show-meridian'=>'true',
+                        'date-format'=>'MMM dd, yyyy',
+                        'date-options'=>'dateOptions',
+                        'date-disabled'=>'disabled(date, mode)',
+                        'datepicker-append-to-body'=>'false',
+                        'readonly-date'=>'false',
+                        'disabled-date'=>'false',
+                        'hidden-time'=>'false',
+                        'hidden-date'=>'false',
+                        'name'=>'datetimepicker',
+                        'show-spinners'=>'false',
+                        'readonly-time'=>'false',
+                        'date-opened'=>'dateOpened',
+                        'show-button-bar'=>'false'}
+                .row
+                  .col-lg-2.col-lg-offset-5.col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3.col-xs-12
+                    .block-ok
+                      %button.btn.btn-block.btn-primary{type:'button', ng:{class:'{disabled:!ride_search_form.$valid}', click:'ride_search_form.$valid && planFromLanding()'}} {{"ok_button" | translate}}
+    #map{style:"width:500px; height:500px;display:none;"}
+      .map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
+  .landing-splash-middle{'ng-include'=>'"/views/landing-splash-middle.html"' }
 
-.row{'ng-include'=>'"/views/footer.html"'}
+  .row{'ng-include'=>'"/views/footer.html"'}
 
 
