@@ -30,23 +30,17 @@
                   .col-xs-4
                     %h5.text-muted.text-right{ng: {show: 'trip.itineraries.length > 1'}} (round trip)
                     %h5.text-muted.text-right{ng: {show: 'trip.itineraries.length == 1'}} (one way)  
+            .animate-show.my-more-trip-details.no-outline{ng: {show: 'trip.showMoreDetails', include:"'/views/myrides-itinerary.html'", click:'$event.stopPropagation();'}}
         %tab{'heading' => 'History ({{trips.past.length}})', 'active' => 'tabPast', "ng-show":'showTab==="past"'}
           %h3 Past trips
-          .bordered.myride{'index' => '{{$index}}', ng: {init: 'tab = "past"', repeat: 'trip in trips.past'}}
+          .bordered.myride{'index' => '{{$index}}', ng: {init: 'tab = "past"', repeat: 'trip in trips.past', click: 'trip.showMoreDetails = !trip.showMoreDetails'}}
             .row
               .col-xs-2.col-height-slave
                 %img.ride-mode-service-icon{style:'vertical-align:bottom;', ng:{src:'{{trip.mode | modeIcon: trip.logo_url}}'}}
               .col-xs-10.col-height-master
                 .row
-                  .col-xs-9
+                  .col-xs-12
                     %h4 {{trip.from_place}} to {{trip.to_place}}
-                  .col-xs-3
-                    .btn.btn-block{ng:{class:'{"btn-primary":!trip.showMoreDetails, "btn-bordered":trip.showMoreDetails}', click: 'trip.showMoreDetails = !trip.showMoreDetails'}}
-                      %span{'ng-show'=>'trip.showMoreDetails'}
-                        Hide
-                      %span{'ng-hide'=>'trip.showMoreDetails'}
-                        Show 
-                      trip details 
                 .row
                   .col-xs-8
                     %h5.blue-text{"ng-show"=>"trip.service_name"} {{trip.service_name}}
@@ -56,7 +50,7 @@
                   .col-xs-4
                     %h5.text-muted.text-right{ng: {show: 'trip.itineraries.length > 1'}} (round trip)
                     %h5.text-muted.text-right{ng: {show: 'trip.itineraries.length == 1'}} (one way)
-            .animate-show{ng: {show: 'trip.showMoreDetails', include:"'/views/myrides-itinerary.html'"}}
+            .animate-show.my-more-trip-details.no-outline{ng: {show: 'trip.showMoreDetails', include:"'/views/myrides-itinerary.html'", click:'$event.stopPropagation();'}}
       .row.btn-spacing
         .col-md-4.col-md-offset-4.col-xs-12.text-center
           %a.btn.btn-primary.btn-block{href: '', ng: {click: 'reset()'}}

@@ -224,6 +224,7 @@ html, body{
     cursor:pointer;
   }
 }
+.no-outline,
 .ride_itineraries .bordered .no-outline{
   outline:none;
 }
@@ -454,6 +455,9 @@ ul.language-menu-dropdown{
   .itinerary-details{
     padding:0px 1em;
     border-top:1px solid #DDD
+  }
+  .my-more-trip-details:hover{
+    cursor:default;
   }
 }
 .btn-bordered{
