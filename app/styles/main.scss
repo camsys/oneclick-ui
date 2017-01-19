@@ -207,6 +207,8 @@ html, body{
 }
 .top-border-hr{
   border-top:1px solid #DDD;
+  margin-top:10px;
+  padding-top:10px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -453,8 +455,8 @@ ul.language-menu-dropdown{
 
 #my-rides{
   .itinerary-details{
-    padding:0px 1em;
-    border-top:1px solid #DDD
+    padding-right:1em;
+    padding-left:1em;
   }
   .my-more-trip-details:hover{
     cursor:default;
@@ -462,4 +464,7 @@ ul.language-menu-dropdown{
 }
 .btn-bordered{
   border:1px solid #DDD;
+}
+.email-or-cancel{
+  margin-top:1.5em;
 }
