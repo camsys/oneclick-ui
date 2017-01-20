@@ -41,11 +41,10 @@ $kioskfonts: "Avenir Next", "Helvetica Neue", Helvetica, sans-serif;
 }
 
 footer.footer{
-  position: fixed;
-  bottom: 0;
+  position:fixed;
+  bottom:0px;
   width: 100%;
-  height: 60px;
-  background-color: #f5f5f5;
+  padding:0.1px;
 }
 
 .navbar {
@@ -107,9 +106,18 @@ html, body{
 .flex-item{
   flex-grow: 0;
 }
+.container-full {
+  margin: 0 auto;
+  width: 100%;
+}
+#main-page-carousel{
+  height:300px;
+  .carousel-indicators li{
+    border:1px solid #333;
+  }
+}
 #main-page{
-  height: 100%;
-  
+  height: 80%;
   .landing-iamge{
     background-image: url('/images/Splash-Default-UTA.jpg');
     background-size: cover;
