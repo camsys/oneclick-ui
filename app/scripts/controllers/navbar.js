@@ -42,7 +42,7 @@ angular.module('oneClickApp')
       $scope.changeLanguage = function(key){
         var postProfileUpdate = function(profile){
           profile.lang = key;
-          planService.postProfileUpdate($http, profile); //.success(function(data){console.log('posted',data);});
+          planService.postProfileUpdate($http, profile); //.then(function(response){console.log('posted',response);});
         }
         //if changing Language was successful and  user is logged in, save the language
         if(true === changeLanguage(key) && planService.email ){
@@ -50,7 +50,13 @@ angular.module('oneClickApp')
           if(planService.profile){
             postProfileUpdate( planService.profile );
           }else{
-            planService.getProfile($http).success( postProfileUpdate );
+            planService.getProfile($http).then( function(){
+              if(!response.data){
+                console.error('no data');
+                return;
+              }
+              postProfileUpdate(response.data);
+            });
           }
         }
       }
@@ -83,7 +89,7 @@ angular.module('oneClickApp')
           /*
           //get the dummy token, then get profile
           planService.getGuestToken($http)
-          .success(function(result){
+          .then(function(response){
             //now get the proifile with the guest token
             console.log('guestTokenResult', result);
             planService.getProfile($http);

@@ -78,10 +78,11 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
             //cancel one itinerary
             var cancel = {bookingcancellation_request:[{itinerary_id: tripId}]};
             var cancelPromise = planService.cancelTrip($http, cancel)
-            cancelPromise.error(function(data) {
-              bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
-            });
-            cancelPromise.success(function(data) {
+            cancelPromise.then(function(response) {
+              if(!response.data){
+                bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
+                return;
+              }
               bootbox.alert(successMessage);
               $scope.tripSelected = false;
               ipCookie('rideCount', ipCookie('rideCount') - 1);
@@ -113,10 +114,11 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       };
       planService
         .emailItineraries($http, emailRequest)
-        .error(function(data) {
-          bootbox.alert("An error occurred on the server, your email was not sent.");
-        })
-        .success(function(data){
+        .then(function(response){
+          if(!response.data){
+            bootbox.alert("An error occurred on the server, your email was not sent.");
+            return;
+          }
           bootbox.alert('Your email was sent');
         });
     });

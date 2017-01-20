@@ -42,11 +42,12 @@ angular.module('oneClickApp')
           cancelRequest.bookingcancellation_request.push( leg2 );
         }
         var cancelPromise = planService.cancelTrip($http, cancelRequest)
-        cancelPromise.error(function(data) {
-          bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
-          usSpinnerService.stop('spinner-1');
-        });
-        cancelPromise.success(function(data) {
+        cancelPromise.then(function(response) {
+          if(!response.data){
+            bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
+            usSpinnerService.stop('spinner-1');
+            return;
+          }
           bootbox.alert('Your trip has been cancelled');
           ipCookie('rideCount', ipCookie('rideCount') - 1);
           $scope.taxiSaved = false;

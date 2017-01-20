@@ -152,11 +152,14 @@ angular.module('oneClickApp')
         newUser.password_confirmation = $scope.passwordConfirm.text;
 
         var promise = $http.post('//'+APIHOST+'/api/v1/sign_up', newUser);
-        promise.error(function(result){
-          $scope.newUserError = true;
-          console.error(result);
+        promise.then(function(response){
+          if(!response.data){
+            $scope.newUserError = true;
+            console.error(result);
+            return;
+          }
+          processUserLogin(response.data);
         });
-        promise.success(processUserLogin);
       }
 
       $scope.authenticate = function(){
@@ -166,10 +169,14 @@ angular.module('oneClickApp')
         login.session.password = $scope.password;
 
         var promise = $http.post('//'+APIHOST+'/api/v1/sign_in', login);
-        promise.error(function(result) {
-          $scope.loginError = true;
+        promise.then(function(response){
+          if(!response.data){
+            $scope.newUserError = true;
+            console.error(result);
+            return;
+          }
+          processUserLogin(response.data);
         });
-        promise.success(processUserLogin);
       }
       
     }
