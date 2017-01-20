@@ -118,6 +118,7 @@ html, body{
 }
 #main-page{
   height: 80%;
+  padding:0px 15px;
   .landing-iamge{
     background-image: url('/images/Splash-Default-UTA.jpg');
     background-size: cover;
@@ -340,6 +341,11 @@ ul.language-menu-dropdown{
   }
 }
 
+@media(min-height: $screen-lg-min){
+  #main-page .landing-plan-centered{
+    margin-top:14em;
+  }
+}
 
 @media (min-width: 0) and (max-width: $screen-sm-min){
   .ride_itineraries .map-canvas{
