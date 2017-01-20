@@ -34,11 +34,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       if(exit || $location.path() != '/'){return;}
       $scope.from = '2000 S Queen St, York, PA';//'1550 11th Ave, York, PA';
       $scope.from = '401 S Queen St, York, PA';
+      $scope.from = '100 North, Salt Lake City, UT';
       $scope.from = '1596 W Warnock Ave, West Valley City, UT 84119';
       mapOnBlur($scope.from, 'from');
       setTimeout(function(){
         $scope.to = '449 E King St, York, PA ';//'1920 Trolley Rd, York, PA'
         $scope.to = '960 S George St, York, PA';
+        $scope.to = 'Utah DMV Tooele Office';
         $scope.to = '1860 W 4100 S, West Valley City, UT 84119';
         mapOnBlur($scope.to, 'to');
         plan();
@@ -46,7 +48,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     }, 1000);
   }
   //FIXME remove debug code before production
-  //!APIHOST.match(/local$/) || debugHelper();
+  !APIHOST.match(/local$/) || debugHelper();
   $scope.refreshResults = ($location.path() !== '/');
   
   $scope.itineraryModes = [];

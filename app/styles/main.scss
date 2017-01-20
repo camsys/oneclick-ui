@@ -257,6 +257,10 @@ html, body{
   padding:3px;
   justify-content:center;
 }
+.ride_itineraries .transit-details{
+  padding:5px 2px;
+}
+.transit-details:nth-child(even),
 .schedule-row:nth-child(even){
   background-color:#EEE;
 }
