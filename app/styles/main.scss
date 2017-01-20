@@ -486,6 +486,10 @@ ul.language-menu-dropdown{
   .my-more-trip-details:hover{
     cursor:default;
   }
+  .my-show-tab.show-future.future,
+  .my-show-tab.show-past.past{
+    background-color:#DDD;
+  }
 }
 .btn-bordered{
   border:1px solid #DDD;
