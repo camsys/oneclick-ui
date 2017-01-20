@@ -26,7 +26,7 @@ angular.module('oneClickApp')
 
       $scope.reset = function() {
         planService.reset();
-        $location.path("/plan/where");
+        $location.path("/");
       };
       $scope.$on('LoginController:login', function(event, data){
         console.log('Navbar: event, data', event, data);
