@@ -972,9 +972,9 @@ angular.module('oneClickApp')
         {
           input: text,
           bounds: new google.maps.LatLngBounds(
-            //PA 7 county region
-            new google.maps.LatLng(39.719635, -79.061985),
-            new google.maps.LatLng(40.730426, -76.153193)
+            //Utah
+            new google.maps.LatLng(37.010211, -114.079487),
+            new google.maps.LatLng(41.992163, -109.094833)
           )
 
         }, function(list, status) {

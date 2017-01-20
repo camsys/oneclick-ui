@@ -48,7 +48,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     }, 1000);
   }
   //FIXME remove debug code before production
-  !APIHOST.match(/local$/) || debugHelper();
+  //!APIHOST.match(/local$/) || debugHelper();
   $scope.refreshResults = ($location.path() !== '/');
   
   $scope.itineraryModes = [];
