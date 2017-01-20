@@ -311,6 +311,27 @@ ul.language-menu-dropdown{
   padding:7px;
 }
 
+@media (min-width: 0) and (max-width: $screen-xs-max){
+  .container-fluid{
+    width:100%;
+  }
+}
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
+  .container-fluid{
+    width:100%;
+  }
+}
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max){
+  .container-fluid{
+    width: 100%;
+  }
+}
+@media (min-width: $screen-lg-min) {
+  .container-fluid{
+    width: $screen-lg-min;
+  }
+}
+
 
 @media (min-width: 0) and (max-width: $screen-sm-min){
   .ride_itineraries .map-canvas{

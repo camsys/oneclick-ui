@@ -1,6 +1,6 @@
 .rides{'ng-controller'=>'RidesController'}
   .row
-    .col-lg-3.col-lg-offset-1.col-sm-3.col-xs-12{'ng-controller'=>'PlanController'}
+    .col-sm-4.col-xs-12{'ng-controller'=>'PlanController'}
       .bordered
         .ride-planner-view.text-center{'ng-show'=>'tripSelected'}
           .row
@@ -137,7 +137,7 @@
           .row{style:"display:none;"}
             %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 
-    .col-lg-7.col-sm-9.col-xs-12
+    .col-sm-8.col-xs-12
       #rides-itineraries-list
         .ride_itineraries{ng:{repeat:"itinerary in itineraries | filter:itineraryFilter | orderBy:orderItinerariesBy:false", hide:'tripSelected && tripSelected != itinerary.id' }}
           .bordered
