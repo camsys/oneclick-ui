@@ -32,7 +32,11 @@ angular.module('oneClickApp', [
     
     // Configure the translation service
     $translateProvider.useSanitizeValueStrategy('escape');
-    $translateProvider.useUrlLoader('//'+APIHOST+'/api/v1/translations/all');
+    //$translateProvider.useUrlLoader('//'+APIHOST+'/api/v1/translations/all');
+    $translateProvider.useStaticFilesLoader({
+      prefix: '/translations/',
+      suffix: '.json'
+    });
     $translateProvider.preferredLanguage('en');
 
     $routeProvider
