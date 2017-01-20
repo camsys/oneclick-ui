@@ -64,7 +64,12 @@ angular.module('oneClickApp')
         if(that.$scope.email){
           planService.email = $scope.email;
           planService.authentication_token = $scope.authentication_token;
-          planService.getProfile($http).success(function(profile){
+          planService.getProfile($http).then(function(response){
+            if(!response.data){
+              console.error('no profile')
+              return;
+            }
+            var profile = response.data;
             //console.log('response', profile);
             $scope.username = profile.first_name +' '+ profile.last_name;
             that.$scope.first_name = profile.first_name;

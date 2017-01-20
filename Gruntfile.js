@@ -305,8 +305,8 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              //js: ['concat', 'uglifyjs'],
-              js: ['concat'],
+              js: ['concat', 'uglifyjs'],
+              //js: ['concat'],
               css: ['cssmin']
             },
             post: {}
@@ -432,6 +432,7 @@ module.exports = function (grunt) {
             'styles/{,*/}*.css',
             'images/{,*/}*.*',
             'assets/{,*/}*.*',
+            'translations/{,*/}*.json',
             'fonts/{,*/}*.*',
             'data/{,*/}*.*'
           ]

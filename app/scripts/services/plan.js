@@ -128,7 +128,11 @@ angular.module('oneClickApp')
       this.getRidesByType = function($http, $scope, ipCookie, tripType, urlPath) {
         var that = this;
         return $http.get(urlPrefix + urlPath, this.getHeaders()).
-          success(function(data) {
+          then(function(response) {
+            if(!response.data){
+              console.error('no data');
+            }
+            var data = response.data;
     
             var sortable = [],
                 tripDivs = [],
@@ -641,7 +645,11 @@ angular.module('oneClickApp')
       this.getTripPurposes = function($scope, $http) {
         this.fixLatLon(this.fromDetails);
         return $http.post(urlPrefix + 'api/v1/trip_purposes/list', this.fromDetails, this.getHeaders()).
-          success(function(data) {
+          then(function(response) {
+            if(!response.data){
+              console.error('no data');
+            }
+            var data = response.data;
             $scope.top_purposes = data.top_trip_purposes;
             data.trip_purposes = data.trip_purposes || [];
             $scope.purposes = data.trip_purposes.filter(function(el){
@@ -684,17 +692,17 @@ angular.module('oneClickApp')
         itineraryRequestPromise.abort = function(){
           deferredAbort.resolve();
         }
-        itineraryRequestPromise.success(function(response){
+        itineraryRequestPromise.then(function(response){
           var alphabetical = function(a,b){
             var textA = a.toUpperCase();
             var textB = b.toUpperCase();
             return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
           };
           //set self properties first
-          planService.accommodationsQuestions = response.accommodations;
-          planService.characteristicsQuestions = response.characteristics;
+          planService.accommodationsQuestions = response.data.accommodations;
+          planService.characteristicsQuestions = response.data.characteristics;
           var modes = {};
-          planService.itineraries = response.itineraries.map(function(itinerary){
+          planService.itineraries = response.data.itineraries.map(function(itinerary){
             itinerary.cost = parseFloat( itinerary.cost ) || 0;
             itinerary.walk_distance = parseFloat( itinerary.walk_distance ) || 0;
             itinerary.duration = parseInt( itinerary.duration ) || 0;
@@ -703,10 +711,10 @@ angular.module('oneClickApp')
             }
             return itinerary;
           });
-          planService.purposes = response.purposes;
-          planService.tripId = response.trip_id;
+          planService.purposes = response.data.purposes;
+          planService.tripId = response.data.trip_id;
           planService.itineraryModes = Object.keys(modes).sort(alphabetical);
-          $rootScope.$broadcast('PlanService:updateItineraryResults', response);
+          $rootScope.$broadcast('PlanService:updateItineraryResults', response.data);
         });
         return itineraryRequestPromise;
       }
@@ -731,10 +739,10 @@ angular.module('oneClickApp')
         }
         profilePromise = $http.get(urlPrefix + 'api/v1/users/profile', this.getHeaders());
         var planService = this;
-        profilePromise.success(function(response){
-          planService.profile = response;
-          planService.first_name = response.first_name;
-          planService.last_name = response.last_name;
+        profilePromise.then(function(response){
+          planService.profile = response.data;
+          planService.first_name = response.data.first_name;
+          planService.last_name = response.data.last_name;
           //drop the profilePromise after promises have run
           setTimeout(function(){
             profilePromise = false;
@@ -922,7 +930,11 @@ angular.module('oneClickApp')
     var recentRemoteSearches = {};
     var config = planService.getHeaders();
     $http.get(urlPrefix + '/api/v1/places/recent', config).
-    success(function(data){
+    then(function(response){
+      if(!response.data){
+        return;
+      }
+      var data = response.data;
       if(data.places){
         angular.forEach(data.places, function(place){
           recentRemoteSearches[place.name] = place;
@@ -1012,7 +1024,11 @@ angular.module('oneClickApp')
       this.poiData = [];
       var that = this;
       $http.get(urlPrefix + 'api/v1/places/search?include_user_pois=true&search_string=%25' + text + '%25', config).
-        success(function(data) {
+        then(function(response) {
+          if(!response.data){
+            console.error('no data');
+          }
+          var data = response.data;
           var locations = data.places_search_results.locations;
           angular.forEach(locations, function(value, index) {
             if(that.savedPlaceResults.length < 10){

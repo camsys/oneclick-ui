@@ -43,7 +43,7 @@
     </script>
   </head>
   <body ng-app="oneClickApp" ng-controller="NavbarController">
-    <div style="position:fixed; bottom:1px; color:black; background-color:white; z-index:9999;" ng-hide="true == debugoff">v0.0.4-rc.9</div>
+    <div style="position:fixed; bottom:1px; color:black; background-color:white; z-index:9999;" ng-hide="true == debugoff">v0.0.4-rc.10</div>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -62,6 +62,10 @@
       <div ng-view="" class="at-view-fade-in at-view-fade-out" style="height:100%;"></div>
     </div>
     
+    <div class="container-full">
+      <div class="included-footer" ng-include="'/views/footer.html'"></div>
+    </div>
+
     <div class="debug footer">
     <div class="container">
     <div class="visible-xs-block">visible-xs-block</div>
@@ -116,7 +120,6 @@
     <script src="bower_components/bootbox/bootbox.js"></script>
     <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
     <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-translate-loader-url/angular-translate-loader-url.js"></script>
     <script src="bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
@@ -174,6 +177,7 @@ var onGoogleReady = (function(){
         <script src="scripts/directives/enter.js"></script>
         <script src="scripts/directives/equals.js"></script>
         <script src="scripts/directives/autofocus.js"></script>
+        <script src="scripts/directives/datetimepicker.js"></script>
         <script src="scripts/lib/infobox.js"></script>
         <!-- endbuild -->
 
