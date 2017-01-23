@@ -39,7 +39,7 @@
             %ul#login-dropdown.dropdown-menu
               %li
                 .row
-                  .col-md-12{"ng-include":"'/views/login-form.html'"}
+                  .col-md-12{"ng-include" => "'/views/login-form.html'"}
           %li.dropdown{"ng-show"=>"!email"}
             %button.btn.btn-link.dropdown-toggle{type:"button", "data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
               %h4.display-inline
@@ -48,5 +48,5 @@
             %ul#signup-dropdown.dropdown-menu
               %li
                 .row
-                  .col-md-12{"ng-include":"'/views/signup-form.html'"}
+                  .col-md-12{"ng-include" => "'/views/signup-form.html'"}
 
