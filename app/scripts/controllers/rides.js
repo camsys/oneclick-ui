@@ -11,6 +11,8 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.itineraries = [];
   $scope.emailAddresses = {};
   $scope.selectedItineraryModes = {};
+  $scope.service_username = {};
+  $scope.service_password = {};
   
   $scope.orderItinerariesBy = 'cost';
   $scope.loadItineraries = function(){
@@ -74,6 +76,50 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       itinerary.showMoreDetails=true;
       ipCookie('rideCount', ipCookie('rideCount') - 1);
     });
+  }
+
+  $scope.serviceLogin = function(service_id){
+    var profile = {};
+    //make the booking array if not already there
+    profile.booking = planService.profile.booking || [];
+    var serviceProfile = {
+      service_id: service_id,
+      user_name: $scope.service_username.text,
+      password: $scope.service_password.text
+      };
+    profile.booking.push(serviceProfile);
+    planService.postProfileUpdate($http, profile).then(function(response){
+      console.log('profile response', response);
+      //hide the service login form, show the pre booking questions
+      $scope.showServiceLoginForm = false;
+      _showPrebookQuestions();
+    }).catch(function(response){
+      console.warn('profile response', response);
+    });
+  }
+  $scope.bookItinerary = function(itinerary){
+    if(!itinerary.user_registered){
+      //show the service login form if the uesr isn't registered yet
+      $scope.showServiceLoginForm = true;
+      return;
+    }
+    _showPrebookQuestions();
+  }
+  var _showPrebookQuestions = function(){
+    $scope.showPrebookingQuestions = true;
+  }
+  $scope.answerPrebookQuestions = function(itinerary){
+    console.log('preprebookQuestions', itinerary, $scope);
+  }
+  $scope.prebookingQuestionTemplate = function(questions){
+    //return a template for either question datatype
+    if(!questions){ return '';}
+    var templateType = typeof questions[0];
+    var templates = {
+      'object':'/views/rides-prebookingQuestion-array.html',
+      'number':'/views/rides-prebookingQuestion-int.html'
+    };
+    return templates[templateType];
   }
 
   $scope.cancelTrip = function(itinerary) {

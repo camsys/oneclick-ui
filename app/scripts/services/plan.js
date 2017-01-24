@@ -709,6 +709,14 @@ angular.module('oneClickApp')
             if(!itinerary.hidden){
               modes[itinerary.returned_mode_code] = null;
             }
+            //bookable services require a place to keep pre-booking question answers
+            if(itinerary.service_bookable){
+              //populate the answers with the first value
+              itinerary.answers = {};
+              itinerary.prebooking_questions.forEach(function(e){
+                itinerary.answers[e.code] = 0;
+              });
+            }
             return itinerary;
           });
           planService.purposes = response.data.purposes;
@@ -727,7 +735,7 @@ angular.module('oneClickApp')
         var planService = this;
         return $http.post(urlPrefix + 'api/v1/users/update', profile, this.getHeaders())
           .then(function(){
-            planService.profile = profile;
+            //planService.profile = profile;
         });
       }
 
