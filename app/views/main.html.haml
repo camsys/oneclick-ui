@@ -40,8 +40,8 @@
                     %select#ride-when.select.form-control{ng: {model: 'fromTimeType'} }
                       %option{:selected => "selected", :value => "depart"} {{"depart_at" | translate}}
                       %option{:value => "arrive"} {{"arrive_by" | translate}}
-                    %datetimepicker{'hour-step'=>'hourStep',
-                        'minute-step'=>'minuteStep',
+                    %datetimepicker{'hour-step'=>'1',
+                        'minute-step'=>'1',
                         'ng-model'=>'rideTime',
                         'show-meridian'=>'true',
                         'date-format'=>'MMM dd, yyyy',
