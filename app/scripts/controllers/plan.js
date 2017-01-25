@@ -195,7 +195,9 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       $scope.planFromResults();
     }
   });
+  //default the scope and planService fromTimeTypes to 'depart' (if planService doesn't already have a value)
   $scope.fromTimeType = planService.fromTimeType || 'depart';
+  planService.fromTimeType = $scope.fromTimeType;
   $scope.$watch('fromTimeType', function(n,o) {
     // refresh the results only if value changed
     if($scope.refreshResults == true && n!==o){
