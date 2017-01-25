@@ -1,0 +1,50 @@
+.service_login_form.row{ng:{show:'showServiceLoginForm'}}
+  %form.col-md-6.col-md-offset-3.col-xs-12{name:"service_login_form", role:"form", method:"post", action:"service_login", "accept-charset"=>"UTF-8"}
+    .form-group
+      %label.sr-only{for:"service-username"}
+        Username
+      %input#service-username.form-control{type:"text", placeholder:"Username", "ng-model"=>"service_username.text", required:'', name:'service_username'}
+      .alert{role:'alert', "ng-show"=>"signupform.service_uesrname.$error.required"}
+        .error
+          Required
+    .form-group
+      %label.sr-only{for:"service-password"}
+        Password
+      %input#service-password.form-control{type:"password", placeholder:"Password", "ng-model"=>"service_password.text", required:'', name:'service_password'}
+      .alert{role:'alert', "ng-show"=>"signupform.service_password.$error.required"}
+        .error
+          Required
+    .form-group
+      .btn.btn-success.btn-block{ng:{click:'serviceLogin(itinerary.service_id)'}}
+        Login
+.prebooking_questions{ng:{show:'showPrebookingQuestions'}}
+  %form{name:'prebooking_questions', role:'form'}
+    .row{ng:{repeat:'question in itinerary.prebooking_questions'}}
+      .col-xs-6
+        {{question.question}}
+      .col-xs-6
+        .included-question{ng:{include:'prebookingQuestionTemplate(question.choices)'}}
+    .row
+      .col-xs-6
+        When do you want to return?
+      .col-xs-6
+        %datetimepicker{'hour-step'=>'1',
+            'minute-step'=>'1',
+            'ng-model'=>'itinerary.answers.return_time',
+            'show-meridian'=>'true',
+            'date-format'=>'MMM dd, yyyy',
+            'date-options'=>'dateOptions',
+            'datepicker-append-to-body'=>'false',
+            'readonly-date'=>'false',
+            'disabled-date'=>'false',
+            'hidden-time'=>'false',
+            'hidden-date'=>'false',
+            'name'=>'datetimepicker',
+            'show-spinners'=>'false',
+            'readonly-time'=>'false',
+            'show-button-bar'=>'false'}
+    .row
+      .col-md-6.col-md-offset-3.col-xs-12
+        .btn.btn-block.btn-primary{ng:{click:'answerPrebookQuestions(itinerary)'}}
+          Continue
+

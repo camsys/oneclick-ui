@@ -716,6 +716,8 @@ angular.module('oneClickApp')
               itinerary.prebooking_questions.forEach(function(e){
                 itinerary.answers[e.code] = 0;
               });
+              //default the return time answer
+              itinerary.answers.return_time = new Date( itinerary.end_time );
             }
             return itinerary;
           });
@@ -763,7 +765,13 @@ angular.module('oneClickApp')
         return $http.get(urlPrefix + '/api/v1/services/hours', this.getHeaders());
       }
 
+      this.bookItinerary = function($http, bookingRequest){
+        //replacement for bookSharedRide
+        var request = {booking_request: bookingRequest};
+        return $http.post(urlPrefix + 'api/v1/itineraries/book', request, this.getHeaders());
+      }
       this.bookSharedRide = function($http) {
+        console.log('depricated');
         var requestHolder = {};
         requestHolder.booking_request = [];
 
