@@ -189,10 +189,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     //save the date/time to planService
     planService.fromDate = n;
     planService.fromTime = n;
-    planService.fromTimeType = 'depart';
-    planService.returnTimeType =  'depart';
     planService.asap = false;
-    planService.fromTimeType = 'arrive';
     // refresh the results only if value changed
     if($scope.refreshResults == true && n!==o){
       $scope.planFromResults();
