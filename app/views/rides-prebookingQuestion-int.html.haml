@@ -1,2 +1,3 @@
-%select{ng:{model:'itinerary.answers[question.code]', options:'o as o for o in question.choices'}}
-
+%select.form-control{id:'question-id-{{$index}}', required:'', name:'question-{{$index}}', ng:{model:'itinerary.answers[question.code]', options:'o as o for o in question.choices'}}
+.error{"ng-show"=>"prebooking_questions['question-'+$index].$error.required"}
+  Required

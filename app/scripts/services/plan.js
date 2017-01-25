@@ -682,6 +682,7 @@ angular.module('oneClickApp')
 
       var itineraryRequestPromise;
       this.postItineraryRequest = function($http) {
+        $rootScope.$broadcast('PlanService:beforeUpdateItineraryResults');
         var planService = this;
         planService.itineraries = null;
         ( !itineraryRequestPromise || itineraryRequestPromise.abort() );

@@ -67,8 +67,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       clearTimeout(planTimeoutId);
     }
     planTimeoutId = setTimeout(function(){
-      $scope.$parent.updatingResults = true;
-      _planTrip( $scope.$parent.loadItineraries );
+      _planTrip();
       planTimeoutId = null;
     }, timeout);
 

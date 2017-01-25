@@ -312,7 +312,7 @@ angular.module('ui.bootstrap.datetimepicker', ["ui.bootstrap.dateparser", "ui.bo
       }
       // Do a copy of the controller
       var ctrlCopy = {};
-      angular.copy(ctrl, ctrlCopy);
+      //angular.copy(ctrl, ctrlCopy);
 
       // Get the parent of the form
       var parent = elm.parent().controller('form');

@@ -13,7 +13,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.selectedItineraryModes = {};
   $scope.service_username = {};
   $scope.service_password = {};
-  
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 0,
+    showWeeks: false,
+    showButtonBar: false
+  };
+
   $scope.orderItinerariesBy = 'cost';
   $scope.loadItineraries = function(){
     //this method is used in PlanController, as a callback for when the plan/itinerary is updated
@@ -29,6 +35,9 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.loadItineraries();
   $scope.$on('PlanService:updateItineraryResults', function(event, data){
     $scope.loadItineraries();
+  });
+  $scope.$on('PlanService:beforeUpdateItineraryResults', function(event, data){
+    $scope.updatingResults = true;
   });
 
   $scope.itineraryTemplate = function( mode ){
@@ -109,7 +118,16 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     $scope.showPrebookingQuestions = true;
   }
   $scope.answerPrebookQuestions = function(itinerary){
-    console.log('preprebookQuestions', itinerary, $scope);
+    
+    //if the form is OK, attach the id to the answers and submit
+    itinerary.answers.itinerary_id = itinerary.id;
+    planService.bookItinerary($http, [itinerary.answers])
+      .then(function(response){
+        bootbox.alert('Your trip is booked');
+      })
+      .catch(function(e){
+        console.error('error booking', e);
+      });
   }
   $scope.prebookingQuestionTemplate = function(questions){
     //return a template for either question datatype

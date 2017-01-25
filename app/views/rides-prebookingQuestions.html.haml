@@ -19,16 +19,17 @@
         Login
 .prebooking_questions{ng:{show:'showPrebookingQuestions'}}
   %form{name:'prebooking_questions', role:'form'}
-    .row{ng:{repeat:'question in itinerary.prebooking_questions'}}
-      .col-xs-6
-        {{question.question}}
-      .col-xs-6
+    .form-group{ng:{repeat:'question in itinerary.prebooking_questions'}}
+      .col-xs-12.col-md-8.col-md-offset-2
+        %label{for:'question-id-{{$index}}'}
+          {{question.question}}
         .included-question{ng:{include:'prebookingQuestionTemplate(question.choices)'}}
-    .row
-      .col-xs-6
-        When do you want to return?
-      .col-xs-6
-        %datetimepicker{'hour-step'=>'1',
+    .row.form-group
+      .col-xs-12.col-md-8.col-md-offset-2
+        %label{for:'return-time'}
+          When do you want to return?
+        %datetimepicker#return-time{'hour-step'=>'1',
+            'style'=>'display:block;',
             'minute-step'=>'1',
             'ng-model'=>'itinerary.answers.return_time',
             'show-meridian'=>'true',
