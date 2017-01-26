@@ -48,7 +48,6 @@ footer.footer{
 }
 
 .navbar {
-  height:60px;
   margin-bottom:10px;
   a{
     color: black;
@@ -118,6 +117,7 @@ html, body{
 }
 #main-page{
   height: 80%;
+  min-height: 400px;
   padding:0px 15px;
   .landing-iamge{
     background-image: url('/images/Splash-Default-UTA.jpg');
@@ -128,7 +128,7 @@ html, body{
     left: 0px;
     width: 100%;
     height:80%;
-    min-height: 240px;
+    min-height: 500px;
     z-index:-9999;
   }
 
