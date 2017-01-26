@@ -87,20 +87,20 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       ipCookie('rideCount', ipCookie('rideCount') - 1);
     });
   }
-  $scope.serviceLogin = function(service_id){
+  $scope.serviceLogin = function(itinerary){
     var profile = {};
     //make the booking array if not already there
     profile.booking = planService.profile.booking || [];
     var serviceProfile = {
-      service_id: service_id,
+      service_id: itinerary.service_id,
       user_name: $scope.service_username.text,
       password: $scope.service_password.text
       };
     profile.booking.push(serviceProfile);
     planService.postProfileUpdate($http, profile).then(function(response){
-      console.log('profile response', response);
       //hide the service login form, show the pre booking questions
       $scope.showServiceLoginForm = false;
+      itinerary.user_registered = true;
       _showPrebookQuestions();
     }).catch(function(response){
       console.warn('profile response', response);

@@ -1,25 +1,25 @@
 .book_itinerary{ng:{hide:'itineraryBooked'}}
   .service_login_form.row{ng:{show:'showServiceLoginForm'}}
-    %form.col-md-6.col-md-offset-3.col-xs-12{name:"rides_forms.service_login_form", role:"form", method:"post", action:"service_login", "accept-charset"=>"UTF-8"}
+    %form.col-md-6.col-md-offset-3.col-xs-12{name:"rides_forms.service_login_form", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'serviceLogin(itinerary)'}}
       .form-group
         %label.sr-only{for:"service-username"}
           Username
-        %input#service-username.form-control{type:"text", placeholder:"Username", ng:{model:"service_username.text", required:''}, name:'service_username'}
+        %input#service-username.form-control{type:"text", placeholder:"Username", ng:{model:"service_username.text"}, name:'service_username', required:''}
         .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_uesrname.$error.required"}
           .error
             Required
       .form-group
         %label.sr-only{for:"service-password"}
           Password
-        %input#service-password.form-control{type:"password", placeholder:"Password", ng:{model:"service_password.text", required:''}, name:'service_password'}
+        %input#service-password.form-control{type:"password", placeholder:"Password", ng:{model:"service_password.text"}, name:'service_password', required:''}
         .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_password.$error.required"}
           .error
             Required
       .form-group
-        .btn.btn-success.btn-block{ng:{click:'serviceLogin(itinerary.service_id)'}}
+        %button.btn.btn-success.btn-block{type:'submit'}
           Login
   .prebooking_questions{ng:{show:'showPrebookingQuestions'}}
-    %form{name:'rides_forms.prebooking_questions', role:'form'}
+    %form{name:'rides_forms.prebooking_questions', role:'form', ng:{submit:'answerPrebookQuestions(itinerary)'}}
       .row.form-group{ng:{repeat:'question in itinerary.prebooking_questions'}}
         .col-xs-12.col-md-8.col-md-offset-2
           %label{for:'question-id-{{$index}}'}
@@ -37,7 +37,7 @@
               Return time: {{itinerary.booking_return_time | toDate | date : 'h:mm a'}}
       .row
         .col-md-6.col-md-offset-3.col-xs-12
-          .btn.btn-block.btn-primary{ng:{click:'answerPrebookQuestions(itinerary)'}}
+          %button.btn.btn-block.btn-primary{type:'submit'}
             Continue
   .action-buttons
     .row.bookable{ng: {hide: 'showServiceLoginForm || showPrebookingQuestions'}, style:'margin-bottom:30px;'}
