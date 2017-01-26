@@ -322,7 +322,9 @@ ul.language-menu-dropdown{
 #login-dropdown{
   padding:7px;
 }
-
+.container-fluid{
+  padding-bottom: 20px;
+}
 @media (min-width: 0) and (max-width: $screen-xs-max){
   .container-fluid{
     width:100%;
