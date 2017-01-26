@@ -1,5 +1,5 @@
 %div{"ng-controller"=>"LoginController"}
-  %form#login-nav.form{name:"loginform", role:"form", method:"post", action:"login", "accept-charset"=>"UTF-8"}
+  %form#login-nav.form{name:"loginform", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'authenticate()'}}
     .form-group
       %label.sr-only{for:"emailaddress"}
         Email Address
@@ -9,7 +9,7 @@
         Password
       %input.form-control{type:"password", placeholder:"Password", id:"password", "ng-model"=>"password", required:''}
     .form-group
-      %button.btn.btn-primary.btn-block{type:"button", "ng-click"=>"authenticate()"}
+      %button.btn.btn-primary.btn-block{type:"submit"}
         Sign in
     .alert-danger{ng:{show:'true === loginError'}}
       Your login was not recognized. Please try again.

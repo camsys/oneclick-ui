@@ -153,12 +153,10 @@ angular.module('oneClickApp')
 
         var promise = $http.post('//'+APIHOST+'/api/v1/sign_up', newUser);
         promise.then(function(response){
-          if(!response.data){
-            $scope.newUserError = true;
-            console.error(result);
-            return;
-          }
           processUserLogin(response.data);
+        }).catch(function(){
+          $scope.newUserError = true;
+          console.error(result);
         });
       }
 
@@ -170,12 +168,9 @@ angular.module('oneClickApp')
 
         var promise = $http.post('//'+APIHOST+'/api/v1/sign_in', login);
         promise.then(function(response){
-          if(!response.data){
-            $scope.newUserError = true;
-            console.error(result);
-            return;
-          }
           processUserLogin(response.data);
+        }).catch(function(){
+          $scope.loginError = true;
         });
       }
       

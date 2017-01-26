@@ -1,5 +1,5 @@
 %div{"ng-controller"=>"LoginController"}
-  %form#login-nav.form{name:"signupform", role:"form", method:"post", action:"signup", "accept-charset"=>"UTF-8"}
+  %form#login-nav.form{name:"signupform", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'signUp()'}}
     .form-group
       %label.sr-only{for:"signup-firstname"}
         First Name
@@ -40,6 +40,6 @@
         .error{"ng-show"=>"signupform.passwordconfirm.$invalid || signupform.password.$invalid"}
           Passwords must match
     .form-group
-      %button.btn.btn-primary.btn-block{type:"button", "ng-click"=>"signUp()"}
+      %button.btn.btn-primary.btn-block{type:"submit"}
         Sign up
 
