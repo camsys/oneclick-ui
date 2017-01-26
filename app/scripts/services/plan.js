@@ -715,10 +715,9 @@ angular.module('oneClickApp')
               //populate the answers with the first value
               itinerary.answers = {};
               itinerary.prebooking_questions.forEach(function(e){
-                itinerary.answers[e.code] = 0;
+                itinerary.answers[e.code] = null;
               });
-              //default the return time answer
-              itinerary.answers.return_time = new Date( itinerary.end_time );
+              itinerary.returnTimeOptions = planService.returnTimeOptions(itinerary);
             }
             return itinerary;
           });
@@ -728,6 +727,36 @@ angular.module('oneClickApp')
           $rootScope.$broadcast('PlanService:updateItineraryResults', response.data);
         });
         return itineraryRequestPromise;
+      }
+      this.returnTimeOptions = function(itinerary)
+      {
+        var startTime, labelTime, i, timeOptions, _timeLabel;
+        startTime = moment(new Date(itinerary.start_time || ''));
+        labelTime = startTime.clone();
+        timeOptions = [];
+        _timeLabel = function(labelTime){
+          return {
+            time: labelTime.toISOString(),
+            label: moment.duration({seconds: startTime.diff(labelTime, 'seconds') }).humanize()
+          }
+        }
+        for(i=0; i<4; i++){
+        }
+        //add 15/30 minutes
+        labelTime.add(15, 'm');
+        timeOptions.push( _timeLabel(labelTime) );
+        labelTime.add(15, 'm');
+        timeOptions.push( _timeLabel(labelTime) );
+        //add 1 hour
+        labelTime.add(15, 'm');
+        labelTime.add(15, 'm');
+        timeOptions.push( _timeLabel(labelTime) );
+        //add hours
+        for(i=0; i<10; i++){
+          labelTime.add(1, 'h');
+          timeOptions.push( _timeLabel(labelTime) );
+        }
+        return timeOptions;
       }
 
       this.getGuestToken = function($http){

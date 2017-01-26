@@ -13,6 +13,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.selectedItineraryModes = {};
   $scope.service_username = {};
   $scope.service_password = {};
+  $scope.rides_forms = {};
   $scope.dateOptions = {
     formatYear: 'yy',
     startingDay: 0,
@@ -86,7 +87,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       ipCookie('rideCount', ipCookie('rideCount') - 1);
     });
   }
-
   $scope.serviceLogin = function(service_id){
     var profile = {};
     //make the booking array if not already there
@@ -106,6 +106,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       console.warn('profile response', response);
     });
   }
+  $scope.cancelBookItinerary = function(itinerary){
+    $scope.showServiceLoginForm = false;
+    $scope.showPrebookingQuestions = false;
+  }
   $scope.bookItinerary = function(itinerary){
     if(!itinerary.user_registered){
       //show the service login form if the uesr isn't registered yet
@@ -118,14 +122,26 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     $scope.showPrebookingQuestions = true;
   }
   $scope.answerPrebookQuestions = function(itinerary){
-    
+    var request = $.extend({}, itinerary.answers);
     //if the form is OK, attach the id to the answers and submit
-    itinerary.answers.itinerary_id = itinerary.id;
-    planService.bookItinerary($http, [itinerary.answers])
+    var stop = false;
+    angular.forEach(request, function(val, key){
+      stop = !(parseInt(val) > -1) || stop;
+      $scope.rides_forms.prebooking_questions[key].error_required = stop;
+    });
+    if(stop){ return; }
+    //populate the id and return time (if applicable)
+    request.itinerary_id = itinerary.id;
+    if(itinerary.booking_return_time){
+      request.return_time = itinerary.booking_return_time;
+    }
+    planService.bookItinerary($http, [request])
       .then(function(response){
         bootbox.alert('Your trip is booked');
+        $scope.itineraryBooked =  true;
       })
       .catch(function(e){
+        bootbox.alert('An error occurred');
         console.error('error booking', e);
       });
   }

@@ -1,51 +1,51 @@
-.service_login_form.row{ng:{show:'showServiceLoginForm'}}
-  %form.col-md-6.col-md-offset-3.col-xs-12{name:"service_login_form", role:"form", method:"post", action:"service_login", "accept-charset"=>"UTF-8"}
-    .form-group
-      %label.sr-only{for:"service-username"}
-        Username
-      %input#service-username.form-control{type:"text", placeholder:"Username", "ng-model"=>"service_username.text", required:'', name:'service_username'}
-      .alert{role:'alert', "ng-show"=>"signupform.service_uesrname.$error.required"}
-        .error
-          Required
-    .form-group
-      %label.sr-only{for:"service-password"}
-        Password
-      %input#service-password.form-control{type:"password", placeholder:"Password", "ng-model"=>"service_password.text", required:'', name:'service_password'}
-      .alert{role:'alert', "ng-show"=>"signupform.service_password.$error.required"}
-        .error
-          Required
-    .form-group
-      .btn.btn-success.btn-block{ng:{click:'serviceLogin(itinerary.service_id)'}}
-        Login
-.prebooking_questions{ng:{show:'showPrebookingQuestions'}}
-  %form{name:'prebooking_questions', role:'form'}
-    .form-group{ng:{repeat:'question in itinerary.prebooking_questions'}}
-      .col-xs-12.col-md-8.col-md-offset-2
-        %label{for:'question-id-{{$index}}'}
-          {{question.question}}
-        .included-question{ng:{include:'prebookingQuestionTemplate(question.choices)'}}
-    .row.form-group
-      .col-xs-12.col-md-8.col-md-offset-2
-        %label{for:'return-time'}
-          When do you want to return?
-        %datetimepicker#return-time{'hour-step'=>'1',
-            'style'=>'display:block;',
-            'minute-step'=>'1',
-            'ng-model'=>'itinerary.answers.return_time',
-            'show-meridian'=>'true',
-            'date-format'=>'MMM dd, yyyy',
-            'date-options'=>'dateOptions',
-            'datepicker-append-to-body'=>'false',
-            'readonly-date'=>'false',
-            'disabled-date'=>'false',
-            'hidden-time'=>'false',
-            'hidden-date'=>'false',
-            'name'=>'datetimepicker',
-            'show-spinners'=>'false',
-            'readonly-time'=>'false',
-            'show-button-bar'=>'false'}
-    .row
-      .col-md-6.col-md-offset-3.col-xs-12
-        .btn.btn-block.btn-primary{ng:{click:'answerPrebookQuestions(itinerary)'}}
-          Continue
+.book_itinerary{ng:{hide:'itineraryBooked'}}
+  .service_login_form.row{ng:{show:'showServiceLoginForm'}}
+    %form.col-md-6.col-md-offset-3.col-xs-12{name:"rides_forms.service_login_form", role:"form", method:"post", action:"service_login", "accept-charset"=>"UTF-8"}
+      .form-group
+        %label.sr-only{for:"service-username"}
+          Username
+        %input#service-username.form-control{type:"text", placeholder:"Username", ng:{model:"service_username.text", required:''}, name:'service_username'}
+        .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_uesrname.$error.required"}
+          .error
+            Required
+      .form-group
+        %label.sr-only{for:"service-password"}
+          Password
+        %input#service-password.form-control{type:"password", placeholder:"Password", ng:{model:"service_password.text", required:''}, name:'service_password'}
+        .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_password.$error.required"}
+          .error
+            Required
+      .form-group
+        .btn.btn-success.btn-block{ng:{click:'serviceLogin(itinerary.service_id)'}}
+          Login
+  .prebooking_questions{ng:{show:'showPrebookingQuestions'}}
+    %form{name:'rides_forms.prebooking_questions', role:'form'}
+      .row.form-group{ng:{repeat:'question in itinerary.prebooking_questions'}}
+        .col-xs-12.col-md-8.col-md-offset-2
+          %label{for:'question-id-{{$index}}'}
+            {{question.question}}
+          .included-question{ng:{include:'prebookingQuestionTemplate(question.choices)'}}
+      .row.form-group
+        .col-xs-12.col-md-8.col-md-offset-2
+          %label{for:'return_time'}
+            How long do you want to stay?
+          %select.form-control{id:'return_time', name:'return_time', ng:{model:'itinerary.booking_return_time', options:'o.time as o.label for o in itinerary.returnTimeOptions'}}
+            %option{value:'',} No return trip
+        .text-right.col-xs-12.col-md-8.col-md-offset-2{ng:{show:'itinerary.booking_return_time'}}
+          %h3
+            .small
+              Return time: {{itinerary.booking_return_time | toDate | date : 'h:mm a'}}
+      .row
+        .col-md-6.col-md-offset-3.col-xs-12
+          .btn.btn-block.btn-primary{ng:{click:'answerPrebookQuestions(itinerary)'}}
+            Continue
+  .action-buttons
+    .row.bookable{ng: {hide: 'showServiceLoginForm || showPrebookingQuestions'}, style:'margin-bottom:30px;'}
+      .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
+        .btn.btn-primary.btn-block{ng:{click:'bookItinerary(itinerary)'}}
+          {{'book_button' | translate}}
+    .row.bookable{ng: {show: 'showServiceLoginForm || showPrebookingQuestions'}, style:'margin-bottom:30px;'}
+      .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
+        .btn.btn-default.btn-block{ng:{click:'cancelBookItinerary(itinerary)'}}
+          {{'cancel' | translate}}
 

@@ -61,6 +61,13 @@ angular.module('oneClickApp')
     return (addressString || '').replace(country, '').trim();
   };
 })
+.filter('toDate', function() {
+  return function(dateString) {
+    //filters ", USA" or ", United States" from the end$ of strings. comma optional
+    if(!dateString){ return '';}
+    return new Date(dateString);
+  };
+})
 .filter('telephoneLink', function(){
   return function(tel){
     //strip all non-numeric chars

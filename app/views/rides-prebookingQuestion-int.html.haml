@@ -1,3 +1,4 @@
-%select.form-control{id:'question-id-{{$index}}', required:'', name:'question-{{$index}}', ng:{model:'itinerary.answers[question.code]', options:'o as o for o in question.choices'}}
-.error{"ng-show"=>"prebooking_questions['question-'+$index].$error.required"}
+%select.form-control{id:'question-id-{{$index}}', name:'{{question.code}}', ng:{model:'itinerary.answers[question.code]', required:'', options:'o as o for o in question.choices'}}
+  %option{style:'display:none', value:'', disabled:''}  
+.text-right.error{"ng-show"=>"rides_forms.prebooking_questions[question.code].error_required"}
   Required
