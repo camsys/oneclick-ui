@@ -14,6 +14,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.tripDivs = null;
   $scope.emailAddresses = {};
 
+  //getPastRides and getFutureRides modify $scope.trips adding .future and .past
   var pastRides = planService.getPastRides($http, $scope, ipCookie);
   var futureRides = planService.getFutureRides($http, $scope, ipCookie);
 
@@ -55,6 +56,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     return templatePath;
   }
   $scope.cancelTrip = function(trip) {
+    console.log($scope, planService);
     var tripIds = [];
     var message = "Are you sure you want to drop this trip?";
     var successMessage = 'Your trip has been dropped.'
@@ -79,13 +81,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
             var cancel = {bookingcancellation_request:[{itinerary_id: tripId}]};
             var cancelPromise = planService.cancelTrip($http, cancel)
             cancelPromise.then(function(response) {
-              if(!response.data){
-                bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
-                return;
-              }
               bootbox.alert(successMessage);
+              trip.cancelled = true;
               $scope.tripSelected = false;
               ipCookie('rideCount', ipCookie('rideCount') - 1);
+            }).catch(function(e){
+              bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
+              console.error(e)
             });
           })
         }

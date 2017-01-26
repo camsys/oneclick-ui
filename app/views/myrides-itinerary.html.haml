@@ -4,7 +4,7 @@
   .email-or-cancel
     .row.even-height-row
       .col-sm-3.col-sm-offset-3.col-xs-6
-        .btn.btn-bordered.btn-block{ng: {click: 'cancelTrip(trip); $event.stopPropagation();'}}
+        .btn.btn-bordered.btn-block{ng: {click: 'cancelTrip(trip); $event.stopPropagation();', hide:'trip.cancelled'}}
           %span.fa-stack
             %i.fa.fa-times-circle.fa-stack-2x{style: 'color: red;'}
           Cancel
