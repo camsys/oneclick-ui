@@ -124,7 +124,7 @@ angular.module('oneClickApp')
 })
 .filter('modeName', function(){
   var modes = {
-    'mode_ride_hailing' : 'Drive',
+    'mode_ride_hailing' : 'Rideshare',
     'mode_car' : 'Drive',
     'mode_paratransit':'Paratransit',
     'mode_taxi':'Taxi',
