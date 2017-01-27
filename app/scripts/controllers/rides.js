@@ -177,13 +177,14 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
           var cancel = {bookingcancellation_request:[{itinerary_id: tripId}]};
           var cancelPromise = planService.cancelTrip($http, cancel)
           cancelPromise.then(function(response) {
-            if(!response.data){
-              bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
-              return;
-            }
             bootbox.alert(successMessage);
+            //reset the UI flags that were set during booking
+            $scope.itineraryBooked = false;
             $scope.tripSelected = false;
+            $scope.cancelBookItinerary();
             ipCookie('rideCount', ipCookie('rideCount') - 1);
+          }).catch(function(){
+            bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
           })
         }
       }
