@@ -15,8 +15,8 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.emailAddresses = {};
 
   //getPastRides and getFutureRides modify $scope.trips adding .future and .past
-  var pastRides = planService.getPastRides($http, $scope, ipCookie);
   var futureRides = planService.getFutureRides($http, $scope, ipCookie);
+  var pastRides = planService.getPastRides($http, $scope, ipCookie);
 
   $scope.itinerary = planService.selectedTrip;
   $scope.hideButtonBar = true;
