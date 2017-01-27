@@ -36,7 +36,7 @@
                         'inputid' => 'toInput',
                         ng: {class:'{error:form.input.$error.required}', model: 'to', 'attr-mobile' => '{{mobile}}'}}
                   .block-two
-                    %label.hide{:for => "ride-when"} Leave or Arrive?
+                    %label.hide{:for => "ride-when"} {{"depart_at" | translate}}/{{"arrive_by" | translate}}?
                     %select#ride-when.select.form-control{ng: {model: 'fromTimeType'} }
                       %option{:selected => "selected", :value => "depart"} {{"depart_at" | translate}}
                       %option{:value => "arrive"} {{"arrive_by" | translate}}

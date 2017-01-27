@@ -43,10 +43,10 @@
                 .email-itinerary-form{style:'margin:1em 0px;', ng: {show: 'showEmail'}}
                   .row
                     .col-xs-12.col-sm-8.col-sm-offset-2.text-left
-                      Email your ride details to a friend (or yourself).
+                      {{'email_your_ride_detail' | translate}}
                   .row
                     .col-xs-12.col-sm-8.col-sm-offset-2.text-left.text-muted
-                      Use a comma to separate multiple addresses
+                      {{'comma_separated_addresses' | translate}}
                   .row
                     .col-sm-6.col-sm-offset-2.col-xs-8{'style' => 'line-height: 2em; padding-right: 0px;'}
                       %input.form-control{type:'text', style: 'font-size: .9em; border-top-right-radius:0px; border-bottom-right-radius:0px;', ng: {model: 'emailAddresses.text'}}
@@ -57,7 +57,7 @@
                             {{'send' | translate}}
                   .row{ng: {show: 'invalidEmail == true'}}
                     .col-xs-12.col-sm-8.col-sm-offset-2.text-left{style: 'color: red'}
-                      Please enter only valid email addresses
+                      {{'enter_valid_emails' | translate}}
                 .action-buttons{ng:{show:'tripSelected == itinerary.id'}}
                   .row
                     .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
@@ -65,7 +65,7 @@
                         {{'email_button' | translate}}
       #rides-itineraries-loading.fade.in{'ng-show'=>'updatingResults', style:'position:absolute; top:0px;'}
         %h3{style:'margin-top:30px;'}
-          Finding Rides...
+          {{'finding_rides' | translate}}...
         .sk-circle
           .sk-circle1.sk-child
           .sk-circle2.sk-child

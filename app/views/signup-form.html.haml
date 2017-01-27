@@ -22,7 +22,7 @@
         .error{"ng-show"=>"signupform.$submitted && signupform.email.$error.required"}
           {{'simple_form.required.text' | translate}}
         .error{"ng-show"=>"signupform.$submitted && signupform.email.$error.email"}
-          Not valid email
+          {{'not_valid_email' | translate}}
         .error{ng:{repeat:'error in loginErrors.email'}}
           {{'email' | translate}} {{error}}
     .form-group
@@ -40,7 +40,7 @@
         .error{"ng-show"=>"signupform.$submitted && signupform.passwordconfirm.$error.required"}
           {{'simple_form.required.text' | translate}}
         .error{"ng-show"=>"signupform.$submitted && (signupform.passwordconfirm.$invalid || signupform.password.$invalid)"}
-          Passwords must match
+          {{'passwords_must_match' | translate}}
         .error{ng:{repeat:'error in loginErrors.password'}}
           {{'password' | translate}} {{error}}
     .form-group

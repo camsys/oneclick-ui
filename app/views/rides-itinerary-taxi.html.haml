@@ -17,7 +17,7 @@
         .row{style:'padding:20px 0px;'}
           .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1.text-center
             %a.btn.btn-primary.btn-block{ng: {href: "{{itinerary.phone | telephoneLink }}", click: 'callService(itinerary.phone);'}}
-              Call {{itinerary.service_name}}
+              {{'call' | translate}} {{itinerary.service_name}}
         .row{style:'padding:20px 0px;'}
           .col-xs-12.text-center
             {{'more_info_call' | translate}} {{itinerary.phone}}

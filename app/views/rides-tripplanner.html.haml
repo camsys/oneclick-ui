@@ -56,7 +56,7 @@
             ng: {model: 'to', 'attr-mobile' => '{{mobile}}'}}
     .row
       .col-xs-12
-        %label.hide{:for => "ride-when"} Leave or Arrive?
+        %label.hide{:for => "ride-when"} {{"depart_at" | translate}}/{{"arrive_by" | translate}}?
         %select#ride-when.select.form-control{style: "width: 100%", ng: {model: 'fromTimeType'} }
           %option{:selected => "selected", :value => "depart"} {{"depart_at" | translate}}
           %option{:value => "arrive"} {{"arrive_by" | translate}}
@@ -110,7 +110,7 @@
             {{"mode_drive_name" | translate }}
       .row
         .col-xs-12
-          %h3 Trip Purpose?
+          %h3 {{'trip_purpose' | translate}}?
           %select#trip-purpose.select.form-control{style: 'width:100%', ng:{model:'tripPurpose', options:'purpose.name for purpose in purposesQuestions track by purpose.code', change:'purposeChange(purpose, $i)'}}
             %option{value:''} {{'all' | translate}}
       .row

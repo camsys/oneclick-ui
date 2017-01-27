@@ -28,13 +28,13 @@
       .row.form-group
         .col-xs-12.col-md-8.col-md-offset-2
           %label{for:'return_time'}
-            How long do you want to stay?
+            {{'how_long_to_stay' | translate}}
           %select.form-control{id:'return_time', name:'return_time', ng:{model:'itinerary.booking_return_time', options:'o.time as o.label for o in itinerary.returnTimeOptions'}}
-            %option{value:'',} No return trip
+            %option{value:'',} {{'no_return_trip' | translate}}
         .text-right.col-xs-12.col-md-8.col-md-offset-2{ng:{show:'itinerary.booking_return_time'}}
           %h3
             .small
-              Return time: {{itinerary.booking_return_time | toDate | date : 'h:mm a'}}
+              {{'return_time' | translate}}: {{itinerary.booking_return_time | toDate | date : 'h:mm a'}}
       .row
         .col-md-6.col-md-offset-3.col-xs-12
           %button.btn.btn-block.btn-primary{type:'submit'}

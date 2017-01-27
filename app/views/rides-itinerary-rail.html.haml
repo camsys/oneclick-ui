@@ -20,24 +20,24 @@
 
               .walk-info{ng: {show: 'leg.mode == "WALK"'}}
                 .first{ng: {show: '$first'}}
-                  Start {{itinerary.start_location.formatted_address | noCountry}}
+                  {{'start' | translate}} {{itinerary.start_location.formatted_address | noCountry}}
                 .not-first{ng: {show: '!$first'}}
-                  Start walking {{leg.from.name}}
+                  {{'start_walking' | translate}} {{leg.from.name}}
                 .show-steps-click{ng:{hide:'showSteps[$index]', click:'showSteps[$index] = !showSteps[$index]'}}
-                  Show steps
+                  {{'show_steps' | translate}}
                 .hide-steps-click{ng:{show:'showSteps[$index]', click:'showSteps[$index] = !showSteps[$index]'}}
-                  Hide steps
+                  {{'hide_steps' | translate}}
                 .show-steps{ng:{show:'showSteps[$index] === true'}}
                   .steps{ng:{repeat:'step in leg.steps track by step.lon'}}
                     .first-step{ng:{show:'$first'}}
-                      {{'depart' | translate}} {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
+                      {{'depart' | translate}} {{step.streetName}}, {{'go' | translate}} {{step.absoluteDirection}} {{'for' | translate}} {{step.distance | distance}}
                     .step{ng:{hide:'$first'}}
-                      Turn {{step.relativeDirection}} ({{step.absoluteDirection}}) on {{step.streetName}}, go {{step.distance | distance}}
+                      {{'turn' | translate}} {{step.relativeDirection}} ({{step.absoluteDirection}}) {{'on' | translate}} {{step.streetName}}, {{'go' | translate}} {{step.distance | distance}}
               .bus-info{ng: {show: 'leg.mode == "BUS"'}}
                 %h5.text-muted{ng: {show: 'leg.warning'}}  {{leg.warning}}
                 %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  {{'wait' | translate}} {{leg.transferTimeInMins}} {{'minutes' | translate}}
                 .get-on
-                  Get on {{leg.serviceName}} 
+                  {{'get_on' | translate}} {{leg.serviceName}} 
                 %span{ng: {show: '!$first'}}
                   {{leg.from.name}}
                 %span{ng: {show: '$first'}}
@@ -52,7 +52,7 @@
                   {{'mode_rail_name'| translate}} @ {{leg.from.name}}
                 %h4{ng: {show: '$first'}}
                   {{'mode_rail_name'| translate}} @ {{itinerary.start_location.formatted_address | noCountry}}
-                %h4{ng: {show: 'leg.specialService'}}  This is a special service train.
+                %h4{ng: {show: 'leg.specialService'}}  {{'this_is_a_special_train' | translate}}
                 %h5.text-muted {{leg.distance | distance}} ({{leg.duration | seconds}})
 
       .col-xs-6

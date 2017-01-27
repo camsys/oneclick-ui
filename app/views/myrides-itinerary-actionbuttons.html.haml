@@ -12,10 +12,10 @@
 .email-form{ng: {show: 'showEmail'}}
   .row
     .col-xs-12.col-sm-8.col-sm-offset-2.text-left
-      Email your ride details to a friend (or yourself).
+      {{'email_your_ride_detail' | translate}}
   .row
     .col-xs-12.col-sm-8.col-sm-offset-2.text-left.text-muted
-      Use a comma to separate multiple addresses
+      {{'comma_separated_addresses' | translate}}
   .row
     .col-xs-10.col-sm-6.col-sm-offset-2{'style' => 'line-height: 2em; padding-right: 0px;'}
       %input.form-control{style: 'font-size: .9em; border-top-right-radius:0px; border-bottom-right-radius:0px;', ng: {model: 'emailString'}}
@@ -26,4 +26,4 @@
             {{'send' | translate}}
   .row{ng: {show: 'invalidEmail == true'}}
     .col-xs-12.col-sm-8.col-sm-offset-2.text-left{style: 'color: red'}
-      Please enter only valid email addresses
+      {{'enter_valid_emails' | translate}}

@@ -11,21 +11,17 @@
       .col-xs-12
         %h3 {{'next_steps' | translate}}
         %h4
-          Call 
           %a{'ng-href'=>'itinerary.phone | telephoneLink'}
-            {{itinerary.phone}}
-          to register to use this service
+            {{'call_to_register' | translate:itinerary}}
     .row{'ng-show'=>'itinerary.url'}
       .col-xs-12
         %h3 {{'more_information' | translate}}
         %h4 
-          Visit 
-          %a{ng:{href:'itinerary.url'}} {{itinerary.url}}
-          for more information
+          {{visit_url_for_more_info | translate:itinerary}}
   .col-sm-5.col-xs-12{style:'display:flex; align-items:center;'}
     .row{'ng-show'=>'itinerary.schedule.length > 0', style:'padding-bottom:20px;'}
       .col-xs-12
-        %h3 Schedule
+        %h3 {{'schedule' | translate}}
       .col-xs-12
         .flex-container.schedule-row{ng:{repeat:'day in itinerary.schedule track by day.day'}}
           .flex-item{style:'width:90px;'}

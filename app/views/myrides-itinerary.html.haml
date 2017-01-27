@@ -7,13 +7,13 @@
         %h3 {{trip.mode | modeName : trip.service_name | translate}}
     .row
       .col-xs-12
-        %h4 {{trip.from_place}} to {{trip.to_place}}
+        %h4 {{trip.from_place}} {{'to' | translate}} {{trip.to_place}}
     .row
       .col-xs-8
         %h5.blue-text {{trip.startDesc}}
       .col-xs-4
         %h5.text-right{ng:{show:'trip.cancelled'}}
-          Cancelled
+          {{'cancelled' | translate}}
         %h5.text-muted.text-right{ng: {show: '!trip.cancelled && trip.itineraries.length > 1'}} (round trip)
         %h5.text-muted.text-right{ng: {show: '!trip.cancelled && trip.itineraries.length == 1'}} (one way)
 .animate-show.my-more-trip-details.no-outline{ng:{show: 'trip.showMoreDetails', click:'$event.stopPropagation();'}}
@@ -35,10 +35,10 @@
       .email-form{ng: {show: 'showEmail'}}
         .row
           .col-xs-12.col-sm-8.col-sm-offset-2.text-left
-            Email your ride details to a friend (or yourself).
+            {{'email_your_ride_details' | translate}}
         .row
           .col-xs-12.col-sm-8.col-sm-offset-2.text-left.text-muted
-            Use a comma to separate multiple addresses
+            {{'comma_separated_addresses' | translate}}
         .row
           .col-xs-10.col-sm-6.col-sm-offset-2{'style' => 'line-height: 2em; padding-right: 0px;'}
             %input.form-control{type:'text', name:'emailAddresses', style: 'font-size: .9em; border-top-right-radius:0px; border-bottom-right-radius:0px;', ng: {model: 'emailAddresses.text'}}
@@ -49,4 +49,4 @@
                   {{'send' | translate}}
         .row{ng: {show: 'invalidEmail == true'}}
           .col-xs-12.col-sm-8.col-sm-offset-2.text-left{style: 'color: red'}
-            Please enter only valid email addresses
+            {{'enter_valid_emails' | translate}}

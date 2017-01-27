@@ -10,32 +10,29 @@
         .col-xs-offset-1.col-xs-5
           .btn.btn-default.btn-block.my-show-tab.show-future{ng:{click:'showTab="future"', class:'showTab'}}
             %h4
-              Upcoming ({{trips.future.length}})
+              {{'upcoming' | translate}} ({{trips.future.length}})
         .col-xs-5
           .btn.btn-default.btn-block.my-show-tab.show-past{ng:{click:'showTab="past"', class:'showTab'}}
             %h4
-              History ({{trips.past.length}})
+              {{'history' | translate}} ({{trips.past.length}})
       .my-rides-tabs{style:'margin-top:30px;'}
         %tabset
-        
-          %tab{'heading' => 'Upcoming ({{trips.future.length}})', 'active' => 'tabFuture', "ng-show" => 'showTab!=="past"'}
-            %h3 Upcoming trips
+          %tab{'heading' => '{{"upcoming" | translate}} ({{trips.future.length}})', 'active' => 'tabFuture', "ng-show" => 'showTab!=="past"'}
+            %h3 {{'upcoming_trips' | translate}}
             .bordered.myride{index: '{{$index}}', 
                   ng:{init: 'tab = "future"', 
                     click: 'trip.showMoreDetails = !trip.showMoreDetails', 
                     repeat: 'trip in trips.future', 
                     class: '[{cancelled: trip.cancelled}]',
                     include:"'/views/myrides-itinerary.html'"}}
-
-          %tab{'heading' => 'History ({{trips.past.length}})', 'active' => 'tabPast', "ng-show" => 'showTab==="past"'}
-            %h3 Past trips
+          %tab{'heading' => '{{"history" | translate}} ({{trips.past.length}})', 'active' => 'tabPast', "ng-show" => 'showTab==="past"'}
+            %h3 {{'past_trips' | translate}}
             .bordered.myride{index: '{{$index}}', 
-                ng:{init: 'tab = "past"',
-                  repeat: 'trip in trips.past', 
-                  click: 'trip.showMoreDetails = !trip.showMoreDetails', 
-                  class: '[{cancelled: trip.cancelled}]',
-                  include:"'/views/myrides-itinerary.html'"}}
-
+                  ng:{init: 'tab = "past"',
+                    repeat: 'trip in trips.past', 
+                    click: 'trip.showMoreDetails = !trip.showMoreDetails', 
+                    class: '[{cancelled: trip.cancelled}]',
+                    include:"'/views/myrides-itinerary.html'"}}
       .row.btn-spacing
         .col-md-4.col-md-offset-4.col-xs-12.text-center
           %a.btn.btn-primary.btn-block{href: '/', ng: {click: 'reset()'}}
