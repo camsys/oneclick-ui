@@ -5,40 +5,44 @@
         {{'first_name' | translate}}
       %input#signup-firstname.form-control{type:"text", placeholder:"{{'first_name' | translate}}", "ng-model"=>"firstName.text", required:'', name:'firstname'}
       .alert{role:'alert'}
-        .error{"ng-show"=>"signupform.firstname.$error.required"}
+        .error{"ng-show"=>"signupform.$submitted && signupform.firstname.$error.required"}
           {{'simple_form.required.text' | translate}}
     .form-group
       %label.sr-only{for:"signup-lastname"}
         {{'last_name' | translate}}
       %input#signup-lastname.form-control{type:"text", placeholder:"{{'last_name' | translate}}", "ng-model"=>"lastName.text", required:'', name:'lastname'}
       .alert{role:'alert'}
-        .error{"ng-show"=>"signupform.lastname.$error.required"}
+        .error{"ng-show"=>"signupform.$submitted && signupform.lastname.$error.required"}
           {{'simple_form.required.text' | translate}}
     .form-group
       %label.sr-only{for:"signup-emailaddress"}
         {{'email' | translate}}
       %input#signup-emailaddress.form-control{type:"email", required:'', name:'email', placeholder:"{{'email' | translate}}", ng:{model:"email.text", pattern:"/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"}}
-      .alert{role:'alert'}
-        .error{"ng-show"=>"signupform.email.$error.required"}
+      .alert-danger{role:'alert'}
+        .error{"ng-show"=>"signupform.$submitted && signupform.email.$error.required"}
           {{'simple_form.required.text' | translate}}
-        .error{"ng-show"=>"signupform.email.$error.email"}
+        .error{"ng-show"=>"signupform.$submitted && signupform.email.$error.email"}
           Not valid email
+        .error{ng:{repeat:'error in loginErrors.email'}}
+          {{'email' | translate}} {{error}}
     .form-group
       %label.sr-only{for:"signup-password"}
         {{'password' | translate}}
       %input.form-control{type:"password", placeholder:"{{'password' | translate}}", id:"signup-password", ng:{model:'password.text', equals:'{{passwordConfirm.text}}'}, required:'', name:'password'}
       .alert{role:'alert'}
-        .error{"ng-show"=>"signupform.password.$error.required"}
+        .error{"ng-show"=>"signupform.$submitted && signupform.password.$error.required"}
           {{'simple_form.required.text' | translate}}
     .form-group
       %label.sr-only{for:"signup-password-confirm"}
         {{'password_confirmation' | translate}}
       %input.form-control{type:"password", placeholder:"{{'password_confirmation' | translate}}", id:"signup-password-confirm", ng:{model:'passwordConfirm.text', equals:'{{password.text}}'}, required:'', name:'passwordconfirm'}
-      .alert{role:'alert'}
-        .error{"ng-show"=>"signupform.passwordconfirm.$error.required"}
+      .alert-danger{role:'alert'}
+        .error{"ng-show"=>"signupform.$submitted && signupform.passwordconfirm.$error.required"}
           {{'simple_form.required.text' | translate}}
-        .error{"ng-show"=>"signupform.passwordconfirm.$invalid || signupform.password.$invalid"}
+        .error{"ng-show"=>"signupform.$submitted && (signupform.passwordconfirm.$invalid || signupform.password.$invalid)"}
           Passwords must match
+        .error{ng:{repeat:'error in loginErrors.password'}}
+          {{'password' | translate}} {{error}}
     .form-group
       %button.btn.btn-primary.btn-block{type:"submit"}
         {{'sign_up' | translate}}

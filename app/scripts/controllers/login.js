@@ -42,6 +42,7 @@ angular.module('oneClickApp')
       $scope.email = {};
       $scope.password = {};
       $scope.passwordConfirm = {};
+      $scope.loginErrors = {};
 
 /*
       function checkNextValid(){
@@ -154,9 +155,10 @@ angular.module('oneClickApp')
         var promise = $http.post('//'+APIHOST+'/api/v1/sign_up', newUser);
         promise.then(function(response){
           processUserLogin(response.data);
-        }).catch(function(){
-          $scope.newUserError = true;
-          console.error(result);
+          $scope.loginErrors = {};
+        }).catch(function(response){
+          $scope.loginErrors = response.data || {};
+          console.error(response);
         });
       }
 
