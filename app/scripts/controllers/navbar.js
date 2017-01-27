@@ -3,8 +3,8 @@
 var app = angular.module('oneClickApp');
 
 angular.module('oneClickApp')
-  .controller('NavbarController', ['$scope', '$location', 'flash', 'planService', 'deviceDetector', 'ipCookie', '$window', '$translate', '$http',
-    function ($scope, $location, flash, planService, deviceDetector, ipCookie, $window, $translate, $http) {
+  .controller('NavbarController', ['$scope', '$location', 'flash', 'planService', 'deviceDetector', 'ipCookie', '$window', '$translate', 'tmhDynamicLocale', '$http',
+    function ($scope, $location, flash, planService, deviceDetector, ipCookie, $window, $translate, tmhDynamicLocale, $http) {
 
       var input = document.createElement('input');
       input.setAttribute('type','date');
@@ -16,8 +16,9 @@ angular.module('oneClickApp')
       $scope.mobile = deviceDetector.isMobile();
       planService.mobile = $scope.mobile;
       $scope.languageOptions = {en:'English', es:'Español'};
-      $scope.languageSelected = ipCookie('lang') || 'en';
+      $scope.languageSelected = localStorage.getItem('lang') || 'en';
       $translate.use($scope.languageSelected);
+      tmhDynamicLocale.set($scope.languageSelected);
 
       $scope.flash = flash;
 
@@ -35,8 +36,10 @@ angular.module('oneClickApp')
       var changeLanguage = function(key){
         if($scope.languageOptions[key] == undefined){ return false; }
         $translate.use(key);
+        tmhDynamicLocale.set(key);
         $scope.languageSelected = key;
         ipCookie('lang', key);
+        localStorage.setItem('lang',key);
         return true;
       }
       $scope.changeLanguage = function(key){

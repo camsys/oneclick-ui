@@ -28,8 +28,9 @@ angular.module('oneClickApp', [
     'ngBootbox',
     'ui.bootstrap.datetimepicker',
     'pascalprecht.translate',
-  ]).config(function ($routeProvider, $translateProvider) {
-    
+    'tmh.dynamicLocale'
+  ]).config(function ($routeProvider, $translateProvider, tmhDynamicLocaleProvider) {
+    var defaultLanguage = localStorage.getItem('lang') || 'en';
     // Configure the translation service
     $translateProvider.useSanitizeValueStrategy('escape');
     //$translateProvider.useUrlLoader('//'+APIHOST+'/api/v1/translations/all');
@@ -37,7 +38,9 @@ angular.module('oneClickApp', [
       prefix: '/translations/',
       suffix: '.json'
     });
-    $translateProvider.preferredLanguage('en');
+    $translateProvider.preferredLanguage(defaultLanguage);
+    tmhDynamicLocaleProvider.localeLocationPattern('/bower_components/angular-i18n/angular-locale_{{locale}}.js');
+    tmhDynamicLocaleProvider.defaultLocale(defaultLanguage);
 
     $routeProvider
       .when('/', {
