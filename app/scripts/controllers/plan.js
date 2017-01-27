@@ -619,13 +619,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     planService
       .postItineraryRequest($http)
       .then(function(response){
-          if(response.data){
-            success(response.data);
-          }else{
-            if(!result){
-              //null result means xhr aborted
-              return;
-            }
+          success(response.data);
+        }).catch(function(e){
+          //if status is -1 it's OK -- the XHR was cancelled. otherwise report error
+          if(e.status > 0){
             bootbox.alert("An error occured on the server, please retry your search or try again later.");
           }
         });
