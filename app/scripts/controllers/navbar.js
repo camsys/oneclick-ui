@@ -18,7 +18,7 @@ angular.module('oneClickApp')
       $scope.languageOptions = {en:'English', es:'Español'};
       $scope.languageSelected = localStorage.getItem('lang') || 'en';
       $translate.use($scope.languageSelected);
-      tmhDynamicLocale.set($scope.languageSelected);
+      tmhDynamicLocale.set($scope.languageSelected+'-us');
 
       $scope.flash = flash;
 
@@ -36,7 +36,7 @@ angular.module('oneClickApp')
       var changeLanguage = function(key){
         if($scope.languageOptions[key] == undefined){ return false; }
         $translate.use(key);
-        tmhDynamicLocale.set(key);
+        tmhDynamicLocale.set(key+'-us');
         $scope.languageSelected = key;
         ipCookie('lang', key);
         localStorage.setItem('lang',key);

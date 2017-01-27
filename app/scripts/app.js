@@ -40,7 +40,7 @@ angular.module('oneClickApp', [
     });
     $translateProvider.preferredLanguage(defaultLanguage);
     tmhDynamicLocaleProvider.localeLocationPattern('/bower_components/angular-i18n/angular-locale_{{locale}}.js');
-    tmhDynamicLocaleProvider.defaultLocale(defaultLanguage);
+    tmhDynamicLocaleProvider.defaultLocale(defaultLanguage+'-us');
 
     $routeProvider
       .when('/', {
