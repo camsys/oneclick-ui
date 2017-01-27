@@ -3,15 +3,15 @@
     %form.col-md-6.col-md-offset-3.col-xs-12{name:"rides_forms.service_login_form", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'serviceLogin(itinerary)'}}
       .form-group
         %label.sr-only{for:"service-username"}
-          {{'username' | translate}}
-        %input#service-username.form-control{type:"text", placeholder:"{{'username' | translate}}", ng:{model:"service_username.text"}, name:'service_username', required:''}
+          {{'client_id' | translate}}
+        %input#service-username.form-control{type:"text", placeholder:"{{'client_id' | translate}}", ng:{model:"service_username.text"}, name:'service_username', required:''}
         .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_uesrname.$error.required"}
           .error
             {{'required' | translate}}
       .form-group
         %label.sr-only{for:"service-password"}
-          {{'password' | translate}}
-        %input#service-password.form-control{type:"password", placeholder:"{{'password' | translate}}", ng:{model:"service_password.text"}, name:'service_password', required:''}
+          {{'token' | translate}}
+        %input#service-password.form-control{type:"text", placeholder:"{{'token' | translate}}", ng:{model:"service_password.text"}, name:'service_password', required:''}
         .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_password.$error.required"}
           .error
             {{'required' | translate}}
