@@ -112,10 +112,6 @@ angular.module('oneClickApp', [
         templateUrl: 'views/uber-detail.html',
         controller: 'UberController'
       })
-      .when('/itinerary', {
-        templateUrl: 'views/itinerary.html',
-        controller: 'ItineraryController'
-      })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'PlanController'
