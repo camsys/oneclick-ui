@@ -130,7 +130,7 @@
               %label{style:'width:100%;'}
                 .mode-boolean.pull-right
                   %input{type:'checkbox', name:'{{mode}}', ng:{model:'$parent.selectedItineraryModes[mode]', change:'$parent.itineraryFilterChange()'}}
-                {{mode | modeName}}
+                {{mode | modeName | translate}}
     .row{style:"display:none;"}
       %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 

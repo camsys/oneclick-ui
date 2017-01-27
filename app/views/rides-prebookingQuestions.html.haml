@@ -19,7 +19,7 @@
         %button.btn.btn-success.btn-block{type:'submit'}
           {{'login' | translate}}
   .prebooking_questions{ng:{show:'showPrebookingQuestions'}}
-    %form{name:'rides_forms.prebooking_questions', role:'form', ng:{submit:'answerPrebookQuestions(itinerary)'}}
+    %form{name:'rides_forms.prebooking_questions', role:'form', method:'post', ng:{submit:'answerPrebookQuestions(itinerary)'}}
       .row.form-group{ng:{repeat:'question in itinerary.prebooking_questions'}}
         .col-xs-12.col-md-8.col-md-offset-2
           %label{for:'question-id-{{$index}}'}

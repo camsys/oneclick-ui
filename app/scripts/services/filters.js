@@ -133,8 +133,18 @@ angular.module('oneClickApp')
     'mode_rail':'Rail',
     'mode_bicycle':'Bicycle'
   };
+  var translatedModes = {
+    'mode_ride_hailing' : 'mode_ride_hailing_name',
+    'mode_car' : 'mode_car_name',
+    'mode_paratransit':'mode_paratransit_name',
+    'mode_taxi':'mode_taxi_name',
+    'mode_transit':'mode_transit_name',
+    'mode_walk':'mode_walk_name',
+    'mode_rail':'mode_rail_name',
+    'mode_bicycle':'mode_bicycle_name'
+  }
   return function(mode, service_name){
-    return (service_name || modes[mode]) || '';
+    return (service_name || translatedModes[mode]) || '';
   }
 })
 .filter('encodeURI', function() {

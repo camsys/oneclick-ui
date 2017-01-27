@@ -11,7 +11,7 @@
                   .no-outline.icon
                     %img.ride-mode-service-icon{style:'vertical-align:bottom;', ng:{src:'{{itinerary.returned_mode_code | modeIcon: itinerary.logo_url}}'}}
                     %h2.ride-mode-service-name
-                      {{itinerary.returned_mode_code | modeName: itinerary.service_name}}
+                      {{itinerary.returned_mode_code | modeName: itinerary.service_name | translate}}
                 .col-sm-4.col-xs-12{style:'position:relative;'}
                   .btn.btn-primary.btn-block{ng:{click:'saveTrip(itinerary)', hide:'tripSelected'}}
                     {{'select' | translate}}
