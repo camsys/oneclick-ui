@@ -158,6 +158,7 @@ angular.module('oneClickApp')
                   // Check for first itinerary to set Trip values
                   if(i == 0){ 
                     trip_with_itineraries.mode = trip[i].mode;
+                    trip_with_itineraries.service_name = trip[i].service_name;
                     trip_with_itineraries.startDesc = that.getDateDescription(trip[i].wait_start || trip[i].departure);
                     trip_with_itineraries.startDesc += " at " + moment(trip[i].wait_start || trip[i].departure).format('h:mm a');
 
