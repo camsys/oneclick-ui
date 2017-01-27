@@ -3,12 +3,12 @@
     .btn{ng: {click: 'cancelTrip($event, tab, $index)'}}
       %span.fa-stack
         %i.fa.fa-times-circle.fa-stack-2x{style: 'color: red;'}
-      Cancel
+      {{'cancel' | translate}}
   .col-xs-4
     .btn{ng: {click: 'toggleEmail($event)'}}
       %span.fa-stack
         %i.fa.fa-envelope-o.fa-stack-2x
-      Email
+      {{'email' | translate}}
 .email-form{ng: {show: 'showEmail'}}
   .row
     .col-xs-12.col-sm-8.col-sm-offset-2.text-left
@@ -23,7 +23,7 @@
       .btn.btn-success.btn-block{style: 'padding-left: 0px; padding-right: 0px;min-width: 20px; border-top-left-radius:0px; border-bottom-left-radius:0px;', ng: {click: 'invalidEmail = sendEmail(itinerary)'}}
         %i.fa.fa-envelope-o.fa-lg{style:'color: white;'}
           %span
-            Send
+            {{'send' | translate}}
   .row{ng: {show: 'invalidEmail == true'}}
     .col-xs-12.col-sm-8.col-sm-offset-2.text-left{style: 'color: red'}
       Please enter only valid email addresses

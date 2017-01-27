@@ -3,21 +3,21 @@
     %form.col-md-6.col-md-offset-3.col-xs-12{name:"rides_forms.service_login_form", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'serviceLogin(itinerary)'}}
       .form-group
         %label.sr-only{for:"service-username"}
-          Username
-        %input#service-username.form-control{type:"text", placeholder:"Username", ng:{model:"service_username.text"}, name:'service_username', required:''}
+          {{'username' | translate}}
+        %input#service-username.form-control{type:"text", placeholder:"{{'username' | translate}}", ng:{model:"service_username.text"}, name:'service_username', required:''}
         .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_uesrname.$error.required"}
           .error
-            Required
+            {{'required' | translate}}
       .form-group
         %label.sr-only{for:"service-password"}
-          Password
-        %input#service-password.form-control{type:"password", placeholder:"Password", ng:{model:"service_password.text"}, name:'service_password', required:''}
+          {{'password' | translate}}
+        %input#service-password.form-control{type:"password", placeholder:"{{'password' | translate}}", ng:{model:"service_password.text"}, name:'service_password', required:''}
         .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_password.$error.required"}
           .error
-            Required
+            {{'required' | translate}}
       .form-group
         %button.btn.btn-success.btn-block{type:'submit'}
-          Login
+          {{'login' | translate}}
   .prebooking_questions{ng:{show:'showPrebookingQuestions'}}
     %form{name:'rides_forms.prebooking_questions', role:'form', ng:{submit:'answerPrebookQuestions(itinerary)'}}
       .row.form-group{ng:{repeat:'question in itinerary.prebooking_questions'}}
@@ -38,7 +38,7 @@
       .row
         .col-md-6.col-md-offset-3.col-xs-12
           %button.btn.btn-block.btn-primary{type:'submit'}
-            Continue
+            {{'continue' | translate}}
   .action-buttons
     .row.bookable{ng: {hide: 'showServiceLoginForm || showPrebookingQuestions'}, style:'margin-bottom:30px;'}
       .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1

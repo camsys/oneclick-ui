@@ -30,12 +30,12 @@
                 .show-steps{ng:{show:'showSteps[$index] === true'}}
                   .steps{ng:{repeat:'step in leg.steps track by step.lon'}}
                     .first-step{ng:{show:'$first'}}
-                      Depart {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
+                      {{'depart' | translate}} {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
                     .step{ng:{hide:'$first'}}
                       Turn {{step.relativeDirection}} ({{step.absoluteDirection}}) on {{step.streetName}}, go {{step.distance | distance}}
               .bus-info{ng: {show: 'leg.mode == "BUS"'}}
                 %h5.text-muted{ng: {show: 'leg.warning'}}  {{leg.warning}}
-                %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  Wait for {{leg.transferTimeInMins}} minutes
+                %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  {{'wait' | translate}} {{leg.transferTimeInMins}} {{'minutes' | translate}}
                 .get-on
                   Get on {{leg.serviceName}} 
                 %span{ng: {show: '!$first'}}
@@ -46,12 +46,12 @@
 
               .tram-info{ng: {show: 'leg.mode == "TRAM" || leg.mode == "RAIL"'}}
                 %h5.text-muted{ng: {show: 'leg.warning'}}  {{leg.warning}}
-                %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  Wait for {{leg.transferTimeInMins}} minutes
+                %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  {{'wait' | translate} {{leg.transferTimeInMins}} {{'minutes' | translate}
                 %h5.text-muted Get on {{leg.serviceName}}
                 %h4{ng: {show: '!$first'}}
-                  Train @ {{leg.from.name}}
+                  {{'mode_rail_name'| translate}} @ {{leg.from.name}}
                 %h4{ng: {show: '$first'}}
-                  Train @ {{itinerary.start_location.formatted_address | noCountry}}
+                  {{'mode_rail_name'| translate}} @ {{itinerary.start_location.formatted_address | noCountry}}
                 %h4{ng: {show: 'leg.specialService'}}  This is a special service train.
                 %h5.text-muted {{leg.distance | distance}} ({{leg.duration | seconds}})
 

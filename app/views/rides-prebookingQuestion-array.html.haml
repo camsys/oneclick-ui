@@ -1,4 +1,4 @@
 %select.form-control{id:'question-id-{{$index}}', name:'{{question.code}}', required:'', ng:{model:'itinerary.answers[question.code]', options:'o[1] as o[0] for o in question.choices'}}
   %option{style:'display:none', value:'', disabled:''}  
 .text-right.error{"ng-show"=>"rides_forms.prebooking_questions[question.code].error_required"}
-  Required
+  {{'required' | translate}}

@@ -41,7 +41,7 @@
                     .show-steps{ng:{show:'showSteps[$index] === true'}}
                       .steps{ng:{repeat:'step in leg.steps track by step.lon'}}
                         .first-step{ng:{show:'$first'}}
-                          Depart {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
+                          {{'depart' | translate}} {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
                         .step{ng:{hide:'$first'}}
                           Turn {{step.relativeDirection}} ({{step.absoluteDirection}}) on {{step.streetName}}
                           %h4.small
@@ -49,7 +49,7 @@
                 .col-xs-9{ng: {show: 'leg.mode != "WALK"'}}
                   .bus-info
                     %h5.text-muted{ng: {show: 'leg.warning'}}  {{leg.warning}}
-                    %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  Wait for {{leg.transferTimeInMins}} minutes
+                    %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  {{'wait' | translate}} {{leg.transferTimeInMins}} {{'minutes' | translate}
                     %h5.text-muted.get-on
                       Get on {{leg.serviceName}} 
                     %span{ng: {show: '!$first'}}

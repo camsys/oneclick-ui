@@ -5,11 +5,11 @@
   .col-sm-7.col-xs-12
     .row{'ng-show'=>'itinerary.comment'}
       .col-xs-12
-        %h3 About
+        %h3 {{'about' | translate}}
         %h4 {{itinerary.comment}}
     .row{'ng-show'=>'itinerary.phone'}
       .col-xs-12
-        %h3 Next Steps
+        %h3 {{'next_steps' | translate}}
         %h4
           Call 
           %a{'ng-href'=>'itinerary.phone | telephoneLink'}
@@ -17,7 +17,7 @@
           to register to use this service
     .row{'ng-show'=>'itinerary.url'}
       .col-xs-12
-        %h3 More Information
+        %h3 {{'more_information' | translate}}
         %h4 
           Visit 
           %a{ng:{href:'itinerary.url'}} {{itinerary.url}}

@@ -4,13 +4,13 @@
       .col-xs-12
         %h4
           %span.small{style:'display: inline-block; width: 35px;text-align: right;'}
-            From
+            {{'from' | translate}}
           {{from}}
     .row
       .col-xs-12
         %h4
           %span.small{style:'display: inline-block; width: 35px;text-align: right;'}
-            To
+            {{'to' | translate}}
           {{to}}
     .row
       .col-xs-4.text-right
@@ -112,19 +112,19 @@
         .col-xs-12
           %h3 Trip Purpose?
           %select#trip-purpose.select.form-control{style: 'width:100%', ng:{model:'tripPurpose', options:'purpose.name for purpose in purposesQuestions track by purpose.code', change:'purposeChange(purpose, $i)'}}
-            %option{value:''} All
+            %option{value:''} {{'all' | translate}}
       .row
         .col-xs-12
           %h3
-            Order By
+            {{'sort_by' | translate}}
           %select#order-by.select.form-control{style: 'width:100%', ng:{model:'$parent.orderItinerariesBy'}}
-            %option{value:'cost'} Price
-            %option{value:'duration'} Travel Time
-            %option{value:'walk_distance'} Walking Distance
+            %option{value:'cost'} {{'fare_sorter' | translate}}
+            %option{value:'duration'} {{'travel_time_sorter' | translate}}
+            %option{value:'walk_distance'} {{'walk_distance_sorter' | translate}}
       .row
         .col-xs-12
           %h3
-            Transit Modes
+            {{'preferred_modes' | translate}}
           .mode-options
             .mode{ng:{repeat:'mode in itineraryModes'}}
               %label{style:'width:100%;'}

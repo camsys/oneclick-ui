@@ -2,18 +2,18 @@
   %form#login-nav.form{name:"loginform", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'authenticate()'}}
     .form-group
       %label.sr-only{for:"emailaddress"}
-        Email Address
+        {{'email' | translate}}
       %input#emailaddress.form-control{type:"text", placeholder:"Email Address", "ng-model"=>"emailAddress", required:''}
     .form-group
       %label.sr-only{for:"password"}
-        Password
+        {{'password' | translate}}
       %input.form-control{type:"password", placeholder:"Password", id:"password", "ng-model"=>"password", required:''}
     .form-group
       %button.btn.btn-primary.btn-block{type:"submit"}
-        Sign in
+        {{'sign_in' | translate}}
     .alert-danger{ng:{show:'true === loginError'}}
-      Your login was not recognized. Please try again.
-    .checkbox
+      {{'devise.failure.not_found_in_database' | translate}}
+    .checkbox{style:'display:none'}
       %label
         %input{type:"checkbox"}
         keep me logged-in

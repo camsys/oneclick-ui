@@ -14,9 +14,9 @@
                       {{itinerary.returned_mode_code | modeName: itinerary.service_name}}
                 .col-sm-4.col-xs-12{style:'position:relative;'}
                   .btn.btn-primary.btn-block{ng:{click:'saveTrip(itinerary)', hide:'tripSelected'}}
-                    Select
+                    {{'select' | translate}}
                   .btn.btn-primary.btn-block{ng:{click:'cancelTrip(itinerary)', show:'tripSelected'}}
-                    Cancel
+                    {{'cancel' | translate}}
             .no-outline.top-border-hr
               .row
                 .col-sm-3.col-xs-6.text-center
@@ -34,9 +34,9 @@
                 .col-sm-4.col-xs-12.text-center
                   .btn.btn-link{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails', hide:'tripSelected' } }
                     %span{ng:{hide:'itinerary.showMoreDetails'}}
-                      More trip details
+                      {{'show_more' | translate }} {{'trip_details' | translate}}
                     %span{ng:{show:'itinerary.showMoreDetails'}}
-                      Close trip details
+                      {{'show_less' | translate }} {{'trip_details' | translate}}
             .top-border-hr{ng: {show: 'itinerary.showMoreDetails'}}
               .included-template{ng:{ 'include'=>'itineraryTemplate( itinerary.returned_mode_code )' } }
               .email-or-cancel
@@ -54,7 +54,7 @@
                       .btn.btn-success.btn-block{style: 'padding-left: 0px; padding-right: 0px;min-width: 20px; border-top-left-radius:0px; border-bottom-left-radius:0px;', ng: {click: 'sendEmail(itinerary)'}}
                         %i.fa.fa-envelope-o.fa-lg{style:'color: white;'}
                           %span
-                            Send
+                            {{'send' | translate}}
                   .row{ng: {show: 'invalidEmail == true'}}
                     .col-xs-12.col-sm-8.col-sm-offset-2.text-left{style: 'color: red'}
                       Please enter only valid email addresses

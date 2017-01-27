@@ -2,44 +2,44 @@
   %form#login-nav.form{name:"signupform", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'signUp()'}}
     .form-group
       %label.sr-only{for:"signup-firstname"}
-        First Name
-      %input#signup-firstname.form-control{type:"text", placeholder:"First Name", "ng-model"=>"firstName.text", required:'', name:'firstname'}
+        {{'first_name' | translate}}
+      %input#signup-firstname.form-control{type:"text", placeholder:"{{'first_name' | translate}}", "ng-model"=>"firstName.text", required:'', name:'firstname'}
       .alert{role:'alert'}
         .error{"ng-show"=>"signupform.firstname.$error.required"}
-          Required
+          {{'simple_form.required.text' | translate}}
     .form-group
       %label.sr-only{for:"signup-lastname"}
-        Last Name
-      %input#signup-lastname.form-control{type:"text", placeholder:"Last Name", "ng-model"=>"lastName.text", required:'', name:'lastname'}
+        {{'last_name' | translate}}
+      %input#signup-lastname.form-control{type:"text", placeholder:"{{'last_name' | translate}}", "ng-model"=>"lastName.text", required:'', name:'lastname'}
       .alert{role:'alert'}
         .error{"ng-show"=>"signupform.lastname.$error.required"}
-          Required
+          {{'simple_form.required.text' | translate}}
     .form-group
       %label.sr-only{for:"signup-emailaddress"}
-        Email Address
-      %input#signup-emailaddress.form-control{type:"email", required:'', name:'email', placeholder:"Email Address", ng:{model:"email.text", pattern:"/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"}}
+        {{'email' | translate}}
+      %input#signup-emailaddress.form-control{type:"email", required:'', name:'email', placeholder:"{{'email' | translate}}", ng:{model:"email.text", pattern:"/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"}}
       .alert{role:'alert'}
         .error{"ng-show"=>"signupform.email.$error.required"}
-          Required
+          {{'simple_form.required.text' | translate}}
         .error{"ng-show"=>"signupform.email.$error.email"}
           Not valid email
     .form-group
       %label.sr-only{for:"signup-password"}
-        Password
-      %input.form-control{type:"password", placeholder:"Password", id:"signup-password", ng:{model:'password.text', equals:'{{passwordConfirm.text}}'}, required:'', name:'password'}
+        {{'password' | translate}}
+      %input.form-control{type:"password", placeholder:"{{'password' | translate}}", id:"signup-password", ng:{model:'password.text', equals:'{{passwordConfirm.text}}'}, required:'', name:'password'}
       .alert{role:'alert'}
         .error{"ng-show"=>"signupform.password.$error.required"}
-          Required
+          {{'simple_form.required.text' | translate}}
     .form-group
       %label.sr-only{for:"signup-password-confirm"}
-        Password
-      %input.form-control{type:"password", placeholder:"Confirm Password", id:"signup-password-confirm", ng:{model:'passwordConfirm.text', equals:'{{password.text}}'}, required:'', name:'passwordconfirm'}
+        {{'password_confirmation' | translate}}
+      %input.form-control{type:"password", placeholder:"{{'password_confirmation' | translate}}", id:"signup-password-confirm", ng:{model:'passwordConfirm.text', equals:'{{password.text}}'}, required:'', name:'passwordconfirm'}
       .alert{role:'alert'}
         .error{"ng-show"=>"signupform.passwordconfirm.$error.required"}
-          Required
+          {{'simple_form.required.text' | translate}}
         .error{"ng-show"=>"signupform.passwordconfirm.$invalid || signupform.password.$invalid"}
           Passwords must match
     .form-group
       %button.btn.btn-primary.btn-block{type:"submit"}
-        Sign up
+        {{'sign_up' | translate}}
 

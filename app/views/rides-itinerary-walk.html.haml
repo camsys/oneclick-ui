@@ -17,7 +17,7 @@
                   Start {{itinerary.start_location.formatted_address | noCountry}}
                 .steps{ng:{repeat:'step in leg.steps track by step.lon'}}
                   .first-step{ng:{show:'$first'}}
-                    Depart {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
+                    {{'depart' | translate}} {{step.streetName}}, go {{step.absoluteDirection}} for {{step.distance | distance}}
                   .step{ng:{hide:'$first'}}
                     %span{style:'text-transform: capitalize;'} {{step.relativeDirection }}
                     on {{step.streetName}} ({{step.absoluteDirection}}), go {{step.distance | distance}}
