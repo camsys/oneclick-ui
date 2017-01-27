@@ -78,14 +78,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     var selectedItineraries = { select_itineraries: [ { itinerary_id: tripId } ] };
     var promise = planService.selectItineraries($http, selectedItineraries);
     promise.then(function(response){
-      if(!response.data){
-        console.error('no data');
-        return;
-      }
       $scope.tripSelected = tripId;
       itinerary.showMoreDetails=true;
       ipCookie('rideCount', ipCookie('rideCount') - 1);
-    });
+    }).catch(console.error);
   }
   $scope.serviceLogin = function(itinerary){
     var profile = {};
