@@ -2,9 +2,9 @@
 
 var app = angular.module('oneClickApp');
 
-app.controller('RidesController', ['$scope', '$http','$routeParams', '$location', 'planService', 'util', 'flash', 'usSpinnerService', '$q', 'LocationSearch', 'localStorageService', 'ipCookie', '$timeout', '$window', '$filter',
+app.controller('RidesController', ['$scope', '$http','$routeParams', '$location', 'planService', 'util', 'flash', 'usSpinnerService', '$q', 'LocationSearch', 'localStorageService', 'ipCookie', '$timeout', '$window', '$filter', '$translate',
 
-function($scope, $http, $routeParams, $location, planService, util, flash, usSpinnerService, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter) {
+function($scope, $http, $routeParams, $location, planService, util, flash, usSpinnerService, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter, $translate) {
 
   $scope.tripSelected =  false;
   $scope.invalidEmail = false;
@@ -133,11 +133,27 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     }
     planService.bookItinerary($http, [request])
       .then(function(response){
-        bootbox.alert('Your trip is booked');
+        var booking_results = response.data.booking_results;
+        var error = false;
+        var confirmation_ids = [];
+        angular.forEach(booking_results, function(itinerary){
+          console.log(itinerary);
+          error = !itinerary.booked || error;
+          confirmation_ids.push(itinerary.confirmation_id);
+        })
+        if(error){
+          bootbox.alert( $translate('booking_failure_message') );
+          return;
+        }
+        itinerary.confirmation_ids = confirmation_ids;
+        var confirmationMessage = $translate('trip_booked_2');
+        confirmationMessage += ' ' + $translate('confirmation');
+        confirmationMessage += ': #' + confirmation_ids.join(' #');
+        bootbox.alert(confirmationMessage);
         $scope.itineraryBooked =  true;
       })
       .catch(function(e){
-        bootbox.alert('An error occurred');
+        bootbox.alert( $translate('booking_failure_message') );
         console.error('error booking', e);
       });
   }
@@ -154,17 +170,17 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
 
   $scope.cancelTrip = function(itinerary) {
     var tripId = itinerary.id;
-    var message = "Are you sure you want to drop this ride?";
-    var successMessage = 'Your trip has been dropped.'
+    var successMessage = $translate('trip_was_successfully_removed');
+    var failureMessage = $translate('cancel_booking_failure', itinerary);
 
     bootbox.confirm({
-      message: message,
+      message: $translate('confirm_remove_trip'),
       buttons: {
         'cancel': {
-          label: 'Keep Ride'
+          label: $translate('cancel')
         },
         'confirm': {
-          label: 'Cancel Ride'
+          label: $translate('remove_trip')
         }
       },
       callback: function(result) {
@@ -180,7 +196,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
             $scope.cancelBookItinerary();
             ipCookie('rideCount', ipCookie('rideCount') - 1);
           }).catch(function(){
-            bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
+            bootbox.alert(failureMessage);
           })
         }
       }
@@ -211,7 +227,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
               bootbox.alert("An error occurred on the server, your email was not sent.");
               return;
             }
-            bootbox.alert('Your email was sent');
+            bootbox.alert( $translate('an_email_was_sent_to_email_addresses_join', {addresses: emailString}) );
           });
         return false;
       }else{

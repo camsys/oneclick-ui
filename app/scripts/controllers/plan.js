@@ -3,9 +3,9 @@
 var app = angular.module('oneClickApp');
 var debugHelper;
 
-app.controller('PlanController', ['$scope', '$http','$routeParams', '$location', 'planService', 'util', 'flash', 'usSpinnerService', '$q', 'LocationSearch', 'localStorageService', 'ipCookie', '$timeout', '$window', '$filter',
+app.controller('PlanController', ['$scope', '$http','$routeParams', '$location', 'planService', 'util', 'flash', 'usSpinnerService', '$q', 'LocationSearch', 'localStorageService', 'ipCookie', '$timeout', '$window', '$filter', '$translate',
 
-function($scope, $http, $routeParams, $location, planService, util, flash, usSpinnerService, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter) {
+function($scope, $http, $routeParams, $location, planService, util, flash, usSpinnerService, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter, $translate) {
 
   var currentLocationLabel = "Current Location";
   var urlPrefix = '//' + APIHOST + '/';
@@ -623,7 +623,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
         }).catch(function(e){
           //if status is -1 it's OK -- the XHR was cancelled. otherwise report error
           if(e.status > 0){
-            bootbox.alert("An error occured on the server, please retry your search or try again later.");
+            bootbox.alert( $translate('service_error') );
           }
         });
   }
