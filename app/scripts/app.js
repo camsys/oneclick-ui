@@ -67,54 +67,6 @@ angular.module('oneClickApp', [
         templateUrl: 'views/plan.html',
         controller: 'PlanController'
       })
-      .when('/plan/:step/:departid/:returnid', {
-        templateUrl: 'views/transit-detail.html',
-        controller: 'PlanController'
-      })
-      .when('/plan/:step', {
-        templateUrl: 'views/plan.html',
-        controller: 'PlanController'
-      })
-      .when('/transit/:departid', {
-        templateUrl: 'views/transit.html',
-        controller: 'TransitController'
-      })
-      .when('/transit-old/:segmentid/:tripid', {
-        templateUrl: 'views/transit.html',
-        controller: 'TransitController'
-      })
-      .when('/transitoptions/:segmentid', {
-        templateUrl: 'views/transitoptions.html',
-        controller: 'TransitController'
-      })
-      .when('/transitconfirm', {
-        templateUrl: 'views/transitconfirm.html',
-        controller: 'TransitController'
-      })
-      .when('/transit/details/:tripid', {
-        templateUrl: 'views/transitconfirm.html',
-        controller: 'TransitController'
-      })
-      .when('/walk/confirm', {
-        templateUrl: 'views/walk.html',
-        controller: 'WalkController'
-      })
-      .when('/walk/details/:tripid', {
-        templateUrl: 'views/walk.html',
-        controller: 'WalkController'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'PlanController'
-      })
-      .when('/about/sharedride', {
-        templateUrl: 'views/about.html',
-        controller: 'PlanController'
-      })
-      .when('/about/projecthistory', {
-        templateUrl: 'views/about.html',
-        controller: 'PlanController'
-      })
       .when('/profile', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileController'
