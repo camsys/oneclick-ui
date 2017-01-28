@@ -95,10 +95,6 @@ angular.module('oneClickApp', [
         templateUrl: 'views/transitconfirm.html',
         controller: 'TransitController'
       })
-      .when('/paratransit/:tripid', {
-        templateUrl: 'views/paratransit.html',
-        controller: 'ParatransitController'
-      })
       .when('/walk/confirm', {
         templateUrl: 'views/walk.html',
         controller: 'WalkController'
