@@ -30,7 +30,6 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
     $location.path("/");
   };
   $scope.$on('LoginController:login', function(event, data){
-    console.log('Navbar: event, data', event, data);
     initialize();
   })
   var changeLanguage = function(key){

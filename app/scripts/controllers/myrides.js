@@ -46,7 +46,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
     return templatePath;
   }
   $scope.cancelTrip = function(trip) {
-    console.log($scope, planService);
     var tripIds = [];
     var message = "Are you sure you want to drop this trip?";
     var successMessage = 'Your trip has been dropped.'
