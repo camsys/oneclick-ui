@@ -849,6 +849,13 @@ angular.module('oneClickApp')
         outboundTrip.segment_index = 0;
         outboundTrip.start_location = this.fromDetails;
         outboundTrip.end_location = this.toDetails;
+        //optimize request -- remove unnecessary data
+        if(outboundTrip.start_location.reviews){
+          delete outboundTrip.start_location.reviews;
+        }
+        if(outboundTrip.end_location.reviews){
+          delete outboundTrip.end_location.reviews;
+        }
         this.addStreetAddressToLocation(outboundTrip.start_location);
         this.addStreetAddressToLocation(outboundTrip.end_location);
         this.fixLatLon(outboundTrip.start_location);
