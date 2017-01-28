@@ -3,9 +3,9 @@
 var app = angular.module('oneClickApp');
 var debugHelper;
 
-app.controller('PlanController', ['$scope', '$http','$routeParams', '$location', 'planService', 'util', 'flash', 'usSpinnerService', '$q', 'LocationSearch', 'localStorageService', 'ipCookie', '$timeout', '$window', '$filter', '$translate',
+app.controller('PlanController', ['$scope', '$http','$routeParams', '$location', 'planService', 'util', 'flash', '$q', 'LocationSearch', 'localStorageService', 'ipCookie', '$timeout', '$window', '$filter', '$translate',
 
-function($scope, $http, $routeParams, $location, planService, util, flash, usSpinnerService, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter, $translate) {
+function($scope, $http, $routeParams, $location, planService, util, flash, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter, $translate) {
 
   var currentLocationLabel = "Current Location";
   var urlPrefix = '//' + APIHOST + '/';
@@ -596,7 +596,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
 
   $scope.getCurrentLocation = function(toFrom) {
     if (navigator.geolocation) {
-      $scope.startSpin();
+      //$scope.startSpin();
       //navigator.geolocation.getCurrentPosition($scope.setOriginLocation(showPosition, 'from'), $scope.showError);
       navigator.geolocation.getCurrentPosition(function (position) {
         var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);

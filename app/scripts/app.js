@@ -17,7 +17,6 @@ angular.module('oneClickApp', [
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'angularSpinner',
     'ui.map',
     'ui.utils',
     'autocomplete',
