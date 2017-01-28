@@ -14,10 +14,15 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.tripDivs = null;
   $scope.emailAddresses = {};
 
-  //getPastRides and getFutureRides modify $scope.trips adding .future and .past
-  var futureRides = planService.getFutureRides($http, $scope, ipCookie);
-  var pastRides = planService.getPastRides($http, $scope, ipCookie);
-
+  var updateRides = function(){
+    //getPastRides and getFutureRides modify $scope.trips adding .future and .past
+    var futureRides = planService.getFutureRides($http, $scope, ipCookie);
+    var pastRides = planService.getPastRides($http, $scope, ipCookie);
+  }
+  updateRides();
+  $scope.$on('LoginController:login', function(event, data){
+    updateRides();
+  })
   $scope.itinerary = planService.selectedTrip;
   $scope.hideButtonBar = true;
   $window.visited = true;
@@ -25,13 +30,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
   $scope.showTab = planService.myRidesShowTab || 'future';
 
 
-  futureRides.then(function() {
-    var navbar = $routeParams.navbar;
-    if(navbar){
-      $scope.tabFuture = true;
-      delete $scope.tabPast;
-    }
-  });
   $scope.itineraryTemplate = function( mode ){
     //return a different template depending on mode 
     var templates={
