@@ -22,7 +22,6 @@ angular.module('oneClickApp', [
     'ui.utils',
     'autocomplete',
     'ui.bootstrap',
-    'dcbClearInput',
     'LocalStorageModule',
     'ng.deviceDetector',
     'ngBootbox',
