@@ -67,10 +67,6 @@ angular.module('oneClickApp', [
         templateUrl: 'views/plan.html',
         controller: 'PlanController'
       })
-      .when('/profile', {
-        templateUrl: 'views/profile.html',
-        controller: 'ProfileController'
-      })
       .otherwise({
         redirectTo: '/'
       });
