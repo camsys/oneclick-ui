@@ -55,18 +55,6 @@ angular.module('oneClickApp', [
         templateUrl: 'views/myrides.html',
         controller: 'MyridesController'
       })
-      .when('/loginError', {
-        templateUrl: 'views/login.html',
-        controller: 'MainController'
-      })
-      .when('/authenticateSharedRideId', {
-        templateUrl: 'views/login.html',
-        controller: 'LoginController'
-      })
-      .when('/plan', {
-        templateUrl: 'views/plan.html',
-        controller: 'PlanController'
-      })
       .otherwise({
         redirectTo: '/'
       });
