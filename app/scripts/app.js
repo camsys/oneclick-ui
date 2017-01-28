@@ -103,14 +103,6 @@ angular.module('oneClickApp', [
         templateUrl: 'views/walk.html',
         controller: 'WalkController'
       })
-      .when('/taxi', {
-        templateUrl: 'views/taxi-detail.html',
-        controller: 'TaxiController'
-      })
-      .when('/uber', {
-        templateUrl: 'views/uber-detail.html',
-        controller: 'UberController'
-      })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'PlanController'
