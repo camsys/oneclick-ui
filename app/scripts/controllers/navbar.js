@@ -69,7 +69,6 @@ angular.module('oneClickApp')
         that.$scope.authentication_token = ipCookie('authentication_token');
         that.$scope.first_name = ipCookie('first_name');
         that.$scope.last_name = ipCookie('last_name');
-        //that.$scope.sharedRideId = ipCookie('sharedRideId');
         if(that.$scope.email){
           planService.email = $scope.email;
           planService.authentication_token = $scope.authentication_token;
@@ -89,28 +88,7 @@ angular.module('oneClickApp')
           });
         }else{
           planService.getProfile($http);
-          /*
-          //get the dummy token, then get profile
-          planService.getGuestToken($http)
-          .then(function(response){
-            //now get the proifile with the guest token
-            console.log('guestTokenResult', result);
-            planService.getProfile($http);
-          });
-          */
-          /*
-          that.$scope.email = planService.email;
-          that.$scope.authentication_token = planService.authentication_token;
-          that.$scope.first_name = planService.first_name;
-          that.$scope.last_name = planService.last_name;
-          that.$scope.last_name = planService.last_name;
-          that.$scope.sharedRideId = planService.sharedRideId;
-          that.$scope.walkingDistance = planService.walkingDistance;
-          that.$scope.walkingSpeed = planService.walkingSpeed;
-          */
         }
-        //$scope.rideCount = ipCookie('rideCount');
-        //return true;
       };
       initialize();
 

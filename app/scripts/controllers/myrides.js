@@ -32,14 +32,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
       delete $scope.tabPast;
     }
   });
-  /*
-  $scope.selectTrip = function($event, tab, index) {
-    $event.stopPropagation();
-    var trip = $scope.trips[tab][index];
-    planService.selectedTrip = trip;
-    $scope.itinerary =  trip;
-    $location.path('/my_rides/itinerary');
-  };*/
   $scope.itineraryTemplate = function( mode ){
     //return a different template depending on mode 
     var templates={
