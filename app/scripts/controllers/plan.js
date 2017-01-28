@@ -284,7 +284,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
         }).catch(function(e){
           //if status is -1 it's OK -- the XHR was cancelled. otherwise report error
           if(e.status > 0){
-            bootbox.alert( $translate('service_error') );
+            bootbox.alert( $translate.instant('service_error') );
           }
         });
   }

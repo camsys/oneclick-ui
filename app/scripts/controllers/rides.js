@@ -142,18 +142,18 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
           confirmation_ids.push(itinerary.confirmation_id);
         })
         if(error){
-          bootbox.alert( $translate('booking_failure_message') );
+          bootbox.alert( $translate.instant('booking_failure_message') );
           return;
         }
         itinerary.confirmation_ids = confirmation_ids;
-        var confirmationMessage = $translate('trip_booked_2');
-        confirmationMessage += ' ' + $translate('confirmation');
+        var confirmationMessage = $translate.instant('trip_booked_2');
+        confirmationMessage += ' ' + $translate.instant('confirmation');
         confirmationMessage += ': #' + confirmation_ids.join(' #');
         bootbox.alert(confirmationMessage);
         $scope.itineraryBooked =  true;
       })
       .catch(function(e){
-        bootbox.alert( $translate('booking_failure_message') );
+        bootbox.alert( $translate.instant('booking_failure_message') );
         console.error('error booking', e);
       });
   }
@@ -170,17 +170,17 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
 
   $scope.cancelTrip = function(itinerary) {
     var tripId = itinerary.id;
-    var successMessage = $translate('trip_was_successfully_removed');
-    var failureMessage = $translate('cancel_booking_failure', itinerary);
+    var successMessage = $translate.instant('trip_was_successfully_removed');
+    var failureMessage = $translate.instant('cancel_booking_failure', itinerary);
 
     bootbox.confirm({
-      message: $translate('confirm_remove_trip'),
+      message: $translate.instant('confirm_remove_trip'),
       buttons: {
         'cancel': {
-          label: $translate('cancel')
+          label: $translate.instant('cancel')
         },
         'confirm': {
-          label: $translate('remove_trip')
+          label: $translate.instant('remove_trip')
         }
       },
       callback: function(result) {
@@ -227,7 +227,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, usSpi
               bootbox.alert("An error occurred on the server, your email was not sent.");
               return;
             }
-            bootbox.alert( $translate('an_email_was_sent_to_email_addresses_join', {addresses: emailString}) );
+            bootbox.alert( $translate.instant('an_email_was_sent_to_email_addresses_join', {addresses: emailString}) );
           });
         return false;
       }else{
