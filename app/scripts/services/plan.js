@@ -731,31 +731,82 @@ angular.module('oneClickApp')
       }
       this.returnTimeOptions = function(itinerary)
       {
-        var startTime, labelTime, i, timeOptions, _timeLabel;
+        var startTime, labelTime, timeOptions, _timeLabel;
         startTime = moment(new Date(itinerary.start_time || ''));
         labelTime = startTime.clone();
         timeOptions = [];
+        //function to generate labels
         _timeLabel = function(labelTime){
           return {
             time: labelTime.toISOString(),
             label: moment.duration({seconds: startTime.diff(labelTime, 'seconds') }).humanize()
           }
         }
-        for(i=0; i<4; i++){
+        //find the schedule for the start day
+        var scheduleDay = itinerary.schedule.filter(function(e){  return e.day == startTime.format('dddd'); });
+        //something wrong if scheduleDay.length !== 1
+        if(scheduleDay.length !== 1){
+          console.error('schedule error!');
+          return;
         }
-        //add 15/30 minutes
-        labelTime.add(15, 'm');
-        timeOptions.push( _timeLabel(labelTime) );
-        labelTime.add(15, 'm');
-        timeOptions.push( _timeLabel(labelTime) );
-        //add 1 hour
-        labelTime.add(15, 'm');
-        labelTime.add(15, 'm');
-        timeOptions.push( _timeLabel(labelTime) );
-        //add hours
-        for(i=0; i<10; i++){
-          labelTime.add(1, 'h');
-          timeOptions.push( _timeLabel(labelTime) );
+        //build an array of start/end moments
+        var schedule = [];
+        scheduleDay[0].start.forEach(function(start, i){
+          //create a start/end entry for each
+          var start = moment(start, ["h:mm A"]);
+          var end = moment(scheduleDay[0].end[i], ["h:mm A"]);
+          //skip pushing time if the time is before ride time
+          schedule.push( {
+            start: labelTime.hour(start.hour()).minute(start.minute()).clone(),
+            end: labelTime.hour(end.hour()).minute(end.minute()).clone() 
+          });
+        });
+
+        //fill in the gaps between start/ends, starting from startTime
+        var timeOptions = [];
+        var count = 0;
+        var time = {qty:15, increment:'m'};
+        var lastEnd;
+        //start increment in minutes, then hours
+        var minutes = true;
+        schedule.forEach(function(block, i){
+          var breakCount=0;
+          var labelTime = block.start.clone();
+          //increment once to start
+          if(i == 0){
+            labelTime.add(time.qty, time.increment);
+          }
+          //push the end seconds for comparison purposes
+          block.end.seconds(10);
+          while( labelTime.isBefore(block.end) ){
+            //include label only if it's after startTime
+            if(labelTime.isAfter(startTime)){
+              timeOptions.push( _timeLabel( labelTime ) );
+              count += 1;
+              //switch to hours after 30 minutes of minute increments
+              if(minutes && labelTime.diff(startTime, 'minutes') > 29 ){
+                //skip 45 minutes, add 1 hour (if OK), then continue in 1 hour increments
+                minutes = false;
+                labelTime.add(time.qty, time.increment);
+                labelTime.add(time.qty, time.increment);
+                if(labelTime.isBefore(block.end)){
+                  timeOptions.push( _timeLabel( labelTime ) );
+                }
+                time = {qty:1, increment:'h'};
+              }
+            }
+            breakCount+=1;
+            if(breakCount > 100){break;}
+
+            //add 15 minutes or 1 hr
+            labelTime.add(time.qty, time.increment);
+          }
+          lastEnd = block.end;
+        });
+        //if the last time is before the actual last time, fix that
+        lastEnd.seconds(0);
+        if(timeOptions.length && moment(timeOptions[ timeOptions.length-1 ].time).isBefore(lastEnd)){
+          timeOptions[ timeOptions.length-1 ].time = lastEnd.toISOString();
         }
         return timeOptions;
       }
