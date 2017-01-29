@@ -161,9 +161,12 @@ angular.module('oneClickApp')
                     trip_with_itineraries.service_name = trip[i].service_name;
                     trip_with_itineraries.startDesc = that.getDateDescription(trip[i].wait_start || trip[i].departure);
                     trip_with_itineraries.startDesc += " at " + moment(trip[i].wait_start || trip[i].departure).format('h:mm a');
-
+                    trip_with_itineraries.booking_confirmation_codes = [];
+                    angular.forEach(trip, function(t){
+                      //add the booking_confirmation if there is one
+                      t.booking_confirmation && trip_with_itineraries.booking_confirmation_codes.push(t.booking_confirmation);
+                    });
                     
-
                     var origin_addresses = trip[0].origin.address_components;
                     for(var n = 0; n < origin_addresses.length; n++){
                       var address_types = origin_addresses[n].types ;

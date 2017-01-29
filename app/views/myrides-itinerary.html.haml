@@ -18,7 +18,13 @@
         %h5.text-muted.text-right{ng: {show: '!trip.cancelled && trip.itineraries.length == 1'}} (one way)
 .animate-show.my-more-trip-details.no-outline{ng:{show: 'trip.showMoreDetails', click:'$event.stopPropagation();'}}
   .myrides-itinerary
-    .itinerary-details.top-border-hr{ng: {repeat:'itinerary in trip.itineraries' }}
+    .top-border-hr{ng:{show:'trip.booking_confirmation_codes.length > 0'}}
+      .row
+        .col-xs-12
+          %h4.text-capitalize
+            {{'confirmation' | translate}}:
+            %span{style:'text-decoration:underline; margin: 0px 13px;', ng:{repeat:'confirmation in trip.booking_confirmation_codes'}} &#35;{{confirmation}}
+    .itinerary-details.top-border-hr{ng: {show:'$last', repeat:'itinerary in trip.itineraries' }}
       .included-template{ng:{ include: 'itineraryTemplate(trip.mode)' } }
     .email-or-cancel
       .row
