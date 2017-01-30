@@ -46,12 +46,16 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
     return templatePath;
   }
   $scope.cancelTrip = function(trip) {
-    var tripIds = [];
+    var cancelTrips = [];
     var message = "Are you sure you want to drop this trip?";
     var successMessage = 'Your trip has been dropped.'
     trip.itineraries.forEach(function( itinerary ){
-      tripIds.push( itinerary.id );
+      cancelTrips.push( {itinerary_id: itinerary.id, booking_confirmation: itinerary.booking_confirmation} );
     });
+    var errorHandler = function(e){
+      bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
+      console.error(e)
+    }
 
     bootbox.confirm({
       message: message,
@@ -64,21 +68,40 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
         }
       },
       callback: function(result) {
+        var cancelRequest = {bookingcancellation_request:[]};
         if(result == true){
-          tripIds.forEach(function(tripId){
+          //build the cancel request
+          cancelTrips.forEach(function(cancel){
             //cancel one itinerary
-            var cancel = {bookingcancellation_request:[{itinerary_id: tripId}]};
-            var cancelPromise = planService.cancelTrip($http, cancel)
-            cancelPromise.then(function(response) {
-              bootbox.alert(successMessage);
-              trip.cancelled = true;
-              $scope.tripSelected = false;
-              ipCookie('rideCount', ipCookie('rideCount') - 1);
-            }).catch(function(e){
-              bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
-              console.error(e)
+            var req;
+            if(cancel.booking_confirmation > 0){
+              req = {booking_confirmation: cancel.booking_confirmation};
+            }else{
+              req = {itinerary_id: cancel.itinerary_id};
+            }
+            cancelRequest.bookingcancellation_request.push( req );
+          });
+
+          //send the request, process response
+          planService
+          .cancelTrip($http, cancelRequest)
+          .then(function(response) {
+            //look for errors:
+            var errors = false;
+            response.data.cancellation_results.forEach(function(e){
+              errors = !e.success || errors
             });
+            if(errors){
+              errorHandler(response);
+              return;
+            }
+            bootbox.alert(successMessage);
+            trip.cancelled = true;
+
+            $scope.tripSelected = false;
+            ipCookie('rideCount', ipCookie('rideCount') - 1);
           })
+          .catch(errorHandler);
         }
       }
     });
