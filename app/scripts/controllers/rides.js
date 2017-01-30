@@ -137,7 +137,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
         var error = false;
         var confirmation_ids = [];
         angular.forEach(booking_results, function(itinerary){
-          console.log(itinerary);
           error = !itinerary.booked || error;
           confirmation_ids.push(itinerary.confirmation_id);
         })
@@ -186,9 +185,19 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
       callback: function(result) {
         if(result == true){
           //cancel one itinerary
-          var cancel = {bookingcancellation_request:[{itinerary_id: tripId}]};
+          var cancel = planService.buildCancelTripRequest(itinerary);
           var cancelPromise = planService.cancelTrip($http, cancel)
           cancelPromise.then(function(response) {
+            //look for errors:
+            var errors = false;
+            response.data.cancellation_results.forEach(function(e){
+              errors = !e.success || errors
+            });
+            if(errors){
+              bootbox.alert(failureMessage);
+              return;
+            }
+
             bootbox.alert(successMessage);
             //reset the UI flags that were set during booking
             $scope.itineraryBooked = false;

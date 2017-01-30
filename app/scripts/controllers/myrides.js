@@ -46,17 +46,12 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
     return templatePath;
   }
   $scope.cancelTrip = function(trip) {
-    var cancelTrips = [];
     var message = "Are you sure you want to drop this trip?";
     var successMessage = 'Your trip has been dropped.'
-    trip.itineraries.forEach(function( itinerary ){
-      cancelTrips.push( {itinerary_id: itinerary.id, booking_confirmation: itinerary.booking_confirmation} );
-    });
     var errorHandler = function(e){
       bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
       console.error(e)
     }
-
     bootbox.confirm({
       message: message,
       buttons: {
@@ -68,20 +63,9 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
         }
       },
       callback: function(result) {
-        var cancelRequest = {bookingcancellation_request:[]};
+        var cancelRequest;
         if(result == true){
-          //build the cancel request
-          cancelTrips.forEach(function(cancel){
-            //cancel one itinerary
-            var req;
-            if(cancel.booking_confirmation > 0){
-              req = {booking_confirmation: cancel.booking_confirmation};
-            }else{
-              req = {itinerary_id: cancel.itinerary_id};
-            }
-            cancelRequest.bookingcancellation_request.push( req );
-          });
-
+          cancelRequest = planService.buildCancelTripRequest( trip.itineraries );
           //send the request, process response
           planService
           .cancelTrip($http, cancelRequest)

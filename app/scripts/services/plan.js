@@ -87,7 +87,41 @@ angular.module('oneClickApp')
       this.emailItineraries = function($http, emailRequest){
         return $http.post(urlPrefix + 'api/v1/trips/email', emailRequest, this.getHeaders())
       }
+      this.buildCancelTripRequest = function(cancelTrip){
+        //cancelTrip is an array of itineraries, or a single itinerary
+        var cancelRequest = {bookingcancellation_request: [] };
 
+        //process single itineraries
+        if( !(cancelTrip instanceof Array) ){
+          
+          //if confirmation_ids exist, cancel those rather than the itinerary.id
+          if(cancelTrip.confirmation_ids instanceof Array){
+            //build the cancelRequest, make sure booking_confirmation is a string
+            cancelRequest.bookingcancellation_request = cancelTrip.confirmation_ids
+              .map(function(booking_confirmation){
+                return {booking_confirmation: ''+booking_confirmation};;
+              });
+            //skip the loop below with an empty array
+            cancelTrip = [];
+          }else{
+            //put the single un-boked itinerary in an array for the forEach
+            cancelTrip = [cancelTrip];
+          }
+        }//end single itinerary processing
+        
+        //build the cancelRequest
+        cancelTrip.forEach(function(cancelItinerary){
+          var request;
+          //use the booking_confirmation if there's one, else the itinerary id
+          if(cancelItinerary.booking_confirmation > 0){
+            request = {booking_confirmation: ''+cancelItinerary.booking_confirmation};
+          }else{
+            request = {itinerary_id: ''+cancelItinerary.id};
+          }
+          cancelRequest.bookingcancellation_request.push( request );
+        });
+        return cancelRequest;
+      }
       this.cancelTrip = function($http, cancelRequest){
         return $http.post(urlPrefix + 'api/v1/itineraries/cancel', cancelRequest, this.getHeaders())
       }
