@@ -854,6 +854,25 @@ angular.module('oneClickApp')
         var planService = this;
         return $http.get(urlPrefix + 'api/v1/users/get_guest_token');
       }
+      this.buildProfileUpdateRequest = function(profile){
+        console.log(profile);
+        var accommodationsRequest = {}, 
+            characteristicsRequest = {};
+        //process the profile keys to work for the request
+        if(profile.accommodations.length > 0){
+          profile.accommodations.forEach(function(accommodation){
+            accommodationsRequest[accommodation.code] = accommodation.value;
+          })
+          profile.accommodations = accommodationsRequest;
+        }
+        if(profile.characteristics.length > 0){
+          profile.characteristics.forEach(function(characteristic){
+            characteristicsRequest[characteristic.code] = characteristic.value;
+          })
+          profile.characteristics = characteristicsRequest;
+        }
+        return profile;
+      }
       this.postProfileUpdate = function($http, profile) {
         var planService = this;
         return $http.post(urlPrefix + 'api/v1/users/update', profile, this.getHeaders())

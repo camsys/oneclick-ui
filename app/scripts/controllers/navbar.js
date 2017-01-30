@@ -44,6 +44,7 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
   $scope.changeLanguage = function(key){
     var postProfileUpdate = function(profile){
       profile.lang = key;
+      profile = planService.buildProfileUpdateRequest(profile);
       planService.postProfileUpdate($http, profile); //.then(function(response){console.log('posted',response);});
     }
     //if changing Language was successful and  user is logged in, save the language
