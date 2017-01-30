@@ -228,7 +228,9 @@ angular.module('oneClickApp')
                     }
 
                   }
-
+                  //normalize some values
+                  trip[i].start_location = trip[i].start_location || trip[i].origin;
+                  trip[i].end_location = trip[i].end_location || trip[i].destination;
                   trip_with_itineraries.itineraries.push(trip[i]);
                   i++;
                 }

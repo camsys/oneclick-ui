@@ -97,6 +97,21 @@ angular.module('oneClickApp')
     return m.format( f );
   };
 })
+.filter('directionIcon', function(){
+  var icons = {
+    'left' : 'fa-arrow-left',
+    'right' : 'fa-arrow-right',
+    'straight':'fa-arrow-up',
+    'continue':'fa-arrow-up',
+    'depart':'fa-bullseye',
+    'destination':'fa-bullseye',
+    'waypoint':'fa-bullseye'
+  };
+  return function(direction){
+    direction = direction.toLowerCase();
+    return icons[direction] || '';
+  }
+})
 .filter('modeIcon', function(){
   var icons = {
     'mode_ride_hailing' : 'auto.png',
