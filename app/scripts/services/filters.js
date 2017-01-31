@@ -109,6 +109,11 @@ angular.module('oneClickApp')
     return count;
   };
 })
+.filter('questionCodeName', function() {
+  return function(code) {
+    return code+'_name';
+  };
+})
 .filter('directionIcon', function(){
   var icons = {
     'left' : 'fa-arrow-left',
