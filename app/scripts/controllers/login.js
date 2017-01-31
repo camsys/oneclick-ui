@@ -30,7 +30,10 @@ angular.module('oneClickApp')
         }
         $rootScope.$broadcast('LoginController:login', result.data);
       }
+      var signingUp = false;
       $scope.signUp = function(){
+        if(signingUp){return;}
+        signingUp = true;
         var newUser = {};
         $scope.signupform.firstname.$setTouched();
         $scope.signupform.lastname.$setTouched();
@@ -39,6 +42,7 @@ angular.module('oneClickApp')
         $scope.signupform.passwordconfirm.$setTouched();
         if(true !== $scope.signupform.$valid){
           $scope.showErrors = true;
+          signingUp = false;
           return;
         }
         newUser.first_name = $scope.firstName.text;
@@ -49,15 +53,20 @@ angular.module('oneClickApp')
 
         var promise = $http.post('//'+APIHOST+'/api/v1/sign_up', newUser);
         promise.then(function(response){
+          signingUp = false;
           processUserLogin(response.data);
           $scope.loginErrors = {};
         }).catch(function(response){
+          signingUp = false;
           $scope.loginErrors = response.data || {};
           console.error(response);
         });
       }
 
+      var authenticating = false;
       $scope.authenticate = function(){
+        if(authenticating){return;}
+        authenticating = true;
         var login = {};
         login.session = {};
         login.session.email = $scope.emailAddress;
@@ -65,8 +74,10 @@ angular.module('oneClickApp')
 
         var promise = $http.post('//'+APIHOST+'/api/v1/sign_in', login);
         promise.then(function(response){
+          authenticating = false;
           processUserLogin(response.data);
         }).catch(function(){
+          authenticating = false;
           $scope.loginError = true;
         });
       }
