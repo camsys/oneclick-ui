@@ -33,6 +33,7 @@ angular.module('oneClickApp')
       }
 
       var urlPrefix = '//' + APIHOST + '/';
+      this.allModes = ['mode_car', 'mode_transit', 'mode_ride_hailing', 'mode_taxi', 'mode_paratransit', 'mode_bicycle', 'mode_walk'];
       this.getPrebookingQuestions = function(){
         var questions = this.paratransitItineraries[0].prebooking_questions;
         var questionObj = {};
@@ -855,7 +856,7 @@ angular.module('oneClickApp')
         return $http.get(urlPrefix + 'api/v1/users/get_guest_token');
       }
       this.buildProfileUpdateRequest = function(profile){
-        console.log(profile);
+        //cleanup profile for update request
         var accommodationsRequest = {}, 
             characteristicsRequest = {};
         //process the profile keys to work for the request
@@ -875,10 +876,7 @@ angular.module('oneClickApp')
       }
       this.postProfileUpdate = function($http, profile) {
         var planService = this;
-        return $http.post(urlPrefix + 'api/v1/users/update', profile, this.getHeaders())
-          .then(function(){
-            //planService.profile = profile;
-        });
+        return $http.post(urlPrefix + 'api/v1/users/update', profile, this.getHeaders());
       }
 
       var profilePromise = false;
@@ -889,14 +887,20 @@ angular.module('oneClickApp')
         }
         profilePromise = $http.get(urlPrefix + 'api/v1/users/profile', this.getHeaders());
         var planService = this;
+        var _resetProfilePromise = function(){
+          setTimeout(function(){
+            profilePromise = false;
+          }, 100);
+        }
         profilePromise.then(function(response){
           planService.profile = response.data;
           planService.first_name = response.data.first_name;
           planService.last_name = response.data.last_name;
           //drop the profilePromise after promises have run
-          setTimeout(function(){
-            profilePromise = false;
-          }, 100);
+          _resetProfilePromise();
+        }).catch(function(e){
+          console.error(e);
+          _resetProfilePromise();
         })
         return profilePromise;
       }
@@ -1011,7 +1015,7 @@ angular.module('oneClickApp')
           request.user_profile = this.user_profile;
           delete this.user_profile;
         }
-        request.modes = ['mode_car', 'mode_transit', 'mode_ride_hailing', 'mode_taxi', 'mode_paratransit', 'mode_bicycle', 'mode_walk'];
+        request.modes = this.allModes;
         if(this.tripPurpose){
           request.trip_purpose = this.tripPurpose;
         }

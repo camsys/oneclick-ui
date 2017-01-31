@@ -57,7 +57,23 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
     var templatePath = '/views/' + (templates[ mode ] || 'rides-itinerary-templatemissing.html');
     return templatePath;
   }
-  var _okModes = [];
+  
+  // _okModes used by itineraryFilter to allow/hide if mode is selected
+  var _okModes = []
+  var _initOkModes = function()
+  {
+    _okModes = planService.profile.preferred_modes || planService.allModes;
+    _okModes.forEach(function(mode){
+      $scope.selectedItineraryModes[mode] = true;
+    })
+  }
+  //set OK modes from the profile, if we have it, or get it then set it
+  if(planService.profile){
+    _initOkModes();
+  }else{
+    planService.getProfile($http).then(_initOkModes)
+  }
+
   $scope.itineraryFilter = function(itinerary, index, arr){
     if(itinerary.hidden){ return false; }
     //returns true if there are no modes selected OR the itinerary's mode is in the array
@@ -72,6 +88,15 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
         _okModes.push(mode);
       }
     }
+    var profile = planService.buildProfileUpdateRequest(planService.profile);
+    //if length of _okModes is 0, all modes are selected
+    if(_okModes.length == 0){
+      profile.preferred_modes = planService.allModes;
+    }else{
+      profile.preferred_modes = _okModes;
+    }
+    planService.postProfileUpdate($http, profile)
+      .catch(console.error);
   }
   $scope.saveTrip = function(itinerary){
     var tripId = itinerary.id;

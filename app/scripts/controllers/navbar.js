@@ -85,7 +85,7 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
         if(profile.lang && profile.lang != $scope.languageSelected ){
           changeLanguage(profile.lang);
         }
-      });
+      }).catch(console.error);
     }else{
       planService.getProfile($http);
     }
