@@ -1,5 +1,5 @@
 'use strict';
-var DEBUG_TRANSLATE = false;
+
 /**
  * @ngdoc overview
  * @name oneClickApp
