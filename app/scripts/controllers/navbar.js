@@ -19,7 +19,16 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
   $scope.languageSelected = localStorage.getItem('lang') || 'en';
   $translate.use($scope.languageSelected);
   tmhDynamicLocale.set($scope.languageSelected+'-us');
-
+  var templates = {
+    'mode_ride_hailing' : 'rides-itinerary-rideshare.html',
+    'mode_paratransit' : 'rides-itinerary-paratransit.html',
+    'mode_taxi' : 'rides-itinerary-taxi.html',
+    'mode_transit' : 'rides-itinerary-transit.html',
+    'mode_walk' : 'rides-itinerary-walk.html',
+    'mode_rail' : 'rides-itinerary-rail.html',
+    'mode_car' : 'rides-itinerary-walk.html',
+    'mode_bicycle' : 'rides-itinerary-walk.html'
+  };
   $scope.flash = flash;
 
   var that = this;
@@ -104,6 +113,13 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
     planService.to = '';
     planService.from = '';
   };
+  $scope.itineraryTemplate = function( mode ){
+    //return a different template depending on mode 
+    //return the mode's template, or a "missing template error" template 
+    var templatePath = '/views/' + (templates[ mode ] || 'rides-itinerary-templatemissing.html');
+    return templatePath;
+  }
+  
 
 }]);
 
