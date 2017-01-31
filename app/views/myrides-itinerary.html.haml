@@ -14,8 +14,8 @@
       .col-xs-4
         %h5.text-right{ng:{show:'trip.cancelled'}}
           {{'cancelled' | translate}}
-        %h5.text-muted.text-right{ng: {show: '!trip.cancelled && trip.itineraries.length > 1'}} (round trip)
-        %h5.text-muted.text-right{ng: {show: '!trip.cancelled && trip.itineraries.length == 1'}} (one way)
+        %h5.text-muted.text-right{ng: {show: '!trip.cancelled && trip.itineraries.length > 1'}} ({{'round_trip' | translate}})
+        %h5.text-muted.text-right{ng: {show: '!trip.cancelled && trip.itineraries.length == 1'}} ({{'one_way' | translate}})
 .animate-show.my-more-trip-details.no-outline{ng:{show: 'trip.showMoreDetails', click:'$event.stopPropagation();'}}
   .myrides-itinerary
     .top-border-hr{ng:{show:'trip.booking_confirmation_codes.length > 0'}}
