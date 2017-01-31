@@ -102,16 +102,20 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
   initialize();
 
   $scope.logout = function() {
-    delete ipCookie.remove('email');
-    delete ipCookie.remove('authentication_token');
-    sessionStorage.clear();
-    localStorage.clear();
-    delete $scope.email;
-    delete planService.email;
-    $window.location.href = "#/";
-    $window.location.reload();
-    planService.to = '';
-    planService.from = '';
+    $http.post('//'+APIHOST+'/api/v1/sign_out', {user_token:$scope.authentication_token }, planService.getHeaders() )
+    .then(function(response){
+      delete ipCookie.remove('email');
+      delete ipCookie.remove('authentication_token');
+      sessionStorage.clear();
+      localStorage.clear();
+      delete $scope.email;
+      delete planService.email;
+      $window.location.href = "#/";
+      $window.location.reload();
+      planService.to = '';
+      planService.from = '';
+    })
+    .catch(console.error);
   };
   $scope.itineraryTemplate = function( mode ){
     //return a different template depending on mode 
