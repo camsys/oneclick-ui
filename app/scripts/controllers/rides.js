@@ -118,6 +118,9 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
     $scope.showPrebookingQuestions = true;
   }
   $scope.answerPrebookQuestions = function(itinerary){
+    //return if itinerary already being booked
+    if(itinerary.itineraryBooking === true){ return; }
+    itinerary.itineraryBooking = true;
     var request = $.extend({}, itinerary.answers);
     //if the form is OK, attach the id to the answers and submit
     var stop = false;
@@ -125,7 +128,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
       stop = !(parseInt(val) > -1) || stop;
       $scope.rides_forms.prebooking_questions[key].error_required = stop;
     });
-    if(stop){ return; }
+    if(stop){
+      itinerary.itineraryBooking = false;
+      return;
+    }
     //populate the id and return time (if applicable)
     request.itinerary_id = itinerary.id;
     if(itinerary.booking_return_time){
@@ -133,6 +139,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
     }
     planService.bookItinerary($http, [request])
       .then(function(response){
+        itinerary.itineraryBooking = false;
         var booking_results = response.data.booking_results;
         var error = false;
         var confirmation_ids = [];
@@ -152,6 +159,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
         $scope.itineraryBooked =  true;
       })
       .catch(function(e){
+        itinerary.itineraryBooking = false;
         bootbox.alert( $translate.instant('booking_failure_message') );
         console.error('error booking', e);
       });

@@ -525,3 +525,7 @@ ul.language-menu-dropdown{
     padding:15px 0px;
   }
 }
+.btn.disabled{
+  pointer-events:none;
+}
+
