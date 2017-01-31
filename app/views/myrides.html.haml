@@ -10,11 +10,11 @@
         .col-xs-offset-1.col-xs-5
           .btn.btn-default.btn-block.my-show-tab.show-future{ng:{click:'showTab="future"', class:'showTab'}}
             %h4
-              {{'upcoming' | translate}} ({{trips.future.length}})
+              {{'upcoming' | translate}} ({{trips.future | notCancelled}})
         .col-xs-5
           .btn.btn-default.btn-block.my-show-tab.show-past{ng:{click:'showTab="past"', class:'showTab'}}
             %h4
-              {{'history' | translate}} ({{trips.past.length}})
+              {{'history' | translate}} ({{trips.past | notCancelled}})
       .my-rides-tabs{style:'margin-top:30px;'}
         %tabset
           %tab{'heading' => '{{"upcoming" | translate}} ({{trips.future.length}})', 'active' => 'tabFuture', "ng-show" => 'showTab!=="past"'}

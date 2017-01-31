@@ -97,6 +97,18 @@ angular.module('oneClickApp')
     return m.format( f );
   };
 })
+.filter('notCancelled', function() {
+  return function(itineraries) {
+    var count = 0;
+    itineraries = itineraries || [];
+    itineraries.forEach(function(itinerary){
+      if(!itinerary.cancelled){
+        count += 1;
+      }
+    });
+    return count;
+  };
+})
 .filter('directionIcon', function(){
   var icons = {
     'left' : 'fa-arrow-left',
