@@ -109,7 +109,7 @@ angular.module('oneClickApp')
     return count;
   };
 })
-.filter('questionCodeName', function() {
+.filter('codeName', function() {
   return function(code) {
     return code+'_name';
   };

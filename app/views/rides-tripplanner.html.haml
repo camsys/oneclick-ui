@@ -91,14 +91,14 @@
             %label{style:'width:100%;'}
               .characteristic-boolean.pull-right
                 %input{type:'checkbox', name:'{{question.code}}', ng:{model:'characteristics[question.code]', change:'characteristicChange(question.code, characteristics[question.code])'}}
-              {{question.code | questionCodeName | translate}}
+              {{question.code | codeName | translate}}
       .row
         .col-xs-12
           .trip-question{ng:{repeat:'question in accommodationsQuestions track by question.code'}}
             %label{style:'width:100%;'}
               .characteristic-boolean.pull-right
                 %input{type:'checkbox', name:'{{question.code}}', ng:{model:'accommodations[question.code]', change:'accommodationChange(question.code, accommodations[question.code])'}}
-              {{question.code | questionCodeName | translate}}
+              {{question.code | codeName | translate}}
       .row{style:"display:none;"}
         .col-xs-12
           %h3 {{"modes" | translate }}
@@ -111,7 +111,7 @@
       .row
         .col-xs-12
           %h3 {{'trip_purpose' | translate}}?
-          %select#trip-purpose.select.form-control{style: 'width:100%', ng:{model:'tripPurpose', options:'purpose.name for purpose in purposesQuestions track by purpose.code', change:'purposeChange(purpose, $i)'}}
+          %select#trip-purpose.select.form-control{style: 'width:100%', ng:{model:'tripPurpose', options:'purpose.code | codeName | translate for purpose in purposesQuestions track by purpose.code', change:'purposeChange(purpose, $i)'}}
             %option{value:''} {{'all' | translate}}
       .row
         .col-xs-12
