@@ -440,7 +440,7 @@ module.exports = function (grunt) {
           cwd: '.',
           src: [
             'bower_components/bootstrap-only-sass/fonts/bootstrap/*',
-            'bower_components/angular-i18n/*.js'],
+            'bower_components/angular-i18n/*-us.js'],
           dest: '<%= yeoman.dist %>'
         }]
       },
