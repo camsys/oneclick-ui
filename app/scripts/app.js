@@ -1,5 +1,5 @@
 'use strict';
-
+var DEBUG_TRANSLATE = false;
 /**
  * @ngdoc overview
  * @name oneClickApp
@@ -27,7 +27,26 @@ angular.module('oneClickApp', [
     'ui.bootstrap.datetimepicker',
     'pascalprecht.translate',
     'tmh.dynamicLocale'
-  ]).config(function ($routeProvider, $translateProvider, tmhDynamicLocaleProvider) {
+  ]).config(function ($routeProvider, $translateProvider, tmhDynamicLocaleProvider, $provide) {
+    //override the translate function to provide translation debug
+    $provide.decorator('$translate', [
+      '$delegate',
+      function myServiceDecorator($delegate)
+      {
+        var instant = $delegate.instant;
+        function debugCheck(translationId) {
+          if(DEBUG_TRANSLATE===true){
+            return '{{'+translationId+'}}';
+          }else{
+            return instant.apply($delegate, arguments);
+          }
+        }
+        //override instant method with a method that outputs the translationId if we're debugging
+        $delegate.instant = debugCheck;
+        return $delegate;
+      }
+    ]);
+
     var defaultLanguage = localStorage.getItem('lang') || 'en';
     // Configure the translation service
     $translateProvider.useSanitizeValueStrategy('escape');
