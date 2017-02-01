@@ -262,6 +262,10 @@ html, body{
   padding:3px;
   justify-content:center;
 }
+.transit-directions{
+  margin: 0px -15px;
+  padding: 15px;
+}
 .ride_itineraries .transit-details{
   padding:5px 2px;
 }
@@ -537,10 +541,6 @@ ul.language-menu-dropdown{
   }
   .row{
     height:100%;
-  }
-  .row .no-float{
-    display:table-cell;
-    float:none;
   }
 }
 .btn-bordered{
