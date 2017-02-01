@@ -113,18 +113,20 @@
           .mode-question
             {{"mode_drive_name" | translate }}
       .row
-        .col-xs-12
-          %h3 {{'trip_purpose' | translate}}
-          %select#trip-purpose.select.form-control{style: 'width:100%', ng:{model:'tripPurpose', options:'purpose.code | codeNote | translate for purpose in purposesQuestions track by purpose.code', change:'purposeChange(purpose, $i)'}}
+        .col-xs-12{style:'padding-top:15px;'}
+          %select#trip-purpose.pull-right.select.form-control{style: 'width:60%', 
+              ng:{model:'tripPurpose', options:'purpose.code | codeNote | translate for purpose in purposesQuestions track by purpose.code', change:'purposeChange(purpose, $i)'}}
             %option{value:''} {{'all' | translate}}
+          %h3.display-inline
+            {{'trip_purpose' | translate}}
       .row
-        .col-xs-12
-          %h3
-            {{'sort_by' | translate}}
-          %select#order-by.select.form-control{style: 'width:100%', ng:{model:'$parent.orderItinerariesBy'}}
+        .col-xs-12{style:'padding-top:15px;'}
+          %select#order-by.pull-right.select.form-control{style: 'width:60%', ng:{model:'$parent.orderItinerariesBy'}}
             %option{value:'cost'} {{'fare_sorter' | translate}}
             %option{value:'duration'} {{'travel_time_sorter' | translate}}
             %option{value:'walk_distance'} {{'walk_distance_sorter' | translate}}
+          %h3.display-inline
+            {{'sort_by' | translate}}
       .row
         .col-xs-12
           %h3
