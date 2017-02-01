@@ -109,9 +109,9 @@ angular.module('oneClickApp')
     return count;
   };
 })
-.filter('codeName', function() {
+.filter('codeNote', function() {
   return function(code) {
-    return code+'_name';
+    return code+'_note';
   };
 })
 .filter('directionIcon', function(){
