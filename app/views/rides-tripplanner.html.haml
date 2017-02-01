@@ -82,8 +82,10 @@
             'show-button-bar'=>'false'}
     .row
       .col-xs-12
-        %button.btn.btn-link{type:"button", data:{toggle:"collapse", target:"#sidebar-collapse-1"}, "aria-label"=>"toggle trip options"}
-          %h3 {{"customize_your_trip" | translate }}
+        %button.btn.btn-link{type:"button", style:'padding-left:0px;', data:{toggle:"collapse", target:"#sidebar-collapse-1"}, "aria-label"=>"toggle trip options"}
+          %h3
+            %i.fa.fa-exclamation-triangle
+            {{"customize_your_trip" | translate }}
     #sidebar-collapse-1.collapse{"ng-class"=>"{ in: !isMobile() }"}
       .row
         .col-xs-12
