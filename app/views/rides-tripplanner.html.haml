@@ -110,7 +110,7 @@
             {{"mode_drive_name" | translate }}
       .row
         .col-xs-12
-          %h3 {{'trip_purpose' | translate}}?
+          %h3 {{'trip_purpose' | translate}}
           %select#trip-purpose.select.form-control{style: 'width:100%', ng:{model:'tripPurpose', options:'purpose.code | codeNote | translate for purpose in purposesQuestions track by purpose.code', change:'purposeChange(purpose, $i)'}}
             %option{value:''} {{'all' | translate}}
       .row
