@@ -3,8 +3,7 @@
     .row
       .col-md-6.col-xs-12
         %h1 {{'directions' | translate}}
-        .transit-details{ng: {repeat: 'leg in itinerary.json_legs track by $index', 
-              class: '{"mode_car": leg.mode == "CAR", "mode_bicycle": leg.mode == "BICYCLE","mode_bus": leg.mode == "BUS", "mode_walk": leg.mode == "WALK", "mode_tram": leg.mode == "TRAM" || leg.mode == "RAIL"}'}}
+        .transit-details{ng: {repeat: 'leg in itinerary.json_legs track by $index'}}
           .row.even-height-row{style:'padding:0px 0px 7px 5px;'}
             .col-xs-2
               .leg-start-time

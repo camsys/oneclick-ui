@@ -24,8 +24,8 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
     'mode_paratransit' : 'rides-itinerary-paratransit.html',
     'mode_taxi' : 'rides-itinerary-taxi.html',
     'mode_transit' : 'rides-itinerary-transit.html',
+    'mode_rail' : 'rides-itinerary-transit.html',
     'mode_walk' : 'rides-itinerary-walk.html',
-    'mode_rail' : 'rides-itinerary-rail.html',
     'mode_car' : 'rides-itinerary-walk.html',
     'mode_bicycle' : 'rides-itinerary-walk.html'
   };
