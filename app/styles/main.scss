@@ -260,9 +260,15 @@ html, body{
 .ride_itineraries .transit-details{
   padding:5px 2px;
 }
+.stripe-row:nth-child(even),
 .transit-details:nth-child(even),
 .schedule-row:nth-child(even){
   background-color:#EEE;
+}
+.stripe-row:nth-child(odd),
+.transit-details:nth-child(odd),
+.schedule-row:nth-child(odd){
+  background-color:#FFF;
 }
 body{
   background-color: #F0F0FF;
