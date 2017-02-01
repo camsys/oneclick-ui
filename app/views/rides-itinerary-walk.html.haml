@@ -1,8 +1,8 @@
 .row
   .col-md-12{ng:{controller:"TransitController"}}
     .row
-      .col-md-6.col-xs-12{style:'padding:30px;'}
-        %h1.text-center {{'directions' | translate}}
+      .col-md-6.col-xs-12
+        %h1 {{'directions' | translate}}
         .mode_walk{ng: {repeat: 'leg in itinerary.json_legs track by $index'}}
           .row
             .col-xs-4
@@ -46,6 +46,6 @@
                       %h4
                         {{itinerary.end_location.formatted_address | noCountry}}
 
-      .col-md-6.col-xs-12
+      .col-md-6.col-xs-12{style:'padding-top:35px;'}
         .map-canvas{:style => "height: 40em", "ui-map" => "routeMap", "ui-options" => "mapOptions"}
 
