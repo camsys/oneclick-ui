@@ -1,7 +1,7 @@
-.row.even-height-row
-  .col-xs-2.col-height-slave
+.row
+  .col-xs-2
     %img.ride-mode-service-icon{style:'vertical-align:bottom;', ng:{src:'{{trip.mode | modeIcon: trip.logo_url}}'}}
-  .col-xs-10.col-height-master
+  .col-xs-10
     .row
       .col-xs-12
         %h3 {{trip.mode | modeName : trip.service_name | translate}}
