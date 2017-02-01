@@ -34,9 +34,9 @@
                 .col-sm-4.col-xs-12.text-center
                   .btn.btn-link{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails', hide:'tripSelected' } }
                     %span{ng:{hide:'itinerary.showMoreDetails'}}
-                      {{'show_more' | translate }} {{'trip_details' | translate}}
+                      {{'show_more' | translate }}
                     %span{ng:{show:'itinerary.showMoreDetails'}}
-                      {{'show_less' | translate }} {{'trip_details' | translate}}
+                      {{'show_less' | translate }}
             .top-border-hr{ng: {show: 'itinerary.showMoreDetails'}}
               .included-template{ng:{ 'include'=>'itineraryTemplate( itinerary.returned_mode_code )' } }
               .email-or-cancel
