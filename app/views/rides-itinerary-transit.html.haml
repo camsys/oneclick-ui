@@ -3,59 +3,113 @@
     .row
       .col-md-6.col-xs-12
         %h1 {{'directions' | translate}}
-        .transit-details{ng: {repeat: 'leg in itinerary.json_legs track by $index'}}
-          .row.even-height-row{style:'padding:0px 0px 7px 5px;'}
-            .col-xs-2
-              .leg-start-time
-                %h3.small.text-nowrap{style:'margin:2.5px 0px;'}
-                  {{leg.startTime | date : 'shortTime'}}
+        .transit-directions
+          .transit-details
+            .row
+              .col-xs-4.text-center
+                %h4.text-capitalize
+                  {{'start' | translate}}
+              .col-xs-8
+                %h4
+                  {{itinerary.start_location.formatted_address | noCountry}}
+          .row.transit-details{style:'position:relative;', ng: {repeat: 'leg in itinerary.json_legs track by $index'}}
+            .leg-end-time{ng:{show:'$last'}}
+              %h4.text-nowrap{style:'margin:2.5px 0px;'}
+                {{leg.endTime | date : 'shortTime'}}
+            .col-xs-4.text-center.no-float
+              .nothing{style:'display:inline-block; height:100%;'}
               .text-center
                 %img{"ng-src"=>"{{leg.mode | modeIcon}}", style:'height:1.7em;'}
-              .leg-end-time{ng:{show:'$last'}}
-                %h3.small.text-nowrap{style:'margin:2.5px 0px;'}
-                  {{leg.endTime | date : 'shortTime'}}
-            .col-xs-10
-              .row
-                .col-xs-3
-                  .text-nowrap.walk-info{ng: {show: 'leg.mode == "WALK"'}}
-                    {{leg.duration | seconds}}
-                  .bus-info.text-center{ng: {show: 'leg.mode != "WALK"'}}
-                    %span{ng: {attr: {style:'background-color:#{{leg.routeColor}}; color: #{{leg.routeTextColor}}'}}}
-                      {{leg.route}}
-                .walk-info{ng: {show: 'leg.mode == "WALK"'}}
-                  .col-xs-9
-                    .first{ng: {show: '$first'}}
-                      {{'start' | translate}} {{itinerary.start_location.formatted_address | noCountry}}
-                    .not-first{ng: {show: '!$first'}}
-                      {{'start_walking' | translate}} {{leg.from.name}}
-                
-                  .col-xs-10.col-xs-offset-2
-                    .btn-link.text-right{ng:{click:'showSteps[$index] = !showSteps[$index]'}}
-                      .show-steps-click{ng:{hide:'showSteps[$index]'}}
+              .transit-info.text-center{ng: {show: 'leg.mode != "WALK"'}}
+                %h3{ng: {attr: {style:'background-color:#{{leg.routeColor}}; color: #{{leg.routeTextColor}}; padding-top:3px; margin-top:5px;'}}}
+                  {{leg.route}}
+                %h4
+                  {{leg.routeLongName}}
+                %h5
+                  %i {{leg.headsign}}
+              .leg-start-time
+                %h4.text-nowrap{style:'margin:2.5px 0px;'}
+                  {{leg.startTime | date : 'shortTime'}}
+            .col-xs-8.no-float
+              .walk-info{ng: {show: 'leg.mode == "WALK"'}}
+                .row
+                  .col-xs-12
+                    %h4
+                      {{'walk' | translate}} {{leg.distance | distance}}
+                    %h5.text-muted
+                      ({{leg.duration | seconds}})
+                    %h4
+                      {{'to' | translate}} {{leg.to.name}}
+                .row
+                  .col-xs-12.text-right
+                    .btn.btn-link{ng:{click:'showSteps[$index] = !showSteps[$index]'}}
+                      %h4.show-steps-click{ng:{hide:'showSteps[$index]'}}
                         {{'show_steps' | translate}}
-                      .hide-steps-click{ng:{show:'showSteps[$index]'}}
+                      %h4.hide-steps-click{ng:{show:'showSteps[$index]'}}
                         {{'hide_steps' | translate}}
-                    .show-steps{ng:{show:'showSteps[$index] === true'}}
-                      .steps{ng:{repeat:'step in leg.steps track by step.lon'}}
-                        .first-step{ng:{show:'$first'}}
-                          {{'depart' | translate}} {{step.streetName}}, {{'go' | translate}} {{step.absoluteDirection}} {{'for' | translate}} {{step.distance | distance}}
-                        .step{ng:{hide:'$first'}}
-                          {{'turn' | translate}} {{step.relativeDirection}} ({{step.absoluteDirection}}) {{'on' | translate}} {{step.streetName}}
-                          %h4.small
-                            {{step.distance | distance}}
-                .col-xs-9{ng: {show: 'leg.mode != "WALK"'}}
-                  .bus-info
-                    %h5.text-muted{ng: {show: 'leg.warning'}}  {{leg.warning}}
-                    %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}  {{'wait' | translate}} {{leg.transferTimeInMins}} {{'minutes' | translate}
-                    %h5.text-muted.get-on
-                      {{'get_on' | translate}} {{leg.serviceName}} 
-                    %span{ng: {show: '!$first'}}
-                      {{leg.from.name}}
-                    %span{ng: {show: '$first'}}
-                      {{itinerary.start_location.formatted_address | noCountry}}
-                    %h4{ng: {show: 'leg.specialService'}}  {{'this_is_a_special_service' | translate}} {{leg.mode | lowercase }}.
-                    %h5.text-muted {{leg.distance | distance}} ({{leg.duration | seconds}})
+              .transit-info{ng: {show: 'leg.mode != "WALK"'}}
+                .row
+                  .col-xs-12
+                    .row
+                      .col-xs-12
+                        %h5.text-muted{ng: {show: 'leg.warning'}}
+                          {{leg.warning}}
+                        %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}
+                          {{'wait' | translate}} {{leg.transferTimeInMins}} {{'minutes' | translate}
+                        %h4
+                          %span.text-muted
+                            {{'from' | translate}}
+                          {{leg.from.name}}
+                    .row
+                      .col-xs-12
+                        %h5
+                          %span.text-muted
+                            {{'get_on' | translate}}
+                          {{leg.serviceName}}
+                        %h4
+                          {{leg.mode}}
+                          {{leg.route}}
+                          {{leg.routeLongName}}
+                          %i {{leg.headsign}}
+                        %h4{ng: {show: '$first'}}
+                          {{'to' | translate}} {{itinerary.start_location.formatted_address | noCountry}}
+                        %h4{ng: {show: 'leg.specialService'}}
+                          {{'this_is_a_special_service' | translate}} {{leg.mode | lowercase }}.
+                        %h5.text-muted
+                          {{leg.distance | distance}} ({{leg.duration | seconds}})
+            .show-steps.line-border.pull-left{ng:{show:'showSteps[$index] === true'}}
+              .col-xs-12
+                .transit-details.steps.row{ng:{repeat:'step in leg.steps track by step.lon'}}
+                  .col-xs-4.text-right
+                    %h4
+                      %span.text-muted.text-capitalize{ng:{show:'$first'}} {{'depart' | translate}}
+                      %span.text-muted.text-capitalize{ng:{hide:'$first'}} {{step.relativeDirection }}
+                  .col-xs-8
+                    %h4{ng:{show:'$first'}} {{step.streetName}}, {{'go' | translate}} {{step.absoluteDirection}}
+                    %h4{ng:{hide:'$first'}} {{'on' | translate}} {{step.streetName}} ({{step.absoluteDirection}})
+                  .col-xs-4.text-right
+                    %h3{style:'margin: 0px;'}
+                      %b{class:'text-muted fa {{step.relativeDirection | directionIcon}}'}
+                  .col-xs-8
+                    %h4
+                      .small.text-capitalize
+                        {{'go' | translate}} {{step.distance | distance}}
+                .transit-details{style:'padding-bottom: 7px;'}
+                  .row
+                    .col-xs-4.text-right
+                      %h4
+                        %span.text-muted.text-capitalize {{'arrive' | translate}}
+                    .col-xs-8
+                      %h4
+                        {{leg.to.name }}
+          .transit-details
+            .row
+              .col-xs-12
+                %h3.text-muted.text-capitalize
+                  {{'end' | translate}}
+                %h4
+                  {{itinerary.end_location.formatted_address | noCountry}}
 
-      .col-md-6.col-xs-12
+      .col-md-6.col-xs-12{style:'padding-top:35px;'}
         .map-canvas{:style => "height: 40em", "ui-map" => "routeMap", "ui-options" => "mapOptions"}
 

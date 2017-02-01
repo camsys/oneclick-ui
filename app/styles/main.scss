@@ -13,6 +13,7 @@ $red: #f34c51;
 $blue: #00b8d0;
 $green: #03763a;
 $yellow: #fdd73e;
+$borderColor: #DDD;
 
 $kioskfonts: "Avenir Next", "Helvetica Neue", Helvetica, sans-serif;
 
@@ -211,15 +212,19 @@ html, body{
 .ride_itineraries{
   margin:5px 0px;
 }
+.line-border{
+  border:1px solid $borderColor;
+  border-radius:8px;
+}
 .bordered{
-  border:1px solid #DDD;
+  border:1px solid $borderColor;
   border-radius:8px;
   padding: 7px 9px;
   margin: 11px 0px;
   background-color: #FFF;
 }
 .top-border-hr{
-  border-top:1px solid #DDD;
+  border-top:1px solid $borderColor;
   margin-top:10px;
   padding-top:10px;
 }
@@ -289,9 +294,6 @@ body{
 .ride-mode-service-name{
   display:inline-block;
   margin:0px 0px 0px 3%;
-}
-.ride-mode-service-icon{
-
 }
 .display-inline{
   display:inline;
@@ -518,6 +520,28 @@ ul.language-menu-dropdown{
   .cancelled{
     background-color:#DDD;
   }
+  .leg-start-time,
+  .leg-end-time{
+    position:absolute;
+    top:-15px;
+    left:-5px;
+    border:1px solid $borderColor;
+    border-radius:13px;
+    padding:3px;
+    background-color:white;
+  }
+  .leg-end-time{
+    top:unset;
+    bottom:-15px;
+    z-index:3;
+  }
+  .row{
+    height:100%;
+  }
+  .row .no-float{
+    display:table-cell;
+    float:none;
+  }
 }
 .btn-bordered{
   border:1px solid #DDD;
@@ -534,4 +558,6 @@ ul.language-menu-dropdown{
 .btn.disabled{
   pointer-events:none;
 }
-
+body .btn.btn-link{
+  text-decoration:none;
+}
