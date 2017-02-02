@@ -90,8 +90,8 @@
                             {{'get_off' | translate}}
                           {{leg.to.name}}
 
-            .show-steps.pull-left{style:'width:100%;', ng:{show:'showSteps[$index] === true'}}
-              .col-xs-12
+            .show-steps.pull-left{style:'width:100%; padding-bottom:7px;', ng:{show:'showSteps[$index] === true'}}
+              .col-xs-12.top-border-hr
                 .transit-details.steps.row{ng:{repeat:'step in leg.steps track by step.lon'}}
                   .col-xs-4.text-right
                     %h4
@@ -107,14 +107,13 @@
                     %h4
                       .small.text-capitalize
                         {{'go' | translate}} {{step.distance | distance}}
-                .transit-details{style:'padding-bottom: 7px;'}
-                  .row
-                    .col-xs-4.text-right
-                      %h4
-                        %span.text-muted.text-capitalize {{'arrive' | translate}}
-                    .col-xs-8
-                      %h4
-                        {{leg.to.name }}
+                .transit-details.row
+                  .col-xs-4.text-right
+                    %h4
+                      %span.text-muted.text-capitalize {{'arrive' | translate}}
+                  .col-xs-8
+                    %h4
+                      {{leg.to.name }}
 
             .row{ng:{show:'$last'}}
               .col-xs-4.text-center
