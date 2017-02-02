@@ -378,14 +378,43 @@ ul.language-menu-dropdown{
   }
 }
 
+//The Rides page shows one column for 0 to sm-min and two columns from sm min-up
 @media (min-width: 0) and (max-width: $screen-sm-min){
   .ride_itineraries .map-canvas{
     height:20em !important;
+  }
+  .ride-planner-menu{
+    //on 1 column display, toggle the up/down arrows depending on collapsed state
+    #customize_your_trip{
+      .fa-sort-down{ display:none; }
+      .fa-sort-up{ display:inline; }
+    }
+    #customize_your_trip.collapsed{
+      .fa-sort-down{ display:inline; }
+      .fa-sort-up{ display:none; }
+    }
   }
 }
 @media (min-width: $screen-sm-min) {
   .ride_itineraries .map-canvas{
     height:40em !important;
+  }
+  .ride-planner-menu{
+    //on 2 column display, always show the customize your trip sidebar, and hide elements/behaviors that collapse it
+    #sidebar-collapse-1.collapse{
+      display:block;
+      height:100% !important;
+    }
+    #customize_your_trip:hover{
+      cursor: default;
+    }
+    #customize_your_trip{
+      pointer-events:none;
+      .fa-sort-down,
+      .fa-sort-up{
+        display:none;
+      }
+    }
   }
 }
 
@@ -574,3 +603,4 @@ ul.language-menu-dropdown{
 body .btn.btn-link{
   text-decoration:none;
 }
+

@@ -82,12 +82,13 @@
             'show-button-bar'=>'false'}
     .row
       .col-xs-12{style:'padding-top:15px;'}
-        %button.btn.btn-link{type:"button", 
+        %button#customize_your_trip.btn.btn-link{type:"button", 
                 style:'padding-left:0px; padding-left: 0px; white-space: normal; text-align: left;', 
                 data:{toggle:"collapse", target:"#sidebar-collapse-1"}, "aria-label"=>"toggle trip options"}
           %h3{style:'margin:0px;'}
-            %i.fa.fa-exclamation-triangle.pull-left
             {{"customize_your_trip" | translate }}
+            %i.fa.fa-sort-down
+            %i.fa.fa-sort-up
     #sidebar-collapse-1.collapse{"ng-class"=>"{ in: !isMobile() }"}
       .row
         .col-xs-12
