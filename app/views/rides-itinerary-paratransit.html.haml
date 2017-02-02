@@ -32,5 +32,5 @@
           .flex-item
             .endTime{style:'width:70px; ', 'ng-repeat'=>'endTime in day.end'}
               {{endTime}}
-.booking{ng:{show:'email && tripSelected == itinerary.id && itinerary.service_bookable', include:'"/views/rides-prebookingQuestions.html"'}}
+.booking{ng:{show:'tripSelected == itinerary.id && itinerary.service_bookable', include:'"/views/rides-prebookingQuestions.html"'}}
 
