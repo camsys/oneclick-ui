@@ -99,8 +99,8 @@
                               {{'get_off' | translate}}
                             {{leg.to.name}}
 
-            .show-steps.pull-left{style:'width:100%; padding-bottom:7px;', ng:{show:'showSteps[$index] === true'}}
-              .col-xs-12.top-border-hr
+            .show-steps.top-border-hr.pull-left{style:'width:100%; padding:0px; margin-bottom:7px;', ng:{show:'showSteps[$index] === true'}}
+              .col-xs-12
                 .transit-details.steps.row{ng:{repeat:'step in leg.steps track by step.lon'}}
                   .col-xs-4.text-right
                     %h4
