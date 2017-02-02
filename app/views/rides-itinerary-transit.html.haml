@@ -35,18 +35,15 @@
                     {{leg.routeLongName}}
                   %h5
                     %i {{leg.headsign}}
+                .last-info{ng:{show:'$last'}}
+                  %h4.text-capitalize
+                    {{'end' | translate}}
+                  .nothing{style:'display:inline-block; height:100%;'}
               .col-xs-8
                 .nothing{style:'display:inline-block; height:100%;', ng:{hide:'$first'}}
                 .walk-info{ng: {show: 'leg.mode == "WALK"'}}
                   .row
                     .col-xs-12{style:'padding-top:10px;'}
-                      .pull-right.text-right
-                        .btn.btn-link{style:'padding:0px;', ng:{click:'showSteps[$index] = !showSteps[$index]'}}
-                          %h4{style:'margin:0px;'}
-                            .show-steps-click{ng:{hide:'showSteps[$index]'}}
-                              {{'show_steps' | translate}}
-                            .hide-steps-click{ng:{show:'showSteps[$index]'}}
-                              {{'hide_steps' | translate}}
                       .pull-left
                         %h4.display-inline
                           {{'walk' | translate}} {{leg.distance | distance}}
@@ -54,6 +51,15 @@
                           ({{leg.duration | seconds}})
                         %h4{ng:{hide:'$last'}}
                           {{'to' | translate}} {{leg.to.name}}
+                        %h4{ng:{show:'$last'}}
+                          {{itinerary.end_location.formatted_address | noCountry}}
+                      .pull-right.text-right
+                        .btn.btn-link{style:'padding:0px 7px 7px 7px;', ng:{click:'showSteps[$index] = !showSteps[$index]'}}
+                          %h4{style:'margin:0px;'}
+                            .show-steps-click{ng:{hide:'showSteps[$index]'}}
+                              {{'show_steps' | translate}}
+                            .hide-steps-click{ng:{show:'showSteps[$index]'}}
+                              {{'hide_steps' | translate}}
 
                 .transit-info{ng: {show: 'leg.mode != "WALK"'}}
                   .row
@@ -118,15 +124,6 @@
                     %h4
                       {{leg.to.name }}
 
-            .row{ng:{show:'$last'}}
-              .col-xs-4.text-center
-                %h4.text-capitalize
-                  {{'end' | translate}}
-                .nothing{style:'display:inline-block; height:100%;'}
-              .col-xs-8
-                %h4
-                  {{itinerary.end_location.formatted_address | noCountry}}
-                .nothing{style:'display:inline-block; height:100%;'}
 
 
       .col-md-6.col-xs-12.padded-transit-map
