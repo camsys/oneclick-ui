@@ -32,12 +32,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
         }
       }
       if(exit || $location.path() != '/'){return;}
-      $scope.rideTime = new Date('2017-1-31 11:00:00');
+      $scope.rideTime = new Date('2017-2-7 11:00:00');
       $scope.from = '2000 S Queen St, York, PA';//'1550 11th Ave, York, PA';
       $scope.from = '401 S Queen St, York, PA';
       $scope.from = '100 North, Salt Lake City, UT';
       $scope.from = '1596 W Warnock Ave, West Valley City, UT 84119';
       $scope.from = 'Tooele High School';
+      $scope.from = 'Amtrak Salt Lake City Station, South 600 West, Salt Lake City, UT';
       mapOnBlur($scope.from, 'from');
       setTimeout(function(){
         $scope.to = '449 E King St, York, PA ';//'1920 Trolley Rd, York, PA'
@@ -45,6 +46,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
         $scope.to = 'Utah DMV Tooele Office';
         $scope.to = '1860 W 4100 S, West Valley City, UT 84119';
         $scope.to = 'Utah DMV Tooele Office';
+        $scope.to = 'Salt Lake City International Airport';
         mapOnBlur($scope.to, 'to');
         plan();
       },1000);
@@ -257,7 +259,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
   $scope.showAllPurposes = false;
   $scope.backToConfirm = planService.backToConfirm;
   $scope.loggedIn = !!planService.email;
-
   $scope.toDefault = countryFilter( localStorage.getItem('last_destination') || '');
   $scope.to = countryFilter( planService.to || '');
   $scope.fromDefault = countryFilter( localStorage.getItem('last_origin') || '' );
@@ -558,7 +559,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
 
             if(datatypes.indexOf('street_number') < 0 || datatypes.indexOf('route') < 0){
               if(datatypes.indexOf('route') < 0){
-                $scope.toFromMarkers[toFrom].setMap(null);
+                $scope.toFromMarkers[toFrom] && $scope.toFromMarkers[toFrom].setMap(null);
                 checkShowMap();
                 bootbox.alert("The location you selected does not have have a street associated with it, please select another location.");
                 return;
