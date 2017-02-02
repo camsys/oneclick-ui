@@ -11,6 +11,7 @@
                 %h4.text-capitalize
                   {{'start' | translate}}
               .col-xs-8
+                .nothing{style:'display:inline-block; height:100%;'}
                 %h4
                   {{itinerary.start_location.formatted_address | noCountry}}
 
@@ -22,73 +23,75 @@
               %h4.text-nowrap{style:'margin:2.5px 0px;'}
                 {{leg.startTime | date : 'shortTime'}}
 
-            .col-xs-4.text-center
-              .nothing{style:'display:inline-block; height:100%;'}
-              .text-center
-                %img{"ng-src"=>"{{leg.mode | modeIcon}}", style:'height:1.7em;'}
-              .transit-info.text-center{ng: {show: 'leg.mode != "WALK"'}}
-                %h3{ng: {attr: {style:'background-color:#{{leg.routeColor}}; color: #{{leg.routeTextColor}}; padding-top:3px; margin-top:5px;'}}}
-                  {{leg.route}}
-                %h4
-                  {{leg.routeLongName}}
-                %h5
-                  %i {{leg.headsign}}
-            .col-xs-8
+            .row
+              .col-xs-4.text-center
+                .nothing{style:'display:inline-block; height:100%;', ng:{hide:'$first'}}
+                .text-center
+                  %img{"ng-src"=>"{{leg.mode | modeIcon}}", style:'height:2.7em;'}
+                .transit-info.text-center{ng: {show: 'leg.mode != "WALK"'}}
+                  %h3{ng: {attr: {style:'background-color:#{{leg.routeColor}}; color: #{{leg.routeTextColor}}; padding-top:3px; margin-top:5px;'}}}
+                    {{leg.route}}
+                  %h4
+                    {{leg.routeLongName}}
+                  %h5
+                    %i {{leg.headsign}}
+              .col-xs-8
+                .nothing{style:'display:inline-block; height:100%;', ng:{hide:'$first'}}
+                .walk-info{ng: {show: 'leg.mode == "WALK"'}}
+                  .row
+                    .col-xs-12{style:'padding-top:10px;'}
+                      .pull-right.text-right
+                        .btn.btn-link{style:'padding:0px;', ng:{click:'showSteps[$index] = !showSteps[$index]'}}
+                          %h4{style:'margin:0px;'}
+                            .show-steps-click{ng:{hide:'showSteps[$index]'}}
+                              {{'show_steps' | translate}}
+                            .hide-steps-click{ng:{show:'showSteps[$index]'}}
+                              {{'hide_steps' | translate}}
+                      .pull-left
+                        %h4.display-inline
+                          {{'walk' | translate}} {{leg.distance | distance}}
+                        %h5.text-muted.display-inline.text-nowrap
+                          ({{leg.duration | seconds}})
+                        %h4{ng:{hide:'$last'}}
+                          {{'to' | translate}} {{leg.to.name}}
 
-              .walk-info{ng: {show: 'leg.mode == "WALK"'}}
-                .row
-                  .col-xs-12{style:'padding-top:10px;'}
-                    %h4.display-inline
-                      {{'walk' | translate}} {{leg.distance | distance}}
-                    %h5.text-muted.display-inline.text-nowrap
-                      ({{leg.duration | seconds}})
-                    %h4{ng:{hide:'$last'}}
-                      {{'to' | translate}} {{leg.to.name}}
-                .row
-                  .col-xs-12.text-right
-                    .btn.btn-link{ng:{click:'showSteps[$index] = !showSteps[$index]'}}
-                      %h4.show-steps-click{ng:{hide:'showSteps[$index]'}}
-                        {{'show_steps' | translate}}
-                      %h4.hide-steps-click{ng:{show:'showSteps[$index]'}}
-                        {{'hide_steps' | translate}}
-
-              .transit-info{ng: {show: 'leg.mode != "WALK"'}}
-                .row
-                  .col-xs-12
-                    .row
-                      .col-xs-12
-                        %h5.text-muted{ng: {show: 'leg.warning'}}
-                          {{leg.warning}}
-                        %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}
-                          {{'wait' | translate}} {{leg.transferTimeInMins}} {{'minutes' | translate}
-                        %h5
-                          %span.text-muted
-                            {{'from' | translate}}
-                          {{leg.from.name}}
-                        %h4
-                          %span.text-muted
-                            {{'get_on' | translate}}
-                          %span.text-nowrap
-                            {{leg.serviceName}}
-                        %h4
-                          %span.text-nowrap
-                            {{leg.mode}}
-                          %span.text-nowrap
-                            {{leg.route}}
-                          %span.text-nowrap
-                            {{leg.routeLongName}}
-                        %h4
-                          %i {{leg.headsign}}
-                        %h4{ng: {show: '$first'}}
-                          {{'to' | translate}} {{itinerary.start_location.formatted_address | noCountry}}
-                        %h4{ng: {show: 'leg.specialService'}}
-                          {{'this_is_a_special_service' | translate}} {{leg.mode | lowercase }}.
-                        %h5.text-muted
-                          {{leg.distance | distance}} ({{leg.duration | seconds}})
-                        %h4
-                          %span.text-muted
-                            {{'get_off' | translate}}
-                          {{leg.to.name}}
+                .transit-info{ng: {show: 'leg.mode != "WALK"'}}
+                  .row
+                    .col-xs-12
+                      .row
+                        .col-xs-12
+                          %h5.text-muted{ng: {show: 'leg.warning'}}
+                            {{leg.warning}}
+                          %h5.text-muted{ng: {show: 'leg.transferTimeInMins'}}
+                            {{'wait' | translate}} {{leg.transferTimeInMins}} {{'minutes' | translate}
+                          %h5
+                            %span.text-muted
+                              {{'from' | translate}}
+                            {{leg.from.name}}
+                          %h4
+                            %span.text-muted
+                              {{'get_on' | translate}}
+                            %span.text-nowrap
+                              {{leg.serviceName}}
+                          %h4
+                            %span.text-nowrap
+                              {{leg.mode}}
+                            %span.text-nowrap
+                              {{leg.route}}
+                            %span.text-nowrap
+                              {{leg.routeLongName}}
+                          %h4
+                            %i {{leg.headsign}}
+                          %h4{ng: {show: '$first'}}
+                            {{'to' | translate}} {{itinerary.start_location.formatted_address | noCountry}}
+                          %h4{ng: {show: 'leg.specialService'}}
+                            {{'this_is_a_special_service' | translate}} {{leg.mode | lowercase }}.
+                          %h5.text-muted
+                            {{leg.distance | distance}} ({{leg.duration | seconds}})
+                          %h4
+                            %span.text-muted
+                              {{'get_off' | translate}}
+                            {{leg.to.name}}
 
             .show-steps.pull-left{style:'width:100%; padding-bottom:7px;', ng:{show:'showSteps[$index] === true'}}
               .col-xs-12.top-border-hr
@@ -123,6 +126,7 @@
               .col-xs-8
                 %h4
                   {{itinerary.end_location.formatted_address | noCountry}}
+                .nothing{style:'display:inline-block; height:100%;'}
 
 
       .col-md-6.col-xs-12.padded-transit-map
