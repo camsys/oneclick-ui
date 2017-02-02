@@ -263,8 +263,8 @@ html, body{
   justify-content:center;
 }
 .transit-directions{
-  margin: 0px -15px;
-  padding: 15px;
+  margin: 15px 0px;
+  padding: 0px 15px;
 }
 .ride_itineraries .transit-details{
   padding:5px 2px;
@@ -341,18 +341,31 @@ ul.language-menu-dropdown{
   .container-fluid{
     width:100%;
   }
+  .padded-transit-map{
+    padding-top:35px;
+  }
 }
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max){
   .container-fluid{
     width:100%;
+  }
+  .padded-transit-map{
+    padding-top:35px;
   }
 }
 @media (min-width: $screen-md-min) and (max-width: $screen-md-max){
   .container-fluid{
     width: 100%;
   }
+  .padded-transit-map{
+    padding-top:70px;
+  }
+
 }
 @media (min-width: $screen-lg-min) {
+  .padded-transit-map{
+    padding-top:70px;
+  }
   .container-fluid{
     width: $screen-lg-min;
   }
@@ -508,7 +521,21 @@ ul.language-menu-dropdown{
   }
 }
 
-
+.leg-start-time,
+.leg-end-time{
+  position:absolute;
+  top:-15px;
+  left:-5px;
+  border:1px solid $borderColor;
+  border-radius:13px;
+  padding:3px;
+  background-color:white;
+}
+.leg-end-time{
+  top:unset;
+  bottom:-15px;
+  z-index:3;
+}
 #my-rides{
   .itinerary-details{
     padding-right:1em;
@@ -523,21 +550,6 @@ ul.language-menu-dropdown{
   }
   .cancelled{
     background-color:#DDD;
-  }
-  .leg-start-time,
-  .leg-end-time{
-    position:absolute;
-    top:-15px;
-    left:-5px;
-    border:1px solid $borderColor;
-    border-radius:13px;
-    padding:3px;
-    background-color:white;
-  }
-  .leg-end-time{
-    top:unset;
-    bottom:-15px;
-    z-index:3;
   }
   .row{
     height:100%;
