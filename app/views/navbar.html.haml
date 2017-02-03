@@ -27,11 +27,11 @@
             %a.btn.btn-link{ href: '/#!/my_trips', style: 'padding:6px 12px; border:1px solid transparent; display:inline-block;'}
               %h4.display-inline
                 {{'my_trips' | translate}}
-          %li{"ng-show"=>"email"}
+          %li{"ng-hide"=>"isGuest"}
             %button.btn.btn-link{"ng-click"=>"logout()"}
               %h4.display-inline
                 {{"logout" | translate}}
-          %li.dropdown{ng:{show:"!email"}}
+          %li.dropdown{ng:{show:"isGuest"}}
             %button.btn.btn-link.dropdown-toggle{type:"button", "data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
               %h4.display-inline
                 {{"log_in" | translate}}
@@ -40,7 +40,7 @@
               %li
                 .row
                   .col-md-12{"ng-include" => "'/views/login-form.html'"}
-          %li.dropdown{"ng-show"=>"!email"}
+          %li.dropdown{"ng-show"=>"isGuest"}
             %button.btn.btn-link.dropdown-toggle{type:"button", "data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
               %h4.display-inline
                 {{"sign_up" | translate}}

@@ -21,6 +21,7 @@ angular.module('oneClickApp')
         $scope.loginError = false;
         planService.authentication_token = result.authentication_token;
         planService.email = result.email;
+        ipCookie('authd', true);
         if($scope.rememberme == true){
           ipCookie('email', planService.email, {expires: 7, expirationUnit: 'days'});
           ipCookie('authentication_token', planService.authentication_token, {expires: 7, expirationUnit: 'days'});

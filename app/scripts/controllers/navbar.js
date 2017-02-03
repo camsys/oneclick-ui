@@ -72,31 +72,47 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
       }
     }
   }
-
+  function loadProfile(response){
+    if(!response.data){
+      console.error('no profile')
+      return;
+    }
+    var profile = response.data;
+    //console.log('response', profile);
+    $scope.username = profile.first_name +' '+ profile.last_name;
+    that.$scope.first_name = profile.first_name;
+    that.$scope.last_name = profile.last_name;
+    if(profile.lang && profile.lang != $scope.languageSelected ){
+      changeLanguage(profile.lang);
+    }
+  }
   var initialize = function() {
     that.$scope.email = ipCookie('email');
     that.$scope.authentication_token = ipCookie('authentication_token');
+    that.$scope.isGuest = (ipCookie('authd') != true);
     that.$scope.first_name = ipCookie('first_name');
     that.$scope.last_name = ipCookie('last_name');
     if(that.$scope.email){
       planService.email = $scope.email;
       planService.authentication_token = $scope.authentication_token;
-      planService.getProfile($http).then(function(response){
-        if(!response.data){
-          console.error('no profile')
-          return;
-        }
-        var profile = response.data;
-        //console.log('response', profile);
-        $scope.username = profile.first_name +' '+ profile.last_name;
-        that.$scope.first_name = profile.first_name;
-        that.$scope.last_name = profile.last_name;
-        if(profile.lang && profile.lang != $scope.languageSelected ){
-          changeLanguage(profile.lang);
-        }
-      }).catch(console.error);
+      planService.getProfile($http)
+      .then( loadProfile )
+      .catch( console.error );
     }else{
-      planService.getProfile($http);
+      planService.getGuestToken($http)
+      .then(function(response){
+        that.$scope.email = response.data.email;
+        that.$scope.authentication_token = response.data.authentication_token;
+        that.$scope.isGuest = true;
+        ipCookie('email', that.$scope.email);
+        ipCookie('authentication_token', that.$scope.authentication_token);
+        planService.getProfile($http)
+        .then( loadProfile )
+        .catch( console.error );
+      })
+      .catch(function(e){
+        console.error(e);
+      });
     }
   };
   initialize();
@@ -106,6 +122,8 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
     .then(function(response){
       delete ipCookie.remove('email');
       delete ipCookie.remove('authentication_token');
+      ipCookie.remove('authd');
+      $scope.isGuest = true;
       sessionStorage.clear();
       localStorage.clear();
       delete $scope.email;
