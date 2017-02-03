@@ -853,7 +853,13 @@ angular.module('oneClickApp')
 
       this.getGuestToken = function($http){
         var planService = this;
-        return $http.get(urlPrefix + 'api/v1/users/get_guest_token');
+        var promise  = $http.get(urlPrefix + 'api/v1/users/get_guest_token');
+        promise.then(function(response){
+          planService.email = response.data.email;
+          planService.authentication_token = response.data.authentication_token;
+        });
+        return promise;
+
       }
       this.buildProfileUpdateRequest = function(profile){
         //cleanup profile for update request
