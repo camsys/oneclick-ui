@@ -573,9 +573,12 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
           {
             input: address,
             bounds: new google.maps.LatLngBounds(
-                      //PA 7 county region
-                      new google.maps.LatLng(39.719635, -79.061985),
-                      new google.maps.LatLng(40.730426, -76.153193)
+//                      //PA 7 county region
+//                      new google.maps.LatLng(39.719635, -79.061985),
+//                      new google.maps.LatLng(40.730426, -76.153193)
+                      //Utah
+                      new google.maps.LatLng(37.000399, -114.05060),
+                      new google.maps.LatLng(42.013078, -109.044967)
                     )
           }, function(list, status)
           {
