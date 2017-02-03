@@ -12,11 +12,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
 
   var eightAm = new Date();
   var countryFilter = $filter('noCountry');
-  var checkShowMap = function(){
-    if(Object.keys( $scope.toFromMarkers ).length == 0){
-      $scope.showMap = false;
-    }
-  }
   debugHelper = function(){
     setTimeout(function(){
       var exit = false;
@@ -78,6 +73,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
     //plan the trip if planService is ready
     if(planService.from && planService.to){
       _planTrip();
+      return;
     }
 
     //try selecting $scope.to and $scope.from
@@ -183,7 +179,9 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
         }
         planService.searchResults = result;
         if(callback && typeof callback === "function"){ callback(); }
-      }).catch(console.error);
+      }).catch(function(e){
+        console.error(e);
+      });
     //formerly _bookTrip();
   }
   $scope.itineraries = planService.transitResult || [];
@@ -214,7 +212,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
     $scope.purposes = {};
     $scope.purposesQuestions = planService.purposes || [];
     $scope.itineraryModes = planService.itineraryModes;
-    //FIXME purposes does not have defaults.
 
     //make sure we have the profile before setting question defaults
     planService.getProfile($http).then(function(){
@@ -224,8 +221,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
       if($scope.accommodationsQuestions.length > 0){
         setQuestionsDefaults('accommodations')( planService.profile.accommodations || [] );
       }
-      //planService.getCharacteristicsQuestions($http).then( setQuestionsDefaults('characteristics') );
-      //planService.getAccommodationQuestions($http).then( setQuestionsDefaults('accommodations') );
     });
   }
   $scope.$on('PlanService:updateItineraryResults', function(event, data){
@@ -233,8 +228,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
   });
 
 
-
-
+  //initialize rideTime to today, unless there's a fromDate in planService
   if(planService.fromDate > 9000){
     $scope.rideTime = new Date(planService.fromDate);
   }else{
@@ -267,8 +261,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
   eightAm.setMinutes(0);
   eightAm.setHours(8);
   eightAm.setDate( eightAm.getDate() - 1 );
-  $scope.minReturnDate = new Date();
-  $scope.marker = null;
   $scope.toFromMarkers = {};
   $scope.toFromIcons={'to' : '//maps.google.com/mapfiles/markerB.png',
                       'from' : '//maps.google.com/mapfiles/marker_greenA.png' };
@@ -289,31 +281,11 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
     $scope.mapOptions.scaleControl = false;
     $scope.mapOptions.draggable = false;
   }
-  $scope.step = $routeParams.step;
-  $scope.disableNext = false;
   $scope.showNext = true;
   $scope.showEmail = false;
   $scope.invalidEmail = false;
-  $scope.showBack = false;
   $scope.planService = planService;
-  $scope.fromMoment = moment( planService.fromDate || eightAm );
-  $scope.returnMoment = null;
-  $scope.serviceHours = null;
-  $scope.fromTime = '';
-  if(planService.fromDate && planService.returnDate){
-    $scope.howLongMinutes = moment(planService.returnDate).diff( planService.fromDate, 'minutes');
-    $scope.howLong = {minutes: ''+ $scope.howLongMinutes };
-  }else{
-    $scope.howLong = {minutes:'0'};
-  }
-  $scope.howLongOptions = [];
-  $scope.fromDate = new Date();
-  $scope.returnDate = new Date();
-  $scope.showMap = false;
-  $scope.location = $location.path();
   $scope.errors = {};
-  $scope.showAllPurposes = false;
-  $scope.backToConfirm = planService.backToConfirm;
   $scope.loggedIn = !!planService.email;
   $scope.toDefault = countryFilter( localStorage.getItem('last_destination') || '');
   $scope.to = countryFilter( planService.to || '');
@@ -365,13 +337,11 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
   }
 
   $scope.clearFrom = function(){
-    //$scope.showMap = false;
     $scope.showNext = false;
     $scope.from = null;
   }
 
   $scope.clearTo = function(){
-    //$scope.showMap = false;
     $scope.showNext = false;
     $scope.to = null;
   }
@@ -459,7 +429,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
       if((!place || 6 > place.length) && $scope.toFromMarkers[toFrom]){
         $scope.toFromMarkers[toFrom].setMap(null);
       }
-      checkShowMap();
       lastMappedPlaces[toFrom] = place;
       ignoreBlur = false;
       return;
@@ -478,13 +447,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
       //otherwise, run selectPlace
       $scope.selectPlace(place, toFrom);
     });
-  }
-
-  $scope.whereShowNext = function(){
-    if( !$scope.toFromMarkers.from || !$scope.toFromMarkers.to){
-      return false;
-    }
-    return (!!$scope.toFromMarkers.from.map && !!$scope.toFromMarkers.to.map);
   }
 
   $scope.mapFrom = function(place){
@@ -523,7 +485,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
   $scope.selectPlace = function(place, toFrom, loadLocationsIfNeeded, parentPromise){
     //when a place is selected, update the map
     $scope.poi = null;
-    $scope.showMap = true;
     $scope.showNext = false;
     var placeIdPromise = $q.defer();
     $scope.placeLabels = $scope.placeLabels || [];
@@ -536,10 +497,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
     if($scope.toFromMarkers[toFrom]){
       $scope.toFromMarkers[toFrom].setMap(null);
     }
-    if(!place){
-      checkShowMap();
-      return;
-    }
+    if(!place){return;}
     var selectedIndex = $scope.placeLabels.indexOf(place);
 
     if(-1 < selectedIndex && $scope.placeLabels[selectedIndex] == currentLocationLabel){
@@ -597,7 +555,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
               $scope.errors[toFrom] = 'Could not find address';
               $scope.errors['noResults'+toFrom] = true;
               parentPromise && parentPromise.reject && parentPromise.reject('No results found');
-              checkShowMap();
             }else{
               var placeId = list[0].place_id;
               placeIdPromise.resolve(placeId);
@@ -625,7 +582,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             if(datatypes.indexOf('street_number') < 0 || datatypes.indexOf('route') < 0){
               if(datatypes.indexOf('route') < 0){
                 $scope.toFromMarkers[toFrom] && $scope.toFromMarkers[toFrom].setMap(null);
-                checkShowMap();
                 loadLocationsIfNeeded || bootbox.alert("The location you selected does not have have a street associated with it, please select another location.");
                 $scope.errors[toFrom] = "The location you selected does not have have a street associated with it, please select another location.";
                 return;
@@ -644,7 +600,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
                   if($scope.toFromMarkers[toFrom]){
                     $scope.toFromMarkers[toFrom].setMap(null);
                   }
-                  checkShowMap();
                   loadLocationsIfNeeded || bootbox.alert("The location you selected does not have a street number associated, please select another location.");
                   $scope.errors[toFrom] = "The location you selected does not have a street number associated, please select another location.";
                   return;
@@ -733,7 +688,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             }
             else{
               $scope.toFromMarkers[toFrom].setMap(null);
-              checkShowMap();
               //bootbox.alert("The location you selected does not have a street number associated, please select another location.");
               $scope.errors[toFrom] = "The location you selected does not have a street number associated, please select another location.";
               //$scope.stopSpin();
@@ -776,9 +730,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             $scope.toFromMarkers[toFrom].setMap(null);
           }
 
-          $scope.showMap = true;
-          $scope.showUndo = true;
-          $scope.disableNext = false;
           $scope.showNext = true;
           var filteredAddress = countryFilter(result.formatted_address);
           $scope.errors[toFrom] = '';
@@ -786,24 +737,9 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
           if(toFrom == 'from'){
             planService.fromDetails = result;
             planService.from = place;
-            /*
-            $scope.from = countryFilter(result.formatted_address);
-            if($scope.from !== filteredAddress){
-              $scope.from = filteredAddress;
-              $scope.errors[toFrom] = 'Check address';
-            }
-            planService.from = $scope.from;
-            */
           }else if(toFrom == 'to'){
             planService.toDetails = result;
             planService.to = place;
-            /*
-            if($scope.to !== filteredAddress){
-              $scope.to = filteredAddress;
-              $scope.errors[toFrom] = 'Check address';
-            }
-            planService.to = $scope.to;
-            */
           }
           //do the google things after a timeout
           setTimeout(function(){
@@ -841,12 +777,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             }
           }, 1);
         }else{
-          //$scope.showMap = false;
           $scope.showNext = false;
           if($scope.toFromMarkers[toFrom]){
             $scope.toFromMarkers[toFrom].setMap(null);
           }
-          checkShowMap();
           $scope.errors['rangeError'+toFrom] = true;
           bootbox.alert("The location you selected is outside the service area.");
           $scope.errors[toFrom] = "The location you selected is outside the service area.";
