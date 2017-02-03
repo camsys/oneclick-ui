@@ -46,4 +46,11 @@
   color: #fff;
 }
 
-
+.autocomplete li[role="button"]{
+  cursor: default;
+  pointer-events:none;
+}
+.autocomplete li.selectable[role="button"]{
+  cursor: pointer;
+  pointer-events:auto;
+}
