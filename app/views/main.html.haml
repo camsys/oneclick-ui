@@ -8,7 +8,7 @@
             %h1 {{"welcome_message" | translate}}
           .row
             .col-md-12.col-xs-12
-              %form{name:'ride_search_form'}
+              %form{name:'ride_search_form', ng:{submit:'ride_search_form.$valid && planFromLanding()'}}
                 #splash-search-form.row
                   .block-one
                     %autocomplete{ placeholder: '"origin_placeholder"',
@@ -20,6 +20,7 @@
                         'data' => 'locations',
                         'on-type'=> 'getLocations',
                         'on-select' => 'selectFrom',
+                        'on-blur'=> 'mapFrom',
                         'autocomplete-required' => 'true',
                         'inputid' => 'fromInput',
                         ng: {model: 'from', 'attr-mobile' => '{{mobile}}'} }
@@ -32,6 +33,7 @@
                         'data' => 'locations',
                         'on-type'=> 'getLocations',
                         'on-select' => 'selectTo',
+                        'on-blur'=> 'mapTo',
                         'autocomplete-required' => 'true',
                         'inputid' => 'toInput',
                         ng: {class:'{error:form.input.$error.required}', model: 'to', 'attr-mobile' => '{{mobile}}'}}
@@ -60,7 +62,8 @@
                 .row
                   .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3.col-xs-12
                     .block-ok
-                      %button.btn.btn-block.btn-primary{type:'button', ng:{class:'{disabled:!ride_search_form.$valid}', click:'ride_search_form.$valid && planFromLanding()'}} {{"ok_button" | translate}}
+                      %button.btn.btn-block.btn-primary{type:'submit', ng:{class:'{disabled:!ride_search_form.$valid}'}}
+                        {{"ok_button" | translate}}
     #map{style:"width:500px; height:500px;display:none;"}
       .map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 .container-full
