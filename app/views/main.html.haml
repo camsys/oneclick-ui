@@ -11,32 +11,40 @@
               %form{name:'ride_search_form', ng:{submit:'ride_search_form.$valid && planFromLanding()'}}
                 #splash-search-form.row
                   .block-one
-                    %autocomplete{ placeholder: '"origin_placeholder"',
-                        class: 'autocomplete_wrapper',
-                        id:'fromInputDiv',
-                        tabindex: 'null',
-                        'inputclass' => 'form-control',
-                        'disable-filter' => 'true',
-                        'data' => 'locations',
-                        'on-type'=> 'getLocations',
-                        'on-select' => 'selectFrom',
-                        'on-blur'=> 'mapFrom',
-                        'autocomplete-required' => 'true',
-                        'inputid' => 'fromInput',
-                        ng: {model: 'from', 'attr-mobile' => '{{mobile}}'} }
-                    %autocomplete{ placeholder: '"destination_placeholder"',
-                        class: 'autocomplete_wrapper',
-                        id:'toInputDiv',
-                        tabindex: 'null',
-                        'inputclass' => 'form-control',
-                        'disable-filter' => 'true',
-                        'data' => 'locations',
-                        'on-type'=> 'getLocations',
-                        'on-select' => 'selectTo',
-                        'on-blur'=> 'mapTo',
-                        'autocomplete-required' => 'true',
-                        'inputid' => 'toInput',
-                        ng: {class:'{error:form.input.$error.required}', model: 'to', 'attr-mobile' => '{{mobile}}'}}
+                    #origin
+                      %autocomplete{ placeholder: '"origin_placeholder"',
+                          class: 'autocomplete_wrapper',
+                          id:'fromInputDiv',
+                          tabindex: 'null',
+                          'inputclass' => 'form-control',
+                          'disable-filter' => 'true',
+                          'data' => 'locations',
+                          'on-type'=> 'getLocations',
+                          'on-select' => 'selectFrom',
+                          'on-blur'=> 'mapFrom',
+                          'autocomplete-required' => 'true',
+                          'inputid' => 'fromInput',
+                          ng: {model: 'from', 'attr-mobile' => '{{mobile}}'} }
+                      .text-right{ng:{show:'errors.from'}}
+                        .error
+                          {{errors.from}}
+                    #destination
+                      %autocomplete{ placeholder: '"destination_placeholder"',
+                          class: 'autocomplete_wrapper',
+                          id:'toInputDiv',
+                          tabindex: 'null',
+                          'inputclass' => 'form-control',
+                          'disable-filter' => 'true',
+                          'data' => 'locations',
+                          'on-type'=> 'getLocations',
+                          'on-select' => 'selectTo',
+                          'on-blur'=> 'mapTo',
+                          'autocomplete-required' => 'true',
+                          'inputid' => 'toInput',
+                          ng: {class:'{error:form.input.$error.required}', model: 'to', 'attr-mobile' => '{{mobile}}'}}
+                      .text-right{ng:{show:'errors.to'}}
+                        .error
+                          {{errors.to}}
                   .block-two
                     %label.hide{:for => "ride-when"} {{"depart_at" | translate}}/{{"arrive_by" | translate}}?
                     %select#ride-when.select.form-control{ng: {model: 'fromTimeType'} }
