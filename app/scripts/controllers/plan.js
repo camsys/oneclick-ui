@@ -578,7 +578,9 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
                 }
               });
             });
-
+            $scope.checkServiceArea(result, place, toFrom, parentPromise);
+            return;
+            /*
             if(datatypes.indexOf('street_number') < 0 || datatypes.indexOf('route') < 0){
               if(datatypes.indexOf('route') < 0){
                 $scope.toFromMarkers[toFrom] && $scope.toFromMarkers[toFrom].setMap(null);
@@ -608,6 +610,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             }
 
             $scope.checkServiceArea(result, place, toFrom, parentPromise);
+            */
 
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
