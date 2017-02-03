@@ -142,6 +142,7 @@ angular.module('oneClickApp')
     'WALK':'walk.png',
     'BUS':'transit.png',
     'TRAM':'streetcar.png',
+    'RAIL':'rail.png',
     'BICYCLE':'bicycle.png',
     'CAR':'auto.png'
   };
