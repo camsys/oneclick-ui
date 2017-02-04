@@ -1,7 +1,7 @@
 .row{'ng-show'=>'!itinerary.comment && !itinerary.phone && !itinerary.url && !itinerary.schedule.length'}
   .col-xs-12.text-center
     %h3 No more details available.
-.row{style:'display:flex; flex-wrap:wrap;'}
+.row
   .col-sm-7.col-xs-12
     .row{'ng-show'=>'itinerary.comment'}
       .col-xs-12
@@ -18,7 +18,7 @@
         %h3 {{'more_information' | translate}}
         %h4 
           {{visit_url_for_more_info | translate:itinerary}}
-  .col-sm-5.col-xs-12{style:'display:flex; align-items:center;'}
+  .col-sm-5.col-xs-12
     .row{'ng-show'=>'itinerary.schedule.length > 0', style:'padding-bottom:20px;'}
       .col-xs-12
         %h3 {{'schedule' | translate}}
