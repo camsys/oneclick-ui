@@ -33,7 +33,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
       $scope.from = '100 North, Salt Lake City, UT';
       $scope.from = '1596 W Warnock Ave, West Valley City, UT 84119';
       $scope.from = 'Tooele High School';
-      $scope.from = 'Amtrak Salt Lake City Station, South 600 West, Salt Lake City, UT';
+      $scope.from = 'Amtrak Salt Lake City Station';
       mapOnBlur($scope.from, 'from');
       setTimeout(function(){
         $scope.to = '449 E King St, York, PA ';//'1920 Trolley Rd, York, PA'
@@ -347,10 +347,12 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
   }
 
   $scope.getFromLocations = function(typed){
-    $scope.getLocations(typed, true);
+    planService.from = '';
+    $scope.getLocations(typed, false);
   }
 
   $scope.getToLocations = function(typed){
+    planService.to = '';
     $scope.getLocations(typed, false);
   }
 
