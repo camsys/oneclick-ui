@@ -31,7 +31,7 @@
             'inputclass' => 'form-control',
             'disable-filter' => 'true',
             'data' => 'locations',
-            'on-type'=> 'getLocations',
+            'on-type'=> 'getFromLocations',
             'on-focus'=> 'focusFrom',
             'on-blur'=> 'mapFrom',
             'on-select' => 'selectFrom',
@@ -47,7 +47,7 @@
             'inputclass' => 'form-control',
             'disable-filter' => 'true',
             'data' => 'locations',
-            'on-type'=> 'getLocations',
+            'on-type'=> 'getToLocations',
             'on-focus'=> 'focusTo',
             'on-blur'=> 'mapTo',
             'on-select' => 'selectTo',
@@ -84,6 +84,7 @@
       .col-xs-12{style:'padding-top:15px;'}
         %button#customize_your_trip.btn.btn-link{type:"button", 
                 style:'padding-left:0px; padding-left: 0px; white-space: normal; text-align: left;', 
+                ng:{class:'{ collapsed: isMobile() }'},
                 data:{toggle:"collapse", target:"#sidebar-collapse-1"}, "aria-label"=>"toggle trip options"}
           %h3{style:'margin:0px;'}
             {{"customize_your_trip" | translate }}
