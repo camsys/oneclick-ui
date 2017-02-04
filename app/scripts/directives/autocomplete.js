@@ -274,6 +274,7 @@ app.directive('autocomplete', function() {
           <ul ng-show="completing && (suggestions | filter:searchFilter).length > 0">\
             <li\
               suggestion\
+              tabindex="-1"\
               ng-repeat="suggestion in suggestions"\
               index="{{ $index }}"\
               val="{{ suggestion.label }}"\
