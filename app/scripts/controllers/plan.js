@@ -164,7 +164,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
       .postItineraryRequest($http)
       .then(function(response){
         if(!response.data){
-          bootbox.alert("An error occured on the server, please retry your search or try again later.");
+          bootbox.alert( $translate.instant('server_error') );
         }
         var result = response.data;
         var i;
@@ -508,14 +508,14 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
     else if(-1 < selectedIndex && selectedIndex < $scope.poiData.length){
       //this is a POI result, get the 1Click location name
       $scope.poi = $scope.poiData[selectedIndex];
-      $scope.checkServiceArea($scope.poi, $scope.poi.formatted_address, toFrom, parentPromise);
+      $scope.checkServiceArea($scope.poi, $scope.poi.formatted_address, toFrom, false, parentPromise);
       return true;
     }
     else{
 
       var placeId = $scope.placeIds[selectedIndex];
       if(placeId) {
-        placeIdPromise.resolve(placeId);
+        placeIdPromise.resolve({placeId:placeId, updateResult:false});
       }
       else{
         var labelIndex = $scope.placeLabels.indexOf(place);
@@ -557,14 +557,14 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
               parentPromise && parentPromise.reject && parentPromise.reject('No results found');
             }else{
               var placeId = list[0].place_id;
-              placeIdPromise.resolve(placeId);
+              placeIdPromise.resolve({placeId:placeId, updateResult:true});
             }
           });
       }
 
-      placeIdPromise.promise.then(function(placeId) {
+      placeIdPromise.promise.then(function(data) {
         var placesService = new google.maps.places.PlacesService($scope.whereToMap);
-        placesService.getDetails( { 'placeId': placeId}, function(result, status) {
+        placesService.getDetails( { 'placeId': data.placeId}, function(result, status) {
           if (status == google.maps.GeocoderStatus.OK) {
 
             //verify the location has a street address
@@ -581,7 +581,6 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             if(datatypes.indexOf('street_number') < 0 || datatypes.indexOf('route') < 0){
               if(datatypes.indexOf('route') < 0){
                 $scope.toFromMarkers[toFrom] && $scope.toFromMarkers[toFrom].setMap(null);
-                loadLocationsIfNeeded || bootbox.alert("The location you selected does not have have a street associated with it, please select another location.");
                 $scope.errors[toFrom] = "The location you selected does not have have a street associated with it, please select another location.";
                 return;
               }else if(datatypes.indexOf('street_number') < 0){
@@ -599,14 +598,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
                   if($scope.toFromMarkers[toFrom]){
                     $scope.toFromMarkers[toFrom].setMap(null);
                   }
-                  loadLocationsIfNeeded || bootbox.alert("The location you selected does not have a street number associated, please select another location.");
                   $scope.errors[toFrom] = "The location you selected does not have a street number associated, please select another location.";
                   return;
                 }
               }
             }
 
-            $scope.checkServiceArea(result, place, toFrom, parentPromise);
+            $scope.checkServiceArea(result, place, toFrom, data.updateResult, parentPromise);
 
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
@@ -694,22 +692,22 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             }
           }
         }
-        $scope.checkServiceArea(result, place, toFrom);
+        $scope.checkServiceArea(result, place, toFrom, true);
       }
       else {
-        alert('Geocode was not successful for the following reason: ' + status);
+        bootbox.alert('Geocode was not successful for the following reason: ' + status);
         //$scope.stopSpin();
       }
     });
   }
 
-  $scope.checkServiceArea = function(result, place, toFrom, parentPromise){
+  $scope.checkServiceArea = function(result, place, toFrom, updateResult, parentPromise){
     var serviceAreaPromise = planService.checkServiceArea($http, result);
     $scope.showNext = false;
     serviceAreaPromise.
       then(function(response) {
         if(!response.data){
-          bootbox.alert("An error occured on the server, please retry your search or try again later.");
+          bootbox.alert( $translate.instant('server_error') );
           return;
         }
         var serviceAreaResult = response.data;
@@ -730,15 +728,27 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
           }
 
           $scope.showNext = true;
-          var filteredAddress = countryFilter(result.formatted_address);
+          var filteredAddress = countryFilter(''+result.name +' '+result.vicinity);
           $scope.errors[toFrom] = '';
           
           if(toFrom == 'from'){
             planService.fromDetails = result;
-            planService.from = place;
+            if(updateResult){
+              $scope.from = filteredAddress;
+              planService.from = $scope.from;
+            }else{
+              planService.from = place;
+            }
+            lastFrom = $scope.from;
           }else if(toFrom == 'to'){
             planService.toDetails = result;
-            planService.to = place;
+            if(updateResult){
+              $scope.to = filteredAddress;
+              planService.to = $scope.to;
+            }else{
+              planService.to = place;
+            }
+            lastTo = $scope.to;
           }
           //do the google things after a timeout
           setTimeout(function(){
@@ -781,7 +791,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             $scope.toFromMarkers[toFrom].setMap(null);
           }
           $scope.errors['rangeError'+toFrom] = true;
-          bootbox.alert("The location you selected is outside the service area.");
+          //bootbox.alert("The location you selected is outside the service area.");
           $scope.errors[toFrom] = "The location you selected is outside the service area.";
           //$scope.stopSpin();
         }
