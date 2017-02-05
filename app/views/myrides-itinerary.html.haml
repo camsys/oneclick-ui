@@ -34,7 +34,7 @@
               %i.fa.fa-times-circle.fa-stack-2x{style: 'color: red;'}
             {{'cancel' | translate}}
         .col-sm-3.col-xs-6
-          .btn.btn-bordered.btn-block{ng: {click: 'showEmail=!showEmail; $event.stopPropagation();'}}
+          .btn.btn-bordered.btn-block{ng: {click: 'toggleShowEmail(); $event.stopPropagation();'}}
             %span.fa-stack
               %i.fa.fa-envelope-o.fa-stack-2x
             {{'email' | translate}}

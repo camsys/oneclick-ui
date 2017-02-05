@@ -76,6 +76,9 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
       }
     });
   };
+  $scope.toggleShowEmail = function(){
+    $scope.showEmail =! $scope.showEmail;
+  }
   $scope.sendEmail = function(trip){
     var tripIds = [];
     var emailString = $scope.emailAddresses.text;
