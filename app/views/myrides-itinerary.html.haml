@@ -38,7 +38,7 @@
             %span.fa-stack
               %i.fa.fa-envelope-o.fa-stack-2x
             {{'email' | translate}}
-      .email-form{ng: {show: 'showEmail'}}
+      %form.email-form{ng: {show: 'showEmail', submit:'invalidEmail = sendEmail(trip);'}}
         .row
           .col-xs-12.col-sm-8.col-sm-offset-2.text-left
             {{'email_your_ride_details' | translate}}
@@ -49,7 +49,7 @@
           .col-xs-10.col-sm-6.col-sm-offset-2{'style' => 'line-height: 2em; padding-right: 0px;'}
             %input.form-control{type:'text', name:'emailAddresses', style: 'font-size: .9em; border-top-right-radius:0px; border-bottom-right-radius:0px;', ng: {model: 'emailAddresses.text'}}
           .col-xs-2.col-sm-2{'style' => 'line-height: 2em; padding-left: 0px;'}
-            .btn.btn-success.btn-block{style: 'padding-left: 0px; padding-right: 0px;min-width: 20px; border-top-left-radius:0px; border-bottom-left-radius:0px;', ng: {click: 'invalidEmail = sendEmail(trip); $event.stopPropagation();'}}
+            %button.btn.btn-success.btn-block{type:'submit', style: 'padding-left: 0px; padding-right: 0px;min-width: 20px; border-top-left-radius:0px; border-bottom-left-radius:0px;'}
               %i.fa.fa-envelope-o.fa-lg{style:'color: white;'}
                 %span
                   {{'send' | translate}}
