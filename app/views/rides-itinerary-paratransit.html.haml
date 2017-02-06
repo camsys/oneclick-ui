@@ -1,12 +1,12 @@
-.row{'ng-show'=>'!itinerary.comment && !itinerary.phone && !itinerary.url && !itinerary.schedule.length'}
+.row{'ng-show'=>'!itinerary.service_comments[languageSelected] && !itinerary.phone && !itinerary.url && !itinerary.schedule.length'}
   .col-xs-12.text-center
     %h3 No more details available.
 .row
   .col-sm-7.col-xs-12
-    .row{'ng-show'=>'itinerary.comment'}
+    .row{'ng-show'=>'itinerary.service_comments[languageSelected]'}
       .col-xs-12
         %h3 {{'about' | translate}}
-        %h4 {{itinerary.comment}}
+        %h4 {{itinerary.service_comments[languageSelected]}}
     .row{'ng-show'=>'itinerary.phone'}
       .col-xs-12
         %h3 {{'next_steps' | translate}}
