@@ -109,7 +109,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             bootbox.alert("An error occurred on the server, your email was not sent.");
             return;
           }
-          bootbox.alert('Your email was sent');
+          bootbox.alert( $translate.instant('your_email_was_sent') );
         });
     });
   }

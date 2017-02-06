@@ -120,13 +120,11 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
         _planTrip();
       }).catch(function(e){
         if(!success){
-          $scope.errors.to = 'Address not found';
-          console.error('Address not found', e);
+          $scope.errors.to = $translate.instant('address_not_found');
         }
       });
     }).catch(function(e){
-      $scope.errors.from = 'Address not found';
-      console.error('Address not found', e);
+      $scope.errors.from = $translate.instant('address_not_found');
     });
   }
   //handle login -- update results
@@ -554,7 +552,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
                   return;
                 }
               }
-              $scope.errors[toFrom] = 'Could not find address';
+              $scope.errors[toFrom] = $translate.instant('address_not_found');
               $scope.errors['noResults'+toFrom] = true;
               parentPromise && parentPromise.reject && parentPromise.reject('No results found');
             }else{
@@ -583,7 +581,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             if(datatypes.indexOf('street_number') < 0 || datatypes.indexOf('route') < 0){
               if(datatypes.indexOf('route') < 0){
                 $scope.toFromMarkers[toFrom] && $scope.toFromMarkers[toFrom].setMap(null);
-                $scope.errors[toFrom] = "The location you selected does not have have a street associated with it, please select another location.";
+                $scope.errors[toFrom] = $translate.instant('no_street_address');
                 return;
               }else if(datatypes.indexOf('street_number') < 0){
                 var streetNameIndex = place.indexOf(route);
@@ -600,7 +598,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
                   if($scope.toFromMarkers[toFrom]){
                     $scope.toFromMarkers[toFrom].setMap(null);
                   }
-                  $scope.errors[toFrom] = "The location you selected does not have a street number associated, please select another location.";
+                  $scope.errors[toFrom] = $translate.instant('no_street_address');
                   return;
                 }
               }
@@ -668,8 +666,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
         if(datatypes.indexOf('street_number') < 0 || datatypes.indexOf('route') < 0){
           if(datatypes.indexOf('route') < 0){
             $scope.toFromMarkers[toFrom].setMap(null);
-            //bootbox.alert("The location you selected does not have have a street associated with it, please select another location.");
-            $scope.errors[toFrom] = "The location you selected does not have have a street associated with it, please select another location.";
+            $scope.errors[toFrom] = $translate.instant('no_street_address');
             //$scope.stopSpin();
             return;
           }
@@ -687,8 +684,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             }
             else{
               $scope.toFromMarkers[toFrom].setMap(null);
-              //bootbox.alert("The location you selected does not have a street number associated, please select another location.");
-              $scope.errors[toFrom] = "The location you selected does not have a street number associated, please select another location.";
+              $scope.errors[toFrom] = $translate.instant('no_street_address');
               //$scope.stopSpin();
               return;
             }
@@ -793,8 +789,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             $scope.toFromMarkers[toFrom].setMap(null);
           }
           $scope.errors['rangeError'+toFrom] = true;
-          //bootbox.alert("The location you selected is outside the service area.");
-          $scope.errors[toFrom] = "The location you selected is outside the service area.";
+          $scope.errors[toFrom] = $translate.instant('outside_service_area');
           //$scope.stopSpin();
         }
         //$scope.stopSpin();
