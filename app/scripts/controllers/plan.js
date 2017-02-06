@@ -733,18 +733,18 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
             planService.fromDetails = result;
             if(updateResult){
               $scope.from = filteredAddress;
-              planService.from = $scope.from;
+              planService.from = ''+$scope.from;
             }else{
-              planService.from = place;
+              planService.from = ''+place;
             }
             lastFrom = $scope.from;
           }else if(toFrom == 'to'){
             planService.toDetails = result;
             if(updateResult){
               $scope.to = filteredAddress;
-              planService.to = $scope.to;
+              planService.to = ''+$scope.to;
             }else{
-              planService.to = place;
+              planService.to = ''+place;
             }
             lastTo = $scope.to;
           }

@@ -38,6 +38,9 @@
             'autocomplete-required' => 'true',
             'inputid' => 'fromInput',
             ng: {model: 'from', 'attr-mobile' => '{{mobile}}'} }
+        .text-right{ng:{show:'errors.from'}}
+          .alert-danger
+            {{errors.from}}
     .row
       .col-xs-12
         %autocomplete{ placeholder: '"destination_placeholder"',
@@ -54,6 +57,9 @@
             'autocomplete-required' => 'true',
             'inputid' => 'toInput',
             ng: {model: 'to', 'attr-mobile' => '{{mobile}}'}}
+        .text-right{ng:{show:'errors.to'}}
+          .alert-danger
+            {{errors.to}}
     .row
       .col-xs-12
         %label.hide{:for => "ride-when"} {{"depart_at" | translate}}/{{"arrive_by" | translate}}?
