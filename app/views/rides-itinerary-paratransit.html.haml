@@ -11,7 +11,7 @@
       .col-xs-12
         %h3 {{'next_steps' | translate}}
         %h4
-          %a{'ng-href'=>'itinerary.phone | telephoneLink'}
+          %a{'ng-href'=>'{{itinerary.phone | telephoneLink}}'}
             {{'call_to_register' | translate:itinerary}}
     .row{'ng-show'=>'itinerary.url'}
       .col-xs-12
