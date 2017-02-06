@@ -32,10 +32,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
 
 
   $scope.cancelTrip = function(trip) {
-    var message = "Are you sure you want to drop this trip?";
-    var successMessage = 'Your trip has been dropped.'
+    var message = $translate.instant('confirm_remove_trip');
+    if(trip.itineraries[0].booking_confirmation){
+      message = $translate.instant('confirm_cancel_trip');
+    }
+    var successMessage = $translate.instant('cancel_booking_success', trip.itineraries[0] );
     var errorHandler = function(e){
-      bootbox.alert("An error occurred, your trip was not cancelled.  Please call 1-844-PA4-RIDE for more information.");
+      bootbox.alert( $translate.instant('cancel_booking_failure', trip.itineraries[0]) );
       console.error(e)
     }
     bootbox.confirm({
