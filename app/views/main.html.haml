@@ -70,7 +70,7 @@
                 .row
                   .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3.col-xs-12
                     .block-ok
-                      %button.btn.btn-block.btn-primary{type:'submit', ng:{class:'{disabled:!ride_search_form.$valid}'}}
+                      %button.btn.btn-block.btn-primary{type:'submit', ng:{class:'{disabled:(!ride_search_form.$valid || errors.to || errors.from)}'}}
                         {{"ok_button" | translate}}
     #map{style:"width:500px; height:500px;display:none;"}
       .map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
