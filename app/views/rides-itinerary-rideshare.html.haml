@@ -11,7 +11,7 @@
             %h3.text-muted{style:'display:inline-block'}
               {{'cost_estimated' | translate}}:
             %h3.text-center{style:'display:inline-block'}
-              {{itinerary.cost | roundUp: itinerary.returned_mode_code | currency}} 
+              {{itinerary.cost | roundUp: itinerary.returned_mode_code | currency | free | translate}} 
               %span{'ng-show'=>'itinerary.returnItinerary'}
                 ({{'one_way_rate' | translate}})
         .row{style:'padding:20px 0px;'}
