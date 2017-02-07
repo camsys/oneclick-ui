@@ -141,6 +141,11 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
     var templatePath = '/views/' + (templates[ mode ] || 'rides-itinerary-templatemissing.html');
     return templatePath;
   }
+  $scope.carouselTemplate = function(){
+    //switch template depending on languageSelected
+    var templatePath = '/views/landing-carousel-' + $scope.languageSelected + '.html';
+    return templatePath;
+  }
   
 
 }]);

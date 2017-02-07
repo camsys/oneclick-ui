@@ -2,32 +2,7 @@
   %ol.carousel-indicators
     %li.active{data:{target:"#main-page-carousel", 'slide-to'=>"0"}}
     %li{data:{target:"#main-page-carousel", 'slide-to'=>"1"}}
-    %li{data:{target:"#main-page-carousel", 'slide-to'=>"2"}}
-    %li{data:{target:"#main-page-carousel", 'slide-to'=>"3"}}
-  .carousel-inner{role:"listbox"}
-    .item.active
-      .container
-        %h1
-          Welcome to the new 1click UI
-        %h3
-          Finding rides, even faster
-    .item
-      .container
-        %h1
-          Book from your smartphone
-        %h3
-          Easy to use on small devices
-    .item
-      .container
-        %h1
-          More results
-        %h3
-          Display and book trips from more service providers
-    .item
-      .container.text-center
-        %h1
-          Enjoy!
-          
+  .carousel-inner{role:"listbox", ng:{include:'carouselTemplate()'}}
   %a.left.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"prev", style:'display:none;'}
   %a.right.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"next", style:'display:none;'}
     
