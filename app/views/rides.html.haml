@@ -29,8 +29,8 @@
               .row{style:'margin-bottom: 1em;'}
                 .col-sm-8.col-xs-12
                   %h3{style:'margin: 0px;'}
-                    %span.small.text-nowrap {{itinerary.duration | seconds}} travel time,
-                    %span.small.text-nowrap {{itinerary.walk_time | seconds}} walking
+                    %span.small.text-nowrap {{itinerary.duration | seconds}} {{'travel_time' | translate}},
+                    %span.small.text-nowrap {{itinerary.walk_time | seconds}} {{'walking' | translate}}
                 .col-sm-4.col-xs-12.text-center
                   .btn.btn-link{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails', hide:'tripSelected' } }
                     %span{ng:{hide:'itinerary.showMoreDetails'}}

@@ -26,7 +26,7 @@
       .col-xs-12
         .flex-container.schedule-row{ng:{repeat:'day in itinerary.schedule track by day.day'}}
           .flex-item{style:'width:90px;'}
-            {{day.day}}
+            {{day.day | lowercase | translate}}
           .flex-item
             .startTime{style:'width:70px; ', 'ng-repeat'=>'startTime in day.start'}
               {{startTime}}

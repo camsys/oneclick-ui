@@ -26,7 +26,7 @@
                     .col-xs-4.text-right
                       %h4
                         %span.text-muted.text-capitalize{ng:{show:'$first'}} {{'depart' | translate}}
-                        %span.text-muted.text-capitalize{ng:{hide:'$first'}} {{step.relativeDirection }}
+                        %span.text-muted.text-capitalize{ng:{hide:'$first'}} {{step.relativeDirection | lowercase | translate }}
                     .col-xs-8
                       %h4{ng:{show:'$first'}} {{step.streetName}}, {{'go' | translate}} {{step.absoluteDirection}}
                       %h4{ng:{hide:'$first'}} {{'on' | translate}} {{step.streetName}} ({{step.absoluteDirection}})

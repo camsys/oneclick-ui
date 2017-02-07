@@ -2,53 +2,54 @@
 
 
 angular.module('oneClickApp')
-.filter('free', function() {
+.filter('free', function(translateFilter) {
+  console.log('translateFilter', translateFilter);
   return function(input) {
     input = input || '$0.00';
-    return input == '$0.00' ? "free" : input;
+    return input == '$0.00' ? translateFilter('free') : input;
   };
 })
-.filter('minutes', function() {
+.filter('minutes', function(translateFilter) {
   return function(m) {
     m = m || 0;
     if(m <= 60){
-      return '' + m + ' minutes';
+      return '' + m + translateFilter('minutes');
     }else{
       return '' 
-        + (Math.floor( m/60 )) + ' hours, '
-        + (m % 60) + ' minutes';
+        + translateFilter('hour_long.other', {count: (Math.floor( m/60 ))}) + ', '
+        + (m % 60) + ' ' + translateFilter('minutes');
     }
     if(!m || !m._isAMomentObject){ return ''; }
     return m.format('YY-MM-DD');
   };
 })
-.filter('seconds', function() {
+.filter('seconds', function(translateFilter) {
   return function(s) {
     s = s || 0;
     var m = Math.ceil( s/60 );
     if(m <= 60){
-      return '' + m + ' Minutes';
+      return '' + m + ' ' + translateFilter('minutes');
     }else{
       return '' 
-        + (Math.floor( m/60 )) + ' Hour, '
-        + (m % 60) + ' Minutes';
+        + (Math.floor( m/60 )) + ' ' + translateFilter('datetime.prompts.hour')+', '
+        + (m % 60) + ' ' + translateFilter('minutes');
     }
     if(!m || !m._isAMomentObject){ return ''; }
     return m.format('YY-MM-DD');
   };
-}).filter('distance', [function(){
+}).filter('distance', function(translateFilter){
   //return human readable distance when provided feet
   return function(meters){
     var feet = meters * 3.28084;
     if(feet < (5280 / 4)) {
-      return Math.round(feet) + ' feet';
+      return Math.round(feet) + ' ' + translateFilter('feet');
     }else{
       //round to tenth of a mile
       //5280 ft per mile
-      return '' + Math.round( (feet/5280) * 100 )/ 100 + ' miles';
+      return '' + Math.round( (feet/5280) * 100 )/ 100 + ' ' + translateFilter('miles');
     }
   };
-}]).filter('momentYMD', function() {
+}).filter('momentYMD', function() {
   return function(m) {
     if(!m || !m._isAMomentObject){ return ''; }
     return m.format('YY-MM-DD');
