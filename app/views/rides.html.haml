@@ -24,7 +24,7 @@
                     {{itinerary.cost | roundUp: itinerary.returned_mode_code | currency | free | translate}}
                 .col-sm-8.col-sm-offset-1.col-xs-12
                   %h3{style:'font-weight:normal'}
-                    %span.start-end-time.text-nowrap {{itinerary.start_time | date : 'h:mm a'}} to
+                    %span.start-end-time.text-nowrap {{itinerary.start_time | date : 'h:mm a'}} {{'to' | translate}}
                     %span.start-end-time.text-nowrap {{itinerary.end_time | date : 'h:mm a'}}
               .row{style:'margin-bottom: 1em;'}
                 .col-sm-8.col-xs-12
