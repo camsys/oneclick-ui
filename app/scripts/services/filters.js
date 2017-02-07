@@ -69,12 +69,35 @@ angular.module('oneClickApp')
   };
 })
 .filter('telephoneLink', function(){
+  var alphaNumTouchPad = {a:2,b:2,c:2,d:3,e:3,f:3,g:4,h:4,i:4,j:5,k:5,l:5,m:6,n:6,o:6,p:7,q:7,r:7,s:7,t:8,u:8,v:8,w:9,x:9,y:9,z:9};
+  var decimalRegexp = /\d/;
+  var nonDecimalRegexp = /\D/;
+  function alphaToNumber(alphaString){
+    //split the alphaString, only use chars that mach /\w/
+    var alphaSplit = alphaString.replace(/\W/g, '').split('');
+    alphaSplit.map(function(character){
+      //if it's a decimal, just return the character
+      if( decimalRegexp.test(character)){
+        return character;
+      }
+      return alphaNumTouchPad[ character.toLowerCase() ];
+    });
+    return alphaSplit.join('');
+  }
   return function(tel){
     //strip all non-numeric chars
+    //tel = tel.toString().trim().replace(/\D/g, '');
+    //default to empty string, trim
+    tel = tel || '';
+    tel = tel.toString().trim();
+    //return nothing if empty
     if(!tel){return '';}
-    tel = tel.toString().trim().replace(/\D/g, '');
+    //if tel has textCharacters, turn those into numbers
+    if(nonDecimalRegexp.test(tel)){
+      tel = alphaToNumber(tel);
+    }
     //prepend 1 if not there
-    if(tel.charAt(0) !== 1){
+    if( !(/^1/.test(tel)) ){
       tel = '1'+tel;
     }
     return 'tel:+' + tel;
