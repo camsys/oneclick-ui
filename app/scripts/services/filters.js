@@ -3,7 +3,6 @@
 
 angular.module('oneClickApp')
 .filter('free', function(translateFilter) {
-  console.log('translateFilter', translateFilter);
   return function(input) {
     input = input || '$0.00';
     return input == '$0.00' ? translateFilter('free') : input;
@@ -12,30 +11,33 @@ angular.module('oneClickApp')
 .filter('minutes', function(translateFilter) {
   return function(m) {
     m = m || 0;
+    var hours, minutes, translation;
     if(m <= 60){
-      return '' + m + translateFilter('minutes');
+      return '' + m + ' ' + translateFilter('minutes');
     }else{
-      return '' 
-        + translateFilter('hour_long.other', {count: (Math.floor( m/60 ))}) + ', '
-        + (m % 60) + ' ' + translateFilter('minutes');
+      hours = (Math.floor( m/60 ));
+      minutes = (m % 60);
+      translation = (hours == 1)
+          ? translateFilter('hour_long.one', {count: hours})
+          : translateFilter('hour_long.other', {count: hours});
+      //if minutes are not 0, add minutes translation
+      if(minutes > 0){
+        translation += ' ';
+        translation += (minutes == 1)
+            ? translateFilter('minute.one', {count: minutes})
+            : translateFilter('minute.other', {count: minutes});
+      }
+      return translation;
     }
     if(!m || !m._isAMomentObject){ return ''; }
     return m.format('YY-MM-DD');
   };
 })
-.filter('seconds', function(translateFilter) {
+.filter('seconds', function(minutesFilter) {
   return function(s) {
     s = s || 0;
     var m = Math.ceil( s/60 );
-    if(m <= 60){
-      return '' + m + ' ' + translateFilter('minutes');
-    }else{
-      return '' 
-        + (Math.floor( m/60 )) + ' ' + translateFilter('datetime.prompts.hour')+', '
-        + (m % 60) + ' ' + translateFilter('minutes');
-    }
-    if(!m || !m._isAMomentObject){ return ''; }
-    return m.format('YY-MM-DD');
+    return minutesFilter(m);
   };
 }).filter('distance', function(translateFilter){
   //return human readable distance when provided feet
