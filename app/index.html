@@ -29,11 +29,11 @@
       {
         var env = docHost.match(/^1click-(.+)\.camsys-apps\.com$/);
         var apiHosts = {
-          'demo': 'oneclick-uta-demo.camsys-apps.com',
-          'uta-demo': 'oneclick-uta-demo.camsys-apps.com',
-          'jta-demo': 'oneclick-jta-demo.camsys-apps.com',
-          'dev': 'oneclick-uta-qa.camsys-apps.com',
-          'qa': 'oneclick-uta-qa.camsys-apps.com'
+          'demo': 'oneclick-uta-demo.herokuapp.com',
+          'uta-demo': 'oneclick-uta-demo.herokuapp.com',
+          'jta-demo': 'oneclick-jta-demo.herokuapp.com',
+          'dev': 'oneclick-uta-qa.herokuapp.com',
+          'qa': 'oneclick-uta-qa.herokuapp.com'
         };
         //use docHost by default, for local environments
         if(!env || !env[1]){
@@ -44,7 +44,7 @@
     </script>
   </head>
   <body ng-app="oneClickApp" ng-controller="NavbarController">
-    <div style="position:fixed; bottom:1px; color:black; background-color:white; z-index:9999;" ng-hide="true == debugoff">v0.0.4-rc.24</div>
+    <div style="position:fixed; bottom:1px; color:black; background-color:white; z-index:9999;" ng-hide="true == debugoff">v0.0.4-rc.25</div>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
