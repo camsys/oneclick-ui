@@ -72,6 +72,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
   $scope.planFromLanding = function(){
     //plan the trip if planService is ready
     if(planService.from && planService.to){
+      planService.fromTimeType = $scope.fromTimeType;
       _planTrip();
       return;
     }
