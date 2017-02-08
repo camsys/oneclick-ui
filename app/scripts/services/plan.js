@@ -2,7 +2,7 @@
 
 
 angular.module('oneClickApp')
-    .service('planService', ['$rootScope', '$filter', '$q', function($rootScope, $filter, $q) {
+    .service('planService', ['$rootScope', '$filter', '$q', '$translate', function($rootScope, $filter, $q, $translate) {
 
       this.reset = function(){
         delete this.fromDate;
@@ -672,11 +672,11 @@ angular.module('oneClickApp')
         var then = moment(date).startOf('day');
         var dayDiff = now.diff(then, 'days');
         if(dayDiff == 0) {
-          description = "Today";
+          description = $translate.instant('today');
         }else if (dayDiff == -1) {
-          description = "Tomorrow";
+          description = $translate.instant('tomorrow');
         }else if (dayDiff == 1) {
-          description = "Yesterday";
+          description = $translate.instant('yesterday');
         }else{
           description = moment(date).format('dddd MMM DD, YYYY');
         }
