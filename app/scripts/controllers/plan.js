@@ -27,17 +27,14 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
         }
       }
       if(exit || $location.path() != '/'){return;}
-      $scope.rideTime = new Date('2017-2-7 11:00:00');
-      $scope.from = '2000 S Queen St, York, PA';//'1550 11th Ave, York, PA';
-      $scope.from = '401 S Queen St, York, PA';
+      $scope.rideTime = new Date();
+      $scope.rideTime.setDate($scope.rideTime.getDate() + 14);
       $scope.from = '100 North, Salt Lake City, UT';
       $scope.from = '1596 W Warnock Ave, West Valley City, UT 84119';
       $scope.from = 'Tooele High School';
       $scope.from = 'Amtrak Salt Lake City Station';
       mapOnBlur($scope.from, 'from');
       setTimeout(function(){
-        $scope.to = '449 E King St, York, PA ';//'1920 Trolley Rd, York, PA'
-        $scope.to = '960 S George St, York, PA';
         $scope.to = 'Utah DMV Tooele Office';
         $scope.to = '1860 W 4100 S, West Valley City, UT 84119';
         $scope.to = 'Utah DMV Tooele Office';

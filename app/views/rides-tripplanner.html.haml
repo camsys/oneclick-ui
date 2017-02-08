@@ -129,7 +129,7 @@
             {{'trip_purpose' | translate}}
       .row
         .col-xs-12{style:'padding-top:15px;'}
-          %select#order-by.pull-right.select.form-control{style: 'width:60%', ng:{model:'$parent.orderItinerariesBy'}}
+          %select#order-by.pull-right.select.form-control{style: 'width:60%', ng:{model:'orderItinerariesBy', change:'itineraryOrderbyChange(orderItinerariesBy)'}}
             %option{value:'cost'} {{'fare_sorter' | translate}}
             %option{value:'duration'} {{'travel_time_sorter' | translate}}
             %option{value:'walk_distance'} {{'walk_distance_sorter' | translate}}
@@ -143,7 +143,7 @@
             .mode{ng:{repeat:'mode in itineraryModes'}}
               %label{style:'width:100%;'}
                 .mode-boolean.pull-right
-                  %input{type:'checkbox', name:'{{mode}}', ng:{model:'$parent.selectedItineraryModes[mode]', change:'$parent.itineraryFilterChange()'}}
+                  %input{type:'checkbox', name:'{{mode}}', ng:{model:'$parent.selectedItineraryModes[mode]', change:'itineraryFilterChange()'}}
                 {{mode | modeName | translate}}
     .row{style:"display:none;"}
       %div.map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}

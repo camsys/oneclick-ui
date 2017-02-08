@@ -22,6 +22,9 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
   };
 
   $scope.orderItinerariesBy = 'cost';
+  $scope.itineraryOrderbyChange = function(orderby){
+    $scope.orderItinerariesBy = orderby;
+  }
   $scope.loadItineraries = function(){
     //this method is used in PlanController, as a callback for when the plan/itinerary is updated
     if(planService.itineraries){
