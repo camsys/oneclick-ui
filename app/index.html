@@ -29,15 +29,20 @@
       {
         var env = docHost.match(/^1click-(.+)\.camsys-apps\.com$/);
         var apiHosts = {
+          'production': 'oneclick-uta.herokuapp.com',
           'demo': 'oneclick-uta-demo.herokuapp.com',
           'uta-demo': 'oneclick-uta-demo.herokuapp.com',
-          'jta-demo': 'oneclick-jta-demo.herokuapp.com',
           'dev': 'oneclick-uta-qa.herokuapp.com',
-          'qa': 'oneclick-uta-qa.herokuapp.com'
+          'qa': 'oneclick-uta-qa.herokuapp.com',
+          'local': docHost
         };
-        //use docHost by default, for local environments
+        //for local envs
+        if( docHost.match(/(.+)\.local$/) ){
+          return apiHosts.local;
+        }
+        //return UTA production env for non camsys envs
         if(!env || !env[1]){
-          return docHost;
+          return apiHosts.production;
         }
         return apiHosts[ env[1] ];
       }( document.location.hostname ));
