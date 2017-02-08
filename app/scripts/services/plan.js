@@ -94,7 +94,7 @@ angular.module('oneClickApp')
 
         //process single itineraries
         if( !(cancelTrip instanceof Array) ){
-          
+
           //if confirmation_ids exist, cancel those rather than the itinerary.id
           if(cancelTrip.confirmation_ids instanceof Array){
             //build the cancelRequest, make sure booking_confirmation is a string
@@ -109,7 +109,7 @@ angular.module('oneClickApp')
             cancelTrip = [cancelTrip];
           }
         }//end single itinerary processing
-        
+
         //build the cancelRequest
         cancelTrip.forEach(function(cancelItinerary){
           var request;
@@ -168,7 +168,7 @@ angular.module('oneClickApp')
               console.error('no data');
             }
             var data = response.data;
-    
+
             var sortable = [],
                 tripDivs = [],
                 trips = [];
@@ -182,16 +182,16 @@ angular.module('oneClickApp')
             angular.forEach(data.trips, function(trip, index) {
 
               if(trip[0].departure && trip[0].status && (trip[0].status != "canceled" || tripType == 'past')){
-                
+
                 var i = 0;
                 var trip_with_itineraries = {};
-                
+
                 trip_with_itineraries.itineraries = [];
-                
+
                 while(typeof trip[i] !== 'undefined'){
 
                   // Check for first itinerary to set Trip values
-                  if(i == 0){ 
+                  if(i == 0){
                     trip_with_itineraries.mode = trip[i].mode;
                     trip_with_itineraries.service_name = trip[i].service_name;
                     trip_with_itineraries.startDesc = that.getDateDescription(trip[i].wait_start || trip[i].departure);
@@ -201,14 +201,14 @@ angular.module('oneClickApp')
                       //add the booking_confirmation if there is one
                       t.booking_confirmation && trip_with_itineraries.booking_confirmation_codes.push(t.booking_confirmation);
                     });
-                    
+
                     var origin_addresses = trip[0].origin.address_components;
                     for(var n = 0; n < origin_addresses.length; n++){
                       var address_types = origin_addresses[n].types ;
                       if(address_types.length > 0 && address_types.indexOf("street_address") != -1){
                         trip_with_itineraries.from_place = origin_addresses[n].short_name;
                         break;
-                      }  
+                      }
                     }
 
                     if(!trip_with_itineraries.from_place && trip[0].origin.name){
@@ -235,15 +235,15 @@ angular.module('oneClickApp')
                   trip_with_itineraries.itineraries.push(trip[i]);
                   i++;
                 }
-                
+
                 trip_with_itineraries.roundTrip = typeof trip[1] !== 'undefined' ? true : false;
-                
+
                 sortable.push([trip_with_itineraries, trip[0].departure])
               }
             });
 
             sortable.sort(function(a,b){ return a[1].localeCompare(b[1]); })
-            
+
             angular.forEach(sortable, function(trip_and_departure_array, index) {
               trips.push(trip_and_departure_array[0]);
             });
@@ -363,7 +363,7 @@ angular.module('oneClickApp')
                 fare_info.paratransitStartTime = lowestPricedParatransitTrip.startTime;
               }
           }
-        
+
 
           if(itinerariesByModeOutbound.mode_transit){
               this.transitItineraries.push(itinerariesByModeOutbound.mode_transit);
@@ -373,7 +373,7 @@ angular.module('oneClickApp')
           if(itinerariesByModeOutbound.mode_taxi){
               this.taxiItineraries = itinerariesByModeOutbound.mode_taxi;
           }
-          
+
           if(itinerariesByModeOutbound.mode_ride_hailing ){
               this.uberItineraries = itinerariesByModeOutbound.mode_ride_hailing;
           }
@@ -414,7 +414,7 @@ angular.module('oneClickApp')
           }else{
             this.taxiItineraries = [];
           }
-          
+
           if(itinerariesByModeReturn.mode_ride_hailing){
             //merge the return itineraries into the other itineraries, matching the service_ids
             itinerariesByModeReturn.mode_ride_hailing.forEach(function(returnItinerary){
@@ -439,7 +439,7 @@ angular.module('oneClickApp')
         this.transitInfos = [];
         if(itinerariesByModeOutbound && itinerariesByModeOutbound.mode_transit){
           this.transitInfos.push(this.prepareTransitOptionsPage(itinerariesBySegmentThenMode[0].mode_transit));
-          
+
           //check for return, reseet transitInfos if this is round trip and no return
           if(itinerariesByModeReturn && itinerariesByModeReturn.mode_transit){
             //for round trips, show the fare as the sum of the two recommended fares
@@ -769,85 +769,38 @@ angular.module('oneClickApp')
         });
         return itineraryRequestPromise;
       }
-      this.returnTimeOptions = function(itinerary)
-      {
-        var startTime, labelTime, timeOptions, _timeLabel;
-        startTime = moment(new Date(itinerary.start_time || ''));
-        labelTime = startTime.clone();
-        timeOptions = [];
-        //function to generate labels
-        _timeLabel = function(labelTime){
+
+      // Returns a nice array of time labels for populating the return time picker drop-down.
+      this.returnTimeOptions = function(itinerary) {
+
+        // function to generate labels
+        var _timeLabel = function(labelTime, startTime){
           return {
             time: labelTime.toISOString(),
-            label: moment.duration({seconds: startTime.diff(labelTime, 'seconds') }).humanize()
+            label: $filter('humanizeDuration')(moment.duration(labelTime - startTime))
           }
         }
+
+        // Set the start time based on the itinerary.
+        var arrivalTime = moment(new Date(itinerary.end_time || ''));
+
         //find the schedule for the start day
-        var scheduleDay = itinerary.schedule.filter(function(e){  return e.day == startTime.format('dddd'); });
-        //something wrong if scheduleDay.length !== 1
-        if(scheduleDay.length !== 1){
-          console.error('schedule error!');
-          return;
-        }
-        //build an array of start/end moments
-        var schedule = [];
-        scheduleDay[0].start.forEach(function(start, i){
-          //create a start/end entry for each
-          var start = moment(start, ["h:mm A"]);
-          var end = moment(scheduleDay[0].end[i], ["h:mm A"]);
-          //skip pushing time if the time is before ride time
-          schedule.push( {
-            start: labelTime.hour(start.hour()).minute(start.minute()).clone(),
-            end: labelTime.hour(end.hour()).minute(end.minute()).clone() 
-          });
-        });
+        var scheduleDay = itinerary.schedule.filter(function(s){ return s.day == arrivalTime.format('dddd'); }).slice(-1)[0]; // Take the last schedule day if there are multiple.
+        var scheduleStart = moment(arrivalTime.format('YYYY-MM-DD ') + scheduleDay.end[0]);
+        var scheduleEnd = moment(arrivalTime.format('YYYY-MM-DD ') + scheduleDay.end[0]);
 
-        //fill in the gaps between start/ends, starting from startTime
+        /* Start with 60 minutes after the arrival time of the trip and move forward.
+        While before the end of the service's hours for that day, add time options
+        every 15 minutes until the end of the service day. */
+        var startTime = moment.min(arrivalTime, scheduleStart);
+        var endTime = moment.min(scheduleEnd, arrivalTime.clone().add(12, 'hours'));
+        var labelTime = arrivalTime.clone().add(60, 'minutes');
         var timeOptions = [];
-        var count = 0;
-        var time = {qty:15, increment:'m'};
-        var lastEnd;
-        //start increment in minutes, then hours
-        var minutes = true;
-        schedule.forEach(function(block, i){
-          var breakCount=0;
-          var labelTime = block.start.clone();
-          //increment once to start
-          if(i == 0){
-            labelTime.add(time.qty, time.increment);
-          }
-          //push the end seconds for comparison purposes
-          block.end.seconds(10);
-          while( labelTime.isBefore(block.end) ){
-            //include label only if it's after startTime
-            if(labelTime.isAfter(startTime)){
-              timeOptions.push( _timeLabel( labelTime ) );
-              count += 1;
-              //switch to hours after 30 minutes of minute increments
-              if(minutes && labelTime.diff(startTime, 'minutes') > 29 ){
-                //skip 45 minutes, add 1 hour (if OK), then continue in 1 hour increments
-                minutes = false;
-                labelTime.add(time.qty, time.increment);
-                labelTime.add(time.qty, time.increment);
-                if(labelTime.isBefore(block.end)){
-                  timeOptions.push( _timeLabel( labelTime ) );
-                }
-                time = {qty:1, increment:'h'};
-              }
-            }
-            breakCount+=1;
-            if(breakCount > 100){break;}
-
-            //add 15 minutes or 1 hr
-            labelTime.add(time.qty, time.increment);
-          }
-          lastEnd = block.end;
-        });
-        //if the last time is before the actual last time, fix that
-        lastEnd.seconds(0);
-        if(timeOptions.length && moment(timeOptions[ timeOptions.length-1 ].time).isBefore(lastEnd)){
-          timeOptions[ timeOptions.length-1 ].time = lastEnd.toISOString();
+        while( labelTime.isBefore(endTime) ) {
+          timeOptions.push(_timeLabel(labelTime, startTime));
+          labelTime.add(15, 'minutes');
         }
+
         return timeOptions;
       }
 
@@ -863,7 +816,7 @@ angular.module('oneClickApp')
       }
       this.buildProfileUpdateRequest = function(profile){
         //cleanup profile for update request
-        var accommodationsRequest = {}, 
+        var accommodationsRequest = {},
             characteristicsRequest = {};
         //process the profile keys to work for the request
         if(profile.accommodations.length > 0){
@@ -1218,4 +1171,3 @@ angular.module('oneClickApp')
 
     return LocationSearch;
   }]);
-
