@@ -48,6 +48,7 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
     $scope.languageSelected = key;
     ipCookie('lang', key);
     localStorage.setItem('lang',key);
+    moment.locale(key);
     return true;
   }
   $scope.changeLanguage = function(key){

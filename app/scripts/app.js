@@ -58,6 +58,7 @@ angular.module('oneClickApp', [
     $translateProvider.preferredLanguage(defaultLanguage);
     tmhDynamicLocaleProvider.localeLocationPattern('/bower_components/angular-i18n/angular-locale_{{locale}}.js');
     tmhDynamicLocaleProvider.defaultLocale(defaultLanguage+'-us');
+    moment.locale(defaultLanguage);
 
     $routeProvider
       .when('/', {
