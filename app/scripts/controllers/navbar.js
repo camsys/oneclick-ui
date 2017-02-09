@@ -10,7 +10,7 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
   input.setAttribute('type','date');
   var notADateValue = 'not-a-date';
   input.setAttribute('value', notADateValue);
-  $scope.debugoff = !!APIHOST.match(/demo/);
+  $scope.debugoff = DEBUG_OFF || !!APIHOST.match(/demo/);
   $scope.html5 = !(input.value === notADateValue);
   planService.html5 = $scope.html5;
   $scope.mobile = deviceDetector.isMobile();

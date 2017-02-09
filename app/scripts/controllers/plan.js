@@ -32,13 +32,13 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
       $scope.from = '100 North, Salt Lake City, UT';
       $scope.from = '1596 W Warnock Ave, West Valley City, UT 84119';
       $scope.from = 'Tooele High School';
-      $scope.from = 'Amtrak Salt Lake City Station';
+      //$scope.from = 'Amtrak Salt Lake City Station';
       mapOnBlur($scope.from, 'from');
       setTimeout(function(){
         $scope.to = 'Utah DMV Tooele Office';
         $scope.to = '1860 W 4100 S, West Valley City, UT 84119';
         $scope.to = 'Utah DMV Tooele Office';
-        $scope.to = 'Salt Lake City International Airport';
+        //$scope.to = 'Salt Lake City International Airport';
         mapOnBlur($scope.to, 'to');
         plan();
       },1000);

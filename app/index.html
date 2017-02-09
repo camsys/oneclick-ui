@@ -24,6 +24,7 @@
     <base href="/">
     <script>
       var DEBUG_TRANSLATE = false;
+      var DEBUG_OFF = false;
       //initialize APIHOST by depending on environment
       var APIHOST = (function( docHost )
       {
@@ -42,6 +43,7 @@
         }
         //return UTA production env for non camsys envs
         if(!env || !env[1]){
+          DEBUG_OFF=true;
           return apiHosts.production;
         }
         return apiHosts[ env[1] ];
