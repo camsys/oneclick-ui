@@ -215,18 +215,18 @@ angular.module('oneClickApp')
     return m.format('h:mm a');
   };
 })
-.filter('humanizeDuration', function() {
+.filter('humanizeDuration', function(translateFilter) {
   return function(duration) {
     var hours = duration.hours();
     var mins = duration.minutes();
     var returnString = "";
     if(hours > 1) {
-      returnString += (hours + " hours ");
+      returnString += translateFilter("hour_long.other", {count:hours}) + " ";
     } else if (hours === 1) {
-      returnString += (hours + " hour ");
+      returnString += translateFilter("hour_long.one", {count:hours}) + " ";
     }
     if(mins > 0) {
-      returnString += (mins + " minutes")
+      returnString += translateFilter("minute.other", {count:mins});
     }
     return returnString;
   };
