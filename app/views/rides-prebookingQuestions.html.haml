@@ -23,7 +23,7 @@
       .row.form-group{ng:{repeat:'question in itinerary.prebooking_questions'}}
         .col-xs-12.col-md-8.col-md-offset-2
           %label{for:'question-id-{{$index}}'}
-            {{question.question}}
+            {{question.code | codeNote | translate}}
           .included-question{ng:{include:'prebookingQuestionTemplate(question.choices)'}}
       .row.form-group
         .col-xs-12.col-md-8.col-md-offset-2
