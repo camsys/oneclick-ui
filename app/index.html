@@ -42,11 +42,11 @@
           return apiHosts.local;
         }
         //return UTA production env for non camsys envs
-        if(!env || !env[1]){
+        if(!env || !env[1] || env[1] == 'uta-prod'){
           DEBUG_OFF=true;
           return apiHosts.production;
         }
-        return apiHosts[ env[1] ];
+        return apiHosts[env[1]] || apiHosts.production;
       }( document.location.hostname ));
     </script>
   </head>
