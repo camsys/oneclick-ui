@@ -18,8 +18,22 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'dist',
+    version: require('./bower.json').version || ''
   };
+  
+  var preprocessDefaultContext = {
+            APP_VERSION: '<%= yeoman.version %>',
+            DIST_ENV: 'UTA',
+            DEBUG: true,
+            GOOGLE_API_KEY: 'AIzaSyCtVx6mDSqQlxrbsVTiowubeAXlX11V-HU',
+            API_HOST_PRODUCTION: 'oneclick-uta.herokuapp.com',
+            API_HOST_DEMO: 'oneclick-pa-qa.herokuapp.com',
+            API_HOST_DEV: 'oneclick-pa-dev.herokuapp.com',
+            API_HOST_QA: 'oneclick-pa-qa.herokuapp.com'
+          };
+  //copy the default context for DIST, with changes like DEBUG:false
+  var preprocessDistContext = Object.assign({}, preprocessDefaultContext, {DEBUG: false});
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -83,39 +97,18 @@ module.exports = function (grunt) {
     
     preprocess:{
       options: {
-        context:{
-          DIST_ENV: 'UTA',
-          GOOGLE_API_KEY: 'AIzaSyCtVx6mDSqQlxrbsVTiowubeAXlX11V-HU',
-          API_HOST_PRODUCTION: 'oneclick-uta.herokuapp.com',
-          API_HOST_DEMO: 'oneclick-uta.herokuapp.com',
-          API_HOST_DEV: 'oneclick-uta.herokuapp.com',
-          API_HOST_QA: 'oneclick-uta.herokuapp.com'
-        }
+        context: preprocessDefaultContext
       },
       default:{
         options: {
-          context:{
-            DIST_ENV: 'UTA',
-            GOOGLE_API_KEY: 'AIzaSyCtVx6mDSqQlxrbsVTiowubeAXlX11V-HU',
-            API_HOST_PRODUCTION: 'oneclick-uta.herokuapp.com',
-            API_HOST_DEMO: 'oneclick-uta.herokuapp.com',
-            API_HOST_DEV: 'oneclick-uta.herokuapp.com',
-            API_HOST_QA: 'oneclick-pa-qa.herokuapp.com'
-          }
+          context: preprocessDefaultContext
         },
         src: '<%= yeoman.app %>/index.html',
         dest: '.tmp/index.html'
       },
       dist: {
         options: {
-          context:{
-            DIST_ENV: 'UTA',
-            GOOGLE_API_KEY: 'AIzaSyCtVx6mDSqQlxrbsVTiowubeAXlX11V-HU',
-            API_HOST_PRODUCTION: 'oneclick-uta.herokuapp.com',
-            API_HOST_DEMO: 'oneclick-uta.herokuapp.com',
-            API_HOST_DEV: 'oneclick-uta.herokuapp.com',
-            API_HOST_QA: 'oneclick-pa-qa.herokuapp.com'
-          }
+          context: preprocessDistContext
         },
         src: '<%= yeoman.dist %>/index.html',
         dest: '<%= yeoman.dist %>/index.html'
@@ -589,7 +582,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'preprocess:dist',
+    'preprocess',
     'cdnify',
     'cssmin',
     'uglify',
