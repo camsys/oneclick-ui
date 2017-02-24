@@ -105,7 +105,22 @@ module.exports = function (grunt) {
         },
         src: '<%= yeoman.app %>/index.html',
         dest: '.tmp/index.html'
+      },
+      dist: {
+        options: {
+          context:{
+            DIST_ENV: 'UTA',
+            GOOGLE_API_KEY: 'AIzaSyCtVx6mDSqQlxrbsVTiowubeAXlX11V-HU',
+            API_HOST_PRODUCTION: 'oneclick-uta.herokuapp.com',
+            API_HOST_DEMO: 'oneclick-uta.herokuapp.com',
+            API_HOST_DEV: 'oneclick-uta.herokuapp.com',
+            API_HOST_QA: 'oneclick-pa-qa.herokuapp.com'
+          }
+        },
+        src: '<%= yeoman.dist %>/index.html',
+        dest: '<%= yeoman.dist %>/index.html'
       }
+
     },
 
     // The actual grunt server settings
@@ -574,7 +589,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'preprocess',
+    'preprocess:dist',
     'cdnify',
     'cssmin',
     'uglify',
