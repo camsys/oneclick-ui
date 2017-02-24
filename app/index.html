@@ -30,19 +30,18 @@
       {
         var env = docHost.match(/^1click-(.+)\.camsys-apps\.com$/);
         var apiHosts = {
-          'production': 'oneclick-uta.herokuapp.com',
-          'demo': 'oneclick-uta-demo.herokuapp.com',
-          'uta-demo': 'oneclick-uta-demo.herokuapp.com',
-          'dev': 'oneclick-uta-qa.herokuapp.com',
-          'qa': 'oneclick-uta-qa.herokuapp.com',
+          'production': '<!-- @echo API_HOST_PRODUCTION -->' || '',
+          'demo': '<!-- @echo API_HOST_DEMO -->' || '',
+          'dev': '<!-- @echo API_HOST_DEV -->' || '',
+          'qa': '<!-- @echo API_HOST_QA -->' || '',
           'local': docHost
         };
         //for local envs
         if( docHost.match(/(.+)\.local$/) ){
           return apiHosts.local;
         }
-        //return UTA production env for non camsys envs
-        if(!env || !env[1] || env[1] == 'uta-prod'){
+        //return production and turn off debug if env not found, or it's production
+        if(!env || !env[1] || !apiHosts[env[1]] || env[1] == 'production'){
           DEBUG_OFF=true;
           return apiHosts.production;
         }
@@ -175,7 +174,7 @@ var onGoogleReady = (function(){
         <script src="scripts/lib/infobox.js"></script>
         <!-- endbuild -->
 
-        <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCtVx6mDSqQlxrbsVTiowubeAXlX11V-HU&libraries=places,geometry&callback=onGoogleReady"></script>
+        <script src="//maps.googleapis.com/maps/api/js?key=<!-- @echo GOOGLE_API_KEY -->&libraries=places,geometry&callback=onGoogleReady"></script>
         <script src="bower_components/moment/locale/es.js"></script>
 
 </body>

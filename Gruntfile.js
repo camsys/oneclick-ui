@@ -80,6 +80,33 @@ module.exports = function (grunt) {
         ]
       }
     },
+    
+    preprocess:{
+      options: {
+        context:{
+          DIST_ENV: 'UTA',
+          GOOGLE_API_KEY: 'AIzaSyCtVx6mDSqQlxrbsVTiowubeAXlX11V-HU',
+          API_HOST_PRODUCTION: 'oneclick-uta.herokuapp.com',
+          API_HOST_DEMO: 'oneclick-uta.herokuapp.com',
+          API_HOST_DEV: 'oneclick-uta.herokuapp.com',
+          API_HOST_QA: 'oneclick-uta.herokuapp.com'
+        }
+      },
+      default:{
+        options: {
+          context:{
+            DIST_ENV: 'UTA',
+            GOOGLE_API_KEY: 'AIzaSyCtVx6mDSqQlxrbsVTiowubeAXlX11V-HU',
+            API_HOST_PRODUCTION: 'oneclick-uta.herokuapp.com',
+            API_HOST_DEMO: 'oneclick-uta.herokuapp.com',
+            API_HOST_DEV: 'oneclick-uta.herokuapp.com',
+            API_HOST_QA: 'oneclick-pa-qa.herokuapp.com'
+          }
+        },
+        src: '<%= yeoman.app %>/index.html',
+        dest: '.tmp/index.html'
+      }
+    },
 
     // The actual grunt server settings
     connect: {
@@ -501,6 +528,8 @@ module.exports = function (grunt) {
   });
 
 
+  grunt.loadNpmTasks('grunt-preprocess');
+  
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -514,6 +543,7 @@ module.exports = function (grunt) {
       'haml:watched',
       'autoprefixer',
       'connect:livereload',
+      'preprocess',
       'watch'
     ]);
   });
@@ -544,6 +574,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'preprocess',
     'cdnify',
     'cssmin',
     'uglify',
