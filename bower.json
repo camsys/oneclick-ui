@@ -1,6 +1,13 @@
 {
   "name": "client",
   "version": "0.0.4-rc.32",
+  "DIST_ENV": "UTA",
+  "DEBUG": true,
+  "GOOGLE_API_KEY": "AIzaSyCtVx6mDSqQlxrbsVTiowubeAXlX11V-HU",
+  "API_HOST_PRODUCTION": "oneclick-uta.herokuapp.com",
+  "API_HOST_DEMO": "oneclick-pa-qa.herokuapp.com",
+  "API_HOST_DEV": "oneclick-pa-dev.herokuapp.com",
+  "API_HOST_QA": "oneclick-pa-qa.herokuapp.com",
   "dependencies": {
     "angular": "^1.3.0",
     "json3": "^3.3.0",

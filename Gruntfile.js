@@ -15,22 +15,25 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  //include bower json which customizes per deploy
+  var bowerConfig = require('./bower.json');
+  
   // Configurable paths for the application
   var appConfig = {
-    app: require('./bower.json').appPath || 'app',
+    app: bowerConfig.appPath || 'app',
     dist: 'dist',
-    version: require('./bower.json').version || ''
+    version: bowerConfig.version || ''
   };
   
   var preprocessDefaultContext = {
             APP_VERSION: '<%= yeoman.version %>',
             DIST_ENV: 'UTA',
             DEBUG: true,
-            GOOGLE_API_KEY: 'AIzaSyCtVx6mDSqQlxrbsVTiowubeAXlX11V-HU',
-            API_HOST_PRODUCTION: 'oneclick-uta.herokuapp.com',
-            API_HOST_DEMO: 'oneclick-pa-qa.herokuapp.com',
-            API_HOST_DEV: 'oneclick-pa-dev.herokuapp.com',
-            API_HOST_QA: 'oneclick-pa-qa.herokuapp.com'
+            GOOGLE_API_KEY: bowerConfig.GOOGLE_API_KEY,
+            API_HOST_PRODUCTION: bowerConfig.API_HOST_PRODUCTION,
+            API_HOST_DEMO: bowerConfig.API_HOST_DEMO,
+            API_HOST_DEV: bowerConfig.API_HOST_DEV,
+            API_HOST_QA: bowerConfig.API_HOST_QA
           };
   //copy the default context for DIST, with changes like DEBUG:false
   var preprocessDistContext = Object.assign({}, preprocessDefaultContext, {DEBUG: false});
