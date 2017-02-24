@@ -61,8 +61,12 @@ footer.footer{
     padding: 0px;
     line-height: 50px;
     color: black;
-    img {
+    .img {
+      background-image: url('/images/UTA_nav_logo.png');
+      background-size: contain;
+      background-repeat: no-repeat;
       height: 47px;
+      width: 200px;
       display: inline-block;
       vertical-align: middle;
     }
