@@ -21,6 +21,14 @@ $kioskfonts: "Avenir Next", "Helvetica Neue", Helvetica, sans-serif;
 @import "bootstrap-only-sass/stylesheets/_bootstrap.scss";
 // endbower
 
+//LOCALIZE CONFIG
+$navbar_logo: url('/images/UTA_nav_logo.png');
+$splash_image: url('/images/Splash-Default-UTA.png');
+$btn-primary-background: #ed7c1f;
+$btn-primary-border: #de741d;
+//LOCALIZE CONFIG
+
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -62,7 +70,7 @@ footer.footer{
     line-height: 50px;
     color: black;
     .img {
-      background-image: url('/images/UTA_nav_logo.png');
+      background-image: $navbar_logo;
       background-size: contain;
       background-repeat: no-repeat;
       height: 47px;
@@ -124,7 +132,7 @@ html, body{
   min-height: 400px;
   padding:0px 15px;
   .landing-iamge{
-    background-image: url('/images/Splash-Default-UTA.png');
+    background-image: $splash_image;
     background-size: cover;
     background-position: center, center;
     position: absolute;
@@ -611,8 +619,8 @@ body .btn.btn-link{
   text-decoration:none;
 }
 .btn.btn-primary{
-  background-color:#ed7c1f;
-  border-color:#de741d;
+  background-color: $btn-primary-background;
+  border-color: $btn-primary-border;
 }
 a{
   color: $black;
