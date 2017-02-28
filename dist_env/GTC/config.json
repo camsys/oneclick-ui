@@ -1,0 +1,9 @@
+{
+  "DIST_ENV": "GTC",
+  "DEBUG": true,
+  "GOOGLE_API_KEY": "AIzaSyAvlI2BnZMv-lRQkKQsE6tTRShjW4rEXgI",
+  "API_HOST_PRODUCTION": "oneclick-gtc.herokuapp.com",
+  "API_HOST_DEMO": "oneclick-uta-qa.herokuapp.com",
+  "API_HOST_DEV": "oneclick-uta-qa.herokuapp.com",
+  "API_HOST_QA": "oneclick-uta-qa.herokuapp.com"
+}
