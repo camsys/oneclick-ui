@@ -745,7 +745,9 @@ angular.module('oneClickApp')
           planService.characteristicsQuestions = response.data.characteristics;
           var modes = {};
           planService.itineraries = response.data.itineraries.map(function(itinerary){
-            itinerary.cost = parseFloat( itinerary.cost ) || 0;
+            if(itinerary.cost != null){
+              itinerary.cost = parseFloat( itinerary.cost ) || 0;
+            }
             itinerary.walk_distance = parseFloat( itinerary.walk_distance ) || 0;
             itinerary.duration = parseInt( itinerary.duration ) || 0;
             if(!itinerary.hidden){
