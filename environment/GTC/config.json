@@ -1,6 +1,7 @@
 {
-  "DIST_ENV": "GTC",
+  "ENVIRONMENT": "GTC",
   "DEBUG": true,
+  "PATH": "environment/GTC/app",
   "GOOGLE_API_KEY": "AIzaSyAvlI2BnZMv-lRQkKQsE6tTRShjW4rEXgI",
   "API_HOST_PRODUCTION": "oneclick-gtc.herokuapp.com",
   "API_HOST_DEMO": "oneclick-uta-qa.herokuapp.com",
