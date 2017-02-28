@@ -1,0 +1,9 @@
+{
+  "DIST_ENV": "QA",
+  "DEBUG": true,
+  "GOOGLE_API_KEY": "AIzaSyBzgKJija-dhcSKVyNNZH_z5V-kWZCJM1A",
+  "API_HOST_PRODUCTION": "oneclick-uta-qa.herokuapp.com",
+  "API_HOST_DEMO": "oneclick-uta-qa.herokuapp.com",
+  "API_HOST_DEV": "oneclick-uta-qa.herokuapp.com",
+  "API_HOST_QA": "oneclick-uta-qa.herokuapp.com"
+}
