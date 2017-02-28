@@ -283,6 +283,13 @@ module.exports = function (grunt) {
             src: '{,*/}*.haml',
             dest: '.tmp/views',
             ext: '.html'
+          },
+          {
+            expand: true,
+            cwd: '<%= yeoman.dist_env %>/views',
+            src: '{,*/}*.haml',
+            dest: '.tmp/views',
+            ext: '.html'
           }
         ]
       },
@@ -293,6 +300,13 @@ module.exports = function (grunt) {
             cwd: '<%= yeoman.app %>/views',
             src: '{,*/}*.haml',
             dest: 'dist/views',
+            ext: '.html'
+          },
+          {
+            expand: true,
+            cwd: '<%= yeoman.dist_env %>/views',
+            src: '{,*/}*.haml',
+            dest: '.tmp/views',
             ext: '.html'
           }
         ]
