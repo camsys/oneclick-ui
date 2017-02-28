@@ -533,8 +533,8 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
 //                      new google.maps.LatLng(39.719635, -79.061985),
 //                      new google.maps.LatLng(40.730426, -76.153193)
                       //Utah
-                      new google.maps.LatLng(37.000399, -114.05060),
-                      new google.maps.LatLng(42.013078, -109.044967)
+                      new google.maps.LatLng(dist_env.map_bounds.latA, dist_env.map_bounds.lonA),
+                      new google.maps.LatLng(dist_env.map_bounds.latB, dist_env.map_bounds.lonB)
                     )
           }, function(list, status)
           {

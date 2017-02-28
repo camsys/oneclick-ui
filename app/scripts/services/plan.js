@@ -1101,8 +1101,8 @@ angular.module('oneClickApp')
           input: text,
           bounds: new google.maps.LatLngBounds(
             //Utah
-            new google.maps.LatLng(37.010211, -114.079487),
-            new google.maps.LatLng(41.992163, -109.094833)
+            new google.maps.LatLng(dist_env.map_bounds.latA, dist_env.map_bounds.lonA),
+            new google.maps.LatLng(dist_env.map_bounds.latB, dist_env.map_bounds.lonB)
           )
 
         }, function(list, status) {
