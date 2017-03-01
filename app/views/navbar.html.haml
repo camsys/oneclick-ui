@@ -19,10 +19,15 @@
                 %h4 English
               %li{ng:{click:"changeLanguage('es')" }}
                 %h4 Español
-          %li{"ng-show"=>"username"}
-            .navbar-icon{style:"padding: 6px 12px; border: 1px solid transparent;"}
+          %li.dropdown{"ng-show"=>"username"}
+            %button#user_menu_dropdown.btn.btn-link.dropdown-toggle{type:"button", "data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
               %h4.display-inline.text-capitalize
                 {{"welcome" | translate}} {{username}}
+                %span.caret
+            %ul.user-menu-dropdown.dropdown-menu{"aria-labelledby"=>"user_menu_dropdown"}
+              %li
+                .row
+                  .col-md-12{ng:{include:"'/views/change-password-form.html'"}}
           %li{"ng-show"=>"username"}
             %a.btn.btn-link{ href: '/#!/my_trips', style: 'padding:6px 12px; border:1px solid transparent; display:inline-block;'}
               %h4.display-inline

@@ -16,6 +16,7 @@ angular.module('oneClickApp')
       $scope.password = {};
       $scope.passwordConfirm = {};
       $scope.loginErrors = {};
+      $scope.passwordUpdateSuccess = false;
 
       var processUserLogin = function(result) {
         $scope.loginError = false;
@@ -62,6 +63,31 @@ angular.module('oneClickApp')
           $scope.loginErrors = response.data || {};
           console.error(response);
         });
+      }
+      var changingPassword = false;
+      var changePasswordReset = function(){
+        $scope.password = {};
+        $scope.passwordConfirm = {};
+        $scope.changepassform.$setPristine();
+      }
+      $scope.changePassword = function(){
+        if(changingPassword){return;}
+        if($scope.password.text != $scope.passwordConfirm.text){return;}
+        changingPassword = true;
+        var request = {
+          password: $scope.password.text,
+          password_confirmation: $scope.passwordConfirm.text
+        };
+        var promise = $http.post('//'+APIHOST+'/api/v1/users/password', request, planService.getHeaders() );
+        promise.then(function(){
+          changingPassword = false;
+          $scope.passwordUpdateSuccess = true;
+          changePasswordReset();
+        }).catch(function(response){
+          changingPassword = false;
+          $scope.loginErrors = response.data || {};
+          console.error(response);
+        })
       }
 
       var authenticating = false;
