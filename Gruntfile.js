@@ -18,18 +18,11 @@ module.exports = function (grunt) {
   //include bower json which customizes per deploy
   var bowerConfig = require('./bower.json');
   var environment = grunt.option('environment') || 'QA';
+  var host_key = 'API_HOST_' + (grunt.option('host') || 'PRODUCTION');
   var envPath = './environment/' + environment;
   var distConfig = require(envPath+'/config.json');
   
   // Configurable paths for the application
-  var appConfig = {
-    app: bowerConfig.appPath || 'app',
-    appPath: envPath + '/app',
-    tmpPath: envPath + '/.tmp',
-    dist: envPath + '/dist',
-    version: bowerConfig.version || ''
-  };
-  
   var preprocessDefaultContext = {
             APP_VERSION: '<%= yeoman.version %>',
             DIST_ENV: distConfig.ENVIRONMENT,
@@ -42,6 +35,15 @@ module.exports = function (grunt) {
           };
   //copy the default context for DIST, with changes like DEBUG:false
   var preprocessDistContext = Object.assign({}, preprocessDefaultContext, {DEBUG: false});
+  var appConfig = {
+    app: bowerConfig.appPath || 'app',
+    appPath: envPath + '/app',
+    tmpPath: envPath + '/.tmp',
+    dist: envPath + '/dist',
+    api_host: preprocessDefaultContext[host_key],
+    version: bowerConfig.version || ''
+  };
+  
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -102,6 +104,21 @@ module.exports = function (grunt) {
           '<%= yeoman.appPath %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
+      }
+    },
+    
+    http: {
+      es_translations: {
+        options: {
+          url: 'https://<%= yeoman.api_host %>/api/v1/translations/all?lang=es',
+        },
+        dest: '<%= yeoman.appPath %>/translations/es.json'
+      },
+      en_translations: {
+        options: {
+          url: 'https://<%= yeoman.api_host %>/api/v1/translations/all?lang=en',
+        },
+        dest: '<%= yeoman.appPath %>/translations/en.json'
       }
     },
     
@@ -552,12 +569,14 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
+        'http',
         'compass:server'
       ],
       test: [
         'compass'
       ],
       dist: [
+        'http',
         'compass:dist',
         'imagemin',
         'svgmin'
@@ -598,6 +617,7 @@ module.exports = function (grunt) {
 
 
   grunt.loadNpmTasks('grunt-preprocess');
+  grunt.loadNpmTasks('grunt-http');
   
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
