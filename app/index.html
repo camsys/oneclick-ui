@@ -30,15 +30,16 @@
       var APIHOST = (function( docHost )
       {
         var env = docHost.match(/^1click-(.+)\.camsys-apps\.com$/);
+        var local = '<!-- @echo API_HOST_LOCAL -->' || docHost;
         var apiHosts = {
           'production': '<!-- @echo API_HOST_PRODUCTION -->' || '',
           'demo': '<!-- @echo API_HOST_DEMO -->' || '',
           'dev': '<!-- @echo API_HOST_DEV -->' || '',
           'qa': '<!-- @echo API_HOST_QA -->' || '',
-          'local': docHost
+          'local': local
         };
-        //for local envs
-        if( docHost.match(/(.+)\.local$/) ){
+        //for local envs, matches on *.local or 0.0.0.0  127.0.0.1 or localhost
+        if( docHost.match( /((.+)\.local|^(0.0.0.0|127.0.0.1|localhost))$/ ) ){
           return apiHosts.local;
         }
         //return production and turn off debug if env not found, or it's production

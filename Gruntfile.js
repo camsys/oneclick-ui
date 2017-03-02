@@ -21,6 +21,7 @@ module.exports = function (grunt) {
   var host_key = 'API_HOST_' + (grunt.option('host') || 'PRODUCTION');
   var envPath = './environment/' + environment;
   var distConfig = require(envPath+'/config.json');
+  var localhost = grunt.option('localhost') || '';
   
   // Configurable paths for the application
   var preprocessDefaultContext = {
@@ -28,6 +29,7 @@ module.exports = function (grunt) {
             DIST_ENV: distConfig.ENVIRONMENT,
             DEBUG: true,
             GOOGLE_API_KEY: distConfig.GOOGLE_API_KEY,
+            API_HOST_LOCAL: localhost,
             API_HOST_PRODUCTION: distConfig.API_HOST_PRODUCTION,
             API_HOST_DEMO: distConfig.API_HOST_DEMO,
             API_HOST_DEV: distConfig.API_HOST_DEV,
