@@ -788,24 +788,31 @@ angular.module('oneClickApp')
         //schedule keys are english, get the arrivalDay in english
         var arrivalDay = arrivalTime.clone().locale('en').format('dddd');
 
-        //find the schedule for the start day
-        var scheduleDay = itinerary.schedule.filter(function(s){ return s.day == arrivalDay;}).slice(-1)[0]; // Take the last schedule day if there are multiple.
-        var scheduleStart = moment(arrivalTime.format('YYYY-MM-DD ') + scheduleDay.end[0], 'YYYY-MM-DD h:mm A');
-        var scheduleEnd = moment(arrivalTime.format('YYYY-MM-DD ') + scheduleDay.end[0], 'YYYY-MM-DD h:mm A');
+        try{
+          //find the schedule for the start day
+          var scheduleDay = itinerary.schedule.filter(function(s){ return s.day == arrivalDay;}).slice(-1)[0]; // Take the last schedule day if there are multiple.
+          var scheduleStart = moment(arrivalTime.format('YYYY-MM-DD ') + scheduleDay.end[0], 'YYYY-MM-DD h:mm A');
+          var scheduleEnd = moment(arrivalTime.format('YYYY-MM-DD ') + scheduleDay.end[0], 'YYYY-MM-DD h:mm A');
 
-        /* Start with 60 minutes after the arrival time of the trip and move forward.
-        While before the end of the service's hours for that day, add time options
-        every 15 minutes until the end of the service day. */
-        var startTime = moment.min(arrivalTime, scheduleStart);
-        var endTime = moment.min(scheduleEnd, arrivalTime.clone().add(12, 'hours'));
-        var labelTime = arrivalTime.clone().add(60, 'minutes');
-        var timeOptions = [];
-        while( labelTime.isBefore(endTime) ) {
-          timeOptions.push(_timeLabel(labelTime, startTime));
-          labelTime.add(15, 'minutes');
+          /* Start with 60 minutes after the arrival time of the trip and move forward.
+          While before the end of the service's hours for that day, add time options
+          every 15 minutes until the end of the service day. */
+          var startTime = moment.min(arrivalTime, scheduleStart);
+          var endTime = moment.min(scheduleEnd, arrivalTime.clone().add(12, 'hours'));
+          var labelTime = arrivalTime.clone().add(60, 'minutes');
+          var timeOptions = [];
+          while( labelTime.isBefore(endTime) ) {
+            timeOptions.push(_timeLabel(labelTime, startTime));
+            labelTime.add(15, 'minutes');
+          }
+        }
+        catch(e){
+          console.error(e);
+        }
+        finally{
+          return timeOptions;
         }
 
-        return timeOptions;
       }
 
       this.getGuestToken = function($http){
