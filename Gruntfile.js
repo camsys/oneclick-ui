@@ -53,6 +53,11 @@ module.exports = function (grunt) {
     concat: {
       options: {
         separator: grunt.util.linefeed + ';' + grunt.util.linefeed
+      },
+      dist: {
+        src: ['<%= yeoman.app %>/scripts/{,*/}*.js',
+              '<%= yeoman.appPath %>/scripts/config.js'],
+        dest: '<%= yeoman.tmpPath %>/scripts/scripts.js'
       }
     },
     
@@ -74,7 +79,8 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<%= yeoman.app %>/scripts/{,*/}*.js',
+                '<%= yeoman.appPath %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -327,7 +333,7 @@ module.exports = function (grunt) {
             expand: true,
             cwd: '<%= yeoman.appPath %>/views',
             src: '{,*/}*.haml',
-            dest: '<%= yeoman.tmpPath %>/views',
+            dest: '<%= yeoman.dist %>/views',
             ext: '.html'
           }
         ]
@@ -387,8 +393,8 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              js: ['concat', 'uglifyjs'],
-              //js: ['concat'],
+              //js: ['concat', 'uglifyjs'],
+              js: ['concat'],
               css: ['cssmin']
             },
             post: {}
@@ -432,6 +438,28 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
     
+    cssmin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.tmpPath %>/styles',
+          src: ['*.css'],
+          dest: '<%= yeoman.dist %>/styles'
+        }]
+      }
+    },
+    uglify: {
+      dist: {
+        files: {
+          '<%= yeoman.dist %>/scripts/scripts.js': [
+            '<%= yeoman.dist %>/scripts/scripts.js'
+          ],
+          '<%= yeoman.dist %>/scripts/vendor.js': [
+            '<%= yeoman.dist %>/scripts/vendor.js'
+          ]
+        }
+      }
+    },
     imagemin: {
       dist: {
         files: [{
@@ -488,9 +516,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.tmpPath %>/concat/scripts',
-          src: ['*.js', '!oldieshim.js'],
-          dest: '<%= yeoman.tmpPath %>/concat/scripts'
+          cwd: '<%= yeoman.dist %>/scripts',
+          src: ['scripts.js', 'vendor.js', '!oldieshim.js'],
+          dest: '<%= yeoman.dist %>/scripts'
         }]
       }
     },
@@ -545,6 +573,16 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }, {
           expand: true,
+          cwd: '<%= yeoman.tmpPath %>/scripts',
+          dest: '<%= yeoman.dist %>/scripts',
+          src: ['scripts.js']
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.tmpPath %>/styles',
+          dest: '<%= yeoman.dist %>/styles',
+          src: ['**']
+        }, {
+          expand: true,
           cwd: '.',
           src: [
             'bower_components/bootstrap-only-sass/fonts/bootstrap/*',
@@ -595,22 +633,24 @@ module.exports = function (grunt) {
 
     //cache bust
     cacheBust: {
-      options: {
-        encoding: 'utf8',
-        algorithm: 'md5',
-        length: 16,
-        deleteOriginals: true,
-        ignorePatterns:['close.png'],
-        baseDir: '<%= yeoman.dist %>'
-      },
-      assets: {
+      dist: {
+        options: {
+          deleteOriginals: true,
+          baseDir: '<%= yeoman.dist %>',
+          assets: [
+            'scripts/*.js',
+            'images/**',
+            'styles/*.css'
+          ]
+        },
         files: [{
+          expand: true,
+          cwd:'<%= yeoman.dist %>',
           src: [
-            '<%= yeoman.dist %>/index.html',
-            '<%= yeoman.dist %>/scripts/*.js',
-            /*'<%= yeoman.dist %>/styles*//*.css',
-            '<%= yeoman.dist %>/images*//*.*',*/
-            '<%= yeoman.dist %>/views/*.html',
+            'index.html',
+            'scripts/*.js',
+            'views/*.html',
+            'styles/*.css'
           ]
         }]
       }
@@ -663,14 +703,15 @@ module.exports = function (grunt) {
     'concurrent:dist',
     'autoprefixer',
     'concat',
-    'ngAnnotate',
     'copy:dist',
+    'ngAnnotate',
     'preprocess',
     'cdnify',
-    'cssmin',
-    'uglify',
+    'cssmin:generated',
+    'cssmin:dist',
     'usemin',
     'htmlmin',
+    'uglify',
     'cacheBust'
   ]);
 
