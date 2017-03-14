@@ -152,7 +152,6 @@ angular.module('oneClickApp')
           var myOptions = {
             pixelOffset: pixelOffset,
             content: boxText,
-            alignBottom: true,
             boxStyle: { background: 'white' },
             closeBoxURL: ''
           };
