@@ -67,11 +67,13 @@ module.exports = function (grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       haml: {
-        files: ['<%= yeoman.app %>/views/{,*/}*.haml'],
+        files: ['<%= yeoman.app %>/views/{,*/}*.haml',
+                '<%= yeoman.appPath %>/views/{,*/}*.haml'],
         tasks: ['haml:watched']
       },
       coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
+        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee',
+                '<%= yeoman.appPath %>/scripts/{,*/}*.coffee'],
         tasks: ['coffee:watched']
       },
       bower: {
