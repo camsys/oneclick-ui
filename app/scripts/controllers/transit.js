@@ -137,24 +137,24 @@ angular.module('oneClickApp')
           var boxText = document.createElement("div");
           boxText.setAttribute("id", "infobox-" + index);
           boxText.style.cssText = "border: 1px solid #81807D; background: white; white-space: nowrap;";
-          var routeColor = leg.routeColor ? "#" + leg.routeColor : "white";
-          var routeTextColor = leg.routeTextColor ? "#" + leg.routeTextColor : "white";
-          var routeShortName = leg.routeShortName ? leg.routeShortName : "";
+          var routeColor = '#' + (leg.routeColor || 'FFF');
+          var routeTextColor = '#' + (leg.routeTextColor || '000');
+          var routeShortName = leg.routeShortName || '';
           boxText.innerHTML =
               '<img src="' + imageUrl + '" style="width: 16px; height: 16px;"/>'+
               '<span style="margin: 0px 1px 0px 2px; position: relative; padding: 0px 4px; color: rgb(255, 255, 255); background-color: ' + routeColor + '; color: ' + routeTextColor + '">' + routeShortName + '</span>'+
               '<img src="http://maps.gstatic.com/mapfiles/tiph.png" draggable="false" style="-webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; position: absolute; right: -7px; top: 17px; width: 15px; height: 9px;"/>';
 
           var pixelOffset = new google.maps.Size(-50, -25);
-          if(leg.mode == 'BICYCLE' || leg.mode == 'CAR')
+          if(leg.mode == 'BICYCLE' || leg.mode == 'CAR'){
             pixelOffset = new google.maps.Size(-35, -25);
+          }
           var myOptions = {
             pixelOffset: pixelOffset,
-            content: boxText
-            ,boxStyle: {
-              background: "white"
-            }
-            ,closeBoxURL: ""
+            content: boxText,
+            alignBottom: true,
+            boxStyle: { background: 'white' },
+            closeBoxURL: ''
           };
           var ib = new InfoBox(myOptions);
           ib.open($scope.routeMap, marker);
@@ -176,19 +176,22 @@ angular.module('oneClickApp')
         */
       }
       $scope.renderRouteOnMap = function(){
+        var bounds = new google.maps.LatLngBounds();
         var legLines = [];
         //generate the selected itinerary lines using the primary color palette
         angular.forEach($scope.itinerary.json_legs, function(leg, index){
           $scope.generateLeg(leg, index, true, legLines);
-          $scope.viewport = getLegBox(leg, $scope.viewport);
+          bounds.extend( new google.maps.LatLng(leg.from.lat, leg.from.lon) );
+          bounds.extend( new google.maps.LatLng(leg.to.lat, leg.to.lon) );
+          angular.forEach(leg.steps, function(step){
+            bounds.extend( new google.maps.LatLng(step.lat, step.lon) );
+          });
         });
-        var bounds = new google.maps.LatLngBounds(
-            new google.maps.LatLng($scope.viewport.maxLat, $scope.viewport.minLon),
-            new google.maps.LatLng($scope.viewport.minLat, $scope.viewport.maxLon)
-        );
-        $scope.routeMap.fitBounds(bounds);
+        $scope.routeMap.setCenter( bounds.getCenter() );
+        $scope.routeMap.fitBounds( bounds );
 
-        $scope.renderLegLines(legLines);
+        $scope.renderLegLines( legLines );
+        return bounds;
       }
       $scope.renderLegLines = function(legLines){
         var lineSymbol = {
@@ -242,8 +245,7 @@ angular.module('oneClickApp')
       }
       $scope.toFromIcons={'to' : '//maps.google.com/mapfiles/markerB.png',
                       'from' : '//maps.google.com/mapfiles/marker_greenA.png' };
-      var start_location, end_location;
-      var bounds = new google.maps.LatLngBounds();
+      var start_location, end_location, bounds;
       var rebuildMap = function()
       {
         google.maps.event.trigger($scope.routeMap, 'resize');
@@ -252,17 +254,15 @@ angular.module('oneClickApp')
         if(!start_location){
           start_location = new google.maps.Marker({
             map: $scope.routeMap,
-            position: origin.geometry.location,
+            position: new google.maps.LatLng(origin.geometry.location.lat, origin.geometry.location.lng),
             icon: $scope.toFromIcons.from
           });
           end_location = new google.maps.Marker({
             map: $scope.routeMap,
-            position: destination.geometry.location,
+            position: new google.maps.LatLng(destination.geometry.location.lat, destination.geometry.location.lng),
             icon: $scope.toFromIcons.to
           });
-          bounds.extend(start_location.position);
-          bounds.extend(end_location.position);
-          $scope.renderRouteOnMap();
+          bounds = $scope.renderRouteOnMap();
         }
         $scope.routeMap.setCenter(bounds.getCenter());
         $scope.routeMap.fitBounds(bounds);
