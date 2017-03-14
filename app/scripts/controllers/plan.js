@@ -12,7 +12,22 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
 
   var eightAm = new Date();
   var countryFilter = $filter('noCountry');
-  debugHelper = function(){
+  debugHelper = function(index){
+    index = index || 0;
+    var from = [
+      '100 North, Salt Lake City, UT',
+      '1596 W Warnock Ave, West Valley City, UT 84119',
+      'Tooele High School',
+      '150 Main Street, Geneseo, NY',
+      'Amtrak Salt Lake City Station'
+    ];
+    var to = [
+      'Utah DMV Tooele Office',
+      '1860 W 4100 S, West Valley City, UT 84119',
+      'Utah DMV Tooele Office',
+      '1 College Circle, Geneseo, NY',
+      'Salt Lake City International Airport'
+    ];
     setTimeout(function(){
       var exit = false;
       var count = 0,
@@ -29,16 +44,10 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
       if(exit || $location.path() != '/'){return;}
       $scope.rideTime = new Date();
       $scope.rideTime.setDate($scope.rideTime.getDate() + 14);
-      $scope.from = '100 North, Salt Lake City, UT';
-      $scope.from = '1596 W Warnock Ave, West Valley City, UT 84119';
-      $scope.from = 'Tooele High School';
-      //$scope.from = 'Amtrak Salt Lake City Station';
+      $scope.from = from[index];
       mapOnBlur($scope.from, 'from');
       setTimeout(function(){
-        $scope.to = 'Utah DMV Tooele Office';
-        $scope.to = '1860 W 4100 S, West Valley City, UT 84119';
-        $scope.to = 'Utah DMV Tooele Office';
-        //$scope.to = 'Salt Lake City International Airport';
+        $scope.to = to[index];
         mapOnBlur($scope.to, 'to');
         plan();
       },1000);
