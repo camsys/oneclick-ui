@@ -3,3 +3,9 @@ $splash_image: url('/images/Splash-Default-UTA.png');
 $btn-primary-background: #ed7c1f;
 $btn-primary-border: #de741d;
 
+.main-page-carousel{
+  h2{
+    color: $btn-primary-background;
+  }
+}
+

@@ -1,15 +1,21 @@
-.item.active
-  .container
-    %h1
-      Welcome to Utah Ride Link
-    %h3
-      Find transportation customized for
-      %strong your
-      needs
-.item
-  .container
-    %img{src:'/images/UTA_nav_logo.png', style:'height:84px;'}
-    %h3
-      Find out more at
-      %a{href:'http://www.utahridelink.org/', target:'_blank'} www.utahridelink.org
+#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel"}
+  %ol.carousel-indicators
+    %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"2"}}
+  .carousel-inner{role:"listbox"}
+    .item.active
+      .container
+        %h1
+          Welcome to Utah Ride Link
+        %h3
+          Find transportation customized for
+          %strong your
+          needs
+    .item
+      .container
+        %img{src:'/images/UTA_nav_logo.png', style:'height:84px;'}
+        %h3
+          Find out more at
+          %a{href:'http://www.utahridelink.org/', target:'_blank'} www.utahridelink.org
 

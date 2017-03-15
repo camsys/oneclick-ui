@@ -118,16 +118,34 @@ html, body{
   margin: 0 auto;
   width: 100%;
 }
-#main-page-carousel{
-  height:300px;
-  .carousel-indicators li{
-    border:1px solid #333;
+.main-page-carousel{
+  min-height:450px;
+  margin-bottom:20px;
+  padding-bottom:24px;
+  .pad-text-center .text-center{
+    padding-bottom: 40px;
+  }
+  .carousel-indicators{
+    bottom:-20px;
+    
+    li{
+      border:1px solid #333;
+    }
   }
 }
+#main-template-container{
+  font-size:13pt;
+}
+.landing-splash-middle{
+  width:100%;
+  margin-bottom: 70px;
+}
+
 #main-page{
   height: 80%;
   min-height: 400px;
   padding:0px 15px;
+
   .landing-iamge{
     background-image: $splash_image;
     background-size: cover;
@@ -156,9 +174,6 @@ html, body{
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     padding:10px 20px 10px 30px;
-  }
-  .landing-splash-middle{
-    width:100%;
   }
   .landing-splash-footer{
     position:absolute;
@@ -235,6 +250,13 @@ html, body{
   border-top:1px solid $borderColor;
   margin-top:10px;
   padding-top:10px;
+}
+.vert-hr{
+  border-right:1px solid $borderColor;
+  min-height: 400px;
+  height: 100%;
+  width: 2px;
+  margin: 0px auto;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -315,6 +337,7 @@ body{
   .alert{
     padding:0px;
     margin-bottom:0px;
+    border:0px;
   }
 }
 .ng-untouched + .alert{

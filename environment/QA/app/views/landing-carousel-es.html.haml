@@ -1,15 +1,24 @@
-.item.active
-  .container
-    %h1
-      Bienvenido a Utah Ride Link
-    %h3
-      Encuentre transporte personalizado para
-      %strong sus
-      necesidades
-.item
-  .container
-    %img{src:'/images/UTA_nav_logo.png', style:'height:84px;'}
-    %h3
-      Más información en
-      %a{href:'http://www.utahridelink.org/', target:'_blank'} www.utahridelink.org
+.main-page-carousel.carousel.slide{'data-ride'=>"carousel"}
+  %ol.carousel-indicators
+    %li.active{data:{target:"#main-page-carousel", 'slide-to'=>"0"}}
+    %li{data:{target:"#main-page-carousel", 'slide-to'=>"1"}}
+
+  .carousel-inner{role:"listbox"}
+    .item.active
+      .container
+        %h1
+          Bienvenido a Utah Ride Link
+        %h3
+          Encuentre transporte personalizado para
+          %strong sus
+          necesidades
+    .item
+      .container
+        %img{src:'/images/UTA_nav_logo.png', style:'height:84px;'}
+        %h3
+          Más información en
+          %a{href:'http://www.utahridelink.org/', target:'_blank'} www.utahridelink.org
+
+  %a.left.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"prev", style:'display:none;'}
+  %a.right.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"next", style:'display:none;'}
 
