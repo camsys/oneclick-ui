@@ -1,59 +1,60 @@
-.book_itinerary{ng:{hide:'itineraryBooked'}}
-  .service_login_form.row{ng:{show:'showServiceLoginForm'}}
-    %form.col-md-6.col-md-offset-3.col-xs-12{name:"rides_forms.service_login_form", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'(!itinerary.itineraryBooking) && serviceLogin(itinerary)'}}
-      .form-group
-        %label.sr-only{for:"service-username"}
-          {{'client_id' | translate}}
-        %input#service-username.form-control{type:"text", placeholder:"{{'client_id' | translate}}", ng:{model:"service_username.text"}, name:'service_username', required:''}
-        .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_uesrname.$error.required"}
-          .error
-            {{'required' | translate}}
-      .form-group
-        %label.sr-only{for:"service-password"}
-          {{'token' | translate}}
-        %input#service-password.form-control{type:"text", placeholder:"{{'token' | translate}}", ng:{model:"service_password.text"}, name:'service_password', required:''}
-        .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_password.$error.required"}
-          .error
-            {{'required' | translate}}
-      .form-group
-        %button.btn.btn-success.btn-block{type:'submit'}
-          {{'login' | translate}}
-  .prebooking_questions{ng:{show:'showPrebookingQuestions'}}
-    %form{name:'rides_forms.prebooking_questions', role:'form', method:'post', ng:{submit:'answerPrebookQuestions(itinerary)'}}
-      .row.form-group{ng:{repeat:'question in itinerary.prebooking_questions'}}
-        .col-xs-12.col-md-8.col-md-offset-2
-          %label{for:'question-id-{{$index}}'}
-            {{question.code | codeNote | translate}}
-          .included-question{ng:{include:'prebookingQuestionTemplate(question.choices)'}}
-      .row.form-group
-        .col-xs-12.col-md-8.col-md-offset-2
-          %label{for:'return_time'}
-            {{'how_long_to_stay' | translate}}
-          %select.form-control{id:'return_time', name:'return_time', ng:{model:'itinerary.booking_return_time', options:'o.time as o.label for o in itinerary.returnTimeOptions'}}
-            %option{value:'',} {{'no_return_trip' | translate}}
-        .text-right.col-xs-12.col-md-8.col-md-offset-2{ng:{show:'itinerary.booking_return_time'}}
-          %h3
-            .small
-              {{'return_time' | translate}}: {{itinerary.booking_return_time | toDate | date : 'h:mm a'}}
-      .row
-        .col-md-6.col-md-offset-3.col-xs-12
-          %button.btn.btn-block.btn-primary{type:'submit', ng:{class:'[{disabled: itinerary.itineraryBooking}]'}}
-            {{'continue' | translate}}
-  .action-buttons
-    .row.bookable{ng: {hide: 'showServiceLoginForm || showPrebookingQuestions'}, style:'margin-bottom:30px;'}
-      .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
-        .btn.btn-primary.btn-block{ng:{click:'bookItinerary(itinerary)'}}
-          {{'book_button' | translate}}
-    .row.bookable{ng: {show: 'showServiceLoginForm || showPrebookingQuestions'}, style:'margin-bottom:30px;'}
-      .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
-        .btn.btn-default.btn-block{ng:{click:'cancelBookItinerary(itinerary)', class:'[{disabled: itinerary.itineraryBooking}]'}}
-          {{'cancel' | translate}}
-.itinerary_booked{ng:{show:'itineraryBooked'}}
-  .row
-    .col-xs-12.col-md-8.col-md-offset-2
-      %h3
-        {{'trip_booked_2' | translate}}
-      %h4
-        {{'confirmation' | translate}}:
-        %span{style:'text-decoration:underline; margin: 0px 13px;', ng:{repeat:'confirmation in itinerary.confirmation_ids'}} &#35;{{confirmation}}
+.booking_interface{ng: {controller: 'BookController' }}
+  .book_itinerary{ng:{hide:'itineraryBooked'}}
+    .service_login_form.row{ng:{show:'showServiceLoginForm'}}
+      %form.col-md-6.col-md-offset-3.col-xs-12{name:"rides_forms.service_login_form", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'(!itinerary.itineraryBooking) && serviceLogin(itinerary)'}}
+        .form-group
+          %label.sr-only{for:"service-username"}
+            {{'client_id' | translate}}
+          %input#service-username.form-control{type:"text", placeholder:"{{'client_id' | translate}}", ng:{model:"service_username.text"}, name:'service_username', required:''}
+          .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_uesrname.$error.required"}
+            .error
+              {{'required' | translate}}
+        .form-group
+          %label.sr-only{for:"service-password"}
+            {{'token' | translate}}
+          %input#service-password.form-control{type:"text", placeholder:"{{'token' | translate}}", ng:{model:"service_password.text"}, name:'service_password', required:''}
+          .alert{role:'alert', "ng-show"=>"rides_forms.service_login_form.service_password.$error.required"}
+            .error
+              {{'required' | translate}}
+        .form-group
+          %button.btn.btn-success.btn-block{type:'submit'}
+            {{'login' | translate}}
+    .prebooking_questions{ng:{show:'showPrebookingQuestions'}}
+      %form{name:'rides_forms.prebooking_questions', role:'form', method:'post', ng:{submit:'answerPrebookQuestions(itinerary)'}}
+        .row.form-group{ng:{repeat:'question in itinerary.prebooking_questions'}}
+          .col-xs-12.col-md-8.col-md-offset-2
+            %label{for:'question-id-{{$index}}'}
+              {{question.code | codeNote | translate}}
+            .included-question{ng:{include:'prebookingQuestionTemplate(question.choices)'}}
+        .row.form-group
+          .col-xs-12.col-md-8.col-md-offset-2
+            %label{for:'return_time'}
+              {{'how_long_to_stay' | translate}}
+            %select.form-control{id:'return_time', name:'return_time', ng:{model:'itinerary.booking_return_time', options:'o.time as o.label for o in itinerary.returnTimeOptions'}}
+              %option{value:'',} {{'no_return_trip' | translate}}
+          .text-right.col-xs-12.col-md-8.col-md-offset-2{ng:{show:'itinerary.booking_return_time'}}
+            %h3
+              .small
+                {{'return_time' | translate}}: {{itinerary.booking_return_time | toDate | date : 'h:mm a'}}
+        .row
+          .col-md-6.col-md-offset-3.col-xs-12
+            %button.btn.btn-block.btn-primary{type:'submit', ng:{class:'[{disabled: itinerary.itineraryBooking}]'}}
+              {{'continue' | translate}}
+    .action-buttons
+      .row.bookable{ng: {hide: 'showServiceLoginForm || showPrebookingQuestions'}, style:'margin-bottom:30px;'}
+        .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
+          .btn.btn-primary.btn-block{ng:{click:'bookItinerary(itinerary)'}}
+            {{'book_button' | translate}}
+      .row.bookable{ng: {show: 'showServiceLoginForm || showPrebookingQuestions'}, style:'margin-bottom:30px;'}
+        .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
+          .btn.btn-default.btn-block{ng:{click:'cancelBookItinerary(itinerary)', class:'[{disabled: itinerary.itineraryBooking}]'}}
+            {{'cancel' | translate}}
+  .itinerary_booked{ng:{show:'itineraryBooked'}}
+    .row
+      .col-xs-12.col-md-8.col-md-offset-2
+        %h3
+          {{'trip_booked_2' | translate}}
+        %h4
+          {{'confirmation' | translate}}:
+          %span{style:'text-decoration:underline; margin: 0px 13px;', ng:{repeat:'confirmation in itinerary.confirmation_ids'}} &#35;{{confirmation}}
 
