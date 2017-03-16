@@ -69,11 +69,11 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
           return;
         }
         itinerary.confirmation_ids = confirmation_ids;
+        itinerary.booked = true;
         var confirmationMessage = $translate.instant('trip_booked_2');
         confirmationMessage += ' ' + $translate.instant('confirmation');
         confirmationMessage += ': #' + confirmation_ids.join(' #');
         bootbox.alert(confirmationMessage);
-        $scope.itineraryBooked =  true;
       })
       .catch(function(e){
         itinerary.itineraryBooking = false;

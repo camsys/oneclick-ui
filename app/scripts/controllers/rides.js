@@ -126,7 +126,7 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
 
             bootbox.alert(successMessage);
             //reset the UI flags that were set during booking
-            $scope.itineraryBooked = false;
+            itinerary.booked = false;
             $scope.tripSelected = false;
             ipCookie('rideCount', ipCookie('rideCount') - 1);
           }).catch(function(){
