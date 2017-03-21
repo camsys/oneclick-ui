@@ -19,14 +19,16 @@ function($scope, $http, $routeParams, $location, planService, util, flash, $q, L
       '1596 W Warnock Ave, West Valley City, UT 84119',
       'Tooele High School',
       '150 Main Street, Geneseo, NY',
-      'Amtrak Salt Lake City Station'
+      'Amtrak Salt Lake City Station',
+      '3251 Eastern Blvd, York, Pa'
     ];
     var to = [
       'Utah DMV Tooele Office',
       '1860 W 4100 S, West Valley City, UT 84119',
       'Utah DMV Tooele Office',
       '1 College Circle, Geneseo, NY',
-      'Salt Lake City International Airport'
+      'Salt Lake City International Airport',
+      'York City Hall, South George Street'
     ];
     setTimeout(function(){
       var exit = false;
