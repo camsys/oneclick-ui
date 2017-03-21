@@ -24,17 +24,11 @@ module.exports = function (grunt) {
   var localhost = grunt.option('localhost') || '';
   
   // Configurable paths for the application
-  var preprocessDefaultContext = {
+  var preprocessDefaultContext = Object.assign({
             APP_VERSION: '<%= yeoman.version %>',
-            DIST_ENV: distConfig.ENVIRONMENT,
             DEBUG: true,
-            GOOGLE_API_KEY: distConfig.GOOGLE_API_KEY,
             API_HOST_LOCAL: localhost,
-            API_HOST_PRODUCTION: distConfig.API_HOST_PRODUCTION,
-            API_HOST_DEMO: distConfig.API_HOST_DEMO,
-            API_HOST_DEV: distConfig.API_HOST_DEV,
-            API_HOST_QA: distConfig.API_HOST_QA
-          };
+          }, distConfig);
   //copy the default context for DIST, with changes like DEBUG:false
   var preprocessDistContext = Object.assign({}, preprocessDefaultContext, {DEBUG: false});
   var appConfig = {
