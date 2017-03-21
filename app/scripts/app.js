@@ -73,6 +73,10 @@ angular.module('oneClickApp', [
         templateUrl: 'views/myrides.html',
         controller: 'MyridesController'
       })
+      .when('/reset_password/:reset_token', {
+        templateUrl: 'views/main.html',
+        controller: 'MainController'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -87,14 +91,25 @@ angular.module('oneClickApp', [
         $(".navbar-collapse").collapse('hide');
       }
     });
-    
     $window.$rootScope = $rootScope;
-    var exceptions = ["/my_trips"];
+    var exceptions = ['/', '/my_trips'];
     $rootScope.$on('$routeChangeStart', function (event) {
-      if(!$window.visited){
+      // redirect user to main page if they try to go to a route not in exceptions, if they havn't visited the main page
+      if(!$window.visited && null === $location.$$path.match(/reset_password/)){
         if(exceptions.indexOf($location.$$path) < 0){
           $location.path('/');
         }
       }
     });
+    var searchParams = {};
+    window.location.search.replace(
+      new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+      function( $0, $1, $2, $3 ){
+        searchParams[ $1 ] = $3;
+      }
+    );
+    if(searchParams.reset_password_token){
+      //redirect to url with no search param, just angular vars
+      location.replace('/#!/reset_password/' + searchParams.reset_password_token);
+    }
   });

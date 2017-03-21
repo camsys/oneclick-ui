@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('oneClickApp')
-  .controller('LoginController', ['$scope', '$rootScope', '$location', 'flash', 'planService', '$http', 'ipCookie', '$window', 'localStorageService',
-    function ($scope, $rootScope, $location, flash, planService, $http, ipCookie, $window, localStorageService) {
+  .controller('LoginController', ['$scope', '$rootScope', '$location', 'flash', 'planService', '$http', 'ipCookie', '$window', 'localStorageService', '$routeParams',
+    function ($scope, $rootScope, $location, flash, planService, $http, ipCookie, $window, localStorageService, $routeParams) {
       $scope.rememberme = true;
       $scope.loginError = false;
       $scope.errors = {dob:false};
@@ -15,6 +15,8 @@ angular.module('oneClickApp')
       $scope.email = {};
       $scope.password = {};
       $scope.passwordConfirm = {};
+      $scope.resetPassword = {};
+      $scope.resetPasswordConfirm = {};
       $scope.loginErrors = {};
       $scope.passwordUpdateSuccess = false;
 
@@ -89,7 +91,40 @@ angular.module('oneClickApp')
           console.error(response);
         })
       }
-
+      $scope.resetPassword = function(){
+        //
+        console.log($scope.reset_password_token, $scope);
+        if(true !== $scope.resetform.$valid){
+          $scope.showErrors = true;
+          return;
+        }
+        var reset = {
+          password: $scope.resetPassword.text,
+          password_confirmation: $scope.resetPasswordConfirm.text,
+          reset_password_token: $routeParams.reset_token
+        };
+        $http.post('//'+APIHOST+'/api/v1/users/reset', reset).
+        then(function(response){
+          bootbox.hideAll()
+          $location.path('/').replace();
+        }).
+        catch(function(e){
+          console.error(e);
+        });
+      }
+      $scope.forgot = function(){
+        //reset the user's password
+        var reset = {};
+        reset.email = $scope.forgotEmailAddress;
+        var postResetRequest = function(){
+          //regardless of response, show success and hide forgot form
+          $scope.forgotSuccess = true;
+          $scope.showForgotForm = false;
+        }
+        $http.post('//'+APIHOST+'/api/v1/users/request_reset', reset).
+          then( postResetRequest ).
+          catch( postResetRequest );
+      };
       var authenticating = false;
       $scope.authenticate = function(){
         if(authenticating){return;}

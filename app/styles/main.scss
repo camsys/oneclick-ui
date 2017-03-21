@@ -333,7 +333,7 @@ body{
 .display-inline{
   display:inline;
 }
-.navbar-container{
+.navbar-container, #reset-password-form{
   .alert{
     padding:0px;
     margin-bottom:0px;
@@ -365,6 +365,7 @@ ul.language-menu-dropdown{
 #signup-dropdown, 
 #login-dropdown{
   padding:7px;
+  min-width:210px;
 }
 .container-fluid{
   padding-bottom: 20px;

@@ -1,5 +1,5 @@
 %div{"ng-controller"=>"LoginController"}
-  %form#login-nav.form{name:"loginform", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'authenticate()'}}
+  %form#login-nav.form{name:"loginform", role:"form", "accept-charset"=>"UTF-8", novalidate:"", ng:{submit:'authenticate()', hide:'showForgotForm'}}
     .form-group
       %label.sr-only{for:"emailaddress"}
         {{'email' | translate}}
@@ -17,3 +17,21 @@
       %label
         %input{type:"checkbox"}
         {{'keep_me_logged_in' | translate}}
+    .form-group
+      .btn.btn-link{ng:{click:"showForgotForm = !showForgotForm", hide:'forgotSuccess'}}
+        {{'forgot_your_password' | translate}}
+  %form#login-nav.form{name:"forgotform", role:"form", "accept-charset"=>"UTF-8", novalidate:"", ng:{submit:'forgot()', show:'showForgotForm'}}
+    .form-group
+      Enter your email address and we'll send you a link to reset your password
+    .form-group
+      %label.sr-only{for:"emailaddress"}
+        {{'email' | translate}}
+      %input#forgot-emailaddress.form-control{type:"text", name:"forgotemail", placeholder:"Email Address", "ng-model"=>"forgotEmailAddress", required:''}
+    .form-group
+      %button.btn.btn-primary.btn-block{type:"submit"}
+        {{'submit' | translate}}
+    .form-group
+      %button.btn.btn-block{type:"button", ng:{click:'showForgotForm=false;'}}
+        {{'cancel' | translate}}
+  .forgot-success{ng:{show:'forgotSuccess'}}
+    {{'devise.passwords.send_paranoid_instructions' | translate}}

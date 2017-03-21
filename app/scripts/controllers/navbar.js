@@ -3,8 +3,8 @@
 var app = angular.module('oneClickApp');
 
 angular.module('oneClickApp')
-.controller('NavbarController', ['$scope', '$location', 'flash', 'planService', 'deviceDetector', 'ipCookie', '$window', '$translate', 'tmhDynamicLocale', '$http',
-function ($scope, $location, flash, planService, deviceDetector, ipCookie, $window, $translate, tmhDynamicLocale, $http) {
+.controller('NavbarController', ['$scope', '$location', 'flash', 'planService', 'deviceDetector', 'ipCookie', '$window', '$translate', 'tmhDynamicLocale', '$http', '$ngBootbox', '$routeParams',
+function ($scope, $location, flash, planService, deviceDetector, ipCookie, $window, $translate, tmhDynamicLocale, $http, $ngBootbox, $routeParams) {
 
   var input = document.createElement('input');
   input.setAttribute('type','date');
@@ -30,7 +30,17 @@ function ($scope, $location, flash, planService, deviceDetector, ipCookie, $wind
     'mode_bicycle' : 'rides-itinerary-walk.html'
   };
   $scope.flash = flash;
-
+  $scope.$on('$routeChangeSuccess', function() {
+    if($routeParams.reset_token){
+      //show the reset dialog
+      $scope.reset_password_token = $routeParams.reset_password_token;
+      $ngBootbox.customDialog({
+        templateUrl: '/views/password-reset.html',
+        scope: $scope,
+        title: $translate.instant('reset_your_password')
+      });
+    }
+  });
   var that = this;
   that.$scope = $scope;
 

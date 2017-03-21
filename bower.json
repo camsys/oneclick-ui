@@ -20,7 +20,7 @@
     "angular-local-storage": "~0.1.5",
     "ng-device-detector": "~1.1.5",
     "angular-cookie": "~4.0.8",
-    "ngBootbox": "~0.0.5",
+    "ngBootbox": "~0.1.4",
     "angular-ui-bootstrap-datetimepicker": "^2.0.2",
     "angular-translate-loader-url": "^2.12.1",
     "angular-translate": "^2.13.0",
