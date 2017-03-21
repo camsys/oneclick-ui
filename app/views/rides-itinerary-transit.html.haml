@@ -35,6 +35,9 @@
                     {{leg.routeLongName}}
                   %h5
                     %i {{leg.headsign}}
+                  %h5{ng:{show:'leg.serviceFareInfo'}}
+                    %a{target:'_blank', ng:{href:'{{leg.serviceFareInfo}}'}}
+                      {{'fare_info' | translate}}
                 .last-info{ng:{show:'$last'}}
                   %h4.text-capitalize
                     {{'end' | translate}}
