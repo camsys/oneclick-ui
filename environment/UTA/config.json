@@ -7,5 +7,5 @@
   "API_HOST_PRODUCTION": "oneclick-uta.herokuapp.com",
   "API_HOST_DEMO": "oneclick-uta.herokuapp.com",
   "API_HOST_DEV": "oneclick-uta.herokuapp.com",
-  "API_HOST_QA": "oneclick-uta.herokuapp.com"
+  "API_HOST_QA": "oneclick-uta-qa.herokuapp.com"
 }
