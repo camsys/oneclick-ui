@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('oneClickApp')
-  .controller('LoginController', ['$scope', '$rootScope', '$location', 'flash', 'planService', '$http', 'ipCookie', '$window', 'localStorageService', '$routeParams',
-    function ($scope, $rootScope, $location, flash, planService, $http, ipCookie, $window, localStorageService, $routeParams) {
+  .controller('LoginController', ['$scope', '$rootScope', '$location', 'flash', 'planService', '$http', 'ipCookie', '$window', 'localStorageService', '$routeParams', '$timeout',
+    function ($scope, $rootScope, $location, flash, planService, $http, ipCookie, $window, localStorageService, $routeParams, $timeout) {
       $scope.rememberme = true;
       $scope.loginError = false;
       $scope.errors = {dob:false};
@@ -121,6 +121,10 @@ angular.module('oneClickApp')
           //regardless of response, show success and hide forgot form
           $scope.forgotSuccess = true;
           $scope.showForgotForm = false;
+          //hide the success message after 17 seconds
+          $timeout(function(){
+            $scope.forgotSuccess = false;
+          }, 17000);
         }
         $http.post('//'+APIHOST+'/api/v1/users/request_reset', reset).
           then( postResetRequest ).

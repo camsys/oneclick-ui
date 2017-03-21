@@ -22,7 +22,7 @@
         {{'forgot_your_password' | translate}}
   %form#login-nav.form{name:"forgotform", role:"form", "accept-charset"=>"UTF-8", novalidate:"", ng:{submit:'forgot()', show:'showForgotForm'}}
     .form-group
-      Enter your email address and we'll send you a link to reset your password
+      {{'reset_password_instructions' | translate}}
     .form-group
       %label.sr-only{for:"emailaddress"}
         {{'email' | translate}}
@@ -34,4 +34,4 @@
       %button.btn.btn-block{type:"button", ng:{click:'showForgotForm=false;'}}
         {{'cancel' | translate}}
   .forgot-success{ng:{show:'forgotSuccess'}}
-    {{'devise.passwords.send_paranoid_instructions' | translate}}
+    {{'devise.passwords.send_instructions' | translate}}
