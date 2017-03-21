@@ -3,6 +3,7 @@
   "DEBUG": true,
   "PATH": "environment/UTA/app",
   "GOOGLE_API_KEY": "AIzaSyBzgKJija-dhcSKVyNNZH_z5V-kWZCJM1A",
+  "GOOGLE_ANALYTICS_ID": "UA-94051616-1",
   "API_HOST_PRODUCTION": "oneclick-uta.herokuapp.com",
   "API_HOST_DEMO": "oneclick-uta.herokuapp.com",
   "API_HOST_DEV": "oneclick-uta.herokuapp.com",

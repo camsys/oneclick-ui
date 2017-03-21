@@ -723,6 +723,7 @@ angular.module('oneClickApp')
 
       var itineraryRequestPromise;
       this.postItineraryRequest = function($http) {
+        ga('send', 'event', 'Search');
         $rootScope.$broadcast('PlanService:beforeUpdateItineraryResults');
         var planService = this;
         planService.itineraries = null;
@@ -882,6 +883,7 @@ angular.module('oneClickApp')
       this.bookItinerary = function($http, bookingRequest){
         //replacement for bookSharedRide
         var request = {booking_request: bookingRequest};
+        ga('send', 'event', 'Booking');
         return $http.post(urlPrefix + 'api/v1/itineraries/book', request, this.getHeaders());
       }
       this.bookSharedRide = function($http) {
@@ -913,7 +915,7 @@ angular.module('oneClickApp')
         });
 
         this.booking_request = requestHolder;
-
+        ga('send', 'event', 'Booking');
         return $http.post(urlPrefix + 'api/v1/itineraries/book', requestHolder, this.getHeaders());
 
       }

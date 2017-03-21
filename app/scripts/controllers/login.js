@@ -60,6 +60,7 @@ angular.module('oneClickApp')
           signingUp = false;
           processUserLogin(response.data);
           $scope.loginErrors = {};
+          ga('send', 'event', 'SignedUp');
         }).catch(function(response){
           signingUp = false;
           $scope.loginErrors = response.data || {};
