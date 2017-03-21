@@ -7,25 +7,27 @@
     .item.active
       .container
         .row
-          .col-md-8.col-md-offset-2.col-xs-12
+          .col-xs-12
             .row
-              .col-md-6.col-xs-12{style:'position:relative; min-height:400px;'}
-                %img{src:'/images/carousel-mid.png', style:'position:absolute; top:0px; left:0px;'}
-                %h1{style:'position:absolute; top:20px; left:20px;'}
-                  %strong
-                    .text-uppercase
-                      .text-nowrap
-                        How to get from
-                      .text-nowrap
-                        point A to point B
-                      .text-nowrap
-                        with every option
-                      .text-nowrap
-                        from A to Z
-            %h2.text-center{style:'font-weight:600;'}
-              .text-uppercase
-                Find the best route, see travel times and
-                compare costs from multiple providers
+              .col-xs-12
+                .carousel-centered
+                  %h1.carousel-text-p1
+                    %strong
+                      .text-uppercase{style:'max-width:400px;'}
+                        .block-inline
+                          How to get from
+                        .block-inline
+                          point A to point B
+                        .block-inline
+                          with every option
+                        .block-inline
+                          from A to Z
+            .row
+              .col-md-8.col-md-offset-2.col-xs-12
+                %h2.text-center{style:'font-weight:600;'}
+                  .text-uppercase
+                    Find the best route, see travel times and
+                    compare costs from multiple providers
     .item
       .container
         .row
@@ -36,35 +38,35 @@
                   %strong
                     Utah's Ultimate Trip Planner
             .row
-              .col-sm-3.col-xs-6.text-center
+              .col-sm-3.col-xs-6.text-center.icon-grid
                 %img{src:"/images/carousel/rail.png"}
                 .mode-label
                   Rail Transit
-              .col-sm-3.col-xs-6.text-center
+              .col-sm-3.col-xs-6.text-center.icon-grid
                 %img{src:"/images/carousel/bus.png"}
                 .mode-label
                   Bus Transit
-              .col-sm-3.col-xs-6.text-center
+              .col-sm-3.col-xs-6.text-center.icon-grid
                 %img{src:"/images/carousel/taxi.png"}
                 .mode-label
                   Taxi Service
-              .col-sm-3.col-xs-6.text-center
+              .col-sm-3.col-xs-6.text-center.icon-grid
                 %img{src:"/images/carousel/uber.png"}
                 .mode-label
                   UBER
-              .col-sm-3.col-xs-6.text-center
+              .col-sm-3.col-xs-6.text-center.icon-grid
                 %img{src:"/images/carousel/health.png"}
                 .mode-label
                   Health Services
-              .col-sm-3.col-xs-6.text-center
+              .col-sm-3.col-xs-6.text-center.icon-grid
                 %img{src:"/images/carousel/community.png"}
                 .mode-label
                   Community Groups
-              .col-sm-3.col-xs-6.text-center
+              .col-sm-3.col-xs-6.text-center.icon-grid
                 %img{src:"/images/carousel/personal.png"}
                 .mode-label
                   Personal Transportation
-              .col-sm-3.col-xs-6.text-center
+              .col-sm-3.col-xs-6.text-center.icon-grid
                 %img{src:"/images/carousel/accessible.png"}
                 .mode-label
                   Accessible Transportation
@@ -76,33 +78,43 @@
               .text-uppercase
                 How Utah Ride Link can benefit your organization
         .row
-          .col-md-4.col-md-offset-2.right-border-hr
-            %img{src:'/images/carousel/resources.png', style:'width:100%;'}
-            %h4.text-uppercase
-              %strong
-                Additional Resources
-            %p
-              We provide more transportation resources than just trip planning:
-            %ul
-              %li
-                Coordinating Councils
-              %li
-                Grant Funding Opportunities
-              %li
-                Travel Training
-              %li
-                Vehicle Programs
-              %li
-                Regional Projects
-          .col-md-4.right-border-hr
-            %img{src:'/images/carousel/providers.png', style:'width:100%;'}
-            %h4.text-uppercase
-              %strong
-                Service Providers
-            %p
-              By partnering with Utah Ride Link, you join a growing network of organizations dedicated to helping people get where they need to be.
-              That means it will be easier for seniors, persons with disabilities and all others to find your services, resulting in more efficient transporation for everyone.
-          .vert-hr
+          .col-md-4.col-md-offset-2.col-sm-6.col-xs-12.right-border-hr
+            .row
+              .col-sm-12.col-xs-5
+                %img{src:'/images/carousel/resources.png', style:'width:100%;'}
+              .col-sm-12.col-xs-7
+                %h4.text-uppercase
+                  %strong
+                    Additional Resources
+                %p
+                  We provide more transportation resources than just trip planning:
+                %ul
+                  %li
+                    Coordinating Councils
+                  %li
+                    Grant Funding Opportunities
+                  %li
+                    Travel Training
+                  %li
+                    Vehicle Programs
+                  %li
+                    Regional Projects
+          .col-md-4.col-sm-6.col-xs-12.right-border-hr
+            .row
+              .col-sm-12.col-xs-5
+                %img{src:'/images/carousel/providers.png', style:'width:100%;'}
+              .col-sm-12.col-xs-7
+                %h4.text-uppercase
+                  %strong
+                    Service Providers
+                %p
+                  By partnering with Utah Ride Link, you join a growing network of organizations dedicated to helping people get where they need to be.
+                  That means it will be easier for seniors, persons with disabilities and all others to find your services, resulting in more efficient transporation for everyone.
+        .row
+          .col-md-8.col-md-offset-2.col-xs-12
+            %p.text-center{style:'padding-top:7px;'}
+              For more information regarding our additional resources 
+              %a{href:'http://www.utahridelink.org/', style:'text-decoration: underline;'} click here.
   %a.left.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"prev", style:'display:none;'}
   %a.right.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"next", style:'display:none;'}
 .container
