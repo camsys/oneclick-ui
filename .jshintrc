@@ -20,8 +20,10 @@
   "globals": {
     "angular": false,
     "APIHOST": false,
+    "DEBUG_TRANSLATE": false,
     "bootbox": false,
     "google": false,
+    "ga": false,
     "moment": false,
     "$": false,
     "InfoBox": false

@@ -18,8 +18,6 @@ app.controller('MyridesController', [
   '$filter',
   '$translate',
   function ($scope, $http, $routeParams, $location, planService, util, flash, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter, $translate) {
-    var currentLocationLabel = 'Current Location';
-    var urlPrefix = '//' + APIHOST + '/';
     $scope.itineraryhideButtonBar = null;
     $scope.showTab = null;
     $scope.trips = null;
@@ -27,11 +25,11 @@ app.controller('MyridesController', [
     $scope.emailAddresses = {};
     var updateRides = function () {
       //getPastRides and getFutureRides modify $scope.trips adding .future and .past
-      var futureRides = planService.getFutureRides($http, $scope, ipCookie);
-      var pastRides = planService.getPastRides($http, $scope, ipCookie);
+      planService.getFutureRides($http, $scope, ipCookie);
+      planService.getPastRides($http, $scope, ipCookie);
     };
     updateRides();
-    $scope.$on('LoginController:login', function (event, data) {
+    $scope.$on('LoginController:login', function () {
       updateRides();
     });
     $scope.itinerary = planService.selectedTrip;
@@ -57,7 +55,7 @@ app.controller('MyridesController', [
         },
         callback: function (result) {
           var cancelRequest;
-          if (result == true) {
+          if (result === true) {
             cancelRequest = planService.buildCancelTripRequest(trip.itineraries);
             //send the request, process response
             planService.cancelTrip($http, cancelRequest).then(function (response) {

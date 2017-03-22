@@ -17,6 +17,9 @@ app.controller('BookController', [
   '$filter',
   '$translate',
   function ($scope, $http, $routeParams, $location, planService, util, flash, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter, $translate) {
+    var _showPrebookQuestions = function () {
+      $scope.showPrebookingQuestions = true;
+    };
     $scope.rides_forms = {};
     $scope.service_username = {};
     $scope.service_password = {};
@@ -31,7 +34,7 @@ app.controller('BookController', [
         password: $scope.service_password.text
       };
       profile.booking.push(serviceProfile);
-      planService.postProfileUpdate($http, profile).then(function (response) {
+      planService.postProfileUpdate($http, profile).then(function () {
         //hide the service login form, show the pre booking questions
         $scope.showServiceLoginForm = false;
         itinerary.user_registered = true;
@@ -40,7 +43,7 @@ app.controller('BookController', [
         console.warn('profile response', response);
       });
     };
-    $scope.cancelBookItinerary = function (itinerary) {
+    $scope.cancelBookItinerary = function () {
       $scope.showServiceLoginForm = false;
       $scope.showPrebookingQuestions = false;
     };
@@ -98,9 +101,6 @@ app.controller('BookController', [
         return;
       }
       _showPrebookQuestions();
-    };
-    var _showPrebookQuestions = function () {
-      $scope.showPrebookingQuestions = true;
     };
     $scope.prebookingQuestionTemplate = function (questions) {
       //return a template for either question datatype

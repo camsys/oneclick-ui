@@ -15,8 +15,6 @@ angular.module('oneClickApp').controller('LoginController', [
     $scope.rememberme = true;
     $scope.loginError = false;
     $scope.errors = { dob: false };
-    var authentication_token = ipCookie('authentication_token');
-    var email = ipCookie('email');
     $window.visited = true;
     $scope.firstName = {};
     $scope.lastName = {};
@@ -32,7 +30,7 @@ angular.module('oneClickApp').controller('LoginController', [
       planService.authentication_token = result.authentication_token;
       planService.email = result.email;
       ipCookie('authd', true);
-      if ($scope.rememberme == true) {
+      if ($scope.rememberme === true) {
         ipCookie('email', planService.email, {
           expires: 7,
           expirationUnit: 'days'
@@ -122,7 +120,7 @@ angular.module('oneClickApp').controller('LoginController', [
         password_confirmation: $scope.resetPasswordConfirm.text,
         reset_password_token: $routeParams.reset_token
       };
-      $http.post('//' + APIHOST + '/api/v1/users/reset', reset).then(function (response) {
+      $http.post('//' + APIHOST + '/api/v1/users/reset', reset).then(function () {
         bootbox.hideAll();
         $location.path('/').replace();
       }).catch(function (e) {

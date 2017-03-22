@@ -72,7 +72,7 @@ angular.module('oneClickApp', [
 })  //global event handler
 .run(function ($rootScope, $window, $location) {
   //Hamburger menu toggle
-  $('.navbar-nav li a').click(function (event) {
+  $('.navbar-nav li a').click(function () {
     // check if window is small enough so dropdown is created
     var toggle = $('.navbar-toggle').is(':visible');
     if (toggle) {
@@ -84,7 +84,7 @@ angular.module('oneClickApp', [
     '/',
     '/my_trips'
   ];
-  $rootScope.$on('$routeChangeStart', function (event) {
+  $rootScope.$on('$routeChangeStart', function () {
     // redirect user to main page if they try to go to a route not in exceptions, if they havn't visited the main page
     if (!$window.visited && null === $location.$$path.match(/reset_password/)) {
       if (exceptions.indexOf($location.$$path) < 0) {
