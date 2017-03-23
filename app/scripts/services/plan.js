@@ -737,6 +737,13 @@ angular.module('oneClickApp').service('planService', [
         planService.tripId = response.data.trip_id;
         planService.itineraryModes = Object.keys(modes).sort(alphabetical);
         $rootScope.$broadcast('PlanService:updateItineraryResults', response.data);
+        itineraryRequestPromise = false;
+      }).catch(function(e){
+        //broadcast the error if it's a number over 0
+        if(e.status > 0 ){
+          $rootScope.$broadcast('PlanService:updateItineraryResultsError', e.data);
+        }
+        itineraryRequestPromise = false;
       });
       return itineraryRequestPromise;
     };

@@ -47,6 +47,12 @@ app.controller('RidesController', [
     $scope.$on('PlanService:updateItineraryResults', function (event, data) {
       $scope.loadItineraries();
     });
+    $scope.$on('PlanService:updateItineraryResultsError', function (event, data) {
+      // handle the error case of getting itinerary results
+      $scope.updatingResults = false;
+      $scope.itineraries = [];
+      bootbox.alert( $translate.instant('error_couldnt_plan') );
+    });
     $scope.$on('PlanService:beforeUpdateItineraryResults', function (event, data) {
       $scope.updatingResults = true;
     });

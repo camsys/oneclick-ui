@@ -191,8 +191,6 @@ app.controller('PlanController', [
         if (callback && typeof callback === 'function') {
           callback();
         }
-      }).catch(function (e) {
-        console.error(e);
       });  //formerly _bookTrip();
     };
     $scope.itineraries = planService.transitResult || [];
