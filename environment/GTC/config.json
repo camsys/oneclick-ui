@@ -4,7 +4,7 @@
   "PATH": "environment/GTC/app",
   "GOOGLE_API_KEY": "AIzaSyAvlI2BnZMv-lRQkKQsE6tTRShjW4rEXgI",
   "API_HOST_PRODUCTION": "oneclick-gtc.herokuapp.com",
-  "API_HOST_DEMO": "oneclick-uta-qa.herokuapp.com",
-  "API_HOST_DEV": "oneclick-uta-qa.herokuapp.com",
+  "API_HOST_DEMO": "-host-demo-",
+  "API_HOST_DEV": "-host-dev-",
   "API_HOST_QA": "oneclick-uta-qa.herokuapp.com"
 }

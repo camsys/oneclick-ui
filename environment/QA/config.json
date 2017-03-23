@@ -3,8 +3,8 @@
   "DEBUG": true,
   "PATH": "environment/QA/app",
   "GOOGLE_API_KEY": "AIzaSyBzgKJija-dhcSKVyNNZH_z5V-kWZCJM1A",
-  "API_HOST_PRODUCTION": "oneclick-uta-qa.herokuapp.com",
-  "API_HOST_DEMO": "oneclick-uta-qa.herokuapp.com",
-  "API_HOST_DEV": "oneclick-uta-qa.herokuapp.com",
+  "API_HOST_PRODUCTION": "-host-prod-",
+  "API_HOST_DEMO": "-host-demo-",
+  "API_HOST_DEV": "-host-dev-",
   "API_HOST_QA": "oneclick-uta-qa.herokuapp.com"
 }
