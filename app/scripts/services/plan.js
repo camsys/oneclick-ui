@@ -785,14 +785,19 @@ angular.module('oneClickApp').service('planService', [
         return timeOptions;
       }
     };
+    var guestUserTokenPromise;
     this.getGuestToken = function ($http) {
+      // only request the token once, return the last promise if necessary 
+      if(guestUserTokenPromise){
+        return guestUserTokenPromise;
+      }
       var planService = this;
-      var promise = $http.get(urlPrefix + 'api/v1/users/get_guest_token');
-      promise.then(function (response) {
+      var guestUserTokenPromise = $http.get(urlPrefix + 'api/v1/users/get_guest_token');
+      guestUserTokenPromise.then(function (response) {
         planService.email = response.data.email;
         planService.authentication_token = response.data.authentication_token;
       });
-      return promise;
+      return guestUserTokenPromise;
     };
     this.buildProfileUpdateRequest = function (profile) {
       //cleanup profile for update request
@@ -1011,18 +1016,33 @@ angular.module('oneClickApp').service('LocationSearch', [
     var autocompleteService = new google.maps.places.AutocompleteService();
     var LocationSearch = {};
     var recentRemoteSearches = {};
-    var config = planService.getHeaders();
-    $http.get(urlPrefix + '/api/v1/places/recent', config).then(function (response) {
-      if (!response.data) {
-        return;
-      }
-      var data = response.data;
-      if (data.places) {
-        angular.forEach(data.places, function (place) {
-          recentRemoteSearches[place.name] = place;
-        });
-      }
-    });
+    var recentsConfig = planService.getHeaders();
+    var getRecentSearches = function(){
+      //get the recent searches
+      $http.get(urlPrefix + '/api/v1/places/recent', recentsConfig).then(function (response) {
+        if (!response.data) {
+          return;
+        }
+        var data = response.data;
+        if (data.places) {
+          angular.forEach(data.places, function (place) {
+            recentRemoteSearches[place.name] = place;
+          });
+        }
+      });
+    };
+    //if the config is ready, go. but otherwise get the guest user token 
+    if(recentsConfig.headers && recentsConfig.headers['X-User-Token']){
+      getRecentSearches();
+    }else{
+      //get guest user token, then get recent searches
+      planService.getGuestToken($http).then(function(){
+        //update the recentsConfig headers with teh token
+        recentsConfig = planService.getHeaders();
+        getRecentSearches();
+      });
+    }
+
     LocationSearch.getLocations = function (text, config, includeRecentSearches) {
       var compositePromise = $q.defer();
       if (includeRecentSearches == true) {
