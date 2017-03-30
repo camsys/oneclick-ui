@@ -191,6 +191,11 @@ app.controller('PlanController', [
         if (callback && typeof callback === 'function') {
           callback();
         }
+      }).catch(function(e){
+        //if status is -1 it's OK -- the XHR was cancelled. otherwise report error
+        if(e.status > 0){
+          //bootbox.alert( $translate.instant('service_error') );
+        }
       });  //formerly _bookTrip();
     };
     $scope.itineraries = planService.transitResult || [];
@@ -324,7 +329,7 @@ app.controller('PlanController', [
       }).catch(function (e) {
         //if status is -1 it's OK -- the XHR was cancelled. otherwise report error
         if (e.status > 0) {
-          bootbox.alert($translate.instant('service_error'));
+          //bootbox.alert($translate.instant('service_error'));
         }
       });
     }
