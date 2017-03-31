@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-curl https://oneclick-uta-qa.herokuapp.com/api/v1/translations/all?lang=en > ./dist/translations/en.json
-curl https://oneclick-uta-qa.herokuapp.com/api/v1/translations/all?lang=es > ./dist/translations/es.json
+## Deploy script for 1click environment
 
-aws s3 sync ./dist/ s3://1click-dev.camsys-apps.com/ --acl public-read
+## sync the ./dist directory with the s3 bucket
+aws s3 sync ./dist/ s3://1click-core-dev.camsys-apps.com/ --acl public-read
 
+## Invalidate the cloudfront distribution
 aws configure set preview.cloudfront true
 aws cloudfront create-invalidation \
-    --distribution-id E1EWGNVO71RU9C \
+    --distribution-id E1OKDMRBDYPMLW \
     --paths '/*'
 
