@@ -68,7 +68,7 @@ app.controller('RidesController', [
     if (planService.profile) {
       _initOkModes();
     } else {
-      planService.getProfile($http).then(_initOkModes);
+      planService.getProfile($http, ipCookie).then(_initOkModes);
     }
     $scope.itineraryFilter = function (itinerary, index, arr) {
       if (itinerary.hidden) {

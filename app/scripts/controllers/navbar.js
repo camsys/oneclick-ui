@@ -85,7 +85,7 @@ angular.module('oneClickApp').controller('NavbarController', [
         if (planService.profile) {
           postProfileUpdate(planService.profile);
         } else {
-          planService.getProfile($http).then(function () {
+          planService.getProfile($http, ipCookie).then(function () {
             if (!response.data) {
               console.error('no data');
               return;
@@ -118,7 +118,7 @@ angular.module('oneClickApp').controller('NavbarController', [
       if (that.$scope.email) {
         planService.email = $scope.email;
         planService.authentication_token = $scope.authentication_token;
-        planService.getProfile($http).then(loadProfile).catch(console.error);
+        planService.getProfile($http, ipCookie).then(loadProfile).catch(console.error);
       } else {
         planService.getGuestToken($http).then(function (response) {
           that.$scope.email = response.data.email;
@@ -126,7 +126,7 @@ angular.module('oneClickApp').controller('NavbarController', [
           that.$scope.isGuest = true;
           ipCookie('email', that.$scope.email);
           ipCookie('authentication_token', that.$scope.authentication_token);
-          planService.getProfile($http).then(loadProfile).catch(console.error);
+          planService.getProfile($http, ipCookie).then(loadProfile).catch(console.error);
         }).catch(function (e) {
           console.error(e);
         });

@@ -228,7 +228,7 @@ app.controller('PlanController', [
       $scope.purposesQuestions = planService.purposes || [];
       $scope.itineraryModes = planService.itineraryModes;
       //make sure we have the profile before setting question defaults
-      planService.getProfile($http).then(function () {
+      planService.getProfile($http, ipCookie).then(function () {
         if ($scope.characteristicsQuestions.length > 0) {
           setQuestionsDefaults('characteristics')(planService.profile.characteristics || []);
         }

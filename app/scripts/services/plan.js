@@ -822,7 +822,7 @@ angular.module('oneClickApp').service('planService', [
       return $http.post(urlPrefix + 'api/v1/users/update', profile, this.getHeaders());
     };
     var profilePromise = false;
-    this.getProfile = function ($http) {
+    this.getProfile = function ($http, ipCookie) {
       //return the existing promise if there is one
       if (profilePromise) {
         return profilePromise;
@@ -835,6 +835,14 @@ angular.module('oneClickApp').service('planService', [
         }, 100);
       };
       profilePromise.then(function (response) {
+        // If the profile isn't valid, delete the email/auth_token and reload
+        if(!response.data.email || !response.data.first_name){
+          planService.email = null;
+          planService.authentication_token = null;
+          ipCookie.remove('email');
+          ipCookie.remove('authentication_token');
+          window.location.reload();
+        }
         planService.profile = response.data;
         planService.first_name = response.data.first_name;
         planService.last_name = response.data.last_name;
