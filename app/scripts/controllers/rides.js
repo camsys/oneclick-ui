@@ -28,6 +28,38 @@ app.controller('RidesController', [
       showWeeks: false,
       showButtonBar: false
     };
+    $scope.customOrderBy = function(e1, e2){
+      var c1, c2;
+      if($scope.orderItinerariesBy !== 'cost'){
+        return e1.value < e2.value ? -1 : 1;
+      }
+      if(e1.value ==='null'){
+        c1 = 0;
+      }else{
+        c1 = e1.value;
+      }
+      if(e2.value ==='null'){
+        c2 = 0;
+      }else{
+        c2 = e2.value;
+      }
+      return c1 < c2 ? -1 : 1;
+    };
+    $scope.orderItinerariesByFn = function(itinerary){
+      // Process order by cost differently (if environment's transitSortPriority is true)
+      if(dist_env.transitSortPriority && $scope.orderItinerariesBy === 'cost'){
+        // push mode_transit to the top by defaulting it to 0 and multiplying everything else by 10 (for sorting purposes)
+        if(itinerary.returned_mode_code === "mode_transit"){
+          // default cost to 0
+          return itinerary['cost'] || 0;
+        }
+        // everything else times 4 (default 1.1 * 10)
+        return ((itinerary['cost'] || 1.1) *10);
+      }else{
+        // standard order by: just return the key
+        return itinerary[$scope.orderItinerariesBy];
+      }
+    };
     $scope.orderItinerariesBy = 'cost';
     $scope.itineraryOrderbyChange = function (orderby) {
       $scope.orderItinerariesBy = orderby;
