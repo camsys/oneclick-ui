@@ -185,11 +185,13 @@ angular.module('oneClickApp').filter('free', function (translateFilter) {
     'mode_transit': 'transit.png',
     'mode_walk': 'walk.png',
     'mode_rail': 'rail.png',
+    'mode_subway': 'rail.png',
     'mode_bicycle': 'bicycle.png',
     'WALK': 'walk.png',
     'BUS': 'transit.png',
     'TRAM': 'streetcar.png',
     'RAIL': 'rail.png',
+    'SUBWAY': 'rail.png',
     'BICYCLE': 'bicycle.png',
     'CAR': 'auto.png'
   };
@@ -202,7 +204,7 @@ angular.module('oneClickApp').filter('free', function (translateFilter) {
     return iconURL;
   };
 }).filter('modeName', function () {
-  var modes = {
+  /* var modes = {
     'mode_ride_hailing': 'Rideshare',
     'mode_car': 'Drive',
     'mode_paratransit': 'Paratransit',
@@ -211,7 +213,7 @@ angular.module('oneClickApp').filter('free', function (translateFilter) {
     'mode_walk': 'Walk',
     'mode_rail': 'Rail',
     'mode_bicycle': 'Bicycle'
-  };
+  }; */
   var translatedModes = {
     'mode_ride_hailing': 'mode_ride_hailing_name',
     'mode_car': 'mode_car_name',
@@ -220,6 +222,7 @@ angular.module('oneClickApp').filter('free', function (translateFilter) {
     'mode_transit': 'mode_transit_name',
     'mode_walk': 'mode_walk_name',
     'mode_rail': 'mode_rail_name',
+    'mode_subway': 'mode_subway_name',
     'mode_bicycle': 'mode_bicycle_name'
   };
   return function (mode, service_name) {

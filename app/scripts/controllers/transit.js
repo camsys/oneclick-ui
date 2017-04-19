@@ -131,7 +131,7 @@ angular.module('oneClickApp').controller('TransitController', [
         if (leg.mode == 'BUS') {
           imageUrl = 'images/modes/transit.png';
           legLines[legLines.length - 1].busColor = '#' + leg.routeColor;
-        } else if (leg.mode == 'TRAM' || leg.mode == 'RAIL') {
+        } else if (leg.mode == 'TRAM' || leg.mode == 'RAIL' || leg.mode == 'SUBWAY') {
           imageUrl = 'images/modes/streetcar.png';
           legLines[legLines.length - 1].busColor = '#' + leg.routeColor;
         } else if (leg.mode == 'BICYCLE') {

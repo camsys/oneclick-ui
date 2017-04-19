@@ -36,6 +36,7 @@ angular.module('oneClickApp').controller('NavbarController', [
       'mode_taxi': 'rides-itinerary-taxi.html',
       'mode_transit': 'rides-itinerary-transit.html',
       'mode_rail': 'rides-itinerary-transit.html',
+      'mode_subway': 'rides-itinerary-transit.html',
       'mode_walk': 'rides-itinerary-walk.html',
       'mode_car': 'rides-itinerary-walk.html',
       'mode_bicycle': 'rides-itinerary-walk.html'
