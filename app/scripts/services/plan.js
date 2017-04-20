@@ -1076,12 +1076,18 @@ angular.module('oneClickApp').service('LocationSearch', [
       this.placeIds = [];
       this.results = [];
       var that = this;
-      autocompleteService.getPlacePredictions({
+      var request = {
         input: text,
-        bounds: new google.maps.LatLngBounds(
-        new google.maps.LatLng(dist_env.map_bounds.latA, dist_env.map_bounds.lonA), new google.maps.LatLng(dist_env.map_bounds.latB, dist_env.map_bounds.lonB)),
         componentRestrictions: {country: 'us'}
-      }, function (list, status) {
+      };
+      // if map_radius is defined, use that. Otherwise use the map_bounds
+      if( !dist_env.map_radius ){
+        request.bounds = new google.maps.LatLngBounds( new google.maps.LatLng(dist_env.map_bounds.latA, dist_env.map_bounds.lonA), new google.maps.LatLng(dist_env.map_bounds.latB, dist_env.map_bounds.lonB));
+      }else{
+        request.location = new google.maps.LatLng(dist_env.map_radius.location[0], dist_env.map_radius.location[1]);
+        request.radius = dist_env.map_radius.radius;
+      }
+      autocompleteService.getPlacePredictions(request, function (list, status) {
         angular.forEach(list, function (value, index) {
           var formatted_address;
           // skip this value (return) if the state_bounds is set (ucase, 2letter state code), and the bounds could not be found in terms
