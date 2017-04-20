@@ -9,6 +9,10 @@ var dist_env = {
     latB: 43.457979,
     lonB: -76.534205
   },
+//  map_radius:{
+//    location:[42.594468, -77.474246],
+//    radius:60000
+//  },
   state_bounds:'NY'
 };
 
