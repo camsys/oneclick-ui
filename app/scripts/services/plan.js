@@ -1078,11 +1078,16 @@ angular.module('oneClickApp').service('LocationSearch', [
       var that = this;
       autocompleteService.getPlacePredictions({
         input: text,
-        bounds: new google.maps.LatLngBounds(//Utah
-        new google.maps.LatLng(dist_env.map_bounds.latA, dist_env.map_bounds.lonA), new google.maps.LatLng(dist_env.map_bounds.latB, dist_env.map_bounds.lonB))
+        bounds: new google.maps.LatLngBounds(
+        new google.maps.LatLng(dist_env.map_bounds.latA, dist_env.map_bounds.lonA), new google.maps.LatLng(dist_env.map_bounds.latB, dist_env.map_bounds.lonB)),
+        componentRestrictions: {country: 'us'}
       }, function (list, status) {
         angular.forEach(list, function (value, index) {
           var formatted_address;
+          // skip this value (return) if the state_bounds is set (ucase, 2letter state code), and the bounds could not be found in terms
+          if( dist_env.state_bounds && !value.terms.some(function(t){ return t.value === dist_env.state_bounds; }) ){
+            return;
+          }
           //verify the location has a street address
           if (that.results.length < 10 && (value.types.indexOf('route') > -1 || value.types.indexOf('establishment') > -1 || value.types.indexOf('street_address') > -1)) {
             //var terms = [];
