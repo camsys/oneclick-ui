@@ -823,6 +823,7 @@ angular.module('oneClickApp').service('planService', [
     };
     var profilePromise = false;
     this.getProfile = function ($http, ipCookie) {
+      
       //return the existing promise if there is one
       if (profilePromise) {
         return profilePromise;
@@ -849,7 +850,6 @@ angular.module('oneClickApp').service('planService', [
         //drop the profilePromise after promises have run
         _resetProfilePromise();
       }).catch(function (e) {
-        console.error(e);
         _resetProfilePromise();
       });
       return profilePromise;

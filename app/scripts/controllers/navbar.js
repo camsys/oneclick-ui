@@ -119,7 +119,13 @@ angular.module('oneClickApp').controller('NavbarController', [
       if (that.$scope.email) {
         planService.email = $scope.email;
         planService.authentication_token = $scope.authentication_token;
-        planService.getProfile($http, ipCookie).then(loadProfile).catch(console.error);
+        planService.getProfile($http, ipCookie)
+          .then(loadProfile)
+          .catch(function(error) {
+            // If there is an error loading the profile, log the user out and return to the home page
+            console.error("ERROR LOADING PROFILE", error);
+            logoutUser();
+          });
       } else {
         planService.getGuestToken($http).then(function (response) {
           that.$scope.email = response.data.email;
@@ -134,21 +140,29 @@ angular.module('oneClickApp').controller('NavbarController', [
       }
     };
     initialize();
+    
+    // Clears user cookies and local storage, sends you back to the home page, and blanks out the trip planning form
+    var logoutUser = function() {
+      delete ipCookie.remove('email');
+      delete ipCookie.remove('authentication_token');
+      ipCookie.remove('authd');
+      $scope.isGuest = true;
+      sessionStorage.clear();
+      localStorage.clear();
+      delete $scope.email;
+      delete planService.email;
+      $window.location.href = '#/';
+      $window.location.reload();
+      planService.to = '';
+      planService.from = '';
+    };
+    
     $scope.logout = function () {
       $http.post('//' + APIHOST + '/api/v1/sign_out', { user_token: $scope.authentication_token }, planService.getHeaders()).then(function (response) {
-        delete ipCookie.remove('email');
-        delete ipCookie.remove('authentication_token');
-        ipCookie.remove('authd');
-        $scope.isGuest = true;
-        sessionStorage.clear();
-        localStorage.clear();
-        delete $scope.email;
-        delete planService.email;
-        $window.location.href = '#/';
-        $window.location.reload();
-        planService.to = '';
-        planService.from = '';
-      }).catch(console.error);
+        logoutUser();
+      }).catch(function(error) {
+        logoutUser();
+      });
     };
     $scope.itineraryTemplate = function (mode) {
       //return a different template depending on mode 
