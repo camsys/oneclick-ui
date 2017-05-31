@@ -8,4 +8,3 @@ var dist_env = {
     lonB: -70.493158
   }
 };
-
