@@ -29,7 +29,7 @@
       //initialize APIHOST by depending on environment
       var APIHOST = (function( docHost )
       {
-        var env = docHost.match(/^1click-(.+)\.camsys-apps\.com$/);
+        var env = docHost.match(/^1click.*-(.+)\.camsys-apps\.com$/);
         var local = '<!-- @echo API_HOST_LOCAL -->' || docHost;
         var apiHosts = {
           'production': '<!-- @echo API_HOST_PRODUCTION -->' || '',
