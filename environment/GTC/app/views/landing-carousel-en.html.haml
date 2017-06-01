@@ -1,7 +1,8 @@
-.main-page-carousel.carousel.slide{'data-ride'=>"carousel"}
+#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel"}
   %ol.carousel-indicators
-    %li.active{data:{target:"#main-page-carousel", 'slide-to'=>"0"}}
-    %li{data:{target:"#main-page-carousel", 'slide-to'=>"1"}}
+    %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"2"}}
 
   .carousel-inner{role:"listbox"}
     .item.active
@@ -14,8 +15,11 @@
           needs
     .item
       .container
+        %h2 Need Help?
+        %a{href: 'mailto:info@co.livingston.ny.us'} Click here to email us.
+    .item
+      .container
         %img{src:'/images/GTC_nav_logo.png', style:'height:84px;'}
 
   %a.left.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"prev", style:'display:none;'}
   %a.right.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"next", style:'display:none;'}
-
