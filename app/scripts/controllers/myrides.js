@@ -25,8 +25,22 @@ app.controller('MyridesController', [
     $scope.emailAddresses = {};
     var updateRides = function () {
       //getPastRides and getFutureRides modify $scope.trips adding .future and .past
-      planService.getFutureRides($http, $scope, ipCookie);
-      planService.getPastRides($http, $scope, ipCookie);
+      planService.getFutureRides($http, $scope, ipCookie)
+      .catch(function(e){
+        // If get rides call errors out due to token invalidation, reload the page.
+        if(e.status === 401 || e.status === 404) {
+          console.error('Future Rides Call Error', e);
+          $window.location.reload();
+        }
+      });
+      planService.getPastRides($http, $scope, ipCookie)
+      .catch(function(e){
+        // If get rides call errors out due to token invalidation, reload the page.
+        if(e.status === 401 || e.status === 404) {
+          console.error('Past Rides Call Error', e);
+          $window.location.reload();
+        }
+      });
     };
     updateRides();
     $scope.$on('LoginController:login', function () {
