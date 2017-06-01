@@ -192,10 +192,16 @@ app.controller('PlanController', [
           callback();
         }
       }).catch(function(e){
-        //if status is -1 it's OK -- the XHR was cancelled. otherwise report error
-        if(e.status > 0){
-          //bootbox.alert( $translate.instant('service_error') );
+        // If plan call errors out due to token invalidation, reload the page.
+        if(e.status === 401 || e.status === 404) {
+          console.error('Plan Call Error', e);
+          $window.location.reload();
         }
+        
+        //if status is -1 it's OK -- the XHR was cancelled. otherwise report error
+        //if(e.status > 0){
+          //bootbox.alert( $translate.instant('service_error') );
+        //}
       });  //formerly _bookTrip();
     };
     $scope.itineraries = planService.transitResult || [];
@@ -327,6 +333,12 @@ app.controller('PlanController', [
       planService.postItineraryRequest($http).then(function (response) {
         success(response.data);
       }).catch(function (e) {
+        // If plan call errors out due to token invalidation, reload the page.
+        if(e.status === 401 || e.status === 404) {
+          console.error('Plan Call Error', e);
+          $window.location.reload();
+        }
+        
         //if status is -1 it's OK -- the XHR was cancelled. otherwise report error
         if (e.status > 0) {
           //bootbox.alert($translate.instant('service_error'));

@@ -1018,7 +1018,8 @@ angular.module('oneClickApp').service('LocationSearch', [
   'localStorageService',
   '$filter',
   'planService',
-  function ($http, $q, localStorageService, $filter, planService) {
+  '$window',
+  function ($http, $q, localStorageService, $filter, planService, $window) {
     var countryFilter = $filter('noCountry');
     var urlPrefix = '//' + APIHOST + '/';
     var autocompleteService = new google.maps.places.AutocompleteService();
@@ -1027,7 +1028,8 @@ angular.module('oneClickApp').service('LocationSearch', [
     var recentsConfig = planService.getHeaders();
     var getRecentSearches = function(){
       //get the recent searches
-      $http.get(urlPrefix + '/api/v1/places/recent', recentsConfig).then(function (response) {
+      $http.get(urlPrefix + '/api/v1/places/recent', recentsConfig)
+      .then(function (response) {
         if (!response.data) {
           return;
         }
@@ -1036,6 +1038,13 @@ angular.module('oneClickApp').service('LocationSearch', [
           angular.forEach(data.places, function (place) {
             recentRemoteSearches[place.name] = place;
           });
+        }
+      })
+      .catch(function(e) {
+        // If places call errors out due to token invalidation, reload the page.
+        if(e.status === 401 || e.status === 404) {
+          console.error('Recent Places Call Error', e);
+          $window.location.reload();
         }
       });
     };
@@ -1144,7 +1153,8 @@ angular.module('oneClickApp').service('LocationSearch', [
       this.savedPlaceResults = [];
       this.poiData = [];
       var that = this;
-      $http.get(urlPrefix + 'api/v1/places/search?include_user_pois=true&search_string=%25' + text + '%25', config).then(function (response) {
+      $http.get(urlPrefix + 'api/v1/places/search?include_user_pois=true&search_string=%25' + text + '%25', config)
+      .then(function (response) {
         if (!response.data) {
           console.error('no data');
         }
@@ -1164,6 +1174,13 @@ angular.module('oneClickApp').service('LocationSearch', [
           savedplaceaddresses: that.savedPlaceAddresses,
           poiData: that.poiData
         });
+      })
+      .catch(function(e) {
+        // If places call errors out due to token invalidation, reload the page.
+        if(e.status === 401 || e.status === 404) {
+          console.error('Recent Places Call Error', e);
+          $window.location.reload();
+        }
       });
       return savedPlaceData.promise;
     };
