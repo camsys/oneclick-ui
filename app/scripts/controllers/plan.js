@@ -269,8 +269,8 @@ app.controller('PlanController', [
         $scope.planFromResults();
       }
     });
-    //default the scope and planService fromTimeTypes to 'depart' (if planService doesn't already have a value)
-    $scope.fromTimeType = planService.fromTimeType || 'depart';
+    //default the scope and planService fromTimeTypes to 'arrive' (if planService doesn't already have a value)
+    $scope.fromTimeType = planService.fromTimeType || 'arrive';
     planService.fromTimeType = $scope.fromTimeType;
     $scope.$watch('fromTimeType', function (n, o) {
       // refresh the results only if value changed

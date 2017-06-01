@@ -48,8 +48,8 @@
                   .block-two
                     %label.hide{:for => "ride-when"} {{"depart_at" | translate}}/{{"arrive_by" | translate}}?
                     %select#ride-when.select.form-control{ng: {model: 'fromTimeType'} }
-                      %option{:selected => "selected", :value => "depart"} {{"depart_at" | translate}}
-                      %option{:value => "arrive"} {{"arrive_by" | translate}}
+                      %option{:selected => "selected", :value => "arrive"} {{"arrive_by" | translate}}
+                      %option{:value => "depart"} {{"depart_at" | translate}}
                     %datetimepicker{'hour-step'=>'1',
                         'minute-step'=>'1',
                         'ng-model'=>'rideTime',
@@ -76,5 +76,3 @@
       .map-canvas{'ui-map' => 'whereToMap', 'ui-options' => 'mapOptions'}
 .container-full
   .landing-splash-middle{'ng-include'=>'carouselTemplate()' }
-
-
