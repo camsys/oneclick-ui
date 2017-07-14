@@ -1,0 +1,12 @@
+'use strict'
+
+var dist_env = {
+  map_bounds:{
+    latA: 41.092, 
+    lonA: -69.423,
+    latB: 42.9095, 
+    lonB: -73.87
+  },
+  transitSortPriority: true
+};
+
