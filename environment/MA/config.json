@@ -1,0 +1,11 @@
+{
+  "ENVIRONMENT": "MA",
+  "DEBUG": true,
+  "PATH": "environment/MA/app",
+  "GOOGLE_API_KEY": "AIzaSyBzgKJija-dhcSKVyNNZH_z5V-kWZCJM1A",
+  "GOOGLE_ANALYTICS_ID": "UA-94051616-500",
+  "API_HOST_PRODUCTION": "oneclick-ma.herokuapp.com",
+  "API_HOST_DEMO": "-host-demo-",
+  "API_HOST_DEV": "-host-dev-",
+  "API_HOST_QA": "oneclick-ma-qa.herokuapp.com"
+}
