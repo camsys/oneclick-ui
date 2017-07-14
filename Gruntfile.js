@@ -661,8 +661,8 @@ module.exports = function (grunt) {
     'cssmin:dist',
     'usemin',
     'htmlmin',
-    'uglify',
-    'cacheBust'
+    'uglify' //,
+    // 'cacheBust'
   ]);
   grunt.registerTask('default', [
     'newer:jshint',
