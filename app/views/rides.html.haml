@@ -13,10 +13,10 @@
                     %h2.ride-mode-service-name
                       {{itinerary.returned_mode_code | modeName: itinerary.service_name | translate}}
                 .col-sm-4.col-xs-12{style:'position:relative;'}
-                  .btn.btn-primary.btn-block{ng:{click:'saveTrip(itinerary)', hide:'tripSelected'}}
-                    {{'select' | translate}}
-                  .btn.btn-primary.btn-block{ng:{click:'cancelTrip(itinerary)', show:'tripSelected'}}
-                    {{'cancel' | translate}}
+                  .btn.btn-link.btn-block{ng:{click:'saveTrip(itinerary)', hide:'tripSelected'}}
+                    {{'select_trip' | translate}}
+                  .btn.btn-link.btn-block{ng:{click:'cancelTrip(itinerary)', show:'tripSelected'}}
+                    {{'cancel_trip' | translate}}
             .no-outline.top-border-hr
               .row
                 .col-sm-3.col-xs-6.text-center
@@ -32,7 +32,7 @@
                     %span.small.text-nowrap {{itinerary.duration | seconds}} {{'travel_time' | translate}},
                     %span.small.text-nowrap {{itinerary.walk_time | seconds}} {{'walking' | translate}}
                 .col-sm-4.col-xs-12.text-center
-                  .btn.btn-link{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails', hide:'tripSelected' } }
+                  .btn.btn-primary{ng: {click: 'itinerary.showMoreDetails = !itinerary.showMoreDetails', hide:'tripSelected' } }
                     %span{ng:{hide:'itinerary.showMoreDetails'}}
                       {{'show_more' | translate }}
                     %span{ng:{show:'itinerary.showMoreDetails'}}
@@ -79,4 +79,3 @@
           .sk-circle10.sk-child
           .sk-circle11.sk-child
           .sk-circle12.sk-child
-

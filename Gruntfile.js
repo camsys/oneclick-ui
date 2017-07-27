@@ -13,10 +13,12 @@ module.exports = function (grunt) {
   //include bower json which customizes per deploy
   var bowerConfig = require('./bower.json');
   var environment = grunt.option('environment') || 'QA';
-  var host_key = 'API_HOST_' + (grunt.option('host') || 'PRODUCTION');
+  var host = (grunt.option('host') || 'PRODUCTION');
+  var host_key = 'API_HOST_' + host;
   var envPath = './environment/' + environment;
   var distConfig = require(envPath + '/config.json');
-  var localhost = grunt.option('localhost') || '';
+  var localhost = grunt.option('localhost') || 'localhost:3000';
+  var hostPrefix = grunt.option('prefix') || (host == "LOCAL" ? 'http' : 'https'); // Default to https, unless local.
   // Configurable paths for the application
   var preprocessDefaultContext = Object.assign({
     APP_VERSION: '<%= yeoman.version %>',
@@ -31,7 +33,8 @@ module.exports = function (grunt) {
     tmpPath: envPath + '/.tmp',
     dist: envPath + '/dist',
     api_host: preprocessDefaultContext[host_key],
-    version: bowerConfig.version || ''
+    version: bowerConfig.version || '',
+    hostPrefix: hostPrefix
   };
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -109,11 +112,11 @@ module.exports = function (grunt) {
     },
     http: {
       es_translations: {
-        options: { url: 'https://<%= yeoman.api_host %>/api/v1/translations/all?lang=es' },
+        options: { url: '<%= yeoman.hostPrefix %>://<%= yeoman.api_host %>/api/v1/translations/all?lang=es' },
         dest: '<%= yeoman.appPath %>/translations/es.json'
       },
       en_translations: {
-        options: { url: 'https://<%= yeoman.api_host %>/api/v1/translations/all?lang=en' },
+        options: { url: '<%= yeoman.hostPrefix %>://<%= yeoman.api_host %>/api/v1/translations/all?lang=en' },
         dest: '<%= yeoman.appPath %>/translations/en.json'
       }
     },
