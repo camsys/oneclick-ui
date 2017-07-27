@@ -14,9 +14,9 @@
                       {{itinerary.returned_mode_code | modeName: itinerary.service_name | translate}}
                 .col-sm-4.col-xs-12{style:'position:relative;'}
                   .btn.btn-link.btn-block{ng:{click:'saveTrip(itinerary)', hide:'tripSelected'}}
-                    {{'select' | translate}}
-                  .btn.btn-primary.btn-block{ng:{click:'cancelTrip(itinerary)', show:'tripSelected'}}
-                    {{'cancel' | translate}}
+                    {{'select_trip' | translate}}
+                  .btn.btn-link.btn-block{ng:{click:'cancelTrip(itinerary)', show:'tripSelected'}}
+                    {{'cancel_trip' | translate}}
             .no-outline.top-border-hr
               .row
                 .col-sm-3.col-xs-6.text-center
