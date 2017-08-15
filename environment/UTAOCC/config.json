@@ -1,0 +1,11 @@
+{
+  "ENVIRONMENT": "UTA",
+  "DEBUG": true,
+  "PATH": "environment/UTA/app",
+  "GOOGLE_API_KEY": "AIzaSyBzgKJija-dhcSKVyNNZH_z5V-kWZCJM1A",
+  "GOOGLE_ANALYTICS_ID": "UA-94051616-1",
+  "API_HOST_PRODUCTION": "occ-uta-prod.herokuapp.com",
+  "API_HOST_DEMO": "-host-demo-",
+  "API_HOST_DEV": "-host-dev-",
+  "API_HOST_QA": "occ-uta-prod.herokuapp.com"
+}
