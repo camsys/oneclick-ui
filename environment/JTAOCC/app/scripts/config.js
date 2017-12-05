@@ -2,10 +2,10 @@
 
 var dist_env = {
   map_bounds:{
-    latA: 41.092, 
-    lonA: -73.87,
-    latB: 42.9095, 
-    lonB: -69.423
+    latA: 29.113924, 
+    lonA: -82.956220,
+    latB: 31.005698, 
+    lonB: -80.485043
   },
   transitSortPriority: true
 };
