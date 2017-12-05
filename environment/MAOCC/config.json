@@ -7,5 +7,5 @@
   "API_HOST_PRODUCTION": "occ-ma-demo.herokuapp.com",
   "API_HOST_DEMO": "-host-demo-",
   "API_HOST_DEV": "-host-dev-",
-  "API_HOST_QA": "oneclick-ma-qa.herokuapp.com"
+  "API_HOST_QA": "occ-qa.herokuapp.com"
 }
