@@ -4,5 +4,7 @@
   "PATH": "environment/JTAOCC/app",
   "GOOGLE_API_KEY": "AIzaSyBzgKJija-dhcSKVyNNZH_z5V-kWZCJM1A",
   "GOOGLE_ANALYTICS_ID": "UA-94051616-501",
-  "API_HOST_PRODUCTION": "occ-jta-prod.herokuapp.com"
+  "API_HOST_PRODUCTION": "occ-jta-prod.herokuapp.com",
+  "API_HOST_QA": "occ-jta-qa.herokuapp.com",
+  "API_HOST_DEV": "occ-jta-dev.herokuapp.com"
 }
