@@ -34,10 +34,12 @@ app.controller('BookController', [
         password: $scope.service_password.text
       };
       profile.booking.push(serviceProfile);
-      planService.postProfileUpdate($http, profile).then(function () {
+      planService.postProfileUpdate($http, profile).then(function(profile_response) {
         //hide the service login form, show the pre booking questions
         $scope.showServiceLoginForm = false;
         itinerary.user_registered = true;
+        // THIS IS NOT THE ANGULARJS WAY. I piggybacked the prebooking questions onto the profile update response.
+        itinerary.prebooking_questions = profile_response.data.booking.prebooking_questions[itinerary.service_id];
         _showPrebookQuestions();
       }).catch(function (response) {
         console.warn('profile response', response);
@@ -57,7 +59,7 @@ app.controller('BookController', [
       //if the form is OK, attach the id to the answers and submit
       var stop = false;
       angular.forEach(request, function (val, key) {
-        stop = !(parseInt(val) > -1) || stop;
+        //stop = !(parseInt(val) > -1) || stop;
         $scope.rides_forms.prebooking_questions[key].error_required = stop;
       });
       if (stop) {
