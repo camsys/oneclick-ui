@@ -24,6 +24,7 @@ app.controller('BookController', [
     $scope.service_username = {};
     $scope.service_password = {};
     $scope.rides_forms = {};
+    $scope.login_error = false;
     $scope.serviceLogin = function (itinerary) {
       var profile = {};
       //make the booking array if not already there
@@ -38,10 +39,12 @@ app.controller('BookController', [
         //hide the service login form, show the pre booking questions
         $scope.showServiceLoginForm = false;
         itinerary.user_registered = true;
+        $scope.login_error = false;
         // THIS IS NOT THE ANGULARJS WAY. I piggybacked the prebooking questions onto the profile update response.
         itinerary.prebooking_questions = profile_response.data.booking.prebooking_questions[itinerary.service_id];
         _showPrebookQuestions();
       }).catch(function (response) {
+        $scope.login_error = true;
         console.warn('profile response', response);
       });
     };

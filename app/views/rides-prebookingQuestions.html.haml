@@ -3,6 +3,9 @@
     .service_login_form.row{ng:{show:'showServiceLoginForm'}}
       %form.col-md-6.col-md-offset-3.col-xs-12{name:"rides_forms.service_login_form", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'(!itinerary.itineraryBooking) && serviceLogin(itinerary)'}}
         .form-group
+          .alert{role:'alert', "ng-show"=>"login_error"}
+            .error
+              {{'service_login_error' | translate}}
           %label.sr-only{for:"service-username"}
             {{'client_id' | translate}}
           %input#service-username.form-control{type:"text", placeholder:"{{'client_id' | translate}}", ng:{model:"service_username.text"}, name:'service_username', required:''}
