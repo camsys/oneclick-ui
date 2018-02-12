@@ -730,6 +730,7 @@ angular.module('oneClickApp').service('planService', [
               itinerary.answers[e.code] = null;
             });
             itinerary.returnTimeOptions = planService.returnTimeOptions(itinerary);
+            console.log(itinerary);
           }
           return itinerary;
         });
@@ -751,9 +752,13 @@ angular.module('oneClickApp').service('planService', [
     this.returnTimeOptions = function (itinerary) {
       // function to generate labels
       var _timeLabel = function (labelTime, startTime) {
+
+        console.log(humanizeDuration(labelTime - startTime));
+
         return {
           time: labelTime.toISOString(),
-          label: $filter('humanizeDuration')(moment.duration(labelTime - startTime))
+          //label: $filter('humanizeDuration')(moment.duration(labelTime - startTime))
+          label: humanizeDuration(labelTime - startTime)
         };
       };
       // Set the start time based on the itinerary.
