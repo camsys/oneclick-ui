@@ -1,23 +1,12 @@
-#main-page-carousel-es.main-page-carousel.carousel.slide{'data-ride'=>"carousel"}
+#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel"}
   %ol.carousel-indicators
-    %li.active{data:{target:"#main-page-carousel-es", 'slide-to'=>"0"}}
-    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"1"}}
-    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"2"}}
-    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"3"}}
-    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"4"}}
-    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"5"}}
+    %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"2"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"3"}}
 
   .carousel-inner{role:"listbox"}
     .item.active
-      .container
-        %h1
-          Bienvenido a Ride Livingston
-        %h3
-          Encuentre transporte personalizado para
-          %strong sus
-          necesidades
-
-    .item
       .container
         %h2 Find Rides with these Services
         %h3
@@ -113,6 +102,9 @@
         %br
         The $24 program allows disabled riders, who need door-to-door service, to visit anywhere in Syracuse. Allow riders two round trip appointments per month with our complete door-to-door assistance; Group transports available (including wheelchair); open 365 days/year.  
         %a{href: 'http://www.empiredm.com'} www.empiredm.com
+
+        %h2
+          %div{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}} Show More Services
 
     .item
       .container
@@ -232,6 +224,9 @@
         %br
         Medicaid & private pay.  After hours trips by appointment with 24 hrs. notice.
 
+        %h2
+          %div{data:{target:"#main-page-carousel-en", 'slide-to'=>"2"}} Show More Services
+
 
     .item
       .container
@@ -326,13 +321,20 @@
         Special needs charter services by contract or pre-arrangement.  
         %a{href: 'www.wecaretrans.com'}  www.wecaretrans.com
 
+        %h2
+          %div{data:{target:"#main-page-carousel-en", 'slide-to'=>"3"}} Need Help?
+
+
     .item
       .container
-        %h2 ¿Necesita ayuda?
-        %a{href: 'mailto:ridelivingston@co.livingston.ny.us'} Haga clic aquí para envíanos un e-mail.
-    .item
-      .container
-        %img{src:'/images/GTC_nav_logo.png', style:'height:84px;'}
+        %h2 Need Help?
+        %a{href: 'mailto:ridelivingston@co.livingston.ny.us'} Click here to send an email.
+        
+        %h4
+          %div{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}} Back to the Beginning
+
+
+
 
   %a.left.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"prev", style:'display:none;'}
   %a.right.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"next", style:'display:none;'}
