@@ -1,0 +1,25 @@
+#main-page-carousel-es.main-page-carousel.carousel.slide{'data-ride'=>"carousel"}
+  %ol.carousel-indicators
+    %li.active{data:{target:"#main-page-carousel-es", 'slide-to'=>"0"}}
+    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"1"}}
+    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"2"}}
+
+  .carousel-inner{role:"listbox"}
+    .item.active
+      .container
+        %h1
+          Bienvenido a Ride Livingston
+        %h3
+          Encuentre transporte personalizado para
+          %strong sus
+          necesidades
+    .item
+      .container
+        %h2 ¿Necesita ayuda?
+        %a{href: 'mailto:ridelivingston@co.livingston.ny.us'} Haga clic aquí para envíanos un e-mail.
+    .item
+      .container
+        %img{src:'/images/GTC_nav_logo.png', style:'height:84px;'}
+
+  %a.left.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"prev", style:'display:none;'}
+  %a.right.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"next", style:'display:none;'}
