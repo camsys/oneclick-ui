@@ -98,5 +98,7 @@
   "confirm_remove_trip": "Are you sure you want to remove this trip?",
   "remove_trip": "Remove Trip",
   "cancel_booking_failure": "There was an error canceling your booking.",
-  "address_not_found": "Address not found"
+  "address_not_found": "Address not found",
+  "mode_transit_name": "Transit",
+  "trips_was_successfully_removed": "Trip was successfully removed"
 }
