@@ -56,7 +56,10 @@
     .row
       .col-xs-12.col-md-8.col-md-offset-2
         %h3
-          {{'trip_booked_2' | translate}}
+          {{ 'booking_success_2' | translate}}
+          %div{ng:{show:'itinerary.wait_start'}}
+            {{ 'pickup_between' | translate }} {{itinerary.wait_start | toDate | date : 'h:mm a'}} {{ 'and' | translate }}
+            {{itinerary.wait_end | toDate | date : 'h:mm a'}}
         %h4
           {{'confirmation' | translate}}:
           %span{style:'text-decoration:underline; margin: 0px 13px;', ng:{repeat:'confirmation in itinerary.confirmation_ids'}} &#35;{{confirmation}}

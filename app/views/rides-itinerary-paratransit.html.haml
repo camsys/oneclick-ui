@@ -2,7 +2,7 @@
   .col-xs-12.text-center
     %h3 No more details available.
 .row
-  .col-sm-7.col-xs-12
+  .col-sm-5.col-xs-12
     .row{'ng-show'=>'itinerary.service_comments[languageSelected]'}
       .col-xs-12
         %h3 {{'about' | translate}}
@@ -19,19 +19,19 @@
         %h4
           %a{target:'_blank', ng:{href:'{{itinerary.url}}'}}
             {{'visit_url_for_more_info' | translate: itinerary}}
-  .col-sm-5.col-xs-12
+  .col-sm-7.col-xs-12
     .row{'ng-show'=>'itinerary.schedule.length > 0', style:'padding-bottom:20px;'}
       .col-xs-12
         %h3 {{'schedule' | translate}}
       .col-xs-12
         .flex-container.schedule-row{ng:{repeat:'day in itinerary.schedule track by day.day'}}
-          .flex-item{style:'width:90px;'}
+          .flex-item{style:'width:100px;'}
             {{day.day | lowercase | translate}}
           .flex-item
-            .startTime{style:'width:70px; ', 'ng-repeat'=>'startTime in day.start'}
+            .startTime{style:'width:100px; ', 'ng-repeat'=>'startTime in day.start'}
               {{startTime}}
           .flex-item
-            .endTime{style:'width:70px; ', 'ng-repeat'=>'endTime in day.end'}
+            .endTime{style:'width:100px; ', 'ng-repeat'=>'endTime in day.end'}
               {{endTime}}
 .booking{ng:{show:'tripSelected == itinerary.id && itinerary.service_bookable', include:'"/views/rides-prebookingQuestions.html"'}}
 

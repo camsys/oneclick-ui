@@ -79,14 +79,24 @@ app.controller('BookController', [
         var booking_results = response.data.booking_results;
         var error = false;
         var confirmation_ids = [];
+        var wait_start;
+        var wait_end;
+        var first = true
         angular.forEach(booking_results, function (itinerary) {
           error = !itinerary.booked || error;
           confirmation_ids.push(itinerary.confirmation_id);
+          if(first){
+            wait_start = itinerary.wait_start
+            wait_end = itinerary.wait_end
+          }
+          first = false;
         });
         if (error) {
           bootbox.alert($translate.instant('booking_failure_message'));
           return;
         }
+        itinerary.wait_start = wait_start
+        itinerary.wait_end = wait_end
         itinerary.confirmation_ids = confirmation_ids;
         itinerary.booked = true;
         var confirmationMessage = $translate.instant('trip_booked_2');
