@@ -1,5 +1,7 @@
 .booking_interface{ng: {controller: 'BookController' }}
   .book_itinerary{ng:{hide:'itinerary.booked'}}
+    
+    // Show the Service Login, if not Logged in
     .service_login_form.row{ng:{show:'showServiceLoginForm'}}
       %form.col-md-6.col-md-offset-3.col-xs-12{name:"rides_forms.service_login_form", role:"form", "accept-charset"=>"UTF-8", ng:{submit:'(!itinerary.itineraryBooking) && serviceLogin(itinerary)'}}
         .form-group
@@ -22,13 +24,19 @@
         .form-group
           %button.btn.btn-success.btn-block{type:'submit'}
             {{'login' | translate}}
+    
+    // If we are logged in, show the pre-booking questions
     .prebooking_questions{ng:{show:'showPrebookingQuestions'}}
       %form{name:'rides_forms.prebooking_questions', role:'form', method:'post', ng:{submit:'answerPrebookQuestions(itinerary)'}}
+        
+        // Show preBookingQuestions for the service
         .row.form-group{ng:{repeat:'question in itinerary.prebooking_questions'}}
           .col-xs-12.col-md-8.col-md-offset-2
             %label{for:'question-id-{{$index}}'}
               {{question.code | codeNote | translate}}
             .included-question{ng:{include:'prebookingQuestionTemplate(question.choices)'}}
+       
+        // Handle Collecting the Return Time
         .row.form-group
           .col-xs-12.col-md-8.col-md-offset-2
             %label{for:'return_time'}
@@ -39,10 +47,14 @@
             %h3
               .small
                 {{'return_time' | translate}}: {{itinerary.booking_return_time | toDate | date : 'h:mm a'}}
+        
+        // Button to Submit the Questions
         .row
           .col-md-6.col-md-offset-3.col-xs-12
             %button.btn.btn-block.btn-primary{type:'submit', ng:{class:'[{disabled: itinerary.itineraryBooking}]'}}
               {{'continue' | translate}}
+    
+    //The Book and Cancel Buttons
     .action-buttons
       .row.bookable{ng: {hide: 'showServiceLoginForm || showPrebookingQuestions'}, style:'margin-bottom:30px;'}
         .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
@@ -52,6 +64,8 @@
         .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
           .btn.btn-default.btn-block{ng:{click:'cancelBookItinerary(itinerary)', class:'[{disabled: itinerary.itineraryBooking}]'}}
             {{'cancel' | translate}}
+
+  // Once the itinerary is booked, show the booking confirmation and message.
   .itinerary_booked{ng:{show:'itinerary.booked'}}
     .row
       .col-xs-12.col-md-8.col-md-offset-2

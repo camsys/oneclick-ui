@@ -125,7 +125,8 @@ app.controller('BookController', [
       var templateType = typeof questions[0];
       var templates = {
         'object': '/views/rides-prebookingQuestion-array.html',
-        'number': '/views/rides-prebookingQuestion-int.html'
+        'number': '/views/rides-prebookingQuestion-int.html',
+        'string': '/views/rides-prebookingQuestion-string.html'
       };
       return templates[templateType];
     };
