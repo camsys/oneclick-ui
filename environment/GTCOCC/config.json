@@ -1,0 +1,10 @@
+{
+  "ENVIRONMENT": "GTC",
+  "DEBUG": true,
+  "PATH": "environment/GTC/app",
+  "GOOGLE_API_KEY": "AIzaSyAvlI2BnZMv-lRQkKQsE6tTRShjW4rEXgI",
+  "API_HOST_PRODUCTION": "occ-gtc-prod.herokuapp.com",
+  "API_HOST_DEMO": "-host-demo-",
+  "API_HOST_DEV": "occ-gtc-prod.herokuapp.com",
+  "API_HOST_QA": "occ-gtc-prod.herokuapp.com"
+}
