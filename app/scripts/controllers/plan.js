@@ -369,6 +369,16 @@ app.controller('PlanController', [
       $scope.showNext = false;
       $scope.to = null;
     };
+    $scope.clickGetFromLocations = function () {
+      var typed = '';
+      planService.from = '';
+      $scope.getLocations(typed, false);
+    };
+    $scope.clickGetToLocations = function () {
+      var typed = '';
+      planService.to = '';
+      $scope.getLocations(typed, false);
+    };
     $scope.getFromLocations = function (typed) {
       planService.from = '';
       $scope.getLocations(typed, false);
@@ -428,6 +438,7 @@ app.controller('PlanController', [
               $scope.placeAddresses = $scope.placeAddresses.concat(recentSearchData);
             }
           }
+
           var googlePlaceData = data[0].googleplaces;
           if (googlePlaceData.length > 0) {
             choices.push({

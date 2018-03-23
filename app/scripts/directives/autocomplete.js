@@ -129,13 +129,24 @@ app.directive('autocomplete', function () {
         esc: 27,
         tab: 9
       };
+
+      element[0].addEventListener('focus', function (e) {
+        scope.completing = true;
+        scope.searchFilter = scope.disableFilter ? '' : scope.searchParam;
+        scope.selectedIndex = -1;
+        scope.onType(" ");
+        return ;
+      }, true);
+
       element[0].addEventListener('keydown', function (e) {
+
         var keycode = e.keyCode || e.which;
         var l = angular.element(this).find('li').length;
         // this allows submitting forms by pressing Enter in the autocompleted field
         //if(!scope.completing || l == 0) return;
         // implementation of the up and down movement in the list of suggestions
         switch (keycode) {
+
         case key.up:
           index = scope.getIndex() - 1;
           if (index < -1) {
@@ -226,7 +237,7 @@ app.directive('autocomplete', function () {
         }
       }, true);
     },
-    template: '        <div class="autocomplete {{ attrs.class }}" id="{{ attrs.id }}">          <input            type="text"            click-to-focus="{{ attrs.clicktofocus }}"            focus-me="{{ attrs.autofocus }}"            ng-model="searchParam"            placeholder="{{ placeholder | translate }}"            class="clearable {{ attrs.inputclass }}"            id="{{ attrs.inputid }}"            autocomplete="off"            ng-required="{{ autocompleteRequired }}" />          <ul ng-show="completing && (suggestions | filter:searchFilter).length > 0">            <li              suggestion              tabindex="-1"              ng-repeat="suggestion in suggestions"              index="{{ $index }}"              val="{{ suggestion.label }}"              ng-class="{ active: ($index === selectedIndex && suggestion.option), selectable: (suggestion.option) }"              ng-click="!suggestion.option || select(suggestion.label)"              ng-mousedown="ignoreBlur()"              ng-bind-html="suggestion.label"></li>          </ul>        </div>'
+    template: '        <div class="autocomplete {{ attrs.class }}" id="{{ attrs.id }}">          <input            type="text"            click-to-focus="{{ attrs.clicktofocus }}"            focus-me="{{ attrs.autofocus }}"            ng-model="searchParam"            placeholder="{{ placeholder | translate }}"            class="clearable {{ attrs.inputclass }}"            id="{{ attrs.inputid }}"            autocomplete="off"            ng-required="{{ autocompleteRequired }}" />          <ul ng-show="completing && (suggestions).length > 0">            <li              suggestion              tabindex="-1"              ng-repeat="suggestion in suggestions"              index="{{ $index }}"              val="{{ suggestion.label }}"              ng-class="{ active: ($index === selectedIndex && suggestion.option), selectable: (suggestion.option) }"              ng-click="!suggestion.option || select(suggestion.label)"              ng-mousedown="ignoreBlur()"              ng-bind-html="suggestion.label"></li>          </ul>        </div>'
   };
 });
 app.directive('clickToFocus', [
