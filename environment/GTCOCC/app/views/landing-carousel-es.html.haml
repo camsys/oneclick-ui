@@ -1,18 +1,54 @@
-#main-page-carousel-es.main-page-carousel.carousel.slide{'data-ride'=>"carousel"}
+#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel"}
   %ol.carousel-indicators
-    %li.active{data:{target:"#main-page-carousel-es", 'slide-to'=>"0"}}
-    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"1"}}
+    %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"2"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"3"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"4"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"5"}}
 
-
+  .row
+    .col-sm-6.col-xs-12.text-center.icon-grid
+      %a.btn.btn-primary{href:"https://s3.amazonaws.com/bin-gtc-prod/Quick+List+-+Transportation+Services.pdf", target:'_blank'} lista de proveedores
+      .mode-label
+        Muéstrame todos los proveedores de transporte.
+    .col-sm-6.col-xs-12.text-center.icon-grid
+      %a.btn.btn-primary{href:"https://s3.amazonaws.com/bin-gtc-prod/Quick+Guide+.pdf", target:'_blank'}  Guía rápida
+      .mode-label
+        ¿Cómo uso este sitio?
+  %br
+  %br
   .carousel-inner{role:"listbox"}
     .item.active
-      .container
-        %h2
-          %a.btn.btn-primary{href:"https://s3.amazonaws.com/bin-gtc-prod/Quick+List+-+Transportation+Services.pdf", target:'_blank'}  Lista de Proveedores
-          
+      .container.text-center
+        .mode-label
+          Conéctese a comprar.
+        %img{src:"/images/A.jpeg"}
     .item
+
+      .container.text-center
+        .mode-label
+          Conectarse a trabajos
+        %img{src:"/images/B.jpeg"}
+    .item
+      .container.text-center
+        .mode-label
+          Conéctese a servicios médicos
+        %img{src:"/images/C.jpeg"}
+    .item
+      .container.text-center
+        .mode-label
+          Conectarse a la cena.
+        %img{src:"/images/D.jpeg"}
+    .item
+      .container.text-center
+        .mode-label
+          Conéctate a comida y supermercado.
+        %img{src:"/images/E.jpeg"}
+
+    .item.text-center
       .container
-        %h2 ¿Necesitas ayuda?
+        %h2 Necesito ayuda?
         %a{href: 'mailto:ridelivingston@co.livingston.ny.us'} Haga clic aquí para enviar un correo electrónico.
 
   %a.left.carousel-control{href:"#main-page-carousel", role:"button", 'data-slide'=>"prev", style:'display:none;'}
