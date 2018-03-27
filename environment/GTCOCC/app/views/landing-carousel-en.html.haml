@@ -1,3 +1,14 @@
+.row
+  .col-sm-6.col-xs-12.text-center.icon-grid
+    %a.btn.btn-primary.btn-sm{href:"https://s3.amazonaws.com/bin-gtc-prod/Quick+List+-+Transportation+Services.pdf", target:'_blank'}  List of Providers
+    .mode-label
+      Show me all the transportation providers.
+  .col-sm-6.col-xs-12.text-center.icon-grid
+    %a.btn.btn-primary.btn-sm{href:"https://s3.amazonaws.com/bin-gtc-prod/Quick+Guide+.pdf", target:'_blank'}  Quick Guide
+    .mode-label
+      How do I use this site?
+%br
+
 #main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel"}
   %ol.carousel-indicators
     %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
@@ -7,17 +18,7 @@
     %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"4"}}
     %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"5"}}
 
-  .row
-    .col-sm-6.col-xs-12.text-center.icon-grid
-      %a.btn.btn-primary{href:"https://s3.amazonaws.com/bin-gtc-prod/Quick+List+-+Transportation+Services.pdf", target:'_blank'}  List of Providers
-      .mode-label
-        Show me all the transportation providers.
-    .col-sm-6.col-xs-12.text-center.icon-grid
-      %a.btn.btn-primary{href:"https://s3.amazonaws.com/bin-gtc-prod/Quick+Guide+.pdf", target:'_blank'}  Quick Guide
-      .mode-label
-        How do I use this site?
-  %br
-  %br
+
   .carousel-inner{role:"listbox"}
     .item.active
       .container.text-center
@@ -25,7 +26,6 @@
           Connect to shopping.
         %img{src:"/images/A.jpeg"}
     .item
-
       .container.text-center
         .mode-label
           Connect to jobs.
