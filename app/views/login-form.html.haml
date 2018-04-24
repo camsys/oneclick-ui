@@ -20,7 +20,7 @@
     .form-group
       .btn.btn-link{ng:{click:"showForgotForm = !showForgotForm", hide:'forgotSuccess'}}
         {{'forgot_your_password' | translate}}
-  %form#login-nav.form{name:"forgotform", role:"form", "accept-charset"=>"UTF-8", novalidate:"", ng:{submit:'forgot()', show:'showForgotForm'}}
+  %form#login-forgot-nav.form{name:"forgotform", role:"form", "accept-charset"=>"UTF-8", novalidate:"", ng:{submit:'forgot()', show:'showForgotForm'}}
     .form-group
       {{'reset_password_instructions' | translate}}
     .form-group
