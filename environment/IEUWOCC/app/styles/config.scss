@@ -1,0 +1,42 @@
+$navbar_logo: url('/images/UTA_nav_logo.png');
+$splash_image: url('/images/splash.png');
+$btn-primary-background: #ed7c1f;
+$btn-primary-border: #de741d;
+
+.main-page-carousel{
+  h2{
+    color: $btn-primary-background;
+  }
+  .icon-grid{
+    padding-top: 20px;
+    img{
+    padding-bottom:10px;
+    }
+  }
+  .carousel-img-p1{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+  }
+  .carousel-text-p1{
+    position:absolute;
+    top:20px;
+    left:20px;
+    margin:0px;
+  }
+  .carousel-centered{
+    background-image: url('/images/carousel-mid.png');
+    background-repeat: no-repeat;
+    background-position:left;
+    max-width:800px;
+    position: relative;
+    min-height:285px;
+    width:80%;
+    margin:0px auto;
+  }
+  .carousel-inner{
+    min-height:580px;
+  }
+}
+
