@@ -24,6 +24,7 @@
     "angular-ui-bootstrap-datetimepicker": "^2.0.2",
     "angular-translate-loader-url": "^2.12.1",
     "angular-translate": "^2.13.0",
+    "bootstrap": "^3.3.7",
     "bootstrap-only-sass": "^3.3.7",
     "bootstrap-toggle": "^2.2.2",
     "autofill-event": "^1.0.0",
@@ -39,6 +40,7 @@
   "appPath": "app",
   "resolutions": {
     "angular": "1.5.8",
-    "angular-ui-utils": "0.x"
+    "angular-ui-utils": "0.x",
+    "bootstrap": "^3.3.7"
   }
 }
