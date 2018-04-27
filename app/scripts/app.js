@@ -101,10 +101,4 @@ angular.module('oneClickApp', [
     location.replace('/#!/reset_password/' + searchParams.reset_password_token);
   }
 
-  // Carousel does not automatically start cycling on page load.
-  var carouselVisible = $('.carousel').is(':visible');
-  if (carouselVisible) {
-      $('.carousel').carousel();
-  }
-
 });
