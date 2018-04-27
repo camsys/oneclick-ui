@@ -1,4 +1,4 @@
-#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel", 'data-interval'=>"9500"}
+#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel", 'ng-init'=>"initCarousel()", 'data-interval'=>"5000"}
   %ol.carousel-indicators
     %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
     %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}}
@@ -7,11 +7,43 @@
     .item.active
       .container
         .row
-          .col-xs-12.center.text-center
-            1-Click Demo Site
+          .col-xs-12.center
+            %strong
+              About 211 VetLink Trip Planner
+        .row
+          .col-xs-12.center
+            Use the 211 VetLink Trip Planner to find transportation options in San Bernardino & Riverside Counties. This Discovery Tool currently does not have trip booking capability, it is the user's responsibility to contact and arrange for transportation from the appropriate provider. *Tip* Plan ahead of time for more possible options! Click the 211 logos to search community resources, then click on "Plan a Trip" link to learn how to get there. Still need help? Dial 2-1-1!
+        .row
+          .col-xs-12.center
+            %a{:href => "http://www.211sb.org/"}
+              %img{:src => "/images/SanBernadino211.png"}
+            %a{:href => "http://www.connectriverside.org/"}
+              %img{:src => "/images/CommunityConnect211.png"}
+    .item
+      .container
+        .row
+          .col-xs-12.center{style:'height:500px !important;'}
+            %a.twitter-timeline{href:'https://twitter.com/211VetLink?ref_src=twsrc%5Etfw'} Tweets by 211VetLink
+            %script{:async => "", :charset => "utf-8", :src => "https://platform.twitter.com/widgets.js"}
+    .item
+      .container
+        .row
+          .col-xs-12.center
+            %strong
+              Funding for 211 VetLink Trip Planner provided by:
+        .row
+          .col-xs-12.center
+            %a{:href => "http://www.fta.dot.gov/"}
+              %img{:src => "/images/FTA.jpg"}
+            %a{:href => "http://www.omnitrans.org/"}
+              %img{:src => "/images/OmniLogo.png"}
+            %a{:href => "http://www.sanbag.ca.gov/"}
+              %img{:src => "/images/sanbag.JPG"}
+            %a{:href => "http://www.sanbag.ca.gov/funding/measure-i.html"}
+              %img{:src => "/images/measure-I.gif"}
+            %a{:href => "http://www.rctc.org/"}
+              %img{:src => "/images/RCTC.png"}
+  %a.left.carousel-control{href:"#main-page-carousel-en", role:"button", 'data-slide'=>"prev", style:'display:none;'}
+  %a.right.carousel-control{href:"#main-page-carousel-en", role:"button", 'data-slide'=>"next", style:'display:none;'}
 
-.container
-  .row{style:'margin-top:40px;'}
-    .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
-      %p
-        1-Click Demo 
+
