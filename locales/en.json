@@ -100,5 +100,9 @@
   "cancel_booking_failure": "There was an error canceling your booking.",
   "address_not_found": "Address not found",
   "mode_transit_name": "Transit",
-  "trips_was_successfully_removed": "Trip was successfully removed"
+  "trips_was_successfully_removed": "Trip was successfully removed",
+  "get_on": "Get on",
+  "get_off": "Get off",
+  "mode_ride_hailing_name": "Uber",
+  "devise.failure.not_found_in_database": "User Not Found"
 }
