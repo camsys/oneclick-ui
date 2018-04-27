@@ -2,6 +2,7 @@ $navbar_logo: url('/images/211_VetLink_50x440_v2.png');
 $splash_image: url('/images/splash.png');
 $btn-primary-background: #cb1117; 
 $btn-primary-border: #aa0e13;
+$main-page-height: 500px;
 
 .main-page-carousel{
   h2{
@@ -37,6 +38,15 @@ $btn-primary-border: #aa0e13;
   }
   .carousel-inner{
     min-height:580px;
+  }
+
+  .top-buffer { 
+    margin-top: 20px; 
+  }
+
+  .twitter-col {
+    height: 500px !important;
+    overflow-y: scroll;
   }
 }
 
