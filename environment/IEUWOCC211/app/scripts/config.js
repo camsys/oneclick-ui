@@ -7,6 +7,7 @@ var dist_env = {
     latB: 33.108948, 
     lonB: -114.248192
   },
+  state_bounds:'CA',
   transitSortPriority: true
 };
 
