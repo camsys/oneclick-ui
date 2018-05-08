@@ -143,6 +143,7 @@ html, body{
 
 #main-page{
   height: 80%;
+  max-height: if(variable-exists(main-page-height), $main-page-height, none);
   min-height: 400px;
   padding:0px 15px;
 
@@ -154,7 +155,8 @@ html, body{
     top: 0px;
     left: 0px;
     width: 100%;
-    height:80%;
+    height: 80%;
+    max-height: if(variable-exists(main-page-height), $main-page-height, none);
     min-height: 500px;
     z-index:-9999;
   }
@@ -162,6 +164,7 @@ html, body{
   .landing-plan{
     height:80%;
     width:100%;
+    max-height: if(variable-exists(main-page-height), $main-page-height, none);
     min-height:240px;
     display:flex;
     justify-content:center;
@@ -215,15 +218,18 @@ html, body{
   }
   #splash-search-form .block-one > *{
     flex: 1 1 251px;
+    margin-right: 3px;
   }
   #splash-search-form .block-two > select{
     flex: 4 1 190px;
+    margin-right: 3px;
   }
   #splash-search-form .block-two > datetimepicker{
     flex: 0 0 290px;
   }
   #splash-search-form .block-two > button{
     flex: 0 0 auto;
+    margin-right: 3px;
   }
 }
 

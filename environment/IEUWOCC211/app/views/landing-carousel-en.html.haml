@@ -1,0 +1,38 @@
+#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel", 'ng-init'=>"initCarousel()", 'data-interval'=>"5000"}
+  %ol.carousel-indicators
+    %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"2"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"3"}}
+  .carousel-inner{role:"listbox"}
+    .item.active
+      .container
+        .row
+          .col-xs-12.center
+            %strong
+              Inland Empire United Way 211
+        .row.top-buffer
+          .col-xs-12.center
+            %a{:href => "http://www.211sb.org/"}
+              %img{:src => "/images/211_Ride_Logo_RGB.jpg"}
+    .item
+      .container
+        .row
+          .col-xs-12.center
+            %strong
+              Orange County 211
+    .item
+      .container
+        .row
+          .col-xs-12.center
+            %strong
+              Los Angeles 211
+    .item
+      .container
+        .row
+          .col-xs-12.center
+            %strong
+              Ventura 211
+  %a.left.carousel-control{href:"#main-page-carousel-en", role:"button", 'data-slide'=>"prev", style:'display:none;'}
+  %a.right.carousel-control{href:"#main-page-carousel-en", role:"button", 'data-slide'=>"next", style:'display:none;'}
+
