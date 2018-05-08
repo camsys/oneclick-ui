@@ -104,5 +104,18 @@
   "get_on": "Get on",
   "get_off": "Get off",
   "mode_ride_hailing_name": "Uber",
-  "devise.failure.not_found_in_database": "User Not Found"
+  "devise.failure.not_found_in_database": "User Not Found",
+  "show_steps": "show steps",
+  "fare_info": "fare info",
+  "trip_was_successfully_removed": "Trip was successfully removed",
+  "next_steps": "Next Steps",
+  "call_to_register": "Call to register",
+  "more_information": "More Information",
+  "visit_url_for_more_info": "Visit URL for more info",
+  "devise.passwords.send_instructions": "Forgot Password?",
+  "no_street_address": "no street address",
+  "your_email_was_sent": "Your email was sent",
+  "enter_valid_emails": "Please enter valid email addresses",
+  "cancel_booking_success": "Trip was successfully cancelled",
+  "cancel_booking_failure": "Trip cancellation failed"
 }
