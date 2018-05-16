@@ -180,8 +180,21 @@ angular.module('oneClickApp').service('planService', [
               if (i == 0) {
                 trip_with_itineraries.mode = trip[i].mode;
                 trip_with_itineraries.service_name = trip[i].service_name;
-                trip_with_itineraries.startDesc = that.getDateDescription(trip[i].wait_start || trip[i].departure);
-                trip_with_itineraries.startDesc += ' at ' + moment(trip[i].wait_start || trip[i].departure).format('h:mm a');
+                console.log(trip_with_itineraries);
+               
+                if(trip[i].pu_window_start != null && trip[i].pu_window_end != null ){
+                  trip_with_itineraries.startDesc = 'Be ready ' + that.getDateDescription(trip[i].pu_window_start);
+                  trip_with_itineraries.startDesc += ' between ' + moment(trip[i].pu_window_start).format('h:mm a');
+                  trip_with_itineraries.startDesc += ' and ' + moment(trip[i].pu_window_end).format('h:mm a') + '.';
+                }else if(trip[i].pu_window_start != null){
+                  trip_with_itineraries.startDesc = 'Be ready ' + that.getDateDescription(trip[i].pu_window_start);
+                  trip_with_itineraries.startDesc += ' at ' + moment(trip[i].pu_window_start).format('h:mm a') + '.';
+                } 
+                else {
+                  trip_with_itineraries.startDesc = that.getDateDescription(trip[i].wait_start || trip[i].departure);
+                  trip_with_itineraries.startDesc += ' at ' + moment(trip[i].wait_start || trip[i].departure).format('h:mm a');
+                }
+               
                 trip_with_itineraries.booking_confirmation_codes = [];
                 angular.forEach(trip, function (t) {
                   //add the booking_confirmation if there is one
