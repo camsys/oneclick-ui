@@ -19,6 +19,7 @@ app.controller('BookController', [
   function ($scope, $http, $routeParams, $location, planService, util, flash, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter, $translate) {
     var _showPrebookQuestions = function () {
       $scope.showPrebookingQuestions = true;
+      $scope.showSpinner = false;
     };
     $scope.rides_forms = {};
     $scope.service_username = {};
@@ -52,7 +53,18 @@ app.controller('BookController', [
       $scope.showServiceLoginForm = false;
       $scope.showPrebookingQuestions = false;
     };
+
+    $scope.startSpinning = function () {
+      $scope.showSpinner = true;
+    };
+
+    $scope.stopSpinning = function () {
+      $scope.showSpinner = false;
+    };
+
+
     $scope.answerPrebookQuestions = function (itinerary) {
+      $scope.startSpinning();
       //return if itinerary already being booked
       if (itinerary.itineraryBooking === true) {
         return;
@@ -75,6 +87,7 @@ app.controller('BookController', [
         request.return_time = itinerary.booking_return_time;
       }
       planService.bookItinerary($http, [request]).then(function (response) {
+        $scope.stopSpinning();
         itinerary.itineraryBooking = false;
         var booking_results = response.data.booking_results;
         var error = false;
