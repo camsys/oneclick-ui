@@ -131,10 +131,12 @@ app.directive('autocomplete', function () {
       };
 
       element[0].addEventListener('focus', function (e) {
-        scope.completing = true;
-        scope.searchFilter = scope.disableFilter ? '' : scope.searchParam;
-        scope.selectedIndex = -1;
-        scope.onType(" ");
+        if(e.srcElement.value.length == 0){
+          scope.completing = true;
+          scope.searchFilter = scope.disableFilter ? '' : scope.searchParam;
+          scope.selectedIndex = -1;
+          scope.onType(" ");
+        }
         return ;
       }, true);
 

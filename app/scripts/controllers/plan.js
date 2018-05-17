@@ -369,16 +369,6 @@ app.controller('PlanController', [
       $scope.showNext = false;
       $scope.to = null;
     };
-    $scope.clickGetFromLocations = function () {
-      var typed = '';
-      planService.from = '';
-      $scope.getLocations(typed, false);
-    };
-    $scope.clickGetToLocations = function () {
-      var typed = '';
-      planService.to = '';
-      $scope.getLocations(typed, false);
-    };
     $scope.getFromLocations = function (typed) {
       planService.from = '';
       $scope.getLocations(typed, false);
