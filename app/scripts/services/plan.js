@@ -42,6 +42,15 @@ angular.module('oneClickApp').service('planService', [
       'mode_bicycle',
       'mode_walk'
     ];
+    this.allModesWithLyft = [
+      'mode_car',
+      'mode_transit',
+      'mode_lyft',
+      'mode_taxi',
+      'mode_paratransit',
+      'mode_bicycle',
+      'mode_walk'
+    ];
     this.getPrebookingQuestions = function () {
       var questions = this.paratransitItineraries[0].prebooking_questions;
       var questionObj = {};
@@ -274,6 +283,7 @@ angular.module('oneClickApp').service('planService', [
       this.guestParatransitItinerary = null;
       this.taxiItineraries = [];
       this.uberItineraries = [];
+      this.lyftItineraries = [];
       this.walkItineraries = [];
       this.tripId = this.searchResults.trip_id;
       var currencyFilter = $filter('currency');
@@ -349,6 +359,9 @@ angular.module('oneClickApp').service('planService', [
         if (itinerariesByModeOutbound.mode_ride_hailing) {
           this.uberItineraries = itinerariesByModeOutbound.mode_ride_hailing;
         }
+        if (itinerariesByModeOutbound.mode_lyft) {
+          this.lyftItineraries = itinerariesByModeOutbound.mode_lyft;
+        }
         if (itinerariesByModeOutbound.mode_walk) {
           this.walkItineraries.push(itinerariesByModeOutbound.mode_walk[0]);
         }
@@ -394,6 +407,19 @@ angular.module('oneClickApp').service('planService', [
           });
         } else {
           this.uberItineraries = [];
+        }
+        if (itinerariesByModeReturn.mode_lyft) {
+          //merge the return itineraries into the other itineraries, matching the service_ids
+          itinerariesByModeReturn.mode_lyft.forEach(function (returnItinerary) {
+            //find the matching itinerary, merge into that
+            that.lyftItineraries.forEach(function (departItinerary) {
+              if (departItinerary.service_id == returnItinerary.service_id) {
+                departItinerary.returnItinerary = returnItinerary;
+              }
+            });
+          });
+        } else {
+          this.lyftItineraries = [];
         }
         if (itinerariesByModeReturn.mode_walk) {
           this.walkItineraries.push(itinerariesByModeReturn.mode_walk[0]);
@@ -961,6 +987,9 @@ angular.module('oneClickApp').service('planService', [
         delete this.user_profile;
       }
       request.modes = this.allModes;
+      if (dist_env.hasLyftMode == true) {
+            request.modes = this.allModesWithLyft;
+      }
       if (this.tripPurpose) {
         request.trip_purpose = this.tripPurpose;
       }

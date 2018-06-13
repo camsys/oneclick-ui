@@ -32,6 +32,7 @@ angular.module('oneClickApp').controller('NavbarController', [
     tmhDynamicLocale.set($scope.languageSelected + '-us');
     var templates = {
       'mode_ride_hailing': 'rides-itinerary-rideshare.html',
+      'mode_lyft': 'rides-itinerary-lyft.html',
       'mode_paratransit': 'rides-itinerary-paratransit.html',
       'mode_taxi': 'rides-itinerary-taxi.html',
       'mode_transit': 'rides-itinerary-transit.html',

@@ -8,6 +8,7 @@ var dist_env = {
     lonB: -114.248192
   },
   state_bounds:'CA',
-  transitSortPriority: true
+  transitSortPriority: true,
+  hasLyftMode: true
 };
 

@@ -131,6 +131,7 @@ angular.module('oneClickApp').filter('free', function (translateFilter) {
 }).filter('roundUp', function () {
   var roundUpModes = [
     'mode_ride_hailing',
+    'mode_lyft',
     'mode_taxi'
   ];
   return function (up, mode) {
@@ -179,6 +180,7 @@ angular.module('oneClickApp').filter('free', function (translateFilter) {
 }).filter('modeIcon', function () {
   var icons = {
     'mode_ride_hailing': 'auto.png',
+    'mode_lyft': 'auto.png',
     'mode_car': 'auto.png',
     'mode_paratransit': 'paratransit.png',
     'mode_taxi': 'taxi.png',
@@ -206,6 +208,7 @@ angular.module('oneClickApp').filter('free', function (translateFilter) {
 }).filter('modeName', function () {
   /* var modes = {
     'mode_ride_hailing': 'Rideshare',
+    'mode_lyft': 'Lyft',
     'mode_car': 'Drive',
     'mode_paratransit': 'Paratransit',
     'mode_taxi': 'Taxi',
@@ -216,6 +219,7 @@ angular.module('oneClickApp').filter('free', function (translateFilter) {
   }; */
   var translatedModes = {
     'mode_ride_hailing': 'mode_ride_hailing_name',
+    'mode_lyft': 'mode_lyft_name',
     'mode_car': 'mode_car_name',
     'mode_paratransit': 'mode_paratransit_name',
     'mode_taxi': 'mode_taxi_name',
