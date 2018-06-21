@@ -53,6 +53,7 @@
           .col-md-6.col-md-offset-3.col-xs-12
             %button.btn.btn-block.btn-primary{type:'submit', ng:{class:'[{disabled: itinerary.itineraryBooking}]'}}
               {{'continue' | translate}}
+
     
     //The Book and Cancel Buttons
     .action-buttons
@@ -64,6 +65,24 @@
         .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
           .btn.btn-default.btn-block{ng:{click:'cancelBookItinerary(itinerary)', class:'[{disabled: itinerary.itineraryBooking}]'}}
             {{'cancel' | translate}}
+
+  
+  #itinerary-booking.fade.in{'ng-show'=>'showSpinner'}
+    %h3{style:'margin-top:30px;'}
+      {{'booking_your_trip' | translate}}...
+    .sk-circle
+      .sk-circle1.sk-child
+      .sk-circle2.sk-child
+      .sk-circle3.sk-child
+      .sk-circle4.sk-child
+      .sk-circle5.sk-child
+      .sk-circle6.sk-child
+      .sk-circle7.sk-child
+      .sk-circle8.sk-child
+      .sk-circle9.sk-child
+      .sk-circle10.sk-child
+      .sk-circle11.sk-child
+      .sk-circle12.sk-child
 
   // Once the itinerary is booked, show the booking confirmation and message.
   .itinerary_booked{ng:{show:'itinerary.booked'}}

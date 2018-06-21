@@ -117,5 +117,19 @@
   "your_email_was_sent": "Your email was sent",
   "enter_valid_emails": "Please enter valid email addresses",
   "cancel_booking_success": "Trip was successfully cancelled",
-  "cancel_booking_failure": "Trip cancellation failed"
+  "cancel_booking_failure": "Trip cancellation failed",
+  "purpose_note": "What is the purpose of your trip?",
+  "guests_note": "Is anyone coming with you?",
+  "pickup_unit_number_note": "What is you pick-up location apartment/suite number? (Optional)",
+  "dropoff_unit_number_note": "What is your drop-off location apartment/suite number? (Optional)",
+  "how_long_to_stay": "How long will you stay before returning?",
+  "no_return_trip": "No return trip",
+  "booking_your_trip": "Booking your trip",
+  "booking_success_2": "Booking succeeded",
+  "pickup_between": "Be ready between",
+  "hide_steps": "hide steps",
+  "trip_booked_2 confirmation": "Booking confirmation",
+  "service_login_error":"Unable to login",
+  "trip_booked_2": "Trip booked",
+  "confirm_cancel_trip":"Are you sure you want to cancel this trip?"
 }
