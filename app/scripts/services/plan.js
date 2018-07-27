@@ -1098,14 +1098,15 @@ angular.module('oneClickApp').service('LocationSearch', [
     //if the config is ready, go. but otherwise get the guest user token 
     if(recentsConfig.headers && recentsConfig.headers['X-User-Token']){
       getRecentSearches();
-    }else{
-      //get guest user token, then get recent searches
-      planService.getGuestToken($http).then(function(){
-        //update the recentsConfig headers with teh token
-        recentsConfig = planService.getHeaders();
-        getRecentSearches();
-      });
     }
+    //else{
+    //  //get guest user token, then get recent searches
+    //  planService.getGuestToken($http).then(function(){
+    //    //update the recentsConfig headers with teh token
+    //    recentsConfig = planService.getHeaders();
+    //    getRecentSearches();
+    //  });
+    //}
 
     LocationSearch.getLocations = function (text, config, includeRecentSearches) {
       var compositePromise = $q.defer();
