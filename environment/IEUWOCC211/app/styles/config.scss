@@ -1,9 +1,21 @@
-$navbar_logo: url('/images/211_Ride_Logo_sm.jpg');
+$navbar_logo: url('/images/211_Ride_Logo_RGB.jpg');
 $splash_image: url('/images/Splash-Default-211Ride.png');
-$btn-primary-background: #ffb351; 
-$btn-primary-border: #ffb351;
+$dark-blue-ieuw: #005191;
+$light-orange-ieuw: #ffb351;
+$medium-orange-ieuw: #ff8c00;
+$blue-font-color-ieuw: #005191;
+$btn-primary-background: $medium-orange-ieuw; 
+$btn-primary-border: $medium-orange-ieuw;
 $btn-secondary-background: #539ed0; 
+$main-page-height-percent: 40%;
 $main-page-height: 500px;
+$body-background-color: #f2f2f2;
+$navbar-background-color: rgba(255, 255, 255, 1.0);
+$navbar-brand-height: 100px;
+$navbar-brand-img-height: 97px;
+$landing-plan-background-color: rgba(255, 255, 255, 1.0);
+$landing-plan-border-color: $dark-blue-ieuw;
+$landing-plan-border-style: solid;
 
 .main-page-carousel{
   h2{
@@ -39,10 +51,24 @@ $main-page-height: 500px;
   }
   .carousel-inner{
     min-height:580px;
+    color: $blue-font-color-ieuw;
   }
 
+  .carousel-inner ul {
+      list-style: none;
+  }
+
+  .carousel-inner ul li:before {
+      content: '✓ ';
+  }
   .top-buffer { 
     margin-top: 20px; 
+  }
+  .carousel-slide-title{
+    background-color: $dark-blue-ieuw;
+    color: white;
+    font-size: 20px;
+    text-align: center;
   }
 
   .twitter-col {
@@ -58,4 +84,26 @@ $main-page-height: 500px;
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #005191 !important;
+}
+
+#splash-search-form .form-control{
+  font-size: 1.0em;
+}
+#splash-search-form .btn{
+  font-size: 1.0em;
+}
+#splash-search-form .datetimepicker-wrapper > input {
+  width: 140px;
+}
+.block-ok .btn {
+  font-size: 1.2em;
+}
+
+.main-page-text{
+  color: $blue-font-color-ieuw;
+}
+
+.main-page-link{
+  color: $blue-font-color-ieuw;
+  text-decoration: underline;
 }

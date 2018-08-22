@@ -1,17 +1,123 @@
-#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel", 'ng-init'=>"initCarousel()", 'data-interval'=>"9500"}
+#main-page-carousel-es.main-page-carousel.carousel.slide{'data-ride'=>"carousel", 'ng-init'=>"initCarousel()", 'data-interval'=>"10000"}
   %ol.carousel-indicators
-    %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
-    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}}
-    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"2"}}
+    %li.active{data:{target:"#main-page-carousel-es", 'slide-to'=>"0"}}
+    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"1"}}
+    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"2"}}
   .carousel-inner{role:"listbox"}
     .item.active
       .container
+        .row.carousel-slide-title
+          .col-xs-12.center
+            %strong
+              Tutorial de Usuario
+        .row.top-buffer
+          .col-xs-4
+            %figure.text-center
+              %img{'src' => "/images/enteryourdestination.png", 'style' => 'height: 50px;', 'alt' => 'Enter your Destination'}
+              %figcaption Ingrese su Destino
+          .col-xs-4
+            %figure.text-center
+              %img{'src' => "/images/customizeyourtrip.png", 'style' => 'height: 50px;', 'alt' => 'Customize your Trip'}
+              %figcaption Personaliza tu Viaje
+          .col-xs-4
+            %figure.text-center
+              %img{'src' => "/images/planyourride.png", 'style' => 'height: 50px;', 'alt' => 'Plan your Ride!'}
+              %figcaption Planifica tu Viaje!
+        .row.top-buffer
+          .col-xs-12.text-center
+            Mira la Guía de Video
+        .row.top-buffer
+          .col-xs-6
+            Inglés:
+          .col-xs-6
+            Español:
         .row
+          .col-xs-6
+            %iframe{'src'=>"https://www.youtube.com/embed/WiJcMjr1qm0", 'width' => '560', 'height' => '315'}
+          .col-xs-6
+            %iframe{'src'=>"https://www.youtube.com/embed/DlxJ9rB8k6U", 'width' => '560', 'height' => '315'}
+        .row          
+          .col-xs-12.text-center
+            %a{href:"https://www.youtube.com/watch?v=Aa6eqLOApoA", target:"_blank", class:"main-page-link"} Vietnamese 
+            %a{href:"https://youtu.be/0hsX5qbzcHc", target:"_blank", class:"main-page-link"} Farsi 
+            %a{href:"https://www.youtube.com/watch?v=OckfTquIQX4", target:"_blank", class:"main-page-link"} Dari          
+    .item
+      .container
+        .row.carousel-slide-title
           .col-xs-12
-            1-Click
-
-.container
-  .row{style:'margin-top:40px;'}
-    .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
-      %p
-        1-Click Demo 
+            %strong
+              Historia de Asociación de 211Ride
+        .row.top-buffer
+          .col-xs-1
+            2015:
+          .col-xs-11
+            %img{'src' => "/images/211_VetLink.jpg", 'style' => 'height: 50px;'}
+        .row.top-buffer
+          .col-xs-12
+            211 San Bernardino se asoció con 211 Riverside para crear una herramienta de planificación de viajes para Veteranos con necesidades de transporte y nació 211 VetLink. 211 VetLink reunió a una serie de socios, muchos de los cuales nunca habían trabajado juntos antes. El éxito fue tremendo al ayudar a más de 200,000 veteranos a encontrar soluciones de transporte en Inland Empire.
+        .row.top-buffer
+          .col-xs-1
+            2018:
+          .col-xs-11
+            %img{'src' => "/images/211_Ride_Logo_sm.jpg", 'style' => 'height: 50px;'}
+        .row.top-buffer
+          .col-xs-2
+            %img{'src' => "/images/211_SoCal.png", 'style' => 'height: 150px;'}
+          .col-xs-10
+            %strong
+              ¿Por qué no todo el sur de California?
+            Con casi el 40% de las 211 personas que llaman indicando no tener un vehículo propio, y la necesidad de planificar un viaje a través del condado, las 211 organizaciones sin fines de lucro del sur de California (211 Community Connect, 211 Inland Empire United Way, 211 Los Angeles y 211 Condado de Orange) se unieron para crear la Alianza 211RIDE. La solución de 211RIDE con un solo clic está disponible para el público de forma gratuita, ofrece a los clientes la opción de tránsito más adecuada para cada viaje, aumenta el uso del viaje y ayuda en la planificación de viajes entre condados.
+        .row.top-buffer
+          .col-xs-12.text-center
+            %strong
+              ¡Disfruta tu Viaje!
+        .row.top-buffer
+          .col-xs-3.text-center
+            %img{'src' => "/images/211_RCTC.png", 'style' => 'height: 50px;'}
+          .col-xs-3.text-center
+            %img{'src' => "/images/SBCTA.png", 'style' => 'height: 50px;'}
+          .col-xs-3.text-center
+            %img{'src' => "/images/Metro.png", 'style' => 'height: 50px;'}
+          .col-xs-3.text-center
+            %img{'src' => "/images/OCTA.png", 'style' => 'height: 50px;'}
+        .row.top-buffer
+          .col-xs-3.text-center
+            %img{'src' => "/images/211_CommunityConnect.png", 'style' => 'height: 50px;'}
+          .col-xs-3.text-center
+            %img{'src' => "/images/211_SanBernardino.png", 'style' => 'height: 50px;'}
+          .col-xs-3.text-center
+            %img{'src' => "/images/211_LACounty.png", 'style' => 'height: 50px;'}
+          .col-xs-3.text-center
+            %img{'src' => "/images/211_HelpStarts.png", 'style' => 'height: 50px;'}
+    .item
+      .container
+        .row.carousel-slide-title
+          .col-xs-12
+            %strong
+              ¿Qué puede hacer 211Ride por ti?
+        .row.top-buffer
+          .col-xs-12
+            %ul
+              %li 211RIDE lo ayuda a investigar y administrar sus propios planes de transporte, y lo ayuda a facilitar su viaje dentro y entre Los Ángeles, Orange, Riverside y el condado de San Bernardino.
+              %li 211RIDE simplifica el proceso de planificación de su viaje al evaluar sus opciones de planificación de viaje en función de factores como los desafíos de movilidad física, la elegibilidad de los veteranos, la edad, el propósito del viaje, el modo de tránsito preferido y el cronograma.
+              %li 211RIDE le ayuda a elegir el modo de tránsito más apropiado evaluando el tránsito de ruta fija, el tránsito receptivo a la demanda, el taxi y otros servicios de transporte privado, paratránsito, redes de servicio de transporte voluntario y vehículos compartidos / camionetas.
+        .row.top-buffer
+          .col-xs-4
+            %figure.text-center
+              %img{'src' => "/images/Bus Stop.png", 'style' => 'height: 50px;', 'alt' => 'Bus Stop'}
+          .col-xs-4
+            %figure.text-center
+              %img{'src' => "/images/Map.png", 'style' => 'height: 50px;', 'alt' => 'Map'}
+          .col-xs-4
+            %figure.text-center
+              %img{'src' => "/images/Pedestrian.png", 'style' => 'height: 50px;', 'alt' => 'Pedestrian'}
+  %a.carousel-control-prev{href:"#main-page-carousel-es", role:"button", 'data-slide'=>"prev"}
+    %span{class:"carousel-control-prev-icon"}
+  %a.carousel-control-next{href:"#main-page-carousel-es", role:"button", 'data-slide'=>"next"}
+    %span{class:"carousel-control-next-icon"}
+.container 
+  .row
+    .col-xs-12.text-center.main-page-text
+      %span Circular del Título VI de la Autoridad Federal de Transporte:
+      %a{href:"/data/Legal.pdf", target:"_blank", class:"main-page-link"} General
+      %a{href:"/data/Legal.pdf", target:"_blank", class:"main-page-link"} Legal

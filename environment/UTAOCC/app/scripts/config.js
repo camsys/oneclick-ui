@@ -7,6 +7,7 @@ var dist_env = {
     latB: 42.013078, 
     lonB: -109.044967
   },
-  transitSortPriority: true
+  transitSortPriority: true,
+  hasLyftMode: true
 };
 

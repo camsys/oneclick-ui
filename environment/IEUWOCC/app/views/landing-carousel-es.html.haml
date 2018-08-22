@@ -1,17 +1,52 @@
-#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel", 'ng-init'=>"initCarousel()", 'data-interval'=>"9500"}
+#main-page-carousel-es.main-page-carousel.carousel.slide{'data-ride'=>"carousel", 'ng-init'=>"initCarousel()", 'data-interval'=>"10000"}
   %ol.carousel-indicators
-    %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
-    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}}
-    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"2"}}
+    %li.active{data:{target:"#main-page-carousel-es", 'slide-to'=>"0"}}
+    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"1"}}
+    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"2"}}
   .carousel-inner{role:"listbox"}
     .item.active
       .container
-        .row
+        .row.carousel-slide-title
           .col-xs-12
-            1-Click
-
-.container
-  .row{style:'margin-top:40px;'}
-    .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
-      %p
-        1-Click Demo 
+            %strong
+              Acerca de 211 Trip Planner Planner
+        .row.top-buffer
+          .col-xs-12.center
+            Utilice el 211 VetLink Trip Planner, una herramienta para planear viajes que en la actualidad no tiene la capacidad para hacer reservaciones. Es responsabilidad del usuario contactar al proveedor de transporte con anticipación y coordinar el servicio. Recomendamos planear con anticipación para así tener más opciones.
+    .item
+      .container
+        .row.carousel-slide-title
+          .col-xs-12
+            %strong
+              Acerca de 211 VetLink Trip Planner (continuación)
+        .row.top-buffer
+          .col-xs-12
+            Para encontrar recursos que la comunidad ofrece, oprima en los logos de 2-1-1 a continuación, si aun necesita ayuda puede llamar al 2-1-1. Personal bilingüe le puede ayudar.
+        .row
+          .col-xs-12.text-center
+            %a{:href => "http://www.211sb.org/"}
+              %img{:src => "/images/SanBernadino211.png"}
+            %a{:href => "http://www.connectriverside.org/"}
+              %img{:src => "/images/CommunityConnect211.png"}
+    .item
+      .container
+        .row.carousel-slide-title
+          .col-xs-12
+            %strong
+              Financiamiento para 211 VetLink Trip Planner provisto por:
+        .row.top-buffer
+          .col-xs-12.text-center
+            %a{:href => "http://www.fta.dot.gov/"}
+              %img{:src => "/images/FTA.jpg"}
+            %a{:href => "http://www.omnitrans.org/"}
+              %img{:src => "/images/OmniLogo.png"}
+            %a{:href => "http://www.caltrans.ca.gov/"}
+              %img{:src => "/images/Caltrans.jpg"}
+            %a{:href => "http://gosbcta.com/sbcta/"}
+              %img{:src => "/images/SBCTALogo.jpg"}
+            %a{:href => "http://www.sanbag.ca.gov/funding/measure-i.html"}
+              %img{:src => "/images/measure-I.gif"}
+            %a{:href => "http://www.rctc.org/"}
+              %img{:src => "/images/RCTC.png"}
+  %a.left.carousel-control{href:"#main-page-carousel-es", role:"button", 'data-slide'=>"prev", style:'display:none;'}
+  %a.right.carousel-control{href:"#main-page-carousel-es", role:"button", 'data-slide'=>"next", style:'display:none;'}

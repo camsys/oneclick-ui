@@ -61,7 +61,7 @@ footer.footer{
     font-size: 3em;
   }
   .navbar-brand {
-    height: 50px;
+    height: if(variable-exists(navbar-brand-height), $navbar-brand-height, 50px);
     margin: 0px;
     padding: 0px;
     line-height: 50px;
@@ -70,7 +70,7 @@ footer.footer{
       background-image: $navbar_logo;
       background-size: contain;
       background-repeat: no-repeat;
-      height: 47px;
+      height: if(variable-exists(navbar-brand-img-height), $navbar-brand-img-height, 47px);
       width: 400px;
       display: inline-block;
       vertical-align: middle;
@@ -87,10 +87,10 @@ footer.footer{
     }
   }
   .navbar-right{
+    background-color: if(variable-exists(navbar-background-color), $navbar-background-color, rgba(255, 255, 255, 0.9));
     margin-top:11px;
   }
   .navbar-container{
-    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 7px;
     margin-top:4px;
   }
@@ -142,7 +142,7 @@ html, body{
 }
 
 #main-page{
-  height: 80%;
+  height: if(variable-exists(main-page-height-percent), $main-page-height-percent, 80%);
   max-height: if(variable-exists(main-page-height), $main-page-height, none);
   min-height: 400px;
   padding:0px 15px;
@@ -174,7 +174,9 @@ html, body{
     align-self:center;
   }
   .landing-plan-content{
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: if(variable-exists(landing-plan-background-color), $landing-plan-background-color, rgba(255, 255, 255, 0.9));
+    border-color: if(variable-exists(landing-plan-border-color), $landing-plan-border-color, none);
+    border-style: if(variable-exists(landing-plan-border-style), $landing-plan-border-style, none);
     border-radius: 10px;
     padding:10px 20px 10px 30px;
   }
@@ -211,7 +213,7 @@ html, body{
   #splash-search-form .block-two{
     margin: 3px 0px;
     display:flex;
-    flex: 1 1 510px;
+    flex: 1 1 590px;
     flex-wrap: wrap;
     flex-direction:row;
     justify-content: space-between;
@@ -225,7 +227,7 @@ html, body{
     margin-right: 3px;
   }
   #splash-search-form .block-two > datetimepicker{
-    flex: 0 0 290px;
+    flex: 0 0 300px;
   }
   #splash-search-form .block-two > button{
     flex: 0 0 auto;
@@ -317,7 +319,7 @@ html, body{
   border-radius:7px;
 }
 body{
-  background-color: #F0F0FF;
+  background-color: if(variable-exists(body-background-color), $body-background-color, #F0F0FF);
 }
 
 @media (min-width: 1200px) {

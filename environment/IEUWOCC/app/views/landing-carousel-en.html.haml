@@ -1,4 +1,4 @@
-#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel", 'ng-init'=>"initCarousel()", 'data-interval'=>"5000"}
+#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel", 'ng-init'=>"initCarousel()", 'data-interval'=>"10000"}
   %ol.carousel-indicators
     %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
     %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}}
@@ -6,50 +6,47 @@
   .carousel-inner{role:"listbox"}
     .item.active
       .container
-        .row
-          .col-xs-12.center
+        .row.carousel-slide-title
+          .col-xs-12
             %strong
               About 211 VetLink Trip Planner
         .row.top-buffer
           .col-xs-12.center
-            Use the 211 VetLink Trip Planner to find transportation options in San Bernardino & Riverside Counties. This Discovery Tool currently does not have trip booking capability, it is the user's responsibility to contact and arrange for transportation from the appropriate provider. *Tip* Plan ahead of time for more possible options! Click the 211 logos to search community resources, then click on "Plan a Trip" link to learn how to get there. Still need help? Dial 2-1-1!
+            VetLink Trip Planner does not have trip booking capability, it is the user's responsibility to contact and arrange for transportation from the appropriate provider. *Tip* Plan ahead of time for more possible options!
+    .item
+      .container
+        .row.carousel-slide-title
+          .col-xs-12
+            %strong
+              About 211 VetLink Trip Planner (continued)
+        .row.top-buffer
+          .col-xs-12
+            Click the 211 logos to search community resources, then click on "Plan a Trip" link to learn how to get there. Still need help? Dial 2-1-1!
         .row
-          .col-xs-12.center
+          .col-xs-12.text-center
             %a{:href => "http://www.211sb.org/"}
               %img{:src => "/images/SanBernadino211.png"}
             %a{:href => "http://www.connectriverside.org/"}
               %img{:src => "/images/CommunityConnect211.png"}
     .item
       .container
-        .row
-          .col-xs-12.center.twitter-col
-            %a.twitter-timeline{href:'https://twitter.com/211VetLink?ref_src=twsrc%5Etfw'} Tweets by 211VetLink
-            %script{:async => "", :charset => "utf-8", :src => "https://platform.twitter.com/widgets.js"}
-    .item
-      .container
-        .row
-          .col-xs-12.center
+        .row.carousel-slide-title
+          .col-xs-12
             %strong
               Funding for 211 VetLink Trip Planner provided by:
         .row.top-buffer
-          .col-xs-12.center
+          .col-xs-12.text-center
             %a{:href => "http://www.fta.dot.gov/"}
               %img{:src => "/images/FTA.jpg"}
             %a{:href => "http://www.omnitrans.org/"}
               %img{:src => "/images/OmniLogo.png"}
-            %a{:href => "http://www.sanbag.ca.gov/"}
-              %img{:src => "/images/sanbag.JPG"}
+            %a{:href => "http://www.caltrans.ca.gov/"}
+              %img{:src => "/images/Caltrans.jpg"}
+            %a{:href => "http://gosbcta.com/sbcta/"}
+              %img{:src => "/images/SBCTALogo.jpg"}
             %a{:href => "http://www.sanbag.ca.gov/funding/measure-i.html"}
               %img{:src => "/images/measure-I.gif"}
             %a{:href => "http://www.rctc.org/"}
               %img{:src => "/images/RCTC.png"}
   %a.left.carousel-control{href:"#main-page-carousel-en", role:"button", 'data-slide'=>"prev", style:'display:none;'}
   %a.right.carousel-control{href:"#main-page-carousel-en", role:"button", 'data-slide'=>"next", style:'display:none;'}
-
-%a{:href => "https://unsplash.com/@ludogauthier?utm_medium=referral&utm_campaign=photographer-credit&utm_content=creditBadge", :rel => "noopener noreferrer", :style => "background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, \"San Francisco\", \"Helvetica Neue\", Helvetica, Ubuntu, Roboto, Noto, \"Segoe UI\", Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;float:right;", :target => "_blank", :title => "Download free do whatever you want high-resolution photos from Ludovic Gauthier"}
-  %span{:style => "display:inline-block;padding:2px 3px;"}
-    %svg{:style => "height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;", :viewbox => "0 0 32 32", :xmlns => "http://www.w3.org/2000/svg"}
-      %title unsplash-logo
-      %path{:d => "M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"}
-  %span{:style => "display:inline-block;padding:2px 3px;"} Ludovic Gauthier
-

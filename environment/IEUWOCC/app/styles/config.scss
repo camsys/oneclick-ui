@@ -1,8 +1,13 @@
-$navbar_logo: url('/images/211_VetLink_50x440_v2.png');
-$splash_image: url('/images/splash.png');
+$navbar_logo: url('/images/Color211 San Bernardino County.jpg');
+$splash_image: url('/images/splash.jpg');
+$dark-blue-ieuw: #005191;
+$blue-font-color-ieuw: #005191;
 $btn-primary-background: #cb1117; 
 $btn-primary-border: #aa0e13;
+$main-page-height-percent: 40%;
 $main-page-height: 500px;
+$navbar-brand-height: 100px;
+$navbar-brand-img-height: 97px;
 
 .main-page-carousel{
   h2{
@@ -38,10 +43,19 @@ $main-page-height: 500px;
   }
   .carousel-inner{
     min-height:580px;
+    color: $blue-font-color-ieuw;
+    font-size: 20px;
   }
 
   .top-buffer { 
     margin-top: 20px; 
+  }
+
+  .carousel-slide-title{
+    background-color: $dark-blue-ieuw;
+    color: white;
+    font-size: 20px;
+    text-align: center;
   }
 
   .twitter-col {
@@ -50,3 +64,19 @@ $main-page-height: 500px;
   }
 }
 
+#splash-search-form .form-control{
+  font-size: 1.0em;
+}
+#splash-search-form .btn{
+  font-size: 1.0em;
+}
+#splash-search-form .datetimepicker-wrapper > input {
+  width: 140px;
+}
+.block-ok .btn {
+  font-size: 1.2em;
+}
+
+.main-page-text{
+  color: $blue-font-color-ieuw;
+}
