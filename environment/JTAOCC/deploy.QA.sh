@@ -4,7 +4,7 @@
 
 ## sync the ./dist directory with the s3 bucket
 #aws s3 sync ./dist/ s3://1click-qa.camsys-apps.com/ --acl public-read
-aws s3 sync ./dist/ s3://ui-jta-prod --acl public-read  --region us-east-1 --profile jta
+aws s3 sync ./dist/ s3://ui-jta-qa --acl public-read  --region us-east-1 --profile jta
 
 ## Invalidate the cloudfront distribution
 #aws configure set preview.cloudfront true
