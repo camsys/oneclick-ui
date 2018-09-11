@@ -1,13 +1,18 @@
-$navbar_logo: url('/images/Color211 San Bernardino County.jpg');
-$splash_image: url('/images/splash.jpg');
+$navbar_logo: url('/images/211VetLink_logo_2015.png');
+$splash_image: url('/images/vetlink button.jpg');
 $dark-blue-ieuw: #005191;
 $blue-font-color-ieuw: #005191;
 $btn-primary-background: #cb1117; 
 $btn-primary-border: #aa0e13;
+$carousel-indicator-radius: 30px;
+$landing-plan-border-color: $dark-blue-ieuw;
+$landing-plan-border-style: solid;
 $main-page-height-percent: 40%;
 $main-page-height: 500px;
-$navbar-brand-height: 100px;
-$navbar-brand-img-height: 97px;
+$navbar-brand-height: 150px;
+$navbar-brand-img-height: 147px;
+$navbar-right-border-color: $dark-blue-ieuw;
+$navbar-right-border-style: solid;
 
 .main-page-carousel{
   h2{

@@ -3,6 +3,7 @@
     %li.active{data:{target:"#main-page-carousel-es", 'slide-to'=>"0"}}
     %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"1"}}
     %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"2"}}
+    %li{data:{target:"#main-page-carousel-es", 'slide-to'=>"3"}}
   .carousel-inner{role:"listbox"}
     .item.active
       .container
@@ -46,15 +47,15 @@
         .row.carousel-slide-title
           .col-xs-12
             %strong
-              Historia de Asociación de 211Ride
+              Historia de Asociación de 211RIDE
         .row.top-buffer
           .col-xs-1
             2015:
           .col-xs-11
-            %img{'src' => "/images/211_VetLink.jpg", 'style' => 'height: 50px;'}
+            %img{'src' => "/images/VetLink_slogan.png", 'style' => 'height: 50px;'}
         .row.top-buffer
           .col-xs-12
-            211 San Bernardino se asoció con 211 Riverside para crear una herramienta de planificación de viajes para Veteranos con necesidades de transporte y nació 211 VetLink. 211 VetLink reunió a una serie de socios, muchos de los cuales nunca habían trabajado juntos antes. El éxito fue tremendo al ayudar a más de 200,000 veteranos a encontrar soluciones de transporte en Inland Empire.
+            211 San Bernardino se asoció con 211 Riverside para crear una herramienta de planificación de viajes para Veteranos con necesidades de transporte y así nació 211 VetLink. 211 VetLink reunió a varios socios, muchos de los cuales nunca habían trabajado juntos antes. El éxito fue tremendo al ayudar a más de 200,000 veteranos a encontrar soluciones de transporte en el Inland Empire.
         .row.top-buffer
           .col-xs-1
             2018:
@@ -65,59 +66,95 @@
             %img{'src' => "/images/211_SoCal.png", 'style' => 'height: 150px;'}
           .col-xs-10
             %strong
-              ¿Por qué no todo el sur de California?
-            Con casi el 40% de las 211 personas que llaman indicando no tener un vehículo propio, y la necesidad de planificar un viaje a través del condado, las 211 organizaciones sin fines de lucro del sur de California (211 Community Connect, 211 Inland Empire United Way, 211 Los Angeles y 211 Condado de Orange) se unieron para crear la Alianza 211RIDE. La solución de 211RIDE con un solo clic está disponible para el público de forma gratuita, ofrece a los clientes la opción de tránsito más adecuada para cada viaje, aumenta el uso del viaje y ayuda en la planificación de viajes entre condados.
+              ¿Y por qué no ofrecer información de transporte para todo el sur de California? Nos preguntamos.
+            Aproximadamente 40% de las personas que llaman a 2-1-1 indican no tener un vehículo propio, y la necesidad de planificar viajes a través de diferentes condados, las organizaciones sin fines de lucro 211 del Sur de California (211 Community Connect Riverside, 211 Serving San Bernardino County, 211 Los Angeles y 211 Orange County) se unieron para crear la Alianza 211RIDE. La solución en un solo clic de 211RIDE está disponible para el público de forma gratuita, ofrece a los clientes la opción de tránsito más adecuada para cada viaje, aumenta el uso de viajes y ayuda en la planificación de viajes entre diferentes condados.
         .row.top-buffer
           .col-xs-12.text-center
             %strong
               ¡Disfruta tu Viaje!
         .row.top-buffer
           .col-xs-3.text-center
-            %img{'src' => "/images/211_RCTC.png", 'style' => 'height: 50px;'}
+            %img{'src' => "/images/211_RCTC.png", 'style' => 'height: 75px;'}
           .col-xs-3.text-center
-            %img{'src' => "/images/SBCTA.png", 'style' => 'height: 50px;'}
+            %img{'src' => "/images/sbcta_logo_rev.png", 'style' => 'height: 75px;'}
           .col-xs-3.text-center
-            %img{'src' => "/images/Metro.png", 'style' => 'height: 50px;'}
+            %img{'src' => "/images/Metro.png", 'style' => 'height: 75px;'}
           .col-xs-3.text-center
-            %img{'src' => "/images/OCTA.png", 'style' => 'height: 50px;'}
+            %img{'src' => "/images/OCTA.png", 'style' => 'height: 75px;'}
         .row.top-buffer
+          .col-xs-3.text-center         
+            %a{:href => "http://www.211la.org", target:"_blank"}
+              %img{'src' => "/images/211_LACounty.png", 'style' => 'height: 75px;'}
           .col-xs-3.text-center
-            %img{'src' => "/images/211_CommunityConnect.png", 'style' => 'height: 50px;'}
-          .col-xs-3.text-center
-            %img{'src' => "/images/211_SanBernardino.png", 'style' => 'height: 50px;'}
-          .col-xs-3.text-center
-            %img{'src' => "/images/211_LACounty.png", 'style' => 'height: 50px;'}
-          .col-xs-3.text-center
-            %img{'src' => "/images/211_HelpStarts.png", 'style' => 'height: 50px;'}
+            %a{:href => "http://www.211oc.org", target:"_blank"}
+              %img{'src' => "/images/211_HelpStarts.png", 'style' => 'height: 75px;'}
+          .col-xs-4.text-center
+            %a{:href => "http://www.connectriverside.org", target:"_blank",}
+              %img{'src' => "/images/CClogo.jpg", 'style' => 'height: 75px;'}
+          .col-xs-2.text-center
+            %a{:href => "http://www.211sb.org", target:"_blank"}
+              %img{'src' => "/images/Color211 San Bernardino County-transparent.png", 'style' => 'height: 75px;'}
     .item
       .container
         .row.carousel-slide-title
           .col-xs-12
             %strong
-              ¿Qué puede hacer 211Ride por ti?
+              ¿Qué puede hacer 211RIDE por ti?
         .row.top-buffer
-          .col-xs-12
-            %ul
-              %li 211RIDE lo ayuda a investigar y administrar sus propios planes de transporte, y lo ayuda a facilitar su viaje dentro y entre Los Ángeles, Orange, Riverside y el condado de San Bernardino.
-              %li 211RIDE simplifica el proceso de planificación de su viaje al evaluar sus opciones de planificación de viaje en función de factores como los desafíos de movilidad física, la elegibilidad de los veteranos, la edad, el propósito del viaje, el modo de tránsito preferido y el cronograma.
-              %li 211RIDE le ayuda a elegir el modo de tránsito más apropiado evaluando el tránsito de ruta fija, el tránsito receptivo a la demanda, el taxi y otros servicios de transporte privado, paratránsito, redes de servicio de transporte voluntario y vehículos compartidos / camionetas.
-        .row.top-buffer
-          .col-xs-4
+          .col-xs-2
             %figure.text-center
               %img{'src' => "/images/Bus Stop.png", 'style' => 'height: 50px;', 'alt' => 'Bus Stop'}
-          .col-xs-4
+          .col-xs-10
+            211RIDE le ayuda a investigar y a administrar sus propios planes de transporte, y le ayuda a facilitar su viaje dentro y entre los condados de los Ángeles, Orange, Riverside y San Bernardino.
+        .row.top-buffer
+          .col-xs-2
             %figure.text-center
               %img{'src' => "/images/Map.png", 'style' => 'height: 50px;', 'alt' => 'Map'}
-          .col-xs-4
+          .col-xs-10
+            211RIDE le simplifica el proceso de planificación de su viaje al evaluar sus opciones basándose en factores como las barreras que afectan la movilidad física, la elegibilidad de los veteranos, la edad, el propósito del viaje, el modo de transporte preferido y el cronograma.
+        .row.top-buffer
+          .col-xs-2
             %figure.text-center
               %img{'src' => "/images/Pedestrian.png", 'style' => 'height: 50px;', 'alt' => 'Pedestrian'}
+          .col-xs-10
+            211RIDE le ayuda a elegir el modo de transporte más apropiado evaluando transporte de ruta fija, el tránsito a pedido, taxi, paratránsito, redes de servicio de transporte voluntario, vehículos y camionetas compartidos y otros servicios de transporte privado.
+    .item
+      .container
+        .row.carousel-slide-title
+          .col-xs-12
+            %strong
+              ¿Necesita ayuda?
+        .row.top-buffer
+          .col-xs-12.text-center
+            %strong
+              ¡Póngase en contacto con su 211 local!
+        .row.top-buffer
+          .col-xs-3.text-center         
+            %a{:href => "http://www.211la.org", target:"_blank"}
+              %img{'src' => "/images/211_LACounty.png", 'style' => 'height: 100px;'}
+          .col-xs-3.text-center
+            %a{:href => "http://www.211oc.org", target:"_blank"}
+              %img{'src' => "/images/211_HelpStarts.png", 'style' => 'height: 100px;'}
+          .col-xs-4.text-center
+            %a{:href => "http://www.connectriverside.org", target:"_blank",}
+              %img{'src' => "/images/CClogo.jpg", 'style' => 'height: 100px;'}
+          .col-xs-2.text-center
+            %a{:href => "http://www.211sb.org", target:"_blank"}
+              %img{'src' => "/images/Color211 San Bernardino County-transparent.png", 'style' => 'height: 100px;'}
   %a.carousel-control-prev{href:"#main-page-carousel-es", role:"button", 'data-slide'=>"prev"}
     %span{class:"carousel-control-prev-icon"}
   %a.carousel-control-next{href:"#main-page-carousel-es", role:"button", 'data-slide'=>"next"}
     %span{class:"carousel-control-next-icon"}
-.container 
-  .row
-    .col-xs-12.text-center.main-page-text
-      %span Circular del Título VI de la Autoridad Federal de Transporte:
-      %a{href:"/data/Legal.pdf", target:"_blank", class:"main-page-link"} General
-      %a{href:"/data/Legal.pdf", target:"_blank", class:"main-page-link"} Legal
+  %br
+  %br
+#footer.text-center
+  %br
+  %a{href:"/data/Legal.pdf", target:"_blank", class:"main-page-link"} Legal
+  %span &vert; 
+  %a{href:"#title-vi-list", role:"button", 'data-toggle'=>"collapse"} Circular del Título VI de la Autoridad Federal de Transporte
+  #title-vi-list.collapse
+    %a{href:"/data/EnEspa§ol/211RIDE Formulario de Queja.pdf", target:"_blank", class:"main-page-link"} 211RIDE Formulario de Queja
+    %span &vert;
+    %a{href:"/data/EnEspa§ol/211RIDE Procedimiento de Queja.pdf", target:"_blank", class:"main-page-link"} 211RIDE Procedimiento de Queja
+    %span &vert;
+    %a{href:"/data/EnEspa§ol/211RIDE Notificaci¢n al P£blico.pdf", target:"_blank", class:"main-page-link"} 211RIDE Notificación al Público

@@ -3,6 +3,7 @@
     %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
     %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}}
     %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"2"}}
+    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"3"}}
   .carousel-inner{role:"listbox"}
     .item.active
       .container
@@ -46,12 +47,12 @@
         .row.carousel-slide-title
           .col-xs-12
             %strong
-              Partnership History of 211Ride
+              Partnership History of 211RIDE
         .row.top-buffer
           .col-xs-1
             2015:
           .col-xs-11
-            %img{'src' => "/images/211_VetLink.jpg", 'style' => 'height: 50px;'}
+            %img{'src' => "/images/VetLink_slogan.png", 'style' => 'height: 50px;'}
         .row.top-buffer
           .col-xs-12
             211 San Bernardino partnered with 211 Riverside to create a trip planning tool for Veterans with transportation needs and 211 VetLink was born. 211 VetLink brought together an array of partners, many of whom had never worked together before. The success was tremendous by helping more than 200,000 veterans find transportation solutions across the Inland Empire. 
@@ -73,51 +74,87 @@
               Enjoy your trip!
         .row.top-buffer
           .col-xs-3.text-center
-            %img{'src' => "/images/211_RCTC.png", 'style' => 'height: 50px;'}
+            %img{'src' => "/images/211_RCTC.png", 'style' => 'height: 75px;'}
           .col-xs-3.text-center
-            %img{'src' => "/images/SBCTA.png", 'style' => 'height: 50px;'}
+            %img{'src' => "/images/sbcta_logo_rev.png", 'style' => 'height: 75px;'}
           .col-xs-3.text-center
-            %img{'src' => "/images/Metro.png", 'style' => 'height: 50px;'}
+            %img{'src' => "/images/Metro.png", 'style' => 'height: 75px;'}
           .col-xs-3.text-center
-            %img{'src' => "/images/OCTA.png", 'style' => 'height: 50px;'}
+            %img{'src' => "/images/OCTA.png", 'style' => 'height: 75px;'}
         .row.top-buffer
+          .col-xs-3.text-center         
+            %a{:href => "http://www.211la.org", target:"_blank"}
+              %img{'src' => "/images/211_LACounty.png", 'style' => 'height: 75px;'}
           .col-xs-3.text-center
-            %img{'src' => "/images/211_CommunityConnect.png", 'style' => 'height: 50px;'}
-          .col-xs-3.text-center
-            %img{'src' => "/images/211_SanBernardino.png", 'style' => 'height: 50px;'}
-          .col-xs-3.text-center
-            %img{'src' => "/images/211_LACounty.png", 'style' => 'height: 50px;'}
-          .col-xs-3.text-center
-            %img{'src' => "/images/211_HelpStarts.png", 'style' => 'height: 50px;'}
+            %a{:href => "http://www.211oc.org", target:"_blank"}
+              %img{'src' => "/images/211_HelpStarts.png", 'style' => 'height: 75px;'}
+          .col-xs-4.text-center
+            %a{:href => "http://www.connectriverside.org", target:"_blank",}
+              %img{'src' => "/images/CClogo.jpg", 'style' => 'height: 75px;'}
+          .col-xs-2.text-center
+            %a{:href => "http://www.211sb.org", target:"_blank"}
+              %img{'src' => "/images/Color211 San Bernardino County-transparent.png", 'style' => 'height: 75px;'}
     .item
       .container
         .row.carousel-slide-title
           .col-xs-12
             %strong
-              What can 211Ride do for You?
+              What can 211RIDE do for You?
         .row.top-buffer
-          .col-xs-12
-            %ul
-              %li 211RIDE helps you research and manage your own transportation plans, and assists in facilitating your travel in and between Los Angeles, Orange, Riverside and San Bernardino County.
-              %li 211RIDE simplifies your trip planning process by assessing your trip planning options based on factors such as physical mobility challenges, veterans eligibility, age, trip purpose, preferred transit mode and schedule.
-              %li 211RIDE helps you choose the most appropriate transit mode by evaluating fixed-route transit, demand-responsive transit, taxi and other private transportation services, paratransit, volunteer transportation service networks and carpools/vanpools.
-        .row.top-buffer
-          .col-xs-4
+          .col-xs-2
             %figure.text-center
               %img{'src' => "/images/Bus Stop.png", 'style' => 'height: 50px;', 'alt' => 'Bus Stop'}
-          .col-xs-4
+          .col-xs-10
+            211RIDE helps you research and manage your own transportation plans, and assists in facilitating your travel in and between Los Angeles, Orange, Riverside and San Bernardino County.
+        .row.top-buffer
+          .col-xs-2
             %figure.text-center
               %img{'src' => "/images/Map.png", 'style' => 'height: 50px;', 'alt' => 'Map'}
-          .col-xs-4
+          .col-xs-10
+            211RIDE simplifies your trip planning process by assessing your trip planning options based on factors such as physical mobility challenges, veterans eligibility, age, trip purpose, preferred transit mode and schedule.
+        .row.top-buffer
+          .col-xs-2
             %figure.text-center
               %img{'src' => "/images/Pedestrian.png", 'style' => 'height: 50px;', 'alt' => 'Pedestrian'}
+          .col-xs-10
+            211RIDE helps you choose the most appropriate transit mode by evaluating fixed-route transit, demand-responsive transit, taxi and other private transportation services, paratransit, volunteer transportation service networks and carpools/vanpools.
+    .item
+      .container
+        .row.carousel-slide-title
+          .col-xs-12
+            %strong
+              Need Assistance?
+        .row.top-buffer
+          .col-xs-12.text-center
+            %strong
+              Contact your local 211! 
+        .row.top-buffer
+          .col-xs-3.text-center         
+            %a{:href => "http://www.211la.org", target:"_blank"}
+              %img{'src' => "/images/211_LACounty.png", 'style' => 'height: 100px;'}
+          .col-xs-3.text-center
+            %a{:href => "http://www.211oc.org", target:"_blank"}
+              %img{'src' => "/images/211_HelpStarts.png", 'style' => 'height: 100px;'}
+          .col-xs-4.text-center
+            %a{:href => "http://www.connectriverside.org", target:"_blank",}
+              %img{'src' => "/images/CClogo.jpg", 'style' => 'height: 100px;'}
+          .col-xs-2.text-center
+            %a{:href => "http://www.211sb.org", target:"_blank"}
+              %img{'src' => "/images/Color211 San Bernardino County-transparent.png", 'style' => 'height: 100px;'}
   %a.carousel-control-prev{href:"#main-page-carousel-en", role:"button", 'data-slide'=>"prev"}
     %span{class:"carousel-control-prev-icon"}
   %a.carousel-control-next{href:"#main-page-carousel-en", role:"button", 'data-slide'=>"next"}
     %span{class:"carousel-control-next-icon"}
-.container 
-  .row
-    .col-xs-12.text-center.main-page-text
-      %span Federal Transportation Authority Title VI Circular:
-      %a{href:"/data/Legal.pdf", target:"_blank", class:"main-page-link"} General
-      %a{href:"/data/Legal.pdf", target:"_blank", class:"main-page-link"} Legal
+  %br
+  %br
+#footer.text-center
+  %br
+  %a{href:"/data/Legal.pdf", target:"_blank", class:"main-page-link"} Legal
+  %span &vert; 
+  %a{href:"#title-vi-list", role:"button", 'data-toggle'=>"collapse"} Federal Transportation Authority Title VI Circular
+  #title-vi-list.collapse
+    %a{href:"/data/InEnglish/211RIDE Complaint Form.pdf", target:"_blank", class:"main-page-link"} 211RIDE Complaint Form
+    %span &vert;
+    %a{href:"/data/InEnglish/211RIDE Complaint Procedure.pdf", target:"_blank", class:"main-page-link"} 211RIDE Complaint Procedure
+    %span &vert;
+    %a{href:"/data/InEnglish/211RIDE Public Notice.pdf", target:"_blank", class:"main-page-link"} 211RIDE Public Notice

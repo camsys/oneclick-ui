@@ -18,10 +18,10 @@
         .row.carousel-slide-title
           .col-xs-12
             %strong
-              About 211 VetLink Trip Planner (continued)
+              Need Help?
         .row.top-buffer
           .col-xs-12
-            Click the 211 logos to search community resources, then click on "Plan a Trip" link to learn how to get there. Still need help? Dial 2-1-1!
+            Click the 211 logos to search community resources. Still need help? Dial 2-1-1!
         .row
           .col-xs-12.text-center
             %a{:href => "http://www.211sb.org/"}
@@ -40,13 +40,26 @@
               %img{:src => "/images/FTA.jpg"}
             %a{:href => "http://www.omnitrans.org/"}
               %img{:src => "/images/OmniLogo.png"}
-            %a{:href => "http://www.caltrans.ca.gov/"}
-              %img{:src => "/images/Caltrans.jpg"}
             %a{:href => "http://gosbcta.com/sbcta/"}
-              %img{:src => "/images/SBCTALogo.jpg"}
+              %img{:src => "/images/sbcta_logo_rev.png", :width => "200px"}
             %a{:href => "http://www.sanbag.ca.gov/funding/measure-i.html"}
               %img{:src => "/images/measure-I.gif"}
             %a{:href => "http://www.rctc.org/"}
               %img{:src => "/images/RCTC.png"}
   %a.left.carousel-control{href:"#main-page-carousel-en", role:"button", 'data-slide'=>"prev", style:'display:none;'}
   %a.right.carousel-control{href:"#main-page-carousel-en", role:"button", 'data-slide'=>"next", style:'display:none;'}
+  %br
+  %br
+#footer.text-center
+  %br
+  %a{href:"/data/Vet Link - Title VI Plan -Acceptance Letter.pdf", target:"_blank", class:"main-page-link"} Title VI Plan – Acceptance Letter
+  %span &vert; 
+  %a{href:"#title-vi-list", role:"button", 'data-toggle'=>"collapse"} Federal Transportation Authority – Title VI Plan
+  #title-vi-list.collapse
+    %a{href:"/data/VetLinkTitleVIApprovedPlan.pdf", target:"_blank", class:"main-page-link"} Plan
+    %span &vert;
+    %a{href:"/data/InEnglish/Complaint Form.pdf", target:"_blank", class:"main-page-link"} Complaint Form
+    %span &vert;
+    %a{href:"/data/InEnglish/Complaint Procedure.pdf", target:"_blank", class:"main-page-link"} Complaint Procedure
+    %span &vert;
+    %a{href:"/data/InEnglish/Public Notice.pdf", target:"_blank", class:"main-page-link"} Public Notice

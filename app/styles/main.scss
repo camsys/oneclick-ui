@@ -88,6 +88,8 @@ footer.footer{
   }
   .navbar-right{
     background-color: if(variable-exists(navbar-background-color), $navbar-background-color, rgba(255, 255, 255, 0.9));
+    border-color: if(variable-exists(navbar-right-border-color), $navbar-right-border-color, none);
+    border-style: if(variable-exists(navbar-right-border-style), $navbar-right-border-style, none);
     margin-top:11px;
   }
   .navbar-container{
@@ -130,6 +132,9 @@ html, body{
     
     li{
       border:1px solid #333;
+      border-radius: if(variable-exists(carousel-indicator-radius), $carousel-indicator-radius, none);
+      width: if(variable-exists(carousel-indicator-radius), $carousel-indicator-radius, none);
+      height: if(variable-exists(carousel-indicator-radius), $carousel-indicator-radius, none);
     }
   }
 }
