@@ -20,7 +20,7 @@
             .no-outline.top-border-hr
               .row
                 .col-sm-3.col-xs-6.text-center
-                  %h3.text-capitalize{ng:{hide:'null == itinerary.cost'}}
+                  %h3.text-capitalize{ng:{hide:'null == itinerary.cost || -0.01 == itinerary.cost'}}
                     {{itinerary.cost | roundUp: itinerary.returned_mode_code | currency | free | translate}}
                 .col-sm-8.col-sm-offset-1.col-xs-12
                   %h3{style:'font-weight:normal'}
