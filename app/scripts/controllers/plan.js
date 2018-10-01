@@ -270,6 +270,9 @@ app.controller('PlanController', [
       }
     });
     //default the scope and planService fromTimeTypes to 'arrive' (if planService doesn't already have a value)
+    if (dist_env.hasDepartSelected == true) {
+      planService.fromTimeType = 'depart';
+    }
     $scope.fromTimeType = planService.fromTimeType || 'arrive';
     planService.fromTimeType = $scope.fromTimeType;
     $scope.$watch('fromTimeType', function (n, o) {
