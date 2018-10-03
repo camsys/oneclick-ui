@@ -1,17 +1,12 @@
-#main-page-carousel-en.main-page-carousel.carousel.slide{'data-ride'=>"carousel", 'data-interval'=>"9500"}
-  %ol.carousel-indicators
-    %li.active{data:{target:"#main-page-carousel-en", 'slide-to'=>"0"}}
-    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"1"}}
-    %li{data:{target:"#main-page-carousel-en", 'slide-to'=>"2"}}
-  .carousel-inner{role:"listbox"}
-    .item.active
-      .container
-        .row
-          .col-xs-12
-            1-Click
-
 .container
-  .row{style:'margin-top:40px;'}
-    .col-md-6.col-md-offset-3.col-xs-10.col-xs-offset-1
-      %p
-        1-Click Demo 
+  .row
+    .col-xs-12.center.text-center
+      .row
+        %img{src: "/images/bigbrand.png"}/
+      %br/
+      .col-xs-2.center.text-center
+      .col-xs-8.center.text-justify
+        Bienvenido a TransPortal, un centro de recursos de transporte virtual financiado por la Administración Federal de Tránsito (FTA). Este proyecto es un esfuerzo conjunto de la Northeast Florida Mobility Coalition. La Coalición está formada por proveedores de transporte, funcionarios electos, responsables políticos, expertos en planificación, representantes de agencias de financiamiento y agencias que brindan apoyo a personas desfavorecidas en el transporte, incluidos veteranos y familias militares. Para obtener más información sobre la gestión de la movilidad en el noreste de Florida, haga
+        = succeed "." do
+          %a{href: "http://info.transportal.net/"} clic aquí
+      .col-xs-2.center.text-center
