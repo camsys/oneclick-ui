@@ -72,6 +72,7 @@ app.controller('PlanController', [
     $scope.itineraryModes = [];
     $scope.accommodations = {};
     $scope.characteristics = {};
+    $scope.age = null;
     $scope.tripPurpose = null;
     var planTimeoutId = null;
     $scope.planFromResults = function () {
@@ -151,10 +152,13 @@ app.controller('PlanController', [
       planService.user_profile = planService.user_profile || {};
       planService.user_profile.characteristics = $scope.characteristics;
       planService.user_profile.accommodations = $scope.accommodations;
+      planService.user_profile.attributes = { age: $scope.age };
+      planService.user_profile.age = $scope.age;
       $scope.planFromResults();
     };
     $scope.characteristicChange = _updatePlanWithQuestionResponses;
     $scope.accommodationChange = _updatePlanWithQuestionResponses;
+    $scope.ageChange = _updatePlanWithQuestionResponses;
     $scope.purposeChange = function (code) {
       code = null;
       if ($scope.tripPurpose) {

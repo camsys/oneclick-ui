@@ -112,6 +112,14 @@
                 %input{type:'checkbox', name:'{{question.code}}', ng:{model:'characteristics[question.code]', change:'characteristicChange(question.code, characteristics[question.code])'}}
               {{question.code | codeNote | translate}}
 
+      .row
+        .col-xs-12
+          %label{style:'width:100%;'}
+            .characteristic-boolean.pull-right
+              %input{type:'number', name:'{{age}}', ng:{model:'age', change:'ageChange(null, null)'}}
+            %h3.display-inline
+              {{"age_label" | translate }}
+
       .row{style:"display:none;"}
         .col-xs-12
           %h3 {{"modes" | translate }}
