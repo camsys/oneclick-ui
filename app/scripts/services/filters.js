@@ -13,11 +13,30 @@ angular.module('oneClickApp').filter('free', function (translateFilter) {
     } else {
       hours = Math.floor(m / 60);
       minutes = m % 60;
-      translation = hours == 1 ? translateFilter('hour_long.one', { count: hours }) : translateFilter('hour_long.other', { count: hours });
+      translation = ''
+      console.log(hours);
+      if(hours == 1){
+        translation += hours 
+        translation += ' '
+        translation += translateFilter('hour_long.one');
+      }
+      if(hours > 1){
+        translation += hours 
+        translation += ' '
+        translation += translateFilter('hour_long.other');
+      }
       //if minutes are not 0, add minutes translation
-      if (minutes > 0) {
+      if(minutes == 1) {
         translation += ' ';
-        translation += minutes == 1 ? translateFilter('minute.one', { count: minutes }) : translateFilter('minute.other', { count: minutes });
+        translation += minutes 
+        translation += ' '
+        translateFilter('minute.one')
+      }
+      if(minutes > 1){
+        translation += ' ' 
+        translation += minutes
+        translation += ' '
+        translation += translateFilter('minute.other', { count: minutes });
       }
       return translation;
     }
