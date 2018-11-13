@@ -12,13 +12,13 @@
         %h3 {{'next_steps' | translate}}
         %h4
           %a{'ng-href'=>'{{itinerary.phone | telephoneLink}}'}
-            {{'call_to_register' | translate:itinerary}}
+            {{'call_to_register' | translate:itinerary}} {{itinerary.phone}}
     .row{'ng-show'=>'itinerary.url'}
       .col-xs-12
         %h3 {{'more_information' | translate}}
         %h4
           %a{target:'_blank', ng:{href:'{{itinerary.url}}'}}
-            {{'visit_url_for_more_info' | translate: itinerary}}
+            {{'visit_url_for_more_info' | translate: itinerary}} {{itinerary.url}}
   .col-sm-7.col-xs-12
     .row{'ng-show'=>'itinerary.schedule.length > 0', style:'padding-bottom:20px;'}
       .col-xs-12
