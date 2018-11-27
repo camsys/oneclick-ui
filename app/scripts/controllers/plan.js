@@ -149,6 +149,9 @@ app.controller('PlanController', [
       }
     });
     var _updatePlanWithQuestionResponses = function (question, value) {
+      console.log(question);
+      console.log(value);
+      console.log('------------');
       planService.user_profile = planService.user_profile || {};
       planService.user_profile.characteristics = $scope.characteristics;
       planService.user_profile.accommodations = $scope.accommodations;
