@@ -1,8 +1,23 @@
 .rides.container-fluid{'ng-controller'=>'RidesController as rides'}
+
   .row
     .col-sm-4.col-xs-12{ng:{include:'"/views/rides-tripplanner.html"'}}
     .col-sm-8.col-xs-12
       #rides-itineraries-list
+        #eligibilities-section{'ng-controller'=>'PlanController'}
+          #eligibilities-questions{ng:{show:"characteristicsQuestions.length > 0"}}
+            .row
+              .col-xs-8
+                %h3{style:'margin:0px;'}
+                  {{"find_more_results" | translate }}
+            .row
+              .col-xs-8.form
+                .trip-question{ng:{repeat:'question in characteristicsQuestions track by question.code'}}
+                  %label.eligibilities-boolean{style:'width:100%'}
+                    .pull-right
+                      %input{type:'checkbox', name:'{{question.code}}', ng:{model:'characteristics[question.code]', change:'characteristicChange(question.code, characteristics[question.code])'}}
+                    {{question.code | codeNote | translate}}
+             
         .ride_itineraries{ng:{repeat:"itinerary in itineraries | filter:itineraryFilter | orderBy:orderItinerariesByFn:false", hide:'tripSelected && tripSelected != itinerary.id' }}
           .bordered
             .no-outline
