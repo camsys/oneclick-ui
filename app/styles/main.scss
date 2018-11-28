@@ -203,6 +203,7 @@ html, body{
     align-items: stretch;
   }
   #splash-search-form .block-one{
+    align-items: center;
     margin: 3px 0px;
     display:flex;
     flex: 10 1 500px;
@@ -217,6 +218,7 @@ html, body{
     flex-direction:column;
   }
   #splash-search-form .block-two{
+    align-items: center;
     margin: 3px 0px;
     display:flex;
     flex: 1 1 590px;
@@ -229,11 +231,11 @@ html, body{
     margin-right: 3px;
   }
   #splash-search-form .block-two > select{
-    flex: 4 1 190px;
+    flex: 4 1 130px;
     margin-right: 3px;
   }
   #splash-search-form .block-two > datetimepicker{
-    flex: 0 0 300px;
+    flex: 0 0 360px;
   }
   #splash-search-form .block-two > button{
     flex: 0 0 auto;
@@ -241,6 +243,21 @@ html, body{
   }
 }
 
+.datetimepicker-wrapper > input {
+  background-image:    url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA3klEQVRIS+3VMU9CMRTF8d8zBL+aizoQFhx0kUk33RzdYMNFXUFnYeGrYYyaJiUxJHDLSxodbNKpfeffc9/pbaPyaCrr+3OA++z4rtT5Pg5GuMnCY9yWQEoBE1xhlUUP8YDrCBIB0vojLvGO0yz4hm4JJAKcYYoPHGOZAUdYoIMBXrc5iQAHeMlzviFygj7O8dkWEJU4XI8chALRhn9AVKHf70VRTHu4wFfbmKZLNKt50dLBnna0imcMd/2I0phWa3Y/D1e1Xa9BCZJG0VuQNpaWKMx72xS1Fl5/WN3BN+AgJhnZQlq4AAAAAElFTkSuQmCC');
+  background-position: calc(100% - .1rem), 100% 0;
+  background-size:  1.5em 1.5em;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  padding-right: 20px;
+}
+.uib-time > button {
+  background-image:    url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA3klEQVRIS+3VMU9CMRTF8d8zBL+aizoQFhx0kUk33RzdYMNFXUFnYeGrYYyaJiUxJHDLSxodbNKpfeffc9/pbaPyaCrr+3OA++z4rtT5Pg5GuMnCY9yWQEoBE1xhlUUP8YDrCBIB0vojLvGO0yz4hm4JJAKcYYoPHGOZAUdYoIMBXrc5iQAHeMlzviFygj7O8dkWEJU4XI8chALRhn9AVKHf70VRTHu4wFfbmKZLNKt50dLBnna0imcMd/2I0phWa3Y/D1e1Xa9BCZJG0VuQNpaWKMx72xS1Fl5/WN3BN+AgJhnZQlq4AAAAAElFTkSuQmCC');
+  background-position: calc(100% - .1rem), 100% 0;
+  background-size:  1.5em 1.5em;
+  background-repeat: no-repeat;
+  padding-right: 20px;
+}
 
 #main-template-container{
   height: calc(100% - 70px);
@@ -382,7 +399,7 @@ ul.language-menu-dropdown{
   min-width:210px;
 }
 .container-fluid{
-  padding-bottom: 20px;
+  padding-bottom: if(variable-exists(navbar-margin-bottom), $navbar-margin-bottom, 20px);
 }
 @media (min-width: 0) and (max-width: $screen-xs-max){
   .container-fluid{

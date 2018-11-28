@@ -14,6 +14,7 @@ $body-background-color: #f2f2f2;
 $navbar-background-color: rgba(255, 255, 255, 1.0);
 $navbar-brand-height: 100px;
 $navbar-brand-img-height: 97px;
+$navbar-margin-bottom: 0px;
 $landing-plan-background-color: rgba(255, 255, 255, 1.0);
 $landing-plan-border-color: $dark-blue-ieuw;
 $landing-plan-border-style: solid;
@@ -96,6 +97,12 @@ h1, h2, h3, h4, h5, h6,
 #splash-search-form .datetimepicker-wrapper > input {
   width: 140px;
 }
+
+#splash-search-form .datetimepicker-wrapper .am-pm button {
+  font-size: smaller;
+  margin-left: 5px;
+}
+
 .block-ok .btn {
   font-size: 1.2em;
 }

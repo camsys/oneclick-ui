@@ -120,7 +120,7 @@ angular.module('ui.bootstrap.datetimepicker', [
             'ngDisabled',
             'readonlyTime'
           ]
-        ].reduce(createAttrConcat, '') + createEvalAttr('showSpinners', 'showSpinners') + '></div>\n' + '</div>';
+        ].reduce(createAttrConcat, '') + ' show-spinners="true"></div>\n' + '</div>';
         // form is isolated so the directive is registered as one component in the parent form (not date and time)
         var tmpl = '<ng-form name="datetimepickerForm">' + dateTmpl + timeTmpl + '</ng-form>';
         return tmpl;
