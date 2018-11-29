@@ -91,6 +91,7 @@ footer.footer{
     border-color: if(variable-exists(navbar-right-border-color), $navbar-right-border-color, none);
     border-style: if(variable-exists(navbar-right-border-style), $navbar-right-border-style, none);
     margin-top:11px;
+    border-radius: 7px;
   }
   .navbar-container{
     border-radius: 7px;
@@ -684,5 +685,32 @@ a{
   background-color: white;
   border:1px solid $borderColor;
   border-radius:7px;
-  font-size: 1.25em;
+  font-size: 1em;
+}
+
+.clear{
+  background: none;
+  background: transparent;
+}
+
+.top-trip-question{
+  //background-color:#EEE;
+  //margin:7px 1px;
+  //margin-bottom:1px;
+  border-radius:5px;
+  label{
+    padding:3px 7px;
+  }
+  label:hover{
+    cursor:pointer;
+  }
+}
+
+.top-bordered{
+  background: none;
+  background: transparent;
+  border-radius:8px;
+  padding: 7px 1px;
+  margin: 11px 0px;
+  //background-color: #FFF;
 }

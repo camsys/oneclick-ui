@@ -10,13 +10,22 @@
               .col-xs-8
                 %h3{style:'margin:0px;'}
                   {{"find_more_results" | translate }}
-            .row
-              .col-xs-8.form
-                .trip-question{ng:{repeat:'question in characteristicsQuestions track by question.code'}}
-                  %label.eligibilities-boolean{style:'width:100%'}
-                    .pull-right
-                      %input{type:'checkbox', name:'{{question.code}}', ng:{model:'characteristics[question.code]', change:'characteristicChange(question.code, characteristics[question.code])'}}
-                    {{question.code | codeNote | translate}}
+            .row.top-bordered
+              .top-trip-question{ng:{repeat:'question in characteristicsQuestions'}}
+                .row{ng:{if:'$index%2 == 0'}}
+                  .col-xs-6.clear
+                    %label.eligibilities-boolean{style:'width:100%'}
+                      .pull-right
+                        %input{type:'checkbox', name:'{{characteristicsQuestions[$index].code}}', ng:{model:'characteristics[characteristicsQuestions[$index].code]', change:'characteristicChange(characteristicsQuestions[$index].code, characteristics[characteristicsQuestions[$index].code])'}}
+                      {{characteristicsQuestions[$index].code | codeNote | translate}}
+                  .col-xs-6.clear{ng:{if:'characteristicsQuestions[$index+1]'}}
+                    %label.eligibilities-boolean{style:'width:100%'}
+                      .pull-right
+                        %input{type:'checkbox', name:'{{characteristicsQuestions[$index+1].code}}', ng:{model:'characteristics[characteristicsQuestions[$index+1].code]', change:'characteristicChange(characteristicsQuestions[$index+1].code, characteristics[characteristicsQuestions[$index+1].code])'}}
+                      {{characteristicsQuestions[$index+1].code | codeNote | translate}}
+            
+                    
+
              
         .ride_itineraries{ng:{repeat:"itinerary in itineraries | filter:itineraryFilter | orderBy:orderItinerariesByFn:false", hide:'tripSelected && tripSelected != itinerary.id' }}
           .bordered
