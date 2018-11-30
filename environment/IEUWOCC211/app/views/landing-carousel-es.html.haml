@@ -74,26 +74,38 @@
               ¡Disfruta tu Viaje!
         .row.top-buffer
           .col-xs-3.text-center
-            %img{'src' => "/images/Metro.png", 'style' => 'height: 75px;'}
+            %a{:href => "https://www.metro.net", target:"_blank"}
+              %img{'src' => "/images/Metro.png", 'class' => 'carousel-sm-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} LA Metro
           .col-xs-3.text-center
-            %img{'src' => "/images/OCTA.png", 'style' => 'height: 75px;'}
+            %a{:href => "https://www.octa.net", target:"_blank"}
+              %img{'src' => "/images/OCTA.png", 'class' => 'carousel-sm-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} OCTA
           .col-xs-3.text-center
-            %img{'src' => "/images/211_RCTC.png", 'style' => 'height: 75px;'}
+            %a{:href => "https://www.rctc.org", target:"_blank"}
+              %img{'src' => "/images/211_RCTC.png", 'class' => 'carousel-sm-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} RCTC
           .col-xs-3.text-center
-            %img{'src' => "/images/sbcta_logo_rev.png", 'style' => 'height: 75px;'}
+            %a{:href => "http://gosbcta.com/sbcta/", target:"_blank"}
+              %img{'src' => "/images/sbcta_logo_rev.png", 'class' => 'carousel-sm-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} SBCTA
         .row.top-buffer
           .col-xs-3.text-center         
             %a{:href => "http://www.211la.org", target:"_blank"}
-              %img{'src' => "/images/211_LACounty.png", 'style' => 'height: 75px;'}
+              %img{'src' => "/images/211_LACounty.png", 'class' => 'carousel-sm-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} LA County
           .col-xs-3.text-center
             %a{:href => "http://www.211oc.org", target:"_blank"}
-              %img{'src' => "/images/211_HelpStarts.png", 'style' => 'height: 75px;'}
+              %img{'src' => "/images/211_HelpStarts.png", 'class' => 'carousel-sm-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} Orange County
           .col-xs-4.text-center
             %a{:href => "http://www.connectriverside.org", target:"_blank",}
-              %img{'src' => "/images/CClogo.png", 'style' => 'height: 75px;'}
+              %img{'src' => "/images/CClogo.png", 'class' => 'carousel-sm-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} Riverside County
           .col-xs-2.text-center
             %a{:href => "http://www.211sb.org", target:"_blank"}
-              %img{'src' => "/images/Color211 San Bernardino County-transparent.png", 'style' => 'height: 75px;'}
+              %img{'src' => "/images/Color211 San Bernardino County-transparent.png", 'class' => 'carousel-sm-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} San Bernardino County
     .item
       .container
         .row.carousel-slide-title
@@ -131,16 +143,20 @@
         .row.top-buffer
           .col-xs-3.text-center         
             %a{:href => "http://www.211la.org", target:"_blank"}
-              %img{'src' => "/images/211_LACounty.png", 'style' => 'height: 100px;'}
+              %img{'src' => "/images/211_LACounty.png", 'class' => 'carousel-lg-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} LA County
           .col-xs-3.text-center
             %a{:href => "http://www.211oc.org", target:"_blank"}
-              %img{'src' => "/images/211_HelpStarts.png", 'style' => 'height: 100px;'}
+              %img{'src' => "/images/211_HelpStarts.png", 'class' => 'carousel-lg-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} Orange County
           .col-xs-4.text-center
             %a{:href => "http://www.connectriverside.org", target:"_blank",}
-              %img{'src' => "/images/CClogo.png", 'style' => 'height: 100px;'}
+              %img{'src' => "/images/CClogo.png", 'class' => 'carousel-lg-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} Riverside County
           .col-xs-2.text-center
             %a{:href => "http://www.211sb.org", target:"_blank"}
-              %img{'src' => "/images/Color211 San Bernardino County-transparent.png", 'style' => 'height: 100px;'}
+              %img{'src' => "/images/Color211 San Bernardino County-transparent.png", 'class' => 'carousel-lg-agency-logo'}
+              %figcaption{'class' => 'carousel-figcaption'} San Bernardino County
   %a.carousel-control-prev{href:"#main-page-carousel-es", role:"button", 'data-slide'=>"prev"}
     %span{class:"carousel-control-prev-icon"}
   %a.carousel-control-next{href:"#main-page-carousel-es", role:"button", 'data-slide'=>"next"}

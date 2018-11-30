@@ -241,6 +241,21 @@ html, body{
     flex: 0 0 auto;
     margin-right: 3px;
   }
+
+  #splash-search-form .form-control{
+    font-size: 1.0em;
+  }
+  #splash-search-form .btn{
+    font-size: 1.0em;
+  }
+  #splash-search-form .datetimepicker-wrapper > input {
+    width: 140px;
+  }
+}
+
+.datetimepicker-wrapper .am-pm button {
+  font-size: smaller;
+  margin-left: 5px;
 }
 
 .datetimepicker-wrapper > input {
