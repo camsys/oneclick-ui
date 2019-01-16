@@ -189,8 +189,7 @@ angular.module('oneClickApp').service('planService', [
               if (i == 0) {
                 trip_with_itineraries.mode = trip[i].mode;
                 trip_with_itineraries.service_name = trip[i].service_name;
-                console.log(trip_with_itineraries);
-               
+
                 if(trip[i].pu_window_start != null && trip[i].pu_window_end != null ){
                   trip_with_itineraries.startDesc = 'Be ready ' + that.getDateDescription(trip[i].pu_window_start);
                   trip_with_itineraries.startDesc += ' between ' + moment(trip[i].pu_window_start).format('h:mm a');
@@ -1152,7 +1151,7 @@ angular.module('oneClickApp').service('LocationSearch', [
             return;
           }
           //verify the location has a street address
-          if (that.results.length < 10 && (value.types.indexOf('route') > -1 || value.types.indexOf('establishment') > -1 || value.types.indexOf('street_address') > -1)) {
+          if (that.results.length < 10 && (value.types.indexOf('route') > -1 || value.types.indexOf('establishment') > -1 || value.types.indexOf('street_address') > -1 || value.types.indexOf('premise') > -1 )) {
             //var terms = [];
             //angular.forEach(value.terms, function(term, index) { terms.push(term.value); }, terms);
             formatted_address = countryFilter(value.description);
