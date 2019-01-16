@@ -12,8 +12,8 @@ $main-page-height-percent: 40%;
 $main-page-height: 500px;
 $body-background-color: #f2f2f2;
 $navbar-background-color: rgba(255, 255, 255, 1.0);
-$navbar-brand-height: 100px;
-$navbar-brand-img-height: 97px;
+$navbar-brand-height: 130px;
+$navbar-brand-img-height: 127px;
 $navbar-margin-bottom: 0px;
 $landing-plan-background-color: rgba(255, 255, 255, 1.0);
 $landing-plan-border-color: $dark-blue-ieuw;
@@ -88,21 +88,6 @@ h1, h2, h3, h4, h5, h6,
   color: #005191 !important;
 }
 
-#splash-search-form .form-control{
-  font-size: 1.0em;
-}
-#splash-search-form .btn{
-  font-size: 1.0em;
-}
-#splash-search-form .datetimepicker-wrapper > input {
-  width: 140px;
-}
-
-#splash-search-form .datetimepicker-wrapper .am-pm button {
-  font-size: smaller;
-  margin-left: 5px;
-}
-
 .block-ok .btn {
   font-size: 1.2em;
 }
@@ -114,4 +99,18 @@ h1, h2, h3, h4, h5, h6,
 .main-page-link{
   color: $blue-font-color-ieuw;
   text-decoration: underline;
+}
+
+.carousel-figcaption {
+  padding-top: 5px;
+}
+
+.carousel-sm-agency-logo {
+  cursor: pointer;
+  height: 75px; 
+}
+
+.carousel-lg-agency-logo {
+  cursor: pointer;
+  height: 100px; 
 }
