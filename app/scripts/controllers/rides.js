@@ -203,5 +203,17 @@ app.controller('RidesController', [
       }
       return true;
     };
+
+    $scope.getItineraryLegsWithoutDuplicateServices = function (itinerary_json_legs) {
+      var jsonLegsWithoutDuplicateServices = [];
+      var serviceNames = [];
+      for (var i = 0; i < itinerary_json_legs.length; i++) {
+          if (!serviceNames.includes(itinerary_json_legs[i].serviceName)) {
+            jsonLegsWithoutDuplicateServices.push(itinerary_json_legs[i]);
+            serviceNames.push(itinerary_json_legs[i].serviceName);
+          }
+      }
+      return jsonLegsWithoutDuplicateServices;
+    };
   }
 ]);
