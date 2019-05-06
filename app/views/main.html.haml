@@ -8,6 +8,10 @@
             %h1 {{"welcome_message" | translate}}
           .row
             .col-md-12.col-xs-12
+              .text-center
+                {{"search_description" | translate}}
+          .row
+            .col-md-12.col-xs-12
               %form{name:'ride_search_form', ng:{submit:'ride_search_form.$valid && planFromLanding()'}}
                 #splash-search-form.row
                   .block-one
