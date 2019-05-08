@@ -36,7 +36,7 @@
                     .icon{ng:{repeat: 'leg in getItineraryLegsWithoutDuplicateServices(itinerary.json_legs) track by $index', if:'leg.serviceName != null'}}
                       %img.ride-mode-service-icon{style:'vertical-align:bottom;', ng:{src:'{{itinerary.returned_mode_code | modeIcon: leg.serviceLogoUrl}}'}}
                       %h2.ride-mode-service-name
-                      {{itinerary.returned_mode_code | modeName: leg.serviceName | translate}}
+                        {{itinerary.returned_mode_code | modeName: leg.serviceName | translate}}
                   .no-outline.icon{ng:{if:'itinerary.returned_mode_code != "mode_transit"'}}
                     %img.ride-mode-service-icon{style:'vertical-align:bottom;', ng:{src:'{{itinerary.returned_mode_code | modeIcon: itinerary.logo_url}}'}}
                     %h2.ride-mode-service-name

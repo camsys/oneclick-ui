@@ -6,6 +6,10 @@
         .col-xs-12.landing-plan-content
           .text-center
             %h1 {{"welcome_message" | translate}}
+          .row{ng:{if:'dist_env.hasSearchDescription == true'}}
+            .col-md-12.col-xs-12
+              .text-center
+                {{"search_description" | translate}}
           .row
             .col-md-12.col-xs-12
               %form{name:'ride_search_form', ng:{submit:'ride_search_form.$valid && planFromLanding()'}}

@@ -10,6 +10,7 @@ var dist_env = {
   state_bounds:'CA',
   transitSortPriority: true,
   hasLyftMode: true,
-  hasDepartSelected: true
+  hasDepartSelected: true,
+  hasSearchDescription: true
 };
 
