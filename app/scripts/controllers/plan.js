@@ -18,6 +18,7 @@ app.controller('PlanController', [
   '$filter',
   '$translate',
   function ($scope, $http, $routeParams, $location, planService, util, flash, $q, LocationSearch, localStorageService, ipCookie, $timeout, $window, $filter, $translate) {
+    $scope.dist_env = dist_env;
     var currentLocationLabel = 'Current Location';
     var urlPrefix = '//' + APIHOST + '/';
     var eightAm = new Date();
