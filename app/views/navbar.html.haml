@@ -15,10 +15,8 @@
                 {{languageOptions[languageSelected]}}
                 %span.caret
             %ul.language-menu-dropdown.dropdown-menu{"aria-labelledby"=>"language_menu_dropdown"}
-              %li{ng:{click:"changeLanguage('en')" }}
-                %h4 English
-              %li{ng:{click:"changeLanguage('es')" }}
-                %h4 Español
+              %li{ng:{repeat:"(key, value) in languageOptions", click: "changeLanguage(key)"}}
+                %h4 {{value}}
           %li.dropdown{"ng-hide"=>"isGuest"}
             %button#user_menu_dropdown.btn.btn-link.dropdown-toggle{type:"button", "data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
               %h4.display-inline.text-capitalize

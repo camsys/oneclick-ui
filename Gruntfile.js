@@ -110,16 +110,16 @@ module.exports = function (grunt) {
         ]
       }
     },
-    http: {
-      es_translations: {
-        options: { url: '<%= yeoman.hostPrefix %>://<%= yeoman.api_host %>/api/v1/translations/all?lang=es' },
-        dest: '<%= yeoman.appPath %>/translations/es.json'
-      },
-      en_translations: {
-        options: { url: '<%= yeoman.hostPrefix %>://<%= yeoman.api_host %>/api/v1/translations/all?lang=en' },
-        dest: '<%= yeoman.appPath %>/translations/en.json'
-      }
-    },
+    // http: {
+    //   es_translations: {
+    //     options: { url: '<%= yeoman.hostPrefix %>://<%= yeoman.api_host %>/api/v1/translations/all?lang=es' },
+    //     dest: '<%= yeoman.appPath %>/translations/es.json'
+    //   },
+    //   en_translations: {
+    //     options: { url: '<%= yeoman.hostPrefix %>://<%= yeoman.api_host %>/api/v1/translations/all?lang=en' },
+    //     dest: '<%= yeoman.appPath %>/translations/en.json'
+    //   }
+    // },
     preprocess: {
       options: { context: preprocessDefaultContext },
       default: {

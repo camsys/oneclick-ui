@@ -23,13 +23,23 @@ angular.module('oneClickApp').controller('NavbarController', [
     planService.html5 = $scope.html5;
     $scope.mobile = deviceDetector.isMobile();
     planService.mobile = $scope.mobile;
-    $scope.languageOptions = {
-      en: 'English',
-      es: 'Español'
-    };
+
     $scope.languageSelected = localStorage.getItem('lang') || 'en';
     $translate.use($scope.languageSelected);
-    tmhDynamicLocale.set($scope.languageSelected + '-us');
+    if (($scope.languageSelected == 'en') || ($scope.languageSelected == 'es')) {
+      tmhDynamicLocale.set($scope.languageSelected + '-us');
+    } else {
+      tmhDynamicLocale.set($scope.languageSelected);
+    }
+
+    //switch template depending on languageSelected
+    var language_data = $http.get('//'+APIHOST+'/api/v1/translations/locales', {params: {lang: $scope.languageSelected}});
+    language_data.then(function (data) {
+      if (data.statusText === 'OK') {
+        $scope.languageOptions = data.data;
+      }
+    });
+
     var templates = {
       'mode_ride_hailing': 'rides-itinerary-rideshare.html',
       'mode_lyft': 'rides-itinerary-lyft.html',
@@ -68,7 +78,11 @@ angular.module('oneClickApp').controller('NavbarController', [
         return false;
       }
       $translate.use(key);
-      tmhDynamicLocale.set(key + '-us');
+      if ((key == 'en') || (key == 'es')) {
+        tmhDynamicLocale.set(key + '-us');
+      } else {
+        tmhDynamicLocale.set(key);
+      }
       $scope.languageSelected = key;
       ipCookie('lang', key);
       localStorage.setItem('lang', key);
@@ -76,6 +90,15 @@ angular.module('oneClickApp').controller('NavbarController', [
       return true;
     };
     $scope.changeLanguage = function (key) {
+
+      //switch template depending on languageSelected
+      var language_data = $http.get('//'+APIHOST+'/api/v1/translations/locales', {params: {lang: key}});
+      language_data.then(function (data) {
+        if (data.statusText === 'OK') {
+          $scope.languageOptions = data.data;
+        }
+      });
+
       var postProfileUpdate = function (profile) {
         profile.lang = key;
         profile = planService.buildProfileUpdateRequest(profile);
